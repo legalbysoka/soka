@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SOKA — A Legal Studio</title>
+    <style>
+        /* --- Core Reset & SOKA Palette --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-color: #FFFFFF;
+            --text-color: #000000;
+            --accent-blue: #0000FF; /* Electric Blue for important elements */
+            --muted-gray: #777777;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: "Times New Roman", Times, serif;
+            font-size: 15px;
+            line-height: 1.5;
+            padding: 40px 50px;
+            letter-spacing: -0.2px;
+            -webkit-font-smoothing: antialiased;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* --- Header Alignment --- */
+        header {
+            margin-bottom: 60px;
+        }
+
+        .brand {
+            font-size: 20px;
+            font-weight: bold;
+            letter-spacing: -0.5px;
+            text-transform: uppercase;
+            text-decoration: none;
+            color: var(--text-color);
+            display: block;
+            line-height: 1;
+        }
+
+        .tagline {
+            font-size: 13px;
+            color: var(--text-color);
+            text-transform: lowercase;
+            margin-top: 5px;
+            display: block;
+            letter-spacing: 0.2px;
+        }
+
+        /* --- Timeline Grid Layout --- */
+        .timeline {
+            max-width: 1400px;
+            flex-grow: 1;
+        }
+
+        .row {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 22px;
+        }
+
+        .date {
+            width: 130px;
+            flex-shrink: 0;
+            color: var(--muted-gray);
+            font-size: 14px;
+        }
+
+        .content-area {
+            flex-grow: 1;
+        }
+
+        /* --- Standard Entry Buttons --- */
+        .essay-trigger {
+            color: var(--text-color);
+            text-decoration: none;
+            cursor: pointer;
+            background: none;
+            border: none;
+            font-family: inherit;
+            font-size: inherit;
+            text-align: left;
+            padding: 0;
+            display: inline;
+        }
+
+        .essay-trigger:hover {
+            text-decoration: underline;
+        }
+
+        /* --- Pinned Blue Top Entry --- */
+        .row.pinned .date {
+            color: var(--accent-blue);
+            font-weight: bold;
+        }
+
+        .row.pinned .essay-trigger {
+            color: var(--accent-blue);
+            font-weight: bold;
+        }
+
+        .row.pinned .essay-trigger:hover {
+            text-decoration: underline;
+        }
+
+        /* --- Collapsible Accordion --- */
+        .collapsible-essay {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s cubic-bezier(0.25, 1, 0.5, 1), margin 0.3s ease;
+            max-width: 720px;
+        }
+
+        .collapsible-essay.expanded {
+            max-height: 4000px;
+            margin-top: 14px;
+            margin-bottom: 28px;
+        }
+
+        .essay-text {
+            font-size: 15.5px;
+            line-height: 1.6;
+            color: #111111;
+            white-space: pre-line;
+        }
+
+        /* --- Footer Setup --- */
+        footer {
+            margin-top: 60px;
+            padding-top: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 13px;
+            color: var(--text-color);
+            text-transform: lowercase;
+            border-top: 1px solid #EEEEEE;
+        }
+
+        .footer-left {
+            text-align: left;
+        }
+
+        .footer-right {
+            display: flex;
+            gap: 18px;
+            align-items: center;
+        }
+
+        .footer-right a, .contact-btn {
+            color: var(--text-color);
+            text-decoration: none;
+            background: none;
+            border: none;
+            font-family: inherit;
+            font-size: inherit;
+            cursor: pointer;
+        }
+
+        .contact-btn-highlight {
+            color: var(--accent-blue) !important;
+            font-weight: bold;
+        }
+
+        .footer-right a:hover, .contact-btn:hover {
+            text-decoration: underline;
+        }
+
+        /* --- Modals (BCI Disclaimer & Contact Window) --- */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: rgba(255, 255, 255, 0.96);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            padding: 20px;
+        }
+
+        .modal-box {
+            background: #FFFFFF;
+            border: 1px solid #000000;
+            padding: 35px;
+            max-width: 580px;
+            width: 100%;
+            box-shadow: 0px 4px 20px rgba(0,0,0,0.05);
+        }
+
+        .modal-title {
+            font-size: 16px;
+            font-weight: bold;
+            text-transform: uppercase;
+            margin-bottom: 15px;
+            color: var(--text-color);
+        }
+
+        .modal-body {
+            font-size: 13.5px;
+            line-height: 1.6;
+            color: #222222;
+            margin-bottom: 25px;
+            white-space: pre-line;
+        }
+
+        .modal-btn {
+            background-color: var(--accent-blue);
+            color: #FFFFFF;
+            border: none;
+            padding: 10px 20px;
+            font-family: inherit;
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        .modal-btn:hover {
+            background-color: #0000CC;
+        }
+
+        /* Form Controls inside Contact Pop-up */
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 12px;
+            text-transform: lowercase;
+            margin-bottom: 4px;
+            color: #444;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 8px 10px;
+            font-family: inherit;
+            font-size: 14px;
+            border: 1px solid #000000;
+            background: #FAFAFA;
+            outline: none;
+        }
+
+        .form-control:focus {
+            background: #FFFFFF;
+            border-color: var(--accent-blue);
+        }
+
+        textarea.form-control {
+            resize: vertical;
+            min-height: 90px;
+        }
+
+        .close-modal-link {
+            display: block;
+            text-align: center;
+            margin-top: 12px;
+            font-size: 12px;
+            color: var(--muted-gray);
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .close-modal-link:hover {
+            color: #000;
+            text-decoration: underline;
+        }
+
+        /* Utility Hide Class */
+        .hidden {
+            display: none !important;
+        }
+
+        /* Mobile Adjustments */
+        @media (max-width: 600px) {
+            body { padding: 25px 20px; }
+            header { margin-bottom: 40px; }
+            .row { flex-direction: column; margin-bottom: 25px; }
+            .date { margin-bottom: 3px; }
+            footer {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- BCI DISCLAIMER POP-UP MODAL -->
+    <div id="bci-modal" class="modal-overlay">
+        <div class="modal-box">
+            <div class="modal-title">Disclaimer & Terms</div>
+            <div class="modal-body">
+As per the rules of the Bar Council of India, advocates and legal entities are restricted from soliciting work or advertising. 
+
+By clicking "I AGREE" below, the user acknowledges that:
+• There has been no advertisement, personal communication, solicitation, invitation, or inducement of any sort whatsoever from SOKA or its members to solicit work through this website.
+• The user wishes to gain more information about SOKA for their own information and use.
+• Any information provided herein is made available solely at the user's request for informational purposes.
+            </div>
+            <button class="modal-btn" onclick="acceptDisclaimer()">I Agree</button>
+        </div>
+    </div>
+
+    <!-- CONTACT / INQUIRY POP-UP MODAL -->
+    <div id="contact-modal" class="modal-overlay hidden">
+        <div class="modal-box">
+            <div class="modal-title" style="color: var(--accent-blue);">Send an Enquiry — SOKA</div>
+            <form action="https://formspree.io/f/hello@legalbysoka.com" method="POST">
+                <div class="form-group">
+                    <label>Name</label>
+                    <input type="text" name="name" class="form-control" required placeholder="Full Name or Brand Entity">
+                </div>
+                <div class="form-group">
+                    <label>Email Address</label>
+                    <input type="email" name="email" class="form-control" required placeholder="name@domain.com">
+                </div>
+                <div class="form-group">
+                    <label>Address / Location</label>
+                    <input type="text" name="address" class="form-control" placeholder="City, State, or Address">
+                </div>
+                <div class="form-group">
+                    <label>Message / Legal Requirement</label>
+                    <textarea name="message" class="form-control" required placeholder="Briefly describe what you need assistance with..."></textarea>
+                </div>
+                <button type="submit" class="modal-btn">Send Message</button>
+                <span class="close-modal-link" onclick="toggleContactModal(false)">[ close window ]</span>
+            </form>
+        </div>
+    </div>
+
+    <!-- MAIN SITE CONTENT -->
+    <header>
+        <a href="#" class="brand">SOKA</a>
+        <span class="tagline">a legal studio — for India's creatives.</span>
+    </header>
+
+    <main class="timeline">
+
+        <!-- PINNED ENTRY: ABOUT / WELCOME (HIGHLIGHTED IN BLUE) -->
+        <div class="row pinned">
+            <div class="date">23.07.2026</div>
+            <div class="content-area">
+                <button class="essay-trigger toggle-btn">welcome to SOKA / about the studio</button>
+                <div class="collapsible-essay">
+                    <div class="essay-text">
+                        SOKA is a legal studio built specifically for creators, independent artists, founders, production houses, and creative entities across India.
+
+                        We advise and handle IP protection, contract negotiation, brand registration, digital media compliance, enforcement, and dispute resolution.
+
+                        This feed serves as an ongoing index of public briefs, advisory scope, and case updates. If you require legal assistance, use the enquiry link below.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- WORK / CASE ENTRY #1 -->
+        <div class="row">
+            <div class="date">15.07.2026</div>
+            <div class="content-area">
+                <button class="essay-trigger toggle-btn">advising independent music label on copyright assignment framework.</button>
+                <div class="collapsible-essay">
+                    <div class="essay-text">
+                        Structured exclusive licensing, master rights agreements, and digital publishing revenue splits for a multi-artist release catalog.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- WORK / CASE ENTRY #2 -->
+        <div class="row">
+            <div class="date">02.06.2026</div>
+            <div class="content-area">
+                <button class="essay-trigger toggle-btn">brand trademark enforcement for fashion label.</button>
+                <div class="collapsible-essay">
+                    <div class="essay-text">
+                        Handled cease-and-desist notices and successfully resolved digital counterfeit claims across e-commerce channels.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-left">
+            © 2026 SOKA. all rights reserved.
+        </div>
+        <div class="footer-right">
+            <button class="contact-btn contact-btn-highlight" onclick="toggleContactModal(true)">[send enquiry]</button>
+            <a href="https://www.instagram.com/legalbysoka?igsh=MWcwMzhwMHgxaDM0" target="_blank">ig</a>
+            <a href="https://linkedin.com/company/legalbysoka" target="_blank">li</a>
+            <a href="mailto:hello@legalbysoka.com">email</a>
+        </div>
+    </footer>
+
+    <!-- SCRIPT FOR MODALS AND ACCORDION EXPANSION -->
+    <script>
+        // Toggle Accordion Entries
+        document.querySelectorAll('.toggle-btn').forEach(button => {
+            button.addEventListener('click', () => {
+                const collapsible = button.nextElementSibling;
+                collapsible.classList.toggle('expanded');
+            });
+        });
+
+        // BCI Disclaimer Logic
+        function acceptDisclaimer() {
+            document.getElementById('bci-modal').classList.add('hidden');
+            // Stores acceptance so user doesn't get prompted repeatedly in same session
+            sessionStorage.setItem('bci_accepted', 'true');
+        }
+
+        // Check if disclaimer was already accepted in current session
+        window.addEventListener('DOMContentLoaded', () => {
+            if (sessionStorage.getItem('bci_accepted') === 'true') {
+                document.getElementById('bci-modal').classList.add('hidden');
+            }
+        });
+
+        // Contact Modal Logic
+        function toggleContactModal(show) {
+            const modal = document.getElementById('contact-modal');
+            if (show) {
+                modal.classList.remove('hidden');
+            } else {
+                modal.classList.add('hidden');
+            }
+        }
+    </script>
+
+</body>
+</html>

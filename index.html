@@ -83,6 +83,11 @@
             font-size: 14px;
         }
 
+        /* Forces the date on the pinned SOKA entry to be white */
+        .row.pinned .date {
+            color: var(--text-color);
+        }
+
         .content-area {
             flex-grow: 1;
         }
@@ -146,6 +151,7 @@
 
         .footer-left {
             text-align: left;
+            text-transform: none; /* Overrides lowercase rule to keep SOKA capitalized */
         }
 
         .footer-center {
@@ -363,8 +369,8 @@ By clicking "I AGREE" below, the user acknowledges that:
     <div class="timeline-scroll-container">
         <main class="timeline">
 
-            <!-- PINNED TOP ENTRY: SOKA -->
-            <div class="row">
+            <!-- PINNED TOP ENTRY: SOKA (Assigned the 'pinned' class to make the date white) -->
+            <div class="row pinned">
                 <div class="date">xx.xx.xxxx</div>
                 <div class="content-area">
                     <button class="essay-trigger toggle-btn">SOKA</button>

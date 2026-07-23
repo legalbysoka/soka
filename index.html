@@ -236,11 +236,6 @@
             width: auto;
             object-fit: contain;
             display: block;
-            /* Uses CSS mask to force the logo image to match the exact electric blue variable */
-            background-color: var(--text-color);
-            -webkit-mask: url('footer-logo.png') no-repeat center / contain;
-            mask: url('footer-logo.png') no-repeat center / contain;
-            transition: background-color 0.6s ease;
         }
 
         .footer-right {
@@ -471,8 +466,8 @@ By clicking "I AGREE" below, the user acknowledges that:
 
                 <!-- OPTIONAL GALLERY SECTION -->
                 <div class="about-gallery">
-                    <img src="footer-logo.png" alt="SOKA Studio Photo 1">
-                    <img src="footer-logo.png" alt="SOKA Studio Photo 2">
+                    <img src="footer-logo-blue.png" alt="SOKA Studio Photo 1">
+                    <img src="footer-logo-blue.png" alt="SOKA Studio Photo 2">
                 </div>
 
                 <p class="about-paragraph">
@@ -510,20 +505,25 @@ By clicking "I AGREE" below, the user acknowledges that:
             });
         });
 
-        // VIEW SWITCHING & COLOR INVERSION LOGIC
+        // VIEW SWITCHING, COLOR INVERSION, & LOGO FILE SWAP LOGIC
         function toggleAboutView() {
             const body = document.body;
             const entriesView = document.getElementById('entries-view');
             const aboutView = document.getElementById('about-view');
+            const footerLogo = document.querySelector('.footer-logo-img');
 
             body.classList.toggle('inverted');
 
             if (body.classList.contains('inverted')) {
                 entriesView.classList.add('hidden-view');
                 aboutView.classList.remove('hidden-view');
+                // Swaps to the exact electric blue logo PNG file
+                footerLogo.src = 'footer-logo-blue.png';
             } else {
                 aboutView.classList.add('hidden-view');
                 entriesView.classList.remove('hidden-view');
+                // Swaps back to the original white logo PNG file
+                footerLogo.src = 'footer-logo.png';
             }
         }
 

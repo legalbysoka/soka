@@ -41,10 +41,9 @@
             letter-spacing: -0.2px;
             -webkit-font-smoothing: antialiased;
             height: 100vh;
-            overflow: hidden; /* Prevents full page scroll; scroll handles inside container views */
+            overflow: hidden;
             display: flex;
             flex-direction: column;
-            /* Ultra-smooth color transition across background and typography */
             transition: background-color 0.6s cubic-bezier(0.25, 1, 0.5, 1), color 0.6s cubic-bezier(0.25, 1, 0.5, 1);
         }
 
@@ -115,7 +114,6 @@
             transition: color 0.6s ease;
         }
 
-        /* Pinned SOKA entry date remains stark white in default view */
         .row.pinned .date {
             color: var(--text-color);
         }
@@ -179,6 +177,7 @@
             font-size: 24px;
             margin-bottom: 25px;
             letter-spacing: -0.5px;
+            font-weight: bold;
         }
 
         .about-paragraph {
@@ -186,20 +185,6 @@
             line-height: 1.7;
             margin-bottom: 25px;
             white-space: pre-line;
-        }
-
-        .about-gallery {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-            margin: 35px 0;
-        }
-
-        .about-gallery img {
-            width: 100%;
-            height: auto;
-            border: 1px solid var(--border-color);
-            display: block;
         }
 
         /* --- Fixed Footer --- */
@@ -222,7 +207,7 @@
 
         .footer-left {
             text-align: left;
-            text-transform: none; /* Keeps SOKA capitalized in copyright */
+            text-transform: none;
         }
 
         .footer-center {
@@ -316,7 +301,6 @@
             transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
         }
 
-        /* Button Hover State: White Background, Blue Text, Blue Border */
         .modal-btn:hover {
             background-color: #FFFFFF;
             color: #1400FF;
@@ -340,7 +324,6 @@
             .page-view { padding: 70px 20px 80px 20px; }
             .row { flex-direction: column; margin-bottom: 25px; }
             .date { margin-bottom: 3px; }
-            .about-gallery { grid-template-columns: 1fr; }
             footer { padding: 15px 20px; display: flex; flex-direction: column; align-items: flex-start; gap: 12px; }
             .footer-right { justify-content: flex-start; }
         }
@@ -395,18 +378,16 @@ The Bar Council of India does not permit advertisement or solicitation by advoca
     <div id="entries-view" class="page-view">
         <main class="timeline">
 
-            <!-- PINNED TOP ENTRY: SOKA -->
+            <!-- PINNED TOP ENTRY -->
             <div class="row pinned">
                 <div class="date">xx.xx.xxxx</div>
                 <div class="content-area">
-                    <button class="essay-trigger toggle-btn">SOKA</button>
+                    <button class="essay-trigger toggle-btn">securing the culture; legally.</button>
                     <div class="collapsible-essay">
                         <div class="essay-text">
-                            a legal studio — for India's creatives.
+                            Creative work doesn't fail for lack of talent. It fails for lack of structure, the kind that goes unnoticed until it's needed.
 
-                            SOKA advises creators, independent artists, founders, production houses, and creative entities across India.
-
-                            We structure and handle IP protection, contract negotiation, brand registration, digital media compliance, enforcement, and dispute resolution.
+                            SOKA builds that structure. We work directly with artists, studios, and independent creators to protect what they make and secure what they own, without the weight of a traditional practice.
 
                             <span class="learn-more-link" onclick="toggleAboutView()">[ learn more about SOKA ]</span>
                         </div>
@@ -414,7 +395,7 @@ The Bar Council of India does not permit advertisement or solicitation by advoca
                 </div>
             </div>
 
-            <!-- CHRONOLOGICAL ENTRY #1 (LATEST) -->
+            <!-- CHRONOLOGICAL ENTRY #1 -->
             <div class="row">
                 <div class="date">15.07.2026</div>
                 <div class="content-area">
@@ -443,35 +424,45 @@ The Bar Council of India does not permit advertisement or solicitation by advoca
         </main>
     </div>
 
-    <!-- VIEW 2: INVERTED "ABOUT SOKA" DETAILED PAGE -->
+    <!-- VIEW 2: INVERTED "ABOUT SOKA" MANIFESTO PAGE -->
     <div id="about-view" class="page-view hidden-view">
         <div class="about-content">
             <div class="about-text-container">
-                <h1 class="about-title">About SOKA; Why Trust Us</h1>
+                <h1 class="about-title">The legal infrastructure creative work was never given.</h1>
                 
                 <p class="about-paragraph">
-                    SOKA operates at the intersection of jurisprudence and modern creative culture. 
-
-                    Traditional legal practices often fail to understand the rapid pacing, digital rights structures, and nuanced contracts required by modern creators, independent studios, and brand builders. SOKA was established to eliminate that friction.
+                    SOKA is a New Delhi based legal practice working with creators and creative businesses across India and beyond.
                 </p>
 
                 <p class="about-paragraph">
-                    <strong>Core Practice Areas:</strong>
-                    • Intellectual Property Strategy (Trademarks, Copyrights, & Trade Secrets)
-                    • Talent, Artist, & Agency Representation Contracts
-                    • Digital Media Rights, Syndication, & Publishing Deals
-                    • E-Commerce, Brand Protection, & Counterfeit Enforcement
+                    India's creative economy has scaled faster than the legal infrastructure built around it. Musicians, filmmakers, designers, and independent creators are now building things of real, defensible value, often without the contracts, rights clarity, or protection that value requires. Legal practice in India was built for corporations. It was not built for the individual creator.
                 </p>
 
-                <!-- OPTIONAL GALLERY SECTION -->
-                <div class="about-gallery">
-                    <img src="footer-logo-blue.png" alt="SOKA Studio Photo 1">
-                    <img src="footer-logo-blue.png" alt="SOKA Studio Photo 2">
-                </div>
+                <p class="about-paragraph">
+                    SOKA exists to close that gap.
+                </p>
 
                 <p class="about-paragraph">
-                    Whether you are an independent creator negotiating a major licensing deal or a studio scaling your IP across international territories, SOKA provides clear, direct, and uncompromising legal strategy.
+                    We advise on intellectual property, contracts, and the structural work that determines whether a creative practice holds up over time: licensing, ownership, rights assignment, brand protection, and enforcement. The scope is deliberately narrow. We work at the intersection of law and creative industry, and nowhere else, because that focus is what the work demands.
+                </p>
 
+                <p class="about-paragraph">
+                    We call ourselves a studio rather than a firm by design. A studio implies precision and craft applied to a specific discipline, not general practice spread thin across every kind of client and matter. That distinction shapes how we work.
+                </p>
+
+                <p class="about-paragraph">
+                    SOKA is built by a team of lawyers who understand creative work on its own terms: the culture it comes from, the pace it moves at, and the structure it requires to endure.
+                </p>
+
+                <p class="about-paragraph">
+                    The name itself draws from 創価, a term meaning "the creation of value." We take that literally. Our work exists to protect the value creative people build, not merely to formalize it after the fact.
+                </p>
+
+                <p class="about-paragraph">
+                    If your work needs that kind of structure, <span class="learn-more-link" onclick="toggleContactModal(true)">write to us</span>.
+                </p>
+
+                <p class="about-paragraph" style="margin-top: 40px;">
                     <span class="learn-more-link" onclick="toggleAboutView()">← return to main index</span>
                 </p>
             </div>
@@ -516,12 +507,10 @@ The Bar Council of India does not permit advertisement or solicitation by advoca
             if (body.classList.contains('inverted')) {
                 entriesView.classList.add('hidden-view');
                 aboutView.classList.remove('hidden-view');
-                // Swaps to the exact electric blue logo PNG file
                 footerLogo.src = 'footer-logo-blue.png';
             } else {
                 aboutView.classList.add('hidden-view');
                 entriesView.classList.remove('hidden-view');
-                // Swaps back to the original white logo PNG file
                 footerLogo.src = 'footer-logo.png';
             }
         }
@@ -551,5 +540,3 @@ The Bar Council of India does not permit advertisement or solicitation by advoca
 
 </body>
 </html>
-
-

@@ -305,7 +305,7 @@
         .modal-btn {
             background-color: #1400FF;
             color: #FFFFFF;
-            border: none;
+            border: 1px solid #1400FF;
             padding: 12px 20px;
             font-family: inherit;
             font-size: 13px;
@@ -313,10 +313,14 @@
             letter-spacing: 1px;
             cursor: pointer;
             width: 100%;
+            transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
         }
 
+        /* Button Hover State: White Background, Blue Text, Blue Border */
         .modal-btn:hover {
-            background-color: #000000;
+            background-color: #FFFFFF;
+            color: #1400FF;
+            border-color: #1400FF;
         }
 
         /* Form Controls */
@@ -347,14 +351,9 @@
     <!-- BCI DISCLAIMER POP-UP MODAL -->
     <div id="bci-modal" class="modal-overlay">
         <div class="modal-box">
-            <div class="modal-title">Disclaimer & Terms</div>
+            <div class="modal-title">Disclaimer</div>
             <div class="modal-body">
-As per the rules of the Bar Council of India, advocates and legal entities are restricted from soliciting work or advertising. 
-
-By clicking "I AGREE" below, the user acknowledges that:
-• There has been no advertisement, personal communication, solicitation, invitation, or inducement of any sort whatsoever from SOKA or its members to solicit work through this website.
-• The user wishes to gain more information about SOKA for their own information and use.
-• Any information provided herein is made available solely at the user's request for informational purposes.
+The Bar Council of India does not permit advertisement or solicitation by advocates in any form or manner. By accessing this website, www.legalbysoka.com, you acknowledge and confirm that you are seeking information relating to SOKA of your own accord and that there has been no form of solicitation, advertisement or inducement by SOKA or its members. The content of this website is for informational purposes only and should not be interpreted as soliciting or advertisement. No material/information provided on this website should be construed as legal advice. SOKA shall not be liable for consequences of any action taken by relying on the material/information provided on this website. The contents of this website are the intellectual property of SOKA.
             </div>
             <button class="modal-btn" onclick="acceptDisclaimer()">I Agree</button>
         </div>
@@ -363,7 +362,7 @@ By clicking "I AGREE" below, the user acknowledges that:
     <!-- CONTACT / INQUIRY POP-UP MODAL -->
     <div id="contact-modal" class="modal-overlay hidden">
         <div class="modal-box">
-            <div class="modal-title" style="color: #1400FF;">Send an Enquiry — SOKA</div>
+            <div class="modal-title" style="color: #1400FF;">Send an Enquiry</div>
             <form action="https://formspree.io/f/hello@legalbysoka.com" method="POST">
                 <div class="form-group">
                     <label>Name</label>

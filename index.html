@@ -22,7 +22,8 @@
             --text-color: #FFFFFF;
             --date-color: #A0A0A0;
             --border-color: rgba(255, 255, 255, 0.15);
-            --modal-overlay-bg: rgba(20, 0, 255, 0.45);
+            /* Ultra-Sheer Glass Backdrop for Blue Theme */
+            --modal-overlay-bg: rgba(20, 0, 255, 0.22);
         }
 
         /* Inverted Theme: White Background / Electric Blue Text */
@@ -31,7 +32,8 @@
             --text-color: #1400FF;
             --date-color: #555555;
             --border-color: rgba(20, 0, 255, 0.2);
-            --modal-overlay-bg: rgba(255, 255, 255, 0.55);
+            /* Sheer Glass Backdrop for Inverted White Theme */
+            --modal-overlay-bg: rgba(255, 255, 255, 0.35);
         }
 
         body {
@@ -63,7 +65,7 @@
             width: 100%;
             padding: 40px 50px 20px 50px;
             background-color: var(--bg-color);
-            z-index: 100; /* Stays above the blurred modal overlay */
+            z-index: 100;
             display: flex;
             justify-content: flex-end;
             transition: background-color 0.6s ease;
@@ -214,7 +216,7 @@
             width: 100%;
             padding: 18px 50px 25px 50px;
             background-color: var(--bg-color);
-            z-index: 100; /* Stays above the blurred modal overlay */
+            z-index: 100;
             display: grid;
             grid-template-columns: 1fr auto 1fr;
             align-items: center;
@@ -265,7 +267,7 @@
             text-decoration: underline;
         }
 
-        /* --- Modals (Blurred Backdrop Between Header & Page Content) --- */
+        /* --- Light, Transparent Frosted Glass Backdrop --- */
         .modal-overlay {
             position: fixed;
             top: 0;
@@ -273,14 +275,14 @@
             width: 100vw;
             height: 100vh;
             background-color: var(--modal-overlay-bg);
-            -webkit-backdrop-filter: blur(12px);
-            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(6px);
+            backdrop-filter: blur(6px);
             display: flex;
             justify-content: center;
             align-items: center;
-            z-index: 50; /* Sits below fixed header/footer (z-index 100) so they remain visible */
+            z-index: 50;
             padding: 20px;
-            transition: background-color 0.6s ease;
+            transition: background-color 0.6s ease, backdrop-filter 0.6s ease;
         }
 
         .modal-box {
@@ -290,7 +292,7 @@
             padding: 35px;
             max-width: 580px;
             width: 100%;
-            box-shadow: 0px 15px 35px rgba(0, 0, 0, 0.25);
+            box-shadow: 0px 20px 40px rgba(0, 0, 0, 0.3);
             pointer-events: auto;
         }
 
@@ -299,7 +301,7 @@
             font-weight: bold;
             text-transform: uppercase;
             margin-bottom: 15px;
-            color: #1400FF; /* Unified Electric Blue Title Font */
+            color: #1400FF;
         }
 
         .modal-body {

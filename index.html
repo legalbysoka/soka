@@ -1,56 +1,59 @@
 <!DOCTYPE html>
 <html lang="en">
-    <!-- JSON-LD STRUCTURED DATA FOR AI & GOOGLE -->
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "LegalService",
-  "@id": "https://www.legalbysoka.com/#organization",
-  "name": "SOKA",
-  "alternateName": "SOKA; A Legal Studio",
-  "url": "https://www.legalbysoka.com",
-  "logo": "https://www.legalbysoka.com/footer-logo.png",
-  "description": "New Delhi based legal studio providing intellectual property, contract drafting, dispute resolution, and legal infrastructure for India's creative economy.",
-  "address": {
-    "@type": "PostalAddress",
-    "streetAddress": "3rd Floor, K1/52, CR Park",
-    "addressLocality": "New Delhi",
-    "addressRegion": "Delhi",
-    "postalCode": "110019",
-    "addressCountry": "IN"
-  },
-  "geo": {
-    "@type": "GeoCoordinates",
-    "latitude": "28.5383",
-    "longitude": "77.2520"
-  },
-  "areaServed": ["IN", "Worldwide"],
-  "knowsAbout": [
-    "Intellectual Property Law",
-    "Copyright Law",
-    "Music Contracts",
-    "Film Clearances",
-    "Creator Rights",
-    "Moral Rights",
-    "Entertainment Law India"
-  ],
-  "sameAs": [
-    "https://www.instagram.com/legalbysoka",
-    "https://linkedin.com/company/legalbysoka"
-  ]
-}
-</script>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SOKA; A Legal Studio | IP, Contracts & Structure for India's Creatives</title>
-<meta name="description" content="SOKA is a New Delhi based legal practice advising musicians, artists, filmmakers, writers, and creators on intellectual property, contracts, disputes, and rights enforcement.">
-<meta property="og:title" content="SOKA; A Legal Studio | IP, Contracts & Structure for India's Creatives">
-<meta property="og:description" content="A New Delhi legal practice providing intellectual property, contract, and structural legal infrastructure for India's creative economy.">
-<meta property="og:url" content="https://www.legalbysoka.com">
     
+    <!-- SEO METADATA -->
+    <meta name="description" content="SOKA is a New Delhi based legal practice advising musicians, artists, filmmakers, writers, and creators on intellectual property, contracts, disputes, and rights enforcement.">
+    <meta property="og:title" content="SOKA; A Legal Studio | IP, Contracts & Structure for India's Creatives">
+    <meta property="og:description" content="A New Delhi legal practice providing intellectual property, contract, and structural legal infrastructure for India's creative economy.">
+    <meta property="og:url" content="https://www.legalbysoka.com">
+
     <!-- TAB ICON / FAVICON -->
     <link rel="icon" type="image/png" href="tab-icon.png">
+
+    <!-- GOOGLE FONTS: Newsreader & JetBrains Mono -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500&family=Newsreader:ital,opsz,wght@0,6..72,300..600;1,6..72,300..600&display=swap" rel="stylesheet">
+
+    <!-- JSON-LD STRUCTURED DATA FOR AI & GOOGLE -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "LegalService",
+      "@id": "https://www.legalbysoka.com/#organization",
+      "name": "SOKA",
+      "alternateName": "SOKA; A Legal Studio",
+      "url": "https://www.legalbysoka.com",
+      "logo": "https://www.legalbysoka.com/footer-logo.png",
+      "description": "New Delhi based legal studio providing intellectual property, contract drafting, dispute resolution, and legal infrastructure for India's creative economy.",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "3rd Floor, K1/52, CR Park",
+        "addressLocality": "New Delhi",
+        "addressRegion": "Delhi",
+        "postalCode": "110019",
+        "addressCountry": "IN"
+      },
+      "areaServed": ["IN", "Worldwide"],
+      "knowsAbout": [
+        "Intellectual Property Law",
+        "Copyright Law",
+        "Music Contracts",
+        "Film Clearances",
+        "Creator Rights",
+        "Moral Rights",
+        "Entertainment Law India"
+      ],
+      "sameAs": [
+        "https://www.instagram.com/legalbysoka",
+        "https://linkedin.com/company/legalbysoka"
+      ]
+    }
+    </script>
 
     <style>
         /* --- Core Reset & Dynamic Color Variables --- */
@@ -70,16 +73,20 @@
         :root {
             --bg-color: #1400FF;
             --text-color: #FFFFFF;
-            --date-color: #A0A0A0;
-            --border-color: rgba(255, 255, 255, 0.15);
+            --date-color: rgba(255, 255, 255, 0.55);
+            --border-color: rgba(255, 255, 255, 0.18);
             --modal-overlay-bg: rgba(20, 0, 255, 0.22);
+
+            /* Editorial Font Stack */
+            --font-serif: 'Newsreader', 'Times New Roman', serif;
+            --font-mono: 'JetBrains Mono', monospace;
         }
 
         /* Inverted / White Page Theme */
         body.inverted {
             --bg-color: #FFFFFF;
             --text-color: #1400FF;
-            --date-color: #555555;
+            --date-color: rgba(20, 0, 255, 0.5);
             --border-color: rgba(20, 0, 255, 0.2);
             --modal-overlay-bg: rgba(255, 255, 255, 0.35);
         }
@@ -87,10 +94,10 @@
         body {
             background-color: var(--bg-color);
             color: var(--text-color);
-            font-family: "Times New Roman", Times, serif;
-            font-size: 15px;
-            line-height: 1.6;
-            letter-spacing: -0.2px;
+            font-family: var(--font-serif);
+            font-size: 16px;
+            line-height: 1.65;
+            letter-spacing: -0.15px;
             -webkit-font-smoothing: antialiased;
             height: 100vh;
             overflow-y: hidden;
@@ -99,10 +106,47 @@
             transition: background-color 0.6s cubic-bezier(0.25, 1, 0.5, 1), color 0.6s cubic-bezier(0.25, 1, 0.5, 1);
         }
 
+        /* Technical Monospace Elements */
+        .date, 
+        .nav-btn, 
+        .footer-right, 
+        .footer-left,
+        .close-modal-link,
+        .practice-toggle-icon,
+        .image-caption {
+            font-family: var(--font-mono);
+            letter-spacing: -0.3px;
+        }
+
         /* Prevent header/footer clicks when modal is open */
         body.modal-open header,
         body.modal-open footer {
             pointer-events: none;
+        }
+
+        /* --- Micro-Animations: Scale Underlines --- */
+        .essay-trigger, .nav-btn, .brand-header, .learn-more-link, .footer-right a, .contact-btn {
+            position: relative;
+            text-decoration: none !important;
+        }
+
+        .essay-trigger::after, .nav-btn::after, .brand-header::after, .learn-more-link::after, .footer-right a::after, .contact-btn::after {
+            content: '';
+            position: absolute;
+            bottom: -1px;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background-color: currentColor;
+            transform: scaleX(0);
+            transform-origin: right;
+            transition: transform 0.35s cubic-bezier(0.25, 1, 0.5, 1);
+            opacity: 0.8;
+        }
+
+        .essay-trigger:hover::after, .nav-btn:hover::after, .brand-header:hover::after, .learn-more-link:hover::after, .footer-right a:hover::after, .contact-btn:hover::after {
+            transform: scaleX(1);
+            transform-origin: left;
         }
 
         /* --- Fixed Top-Right Header & Navigation --- */
@@ -122,16 +166,11 @@
 
         .brand-header {
             font-size: 16px;
-            font-weight: normal;
+            font-weight: 400;
             letter-spacing: -0.3px;
             color: var(--text-color);
-            text-decoration: none;
             cursor: pointer;
             transition: color 0.6s ease;
-        }
-
-        .brand-header:hover {
-            text-decoration: underline;
         }
 
         .nav-links {
@@ -145,16 +184,13 @@
             color: var(--text-color);
             background: none;
             border: none;
-            font-family: inherit;
             cursor: pointer;
-            text-decoration: none;
             opacity: 0.85;
             transition: opacity 0.3s ease, color 0.6s ease;
         }
 
         .nav-btn:hover {
             opacity: 1;
-            text-decoration: underline;
         }
 
         /* --- Scrollable View Containers --- */
@@ -202,7 +238,7 @@
             width: 130px;
             flex-shrink: 0;
             color: var(--date-color);
-            font-size: 14px;
+            font-size: 13.5px;
             transition: color 0.6s ease;
         }
 
@@ -217,40 +253,42 @@
 
         .essay-trigger {
             color: var(--text-color);
-            text-decoration: none;
-            cursor: pointer;
             background: none;
             border: none;
             font-family: inherit;
-            font-size: inherit;
+            font-size: 16.5px;
             text-align: left;
             padding: 0;
             display: inline;
+            cursor: pointer;
             transition: color 0.6s ease;
         }
 
-        .essay-trigger:hover {
-            text-decoration: underline;
-        }
-
-        /* --- Collapsible Accordion --- */
+        /* --- Collapsible Accordion with Smooth Micro-Transitions --- */
         .collapsible-essay {
             max-height: 0;
+            opacity: 0;
             overflow: hidden;
-            transition: max-height 0.4s cubic-bezier(0.25, 1, 0.5, 1), margin 0.3s ease;
+            transform: translateY(-4px);
+            transition: max-height 0.5s cubic-bezier(0.16, 1, 0.3, 1), 
+                        opacity 0.4s ease, 
+                        transform 0.4s ease,
+                        margin 0.3s ease;
             max-width: 720px;
             width: 100%;
         }
 
         .collapsible-essay.expanded {
             max-height: 6000px;
-            margin-top: 16px;
-            margin-bottom: 32px;
+            opacity: 1;
+            transform: translateY(0);
+            margin-top: 18px;
+            margin-bottom: 36px;
         }
 
         .essay-text {
-            font-size: 15.5px;
-            line-height: 1.65;
+            font-size: 16px;
+            line-height: 1.7;
             white-space: pre-line;
             word-wrap: break-word;
             overflow-wrap: break-word;
@@ -302,7 +340,7 @@
         }
 
         .image-caption {
-            font-size: 11.5px;
+            font-size: 11px;
             font-style: italic;
             color: var(--date-color);
             line-height: 1.3;
@@ -312,9 +350,8 @@
 
         .learn-more-link {
             color: var(--text-color);
-            text-decoration: underline;
             cursor: pointer;
-            font-weight: bold;
+            font-weight: 500;
         }
 
         /* --- Detailed About View Formatting --- */
@@ -325,14 +362,14 @@
         }
 
         .about-title {
-            font-size: 24px;
+            font-size: 26px;
             margin-bottom: 30px;
             letter-spacing: -0.5px;
-            font-weight: bold;
+            font-weight: 500;
         }
 
         .about-paragraph {
-            font-size: 16.5px;
+            font-size: 17px;
             line-height: 1.75;
             margin-bottom: 30px;
             white-space: pre-line;
@@ -371,8 +408,8 @@
         }
 
         .practice-heading {
-            font-size: 20px;
-            font-weight: bold;
+            font-size: 21px;
+            font-weight: 500;
             text-transform: lowercase;
             background: none;
             border: none;
@@ -392,45 +429,47 @@
         }
 
         .practice-toggle-icon {
-            font-size: 12px;
+            font-size: 11px;
             font-weight: normal;
             opacity: 0.85;
         }
 
         .practice-accordion {
             max-height: 0;
+            opacity: 0;
             overflow: hidden;
-            transition: max-height 0.4s cubic-bezier(0.25, 1, 0.5, 1), margin 0.3s ease;
+            transition: max-height 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s ease, margin 0.3s ease;
             max-width: 440px;
             text-align: left;
         }
 
         .practice-accordion.expanded {
             max-height: 1000px;
+            opacity: 1;
             margin-top: 14px;
         }
 
         .practice-desc {
-            font-size: 14.5px;
+            font-size: 15px;
             line-height: 1.65;
         }
 
         /* Hero Prose Paragraph */
         .hero-prose-block {
-            font-size: 17px;
+            font-size: 17.5px;
             line-height: 1.8;
             text-align: left;
             align-self: center;
             padding: 10px 10px;
         }
 
-        /* Full-Bleed Edge-to-Edge Blue Strip (Extra Height & Light/Large Font) */
+        /* Full-Bleed Edge-to-Edge Blue Strip */
         .blue-strip {
             background-color: #1400FF;
             color: #FFFFFF;
             width: 100vw;
             margin-left: calc(-50vw + 50%);
-            padding: 180px 50px; /* Massive vertical height */
+            padding: 180px 50px;
             margin-top: 40px;
             margin-bottom: 40px;
             box-sizing: border-box;
@@ -452,8 +491,8 @@
         }
 
         .blue-strip-trigger {
-            font-size: 42px; /* Very large font */
-            font-weight: 200; /* Extremely light font weight */
+            font-size: 42px;
+            font-weight: 200;
             letter-spacing: -1px;
             color: #FFFFFF;
             background: none;
@@ -472,19 +511,21 @@
 
         .blue-strip-accordion {
             max-height: 0;
+            opacity: 0;
             overflow: hidden;
-            transition: max-height 0.4s cubic-bezier(0.25, 1, 0.5, 1), margin 0.3s ease;
+            transition: max-height 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s ease, margin 0.3s ease;
             max-width: 520px;
             text-align: center;
         }
 
         .blue-strip-accordion.expanded {
             max-height: 1000px;
+            opacity: 1;
             margin-top: 20px;
         }
 
         .blue-strip-desc {
-            font-size: 15.5px;
+            font-size: 16px;
             line-height: 1.7;
             font-weight: 300;
             opacity: 0.92;
@@ -500,8 +541,8 @@
         }
 
         .closing-title {
-            font-size: 32px;
-            font-weight: bold;
+            font-size: 34px;
+            font-weight: 500;
             letter-spacing: -0.8px;
             margin-bottom: 12px;
         }
@@ -530,14 +571,14 @@
         }
 
         .contact-title {
-            font-size: 26px;
-            font-weight: bold;
+            font-size: 28px;
+            font-weight: 500;
             margin-bottom: 8px;
             letter-spacing: -0.5px;
         }
 
         .contact-subtitle {
-            font-size: 15px;
+            font-size: 15.5px;
             margin-bottom: 35px;
             line-height: 1.5;
             opacity: 0.9;
@@ -552,7 +593,7 @@
         }
 
         .contact-detail-block {
-            font-size: 15.5px;
+            font-size: 16px;
             line-height: 1.85;
         }
 
@@ -573,6 +614,7 @@
         .form-group label {
             display: block;
             font-size: 12px;
+            font-family: var(--font-mono);
             text-transform: lowercase;
             margin-bottom: 6px;
             color: var(--text-color);
@@ -581,8 +623,8 @@
         .form-control {
             width: 100%;
             padding: 10px 12px;
-            font-family: inherit;
-            font-size: 14px;
+            font-family: var(--font-serif);
+            font-size: 15px;
             border: 1px solid var(--border-color);
             background: transparent;
             color: var(--text-color);
@@ -605,8 +647,8 @@
             color: #FFFFFF;
             border: 1px solid #1400FF;
             padding: 12px 26px;
-            font-family: inherit;
-            font-size: 13px;
+            font-family: var(--font-mono);
+            font-size: 12px;
             text-transform: uppercase;
             letter-spacing: 1px;
             cursor: pointer;
@@ -633,7 +675,7 @@
             display: grid;
             grid-template-columns: 1fr auto 1fr;
             align-items: center;
-            font-size: 13px;
+            font-size: 12.5px;
             color: var(--text-color);
             border-top: 1px solid var(--border-color);
             transition: background-color 0.6s ease, border-color 0.6s ease, color 0.6s ease;
@@ -646,16 +688,11 @@
 
         .footer-right a, .contact-btn {
             color: var(--text-color);
-            text-decoration: none;
             background: none;
             border: none;
-            font-family: inherit;
-            font-size: inherit;
             cursor: pointer;
             transition: color 0.6s ease;
         }
-
-        .footer-right a:hover, .contact-btn:hover { text-decoration: underline; }
 
         /* --- Modals --- */
         .modal-overlay {
@@ -687,15 +724,16 @@
         }
 
         .modal-title {
-            font-size: 16px;
-            font-weight: bold;
+            font-size: 15px;
+            font-family: var(--font-mono);
+            font-weight: 500;
             text-transform: uppercase;
             margin-bottom: 15px;
             color: #1400FF;
         }
 
         .modal-body {
-            font-size: 13.5px;
+            font-size: 14px;
             line-height: 1.6;
             color: #222222;
             margin-bottom: 25px;
@@ -707,8 +745,8 @@
             color: #FFFFFF;
             border: 1px solid #1400FF;
             padding: 12px 20px;
-            font-family: inherit;
-            font-size: 13px;
+            font-family: var(--font-mono);
+            font-size: 12px;
             text-transform: uppercase;
             letter-spacing: 1px;
             cursor: pointer;
@@ -739,7 +777,7 @@
                 width: 100%;
             }
             
-            .date { width: 95px; font-size: 13px; margin-bottom: 0; }
+            .date { width: 95px; font-size: 12.5px; margin-bottom: 0; }
             .content-area { width: calc(100% - 95px); max-width: calc(100% - 95px); }
 
             .collapsible-essay { max-width: 100% !important; width: 100% !important; }
@@ -752,7 +790,7 @@
             .blue-strip { padding: 100px 24px; }
             .blue-strip-trigger { font-size: 30px; }
 
-            .closing-title { font-size: 24px; }
+            .closing-title { font-size: 26px; }
             .contact-right { text-align: left; justify-content: flex-start; padding-top: 25px; }
 
             footer { 
@@ -762,7 +800,7 @@
                 justify-content: space-between;
                 align-items: center; 
                 gap: 8px;
-                font-size: 11.5px;
+                font-size: 11px;
             }
 
             .footer-left { flex-shrink: 0; }
@@ -826,10 +864,10 @@ The Bar Council of India does not permit advertisement or solicitation by advoca
         <main class="timeline">
 
             <!-- PINNED TOP ENTRY -->
-            <div class="row pinned">
+            <div class="row pinned" id="entry-securing-the-culture">
                 <div class="date">xx.xx.xxxx</div>
                 <div class="content-area">
-                    <button class="essay-trigger toggle-btn">securing the culture; legally.</button>
+                    <button class="essay-trigger toggle-btn" data-slug="securing-the-culture">securing the culture; legally.</button>
                     <div class="collapsible-essay">
                         <div class="essay-text">
                             Creative work doesn't fail for lack of talent. It fails for lack of structure, the kind that goes unnoticed until it's needed.
@@ -843,10 +881,10 @@ The Bar Council of India does not permit advertisement or solicitation by advoca
             </div>
 
             <!-- CHRONOLOGICAL ENTRY 1: RIGHT TO SKATEBOARD -->
-            <div class="row">
+            <div class="row" id="entry-right-to-skateboard">
                 <div class="date">28.07.2026</div>
                 <div class="content-area">
-                    <button class="essay-trigger toggle-btn">right to skateboard</button>
+                    <button class="essay-trigger toggle-btn" data-slug="right-to-skateboard">right to skateboard</button>
                     <div class="collapsible-essay">
                         <img src="r2s.jpeg" alt="right to skateboard" class="essay-image">
                         <div class="essay-text">
@@ -865,10 +903,10 @@ The Bar Council of India does not permit advertisement or solicitation by advoca
             </div>
 
             <!-- CHRONOLOGICAL ENTRY 2: ANI V. OPENAI -->
-            <div class="row">
+            <div class="row" id="entry-ani-v-openai">
                 <div class="date">26.07.2026</div>
                 <div class="content-area">
-                    <button class="essay-trigger toggle-btn">ani v. openai</button>
+                    <button class="essay-trigger toggle-btn" data-slug="ani-v-openai">ani v. openai</button>
                     <div class="collapsible-essay">
                         <div class="essay-text">
                             Read the coverage and you'd think the Delhi High Court just declared AI training legal in India. It didn't. Justice Amit Bansal refused ANI an interim injunction because ANI couldn't prove ChatGPT had memorised or spat back its reporting, not because OpenAI walked in clean. Fair dealing gave the ruling its legal skin. The actual bone underneath is duller and more consequential, an argument about who has to bring proof, and proof of what.
@@ -886,10 +924,10 @@ The Bar Council of India does not permit advertisement or solicitation by advoca
             </div>
 
             <!-- CHRONOLOGICAL ENTRY 3: PROTECTING STEEL AND CONCRETE -->
-            <div class="row">
+            <div class="row" id="entry-protecting-steel-and-concrete">
                 <div class="date">14.07.2026</div>
                 <div class="content-area">
-                    <button class="essay-trigger toggle-btn">protecting steel and concrete</button>
+                    <button class="essay-trigger toggle-btn" data-slug="protecting-steel-and-concrete">protecting steel and concrete</button>
                     <div class="collapsible-essay">
                         <img src="snc.jpeg" alt="protecting steel and concrete" class="essay-image">
                         <div class="essay-text">
@@ -910,10 +948,10 @@ The Bar Council of India does not permit advertisement or solicitation by advoca
             </div>
 
             <!-- CHRONOLOGICAL ENTRY 4: COURTROOM SKETCHES -->
-            <div class="row">
+            <div class="row" id="entry-courtroom-sketches">
                 <div class="date">03.07.2026</div>
                 <div class="content-area">
-                    <button class="essay-trigger toggle-btn">courtroom sketches</button>
+                    <button class="essay-trigger toggle-btn" data-slug="courtroom-sketches">courtroom sketches</button>
                     <div class="collapsible-essay">
                         
                         <!-- SIDEWAYS SCROLLING GALLERY (7 SKETCHES) -->
@@ -1057,7 +1095,7 @@ The Bar Council of India does not permit advertisement or solicitation by advoca
                     </div>
                 </div>
 
-                <!-- FULL-BLEED EDGE-TO-EDGE BLUE STRIP (WITH INTERACTIVE DROPDOWNS & ULTRA-LIGHT LIGHT/LARGE FONT) -->
+                <!-- FULL-BLEED EDGE-TO-EDGE BLUE STRIP -->
                 <div class="blue-strip">
                     <div class="blue-strip-grid">
                         
@@ -1202,16 +1240,26 @@ The Bar Council of India does not permit advertisement or solicitation by advoca
         </div>
     </footer>
 
-    <!-- INTERACTIVE SCRIPT LOGIC -->
+    <!-- INTERACTIVE SCRIPT LOGIC WITH FULL PAGE & ESSAY DEEP-LINKING -->
     <script>
-        // Track currently active view
         let currentView = 'entries';
 
-        // Toggle Main Entry Accordions
+        // Toggle Main Entry Accordions with Hash Updates
         document.querySelectorAll('.essay-trigger.toggle-btn').forEach(button => {
             button.addEventListener('click', () => {
                 const collapsible = button.nextElementSibling;
+                const isExpanding = !collapsible.classList.contains('expanded');
+                
+                // Toggle expansion
                 collapsible.classList.toggle('expanded');
+
+                // Update hash URL on expand
+                const slug = button.getAttribute('data-slug');
+                if (isExpanding && slug) {
+                    history.pushState(null, null, '#' + slug);
+                } else if (!isExpanding && window.location.hash.replace('#', '') === slug) {
+                    history.pushState(null, null, window.location.pathname);
+                }
             });
         });
 
@@ -1246,8 +1294,8 @@ The Bar Council of India does not permit advertisement or solicitation by advoca
             }
         }
 
-        // MULTI-VIEW SWITCHING, INVERSION & LOGO LOGIC
-        function switchView(targetView) {
+        // MULTI-VIEW SWITCHING WITH URL HASH ROUTING
+        function switchView(targetView, updateHash = true) {
             currentView = targetView;
             const body = document.body;
             const views = {
@@ -1258,24 +1306,65 @@ The Bar Council of India does not permit advertisement or solicitation by advoca
             };
             const footerLogo = document.querySelector('.footer-logo-img');
 
+            if (!views[targetView]) return;
+
+            // Handle Hash URL
+            if (updateHash) {
+                if (targetView === 'entries') {
+                    history.pushState(null, null, window.location.pathname);
+                } else {
+                    window.location.hash = targetView;
+                }
+            }
+
             // Hide all views first
             Object.values(views).forEach(v => v.classList.add('hidden-view'));
 
             // Reveal chosen target view
             views[targetView].classList.remove('hidden-view');
 
-            // Reset scroll position to top when changing views
+            // Reset scroll position
             views[targetView].scrollTop = 0;
 
-            // Handle theme inversion (Blue vs White background)
+            // Handle theme inversion
             if (targetView === 'entries') {
                 body.classList.remove('inverted');
-                footerLogo.src = 'footer-logo.png';
+                if (footerLogo) footerLogo.src = 'footer-logo.png';
             } else {
                 body.classList.add('inverted');
-                footerLogo.src = 'footer-logo-blue.png';
+                if (footerLogo) footerLogo.src = 'footer-logo-blue.png';
             }
         }
+
+        // HANDLE BROWSER BACK/FORWARD & DEEP-LINKED URLS (PAGES & ESSAYS)
+        function handleHashChange() {
+            const rawHash = window.location.hash.replace('#', '');
+            if (!rawHash) {
+                switchView('entries', false);
+                return;
+            }
+
+            // Page Hash Routing
+            if (['about', 'practices', 'contact'].includes(rawHash)) {
+                switchView(rawHash, false);
+                return;
+            }
+
+            // Essay Deep-Link Routing
+            const essayButton = document.querySelector(`.essay-trigger[data-slug="${rawHash}"]`);
+            if (essayButton) {
+                switchView('entries', false);
+                const collapsible = essayButton.nextElementSibling;
+                if (!collapsible.classList.contains('expanded')) {
+                    collapsible.classList.add('expanded');
+                }
+                setTimeout(() => {
+                    essayButton.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }, 300);
+            }
+        }
+
+        window.addEventListener('hashchange', handleHashChange);
 
         // BCI Disclaimer Logic
         function acceptDisclaimer() {
@@ -1289,6 +1378,8 @@ The Bar Council of India does not permit advertisement or solicitation by advoca
                 document.getElementById('bci-modal').classList.add('hidden');
                 document.body.classList.remove('modal-open');
             }
+            // Check initial URL hash on load
+            handleHashChange();
         });
 
         // Contact Modal Logic

@@ -16,15 +16,19 @@
             box-sizing: border-box;
         }
 
+        /* Prevent Any Horizontal Page-Swiping / Viewport Blowout */
+        html, body {
+            overflow-x: hidden;
+            max-width: 100vw;
+        }
+
         /* Default Theme: Electric Blue Background / White Text */
         :root {
             --bg-color: #1400FF;
             --text-color: #FFFFFF;
             --date-color: #A0A0A0;
             --border-color: rgba(255, 255, 255, 0.15);
-            /* Ultra-Sheer Glass Backdrop for Blue Theme */
             --modal-overlay-bg: rgba(20, 0, 255, 0.22);
-            --caption-color: rgba(255, 255, 255, 0.65);
         }
 
         /* Inverted Theme: White Background / Electric Blue Text */
@@ -33,9 +37,7 @@
             --text-color: #1400FF;
             --date-color: #555555;
             --border-color: rgba(20, 0, 255, 0.2);
-            /* Sheer Glass Backdrop for Inverted White Theme */
             --modal-overlay-bg: rgba(255, 255, 255, 0.35);
-            --caption-color: rgba(20, 0, 255, 0.7);
         }
 
         body {
@@ -47,7 +49,7 @@
             letter-spacing: -0.2px;
             -webkit-font-smoothing: antialiased;
             height: 100vh;
-            overflow: hidden;
+            overflow-y: hidden;
             display: flex;
             flex-direction: column;
             transition: background-color 0.6s cubic-bezier(0.25, 1, 0.5, 1), color 0.6s cubic-bezier(0.25, 1, 0.5, 1);
@@ -96,6 +98,7 @@
             height: 100%;
             padding: 90px 50px 80px 50px;
             overflow-y: auto;
+            overflow-x: hidden;
             opacity: 1;
             transform: translateY(0);
             transition: opacity 0.5s ease, transform 0.5s ease;
@@ -109,6 +112,7 @@
 
         .timeline, .about-content {
             max-width: 1400px;
+            width: 100%;
         }
 
         /* --- Timeline Rows --- */
@@ -116,6 +120,7 @@
             display: flex;
             align-items: flex-start;
             margin-bottom: 22px;
+            width: 100%;
         }
 
         .date {
@@ -132,6 +137,7 @@
 
         .content-area {
             flex-grow: 1;
+            max-width: 100%;
         }
 
         .essay-trigger {
@@ -158,6 +164,7 @@
             overflow: hidden;
             transition: max-height 0.4s cubic-bezier(0.25, 1, 0.5, 1), margin 0.3s ease;
             max-width: 720px;
+            width: 100%;
         }
 
         .collapsible-essay.expanded {
@@ -170,10 +177,14 @@
             font-size: 15.5px;
             line-height: 1.6;
             white-space: pre-line;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            max-width: 100%;
         }
 
-        /* --- Precise Image Formatting --- */
-        .essay-image {
+        /* --- Precise Image Formatting (Strict Width Locking) --- */
+        .essay-image, 
+        .collapsible-essay img {
             width: 100%;
             max-width: 720px;
             height: auto;
@@ -181,43 +192,7 @@
             margin-bottom: 18px;
             border: 1px solid var(--border-color);
             object-fit: cover;
-        }
-
-        /* --- Horizontal Scroll Carousel with Image Attributions --- */
-        .carousel-container {
-            display: flex;
-            overflow-x: auto;
-            scroll-snap-type: x mandatory;
-            gap: 15px;
-            max-width: 720px;
-            margin-bottom: 20px;
-            padding-bottom: 10px;
-            -webkit-overflow-scrolling: touch;
-            scrollbar-width: thin;
-        }
-
-        .carousel-item {
-            flex: 0 0 100%;
-            scroll-snap-align: start;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .carousel-item img {
-            width: 100%;
-            height: 420px;
-            object-fit: cover;
-            border: 1px solid var(--border-color);
-            display: block;
-        }
-
-        .carousel-attribution {
-            font-size: 11.5px;
-            color: var(--caption-color);
-            margin-top: 6px;
-            font-style: italic;
-            line-height: 1.3;
-            transition: color 0.6s ease;
+            box-sizing: border-box;
         }
 
         .learn-more-link {
@@ -230,6 +205,7 @@
         /* --- Detailed About View Formatting --- */
         .about-text-container {
             max-width: 780px;
+            width: 100%;
             padding-top: 10px;
         }
 
@@ -382,28 +358,43 @@
 
         .hidden { display: none !important; }
 
-        /* --- MOBILE ONLY ISOLATED OVERRIDES --- */
+        /* --- STRICT MOBILE OVERRIDES --- */
         @media (max-width: 600px) {
             header { 
                 padding: 25px 20px 15px 20px; 
             }
             .page-view { 
-                padding: 105px 20px 70px 20px; 
+                padding: 105px 20px 70px 20px;
             }
 
             .row { 
                 flex-direction: row; 
                 align-items: baseline;
                 margin-bottom: 18px; 
+                width: 100%;
             }
+            
             .date { 
-                width: 95px; 
+                width: 95px;
                 font-size: 13px;
                 margin-bottom: 0;
             }
 
-            .carousel-item img {
-                height: 280px; /* Adapted carousel height for mobile devices */
+            .content-area {
+                width: calc(100% - 95px);
+                max-width: calc(100% - 95px);
+            }
+
+            .collapsible-essay {
+                max-width: 100% !important;
+                width: 100% !important;
+            }
+
+            .essay-image, 
+            .collapsible-essay img {
+                width: 100% !important;
+                max-width: 100% !important;
+                height: auto !important;
             }
 
             footer { 
@@ -426,7 +417,7 @@
             }
 
             .footer-logo-img {
-                height: 22px; 
+                height: 22px;
             }
 
             .footer-right { 
@@ -565,62 +556,6 @@ The Bar Council of India does not permit advertisement or solicitation by advoca
                             What the case actually exposes, once the doctrine is set aside, is a choice this country hasn't made yet, whether architecture is closer to infrastructure, disposable once its function ends, or closer to art, worth preserving regardless of function. Most legal systems that take moral rights seriously eventually have to answer that question directly, sometimes through heritage law, sometimes through cultural property statutes that sit outside copyright altogether. India has largely let property rights answer it by default, letting ownership of the land settle a question that ownership was never really equipped to settle. An architect's authorship doesn't disappear the day a building comes down. It just stops having anywhere to live.
 
                             That's the idea worth holding past this one case. A society's relationship to its own built art shows up less in what it protects on paper and more in what it's willing to let disappear without a fight. Every demolished structure of real artistic weight is a small referendum on that question, decided quietly, usually by whoever holds the title, rarely by anyone weighing what the work itself was worth keeping. Preservation, in that sense, was never really a legal problem waiting for the right provision. It's a cultural one, about whether a country is willing to treat the buildings it stands inside as something closer to authorship than to real estate, long before any court has to be asked.
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- CHRONOLOGICAL ENTRY 4: COURTROOM SKETCHES -->
-            <div class="row">
-                <div class="date">03.07.2026</div>
-                <div class="content-area">
-                    <button class="essay-trigger toggle-btn">courtroom sketches</button>
-                    <div class="collapsible-essay">
-                        
-                        <!-- 7-IMAGE HORIZONTAL CAROUSEL WITH ATTRIBUTIONS -->
-                        <div class="carousel-container">
-                            <div class="carousel-item">
-                                <img src="cs1.jpeg" alt="Courtroom Sketch 1">
-                                <div class="carousel-attribution">Dustin McDaniel, CC BY-SA 4.0, via Wikimedia Commons</div>
-                            </div>
-                            <div class="carousel-item">
-                                <img src="cs2.jpeg" alt="Courtroom Sketch 2">
-                                <div class="carousel-attribution">[author unconfirmed], CC BY-SA 3.0, via Wikimedia Commons (verify before use)</div>
-                            </div>
-                            <div class="carousel-item">
-                                <img src="cs3.jpeg" alt="Courtroom Sketch 3">
-                                <div class="carousel-attribution">Beinecke Library, CC BY-SA 2.0, via Wikimedia Commons</div>
-                            </div>
-                            <div class="carousel-item">
-                                <img src="cs4.jpeg" alt="Courtroom Sketch 4">
-                                <div class="carousel-attribution">Elizabeth Williams, CC BY-SA 3.0, via Wikimedia Commons</div>
-                            </div>
-                            <div class="carousel-item">
-                                <img src="cs5.jpeg" alt="Courtroom Sketch 5">
-                                <div class="carousel-attribution">Staff Sgt. Amy Brown, Public Domain, via Wikimedia Commons</div>
-                            </div>
-                            <div class="carousel-item">
-                                <img src="cs6.jpeg" alt="Courtroom Sketch 6">
-                                <div class="carousel-attribution">Oeoi, CC0, via Wikimedia Commons</div>
-                            </div>
-                            <div class="carousel-item">
-                                <img src="cs7.jpeg" alt="Courtroom Sketch 7">
-                                <div class="carousel-attribution">Elizabeth Williams, CC BY-SA 3.0, via Wikimedia Commons</div>
-                            </div>
-                        </div>
-
-                        <div class="essay-text">
-                            Last September, the Supreme Court of India banned photography and videography across its high-security zones, cameras, phones, tripods, selfie sticks, all of it, citing security and the dignity of proceedings. Buried in the same circular sat a single clarifying line, official sketches remain allowed. Nobody wrote a follow-up piece about that sentence. It's easy to miss, sitting quietly beside a ban that made headlines for what it prohibited rather than the one thing it quietly permitted.
-
-                            A courtroom sketch was never decoration. It exists specifically as the record wherever a camera isn't allowed to be, the artist's hand and memory standing in for a lens the room won't tolerate. A photograph fixes a face permanently, publishably, in a form that travels without context. A sketch renders a scene, the posture of counsel, the weight in a witness's shoulders, the particular stillness of a room mid-argument, without necessarily producing an identity that can be lifted and circulated freely. It preserves atmosphere while leaving likeness negotiable. In proceedings where privacy and dignity are the entire point of banning the camera in the first place, that may be the more appropriate record, not a lesser one.
-
-                            What that record has captured, over decades, is a strange and specific kind of power dynamic, a defendant with almost no control left over anything else in the room, negotiating with the one person still deciding how they'll be remembered. Jane Rosenberg, who has drawn American courtrooms for Reuters for over forty years, spent this year fielding requests from men on trial for their futures. Sean Combs, sketched through his federal trial on charges of sex trafficking and racketeering, turned to her during a break and asked her to "soften" him, telling her she was making him look like a koala. Earlier the same year, Rudy Giuliani told her she'd drawn him looking like his dog. In 2023, Donald Trump Jr., mid civil fraud trial, had a simpler request, make me look sexy. None of them could touch the verdict. All of them, apparently, could still care about the line.
-
-                            That's the part worth sitting with as art, not law. A sketch artist in an American federal courtroom holds something closer to authorship than documentation, working from a fixed vantage point, under time pressure, translating a room's tension into a single frozen composition that will stand in for an event most of the public will never see directly. It's a discipline built on constraint, no do-overs, no second angle, no zoom, and constraint has produced its own visual language over a century, exaggerated shadow, expressive line, a face rendered slightly larger than life because the artist is working fast and from memory as much as from sight. That language has become recognizable enough that a defendant can look at a sketch and object to it the way a subject objects to an unflattering photograph, proof the form carries real representational weight, not merely procedural function.
-
-                            The United States built an entire institution around the legal gap that makes this necessary. Federal courts have restricted cameras since the 1940s, with narrow and inconsistent exceptions, and sketch artists filled the space that restriction created, credentialed, employed by news organizations, present at the country's most consequential trials for generations. The United Kingdom went further, and the comparison is more instructive for it. Section 41 of the Criminal Justice Act 1925 doesn't merely ban cameras. It bans sketching itself inside a court, extending "in court" to the building, its precincts, even a person entering or leaving. What survives that restriction is a stricter, almost ritualized discipline, an artist sits through proceedings, commits the scene to memory, leaves the building, and draws afterward, entirely from recall. Presence without recording. Likeness rebuilt from memory rather than captured live.
-
-                            India has neither tradition, no credentialed role, no institutional process for who may sketch or how, no century of the practice attaching itself to significant proceedings the way it has elsewhere. And yet the same court that just tightened its restrictions on recording named sketching, explicitly, as the sanctioned alternative, inside the exact zones where the question would matter most. The permission isn't missing. It's sitting in the text of a circular nobody has built anything underneath, waiting on the accreditation, the access, and the artists themselves, the culture a right needs before it becomes a practice anyone can actually point to.
                         </div>
                     </div>
                 </div>

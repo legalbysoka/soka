@@ -134,8 +134,14 @@
             pointer-events: none;
         }
 
-        .timeline, .about-content, .practices-content, .contact-content {
+        .timeline, .about-content, .practices-content {
             max-width: 1200px;
+            width: 100%;
+            margin: 0 auto;
+        }
+
+        .contact-content {
+            max-width: 100%; /* Stretch to align flush with header 50px padding */
             width: 100%;
             margin: 0 auto;
         }
@@ -292,7 +298,7 @@
         .practices-grid {
             display: flex;
             flex-direction: column;
-            gap: 120px; /* Expands vertical spacing so strip is hidden until scroll */
+            gap: 130px; /* Spacious block separation */
             padding-top: 25px;
         }
 
@@ -314,8 +320,8 @@
             width: 100%;
             max-width: 440px;
             height: 280px;
-            object-fit: contain; /* Clean render without box borders */
-            border: none; /* Removed blue outline box */
+            object-fit: contain;
+            border: none;
             margin-bottom: 18px;
             display: block;
         }
@@ -323,6 +329,7 @@
         .practice-heading {
             font-size: 20px;
             font-weight: bold;
+            text-transform: lowercase; /* Lowercase headings */
             background: none;
             border: none;
             font-family: inherit;
@@ -373,28 +380,28 @@
             padding: 10px 10px;
         }
 
-        /* Full-Bleed Edge-to-Edge Blue Strip with High Vertical Length */
+        /* Full-Bleed Edge-to-Edge Blue Strip with High Height & Light/Large Typography */
         .blue-strip {
             background-color: #1400FF;
             color: #FFFFFF;
             width: 100vw;
             margin-left: calc(-50vw + 50%);
-            padding: 110px 50px; /* Generous height expansion */
+            padding: 160px 50px; /* Expansive vertical height */
             margin-top: 40px;
             margin-bottom: 40px;
             box-sizing: border-box;
         }
 
         .blue-strip-grid {
-            max-width: 1100px;
+            max-width: 1200px;
             margin: 0 auto;
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 40px 80px;
+            gap: 60px 100px;
             text-align: center;
-            font-size: 28px; /* Substantially larger lowercase headings */
-            font-weight: bold;
-            letter-spacing: -0.5px;
+            font-size: 36px; /* Substantially larger headings */
+            font-weight: normal; /* Decreased font weight */
+            letter-spacing: -0.8px;
         }
 
         .blue-strip-item {
@@ -409,14 +416,14 @@
 
         /* Hero Closing Statement Section */
         .closing-statement {
-            margin-top: 80px;
-            margin-bottom: 80px;
+            margin-top: 90px;
+            margin-bottom: 90px;
             text-align: center;
             padding: 30px 0;
         }
 
         .closing-title {
-            font-size: 32px; /* Prominent closing title */
+            font-size: 32px;
             font-weight: bold;
             letter-spacing: -0.8px;
             margin-bottom: 12px;
@@ -428,13 +435,16 @@
             font-style: italic;
         }
 
-        /* --- Contact Page Layout --- */
+        /* --- Contact Page Layout (Aligned Flush Right with Header) --- */
         .contact-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 80px;
             min-height: calc(100vh - 280px);
             padding-top: 15px;
+            max-width: 1200px;
+            margin: 0 0 0 auto; /* Pushes content right so right column hits screen boundary */
+            width: 100%;
         }
 
         .contact-left {
@@ -460,7 +470,7 @@
             display: flex;
             flex-direction: column;
             justify-content: flex-end;
-            text-align: right;
+            text-align: right; /* Aligned right to match header text margin */
             padding-bottom: 35px;
         }
 
@@ -671,19 +681,19 @@
 
         .hidden { display: none !important; }
 
-        /* --- STRICT MOBILE OVERRIDES --- */
+        /* --- STRICT & SPACIOUS MOBILE OVERRIDES --- */
         @media (max-width: 600px) {
             header { 
                 padding: 20px 20px 12px 20px; 
             }
             .page-view { 
-                padding: 110px 20px 70px 20px;
+                padding: 120px 24px 80px 24px; /* Generous side padding and top clearance */
             }
 
             .row { 
                 flex-direction: row; 
                 align-items: baseline;
-                margin-bottom: 18px; 
+                margin-bottom: 24px; 
                 width: 100%;
             }
             
@@ -712,20 +722,21 @@
             }
 
             .practices-grid {
-                gap: 60px;
+                gap: 80px; /* Ample breathing room on mobile */
             }
 
             .practice-row, .contact-grid, .blue-strip-grid {
                 grid-template-columns: 1fr;
-                gap: 35px;
+                gap: 45px;
             }
 
             .blue-strip {
-                padding: 65px 20px;
+                padding: 90px 24px;
             }
 
             .blue-strip-grid {
-                font-size: 22px;
+                font-size: 26px;
+                gap: 35px;
             }
 
             .closing-title {
@@ -735,11 +746,11 @@
             .contact-right {
                 text-align: left;
                 justify-content: flex-start;
-                padding-top: 20px;
+                padding-top: 25px;
             }
 
             footer { 
-                padding: 12px 18px 18px 18px; 
+                padding: 14px 20px 20px 20px; 
                 display: flex; 
                 flex-direction: row; 
                 justify-content: space-between;
@@ -1005,8 +1016,8 @@ The Bar Council of India does not permit advertisement or solicitation by advoca
                 <!-- ROW 1 -->
                 <div class="practice-row">
                     <div class="practice-block">
-                        <img src="vinyl.jpeg" alt="Music" class="practice-img">
-                        <button class="practice-heading practice-toggle">Music <span class="practice-toggle-icon">[ + ]</span></button>
+                        <img src="vinyl.jpeg" alt="music" class="practice-img">
+                        <button class="practice-heading practice-toggle">music <span class="practice-toggle-icon">[ + ]</span></button>
                         <div class="practice-accordion">
                             <p class="practice-desc">
                                 We work with musicians, producers, and independent labels on the agreements that decide who owns what once a track exists, splits, sampling clearances, distribution and licensing deals, and the featured artist and producer credits that rarely get written down until something goes wrong.
@@ -1014,8 +1025,8 @@ The Bar Council of India does not permit advertisement or solicitation by advoca
                         </div>
                     </div>
                     <div class="practice-block">
-                        <img src="art.jpeg" alt="Art" class="practice-img">
-                        <button class="practice-heading practice-toggle">Art <span class="practice-toggle-icon">[ + ]</span></button>
+                        <img src="art.jpeg" alt="art" class="practice-img">
+                        <button class="practice-heading practice-toggle">art <span class="practice-toggle-icon">[ + ]</span></button>
                         <div class="practice-accordion">
                             <p class="practice-desc">
                                 For painters, illustrators, and visual artists, we handle commission agreements, licensing for prints and reproductions, and the ownership questions that come up when a piece is made for someone else's brief, gallery, or campaign.
@@ -1027,8 +1038,8 @@ The Bar Council of India does not permit advertisement or solicitation by advoca
                 <!-- ROW 2 -->
                 <div class="practice-row">
                     <div class="practice-block">
-                        <img src="clapper.jpeg" alt="Film & Photography" class="practice-img">
-                        <button class="practice-heading practice-toggle">Film & Photography <span class="practice-toggle-icon">[ + ]</span></button>
+                        <img src="clapper.jpeg" alt="film & photography" class="practice-img">
+                        <button class="practice-heading practice-toggle">film & photography <span class="practice-toggle-icon">[ + ]</span></button>
                         <div class="practice-accordion">
                             <p class="practice-desc">
                                 From short films to commercial shoots, we work on production agreements, location and talent releases, and the rights clearances that determine who can use footage or stills, where, and for how long, before a single frame goes public.
@@ -1053,8 +1064,8 @@ The Bar Council of India does not permit advertisement or solicitation by advoca
                 <!-- ROW 3 -->
                 <div class="practice-row">
                     <div class="practice-block">
-                        <img src="book.jpeg" alt="Writing" class="practice-img">
-                        <button class="practice-heading practice-toggle">Writing <span class="practice-toggle-icon">[ + ]</span></button>
+                        <img src="book.jpeg" alt="writing" class="practice-img">
+                        <button class="practice-heading practice-toggle">writing <span class="practice-toggle-icon">[ + ]</span></button>
                         <div class="practice-accordion">
                             <p class="practice-desc">
                                 For novelists, screenwriters, and independent writers, we work on publishing and option agreements, ghostwriting and collaboration credit, and the licensing terms that decide what happens to a manuscript once someone else wants to adapt, publish, or option it.
@@ -1062,8 +1073,8 @@ The Bar Council of India does not permit advertisement or solicitation by advoca
                         </div>
                     </div>
                     <div class="practice-block">
-                        <img src="cam.jpeg" alt="Creators" class="practice-img">
-                        <button class="practice-heading practice-toggle">Creators <span class="practice-toggle-icon">[ + ]</span></button>
+                        <img src="cam.jpeg" alt="creators" class="practice-img">
+                        <button class="practice-heading practice-toggle">creators <span class="practice-toggle-icon">[ + ]</span></button>
                         <div class="practice-accordion">
                             <p class="practice-desc">
                                 For creators building on Instagram, YouTube, and live platforms, we work on brand deal and sponsorship agreements, platform and IP disputes, and the ownership questions that come up when a persona, format, or piece of content starts generating real commercial value.

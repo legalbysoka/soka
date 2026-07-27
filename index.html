@@ -125,12 +125,12 @@
         }
 
         /* --- Micro-Animations: Scale Underlines --- */
-        .essay-trigger, .nav-btn, .brand-header, .learn-more-link, .footer-right a, .contact-btn {
+        .essay-trigger, .nav-btn, .brand-header, .learn-more-link, .footer-right a, .contact-btn, .practice-heading, .blue-strip-trigger {
             position: relative;
             text-decoration: none !important;
         }
 
-        .essay-trigger::after, .nav-btn::after, .brand-header::after, .learn-more-link::after, .footer-right a::after, .contact-btn::after {
+        .essay-trigger::after, .nav-btn::after, .brand-header::after, .learn-more-link::after, .footer-right a::after, .contact-btn::after, .practice-heading::after, .blue-strip-trigger::after {
             content: '';
             position: absolute;
             bottom: -1px;
@@ -144,7 +144,7 @@
             opacity: 0.8;
         }
 
-        .essay-trigger:hover::after, .nav-btn:hover::after, .brand-header:hover::after, .learn-more-link:hover::after, .footer-right a:hover::after, .contact-btn:hover::after {
+        .essay-trigger:hover::after, .nav-btn:hover::after, .brand-header:hover::after, .learn-more-link:hover::after, .footer-right a:hover::after, .contact-btn:hover::after, .practice-heading:hover::after, .blue-strip-trigger:hover::after {
             transform: scaleX(1);
             transform-origin: left;
         }
@@ -264,7 +264,7 @@
             transition: color 0.6s ease;
         }
 
-        /* --- Collapsible Accordion with Smooth Micro-Transitions --- */
+        /* --- Collapsible Accordion --- */
         .collapsible-essay {
             max-height: 0;
             opacity: 0;
@@ -424,10 +424,6 @@
             padding: 0;
         }
 
-        .practice-heading:hover {
-            text-decoration: underline;
-        }
-
         .practice-toggle-icon {
             font-size: 11px;
             font-weight: normal;
@@ -463,16 +459,41 @@
             padding: 10px 10px;
         }
 
-        /* Full-Bleed Edge-to-Edge Blue Strip */
+        /* --- Full-Bleed Edge-to-Edge Blue Strip with Background Numbers --- */
         .blue-strip {
             background-color: #1400FF;
             color: #FFFFFF;
             width: 100vw;
             margin-left: calc(-50vw + 50%);
-            padding: 180px 50px;
+            padding: 220px 50px; /* Expansive vertical height */
             margin-top: 40px;
             margin-bottom: 40px;
             box-sizing: border-box;
+        }
+
+        /* Header & Subheader inside Blue Strip */
+        .blue-strip-header {
+            max-width: 1250px;
+            margin: 0 auto 90px auto;
+            text-align: center;
+        }
+
+        .blue-strip-title {
+            font-size: 34px;
+            font-weight: 500;
+            letter-spacing: -0.8px;
+            margin-bottom: 16px;
+            color: #FFFFFF;
+        }
+
+        .blue-strip-subtitle {
+            font-size: 17px;
+            font-weight: 300;
+            line-height: 1.65;
+            opacity: 0.9;
+            max-width: 900px;
+            margin: 0 auto;
+            color: #FFFFFF;
         }
 
         .blue-strip-grid {
@@ -480,7 +501,7 @@
             margin: 0 auto;
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 90px 100px;
+            gap: 110px 100px;
             text-align: center;
         }
 
@@ -488,11 +509,34 @@
             display: flex;
             flex-direction: column;
             align-items: center;
+            position: relative;
+        }
+
+        /* Relative Wrapper for Text + Watermark Image Layering */
+        .blue-strip-wrapper {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Number Watermark Images (one.png, two.png, three.png, four.png) */
+        .blue-strip-bg-num {
+            position: absolute;
+            left: -35px; /* Offset slightly to the left behind text */
+            top: 50%;
+            transform: translateY(-50%);
+            height: 140px; /* Proportionate watermark scale */
+            width: auto;
+            object-fit: contain;
+            pointer-events: none;
+            opacity: 0.85; /* Light shade blending into blue */
+            z-index: 0;
         }
 
         .blue-strip-trigger {
             font-size: 42px;
-            font-weight: 200;
+            font-weight: 200; /* Ultra-light font weight */
             letter-spacing: -1px;
             color: #FFFFFF;
             background: none;
@@ -501,11 +545,12 @@
             cursor: pointer;
             padding: 0;
             text-align: center;
+            position: relative;
+            z-index: 1; /* Floats crisp above watermark image */
             transition: opacity 0.3s ease;
         }
 
         .blue-strip-trigger:hover {
-            text-decoration: underline;
             opacity: 0.9;
         }
 
@@ -516,12 +561,14 @@
             transition: max-height 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s ease, margin 0.3s ease;
             max-width: 520px;
             text-align: center;
+            position: relative;
+            z-index: 1;
         }
 
         .blue-strip-accordion.expanded {
             max-height: 1000px;
             opacity: 1;
-            margin-top: 20px;
+            margin-top: 24px;
         }
 
         .blue-strip-desc {
@@ -683,7 +730,7 @@
 
         .footer-left { text-align: left; text-transform: none; }
         .footer-center { display: flex; justify-content: center; align-items: center; }
-        .footer-logo-img { height: 38px; width: auto; object-fit: contain; display: block; }
+        .footer-logo-img { height: 38px; width: auto; object-fit: contain; display: block; cursor: pointer; }
         .footer-right { display: flex; justify-content: flex-end; gap: 18px; align-items: center; text-transform: lowercase; }
 
         .footer-right a, .contact-btn {
@@ -787,8 +834,12 @@
             .practices-grid { gap: 80px; }
             .practice-row, .contact-grid, .blue-strip-grid { grid-template-columns: 1fr; gap: 45px; }
 
-            .blue-strip { padding: 100px 24px; }
-            .blue-strip-trigger { font-size: 30px; }
+            .blue-strip { padding: 120px 24px; }
+            .blue-strip-header { margin-bottom: 60px; }
+            .blue-strip-title { font-size: 26px; }
+            .blue-strip-subtitle { font-size: 15px; }
+            .blue-strip-trigger { font-size: 28px; }
+            .blue-strip-bg-num { height: 90px; left: -15px; }
 
             .closing-title { font-size: 26px; }
             .contact-right { text-align: left; justify-content: flex-start; padding-top: 25px; }
@@ -1097,10 +1148,21 @@ The Bar Council of India does not permit advertisement or solicitation by advoca
 
                 <!-- FULL-BLEED EDGE-TO-EDGE BLUE STRIP -->
                 <div class="blue-strip">
+                    
+                    <!-- EDITORIAL HEADER & SUBHEADER INSIDE STRIP -->
+                    <div class="blue-strip-header">
+                        <div class="blue-strip-title">The structural framework underneath the culture.</div>
+                        <div class="blue-strip-subtitle">At SOKA, we focus strictly on four targeted pillars designed to establish artistic ownership, clarify commercial structure, and safeguard creative capital.</div>
+                    </div>
+
                     <div class="blue-strip-grid">
                         
+                        <!-- PRACTICE 1: IP -->
                         <div class="blue-strip-block">
-                            <button class="blue-strip-trigger blue-toggle">[ intellectual property ]</button>
+                            <div class="blue-strip-wrapper">
+                                <img src="one.png" alt="01" class="blue-strip-bg-num">
+                                <button class="blue-strip-trigger blue-toggle">[ intellectual property ]</button>
+                            </div>
                             <div class="blue-strip-accordion">
                                 <p class="blue-strip-desc">
                                     Creative ideas only carry real value when they are legally distinct and defensibly owned. We establish clear title over artistic assets from the moment of creation, securing copyright, brand identity, and proprietary craft before work enters the marketplace.
@@ -1108,8 +1170,12 @@ The Bar Council of India does not permit advertisement or solicitation by advoca
                             </div>
                         </div>
 
+                        <!-- PRACTICE 2: CONTRACTS -->
                         <div class="blue-strip-block">
-                            <button class="blue-strip-trigger blue-toggle">[ contracts ]</button>
+                            <div class="blue-strip-wrapper">
+                                <img src="two.png" alt="02" class="blue-strip-bg-num">
+                                <button class="blue-strip-trigger blue-toggle">[ contracts ]</button>
+                            </div>
                             <div class="blue-strip-accordion">
                                 <p class="blue-strip-desc">
                                     Traditional legal drafting forces creative relationships into rigid corporate templates. We construct bespoke, transparent agreements that protect commercial upside, preserve artistic control, and eliminate ambiguity before capital is committed.
@@ -1117,8 +1183,12 @@ The Bar Council of India does not permit advertisement or solicitation by advoca
                             </div>
                         </div>
 
+                        <!-- PRACTICE 3: DISPUTES -->
                         <div class="blue-strip-block">
-                            <button class="blue-strip-trigger blue-toggle">[ disputes ]</button>
+                            <div class="blue-strip-wrapper">
+                                <img src="three.png" alt="03" class="blue-strip-bg-num">
+                                <button class="blue-strip-trigger blue-toggle">[ disputes ]</button>
+                            </div>
                             <div class="blue-strip-accordion">
                                 <p class="blue-strip-desc">
                                     When creative partnerships break down or ownership is challenged, swift intervention is essential. We manage conflicts at the intersection of law and creative culture with strategic composure, protecting reputations and securing fair settlement.
@@ -1126,8 +1196,12 @@ The Bar Council of India does not permit advertisement or solicitation by advoca
                             </div>
                         </div>
 
+                        <!-- PRACTICE 4: RIGHTS & ENFORCEMENT -->
                         <div class="blue-strip-block">
-                            <button class="blue-strip-trigger blue-toggle">[ rights & enforcement ]</button>
+                            <div class="blue-strip-wrapper">
+                                <img src="four.png" alt="04" class="blue-strip-bg-num">
+                                <button class="blue-strip-trigger blue-toggle">[ rights & enforcement ]</button>
+                            </div>
                             <div class="blue-strip-accordion">
                                 <p class="blue-strip-desc">
                                     Building defensible value requires continuous vigilance across digital and physical domains. We handle unauthorized commercial exploitation, takedowns, and brand protection to ensure creators retain full financial and moral authority over their catalog.
@@ -1230,7 +1304,8 @@ The Bar Council of India does not permit advertisement or solicitation by advoca
             © 2026 SOKA
         </div>
         <div class="footer-center">
-            <img src="footer-logo.png" alt="SOKA Logo" class="footer-logo-img">
+            <!-- CLICKABLE LOGO BUTTON TO HOME / INDEX FEED -->
+            <img src="footer-logo.png" alt="SOKA Logo" class="footer-logo-img" onclick="switchView('entries')">
         </div>
         <div class="footer-right">
             <button class="contact-btn" onclick="toggleContactModal(true)">[send enquiry]</button>
@@ -1240,7 +1315,7 @@ The Bar Council of India does not permit advertisement or solicitation by advoca
         </div>
     </footer>
 
-    <!-- INTERACTIVE SCRIPT LOGIC WITH FULL PAGE & ESSAY DEEP-LINKING -->
+    <!-- INTERACTIVE SCRIPT LOGIC -->
     <script>
         let currentView = 'entries';
 
@@ -1250,10 +1325,8 @@ The Bar Council of India does not permit advertisement or solicitation by advoca
                 const collapsible = button.nextElementSibling;
                 const isExpanding = !collapsible.classList.contains('expanded');
                 
-                // Toggle expansion
                 collapsible.classList.toggle('expanded');
 
-                // Update hash URL on expand
                 const slug = button.getAttribute('data-slug');
                 if (isExpanding && slug) {
                     history.pushState(null, null, '#' + slug);
@@ -1308,7 +1381,6 @@ The Bar Council of India does not permit advertisement or solicitation by advoca
 
             if (!views[targetView]) return;
 
-            // Handle Hash URL
             if (updateHash) {
                 if (targetView === 'entries') {
                     history.pushState(null, null, window.location.pathname);
@@ -1317,16 +1389,10 @@ The Bar Council of India does not permit advertisement or solicitation by advoca
                 }
             }
 
-            // Hide all views first
             Object.values(views).forEach(v => v.classList.add('hidden-view'));
-
-            // Reveal chosen target view
             views[targetView].classList.remove('hidden-view');
-
-            // Reset scroll position
             views[targetView].scrollTop = 0;
 
-            // Handle theme inversion
             if (targetView === 'entries') {
                 body.classList.remove('inverted');
                 if (footerLogo) footerLogo.src = 'footer-logo.png';
@@ -1336,7 +1402,7 @@ The Bar Council of India does not permit advertisement or solicitation by advoca
             }
         }
 
-        // HANDLE BROWSER BACK/FORWARD & DEEP-LINKED URLS (PAGES & ESSAYS)
+        // HANDLE BROWSER BACK/FORWARD & DEEP-LINKED URLS
         function handleHashChange() {
             const rawHash = window.location.hash.replace('#', '');
             if (!rawHash) {
@@ -1344,13 +1410,11 @@ The Bar Council of India does not permit advertisement or solicitation by advoca
                 return;
             }
 
-            // Page Hash Routing
             if (['about', 'practices', 'contact'].includes(rawHash)) {
                 switchView(rawHash, false);
                 return;
             }
 
-            // Essay Deep-Link Routing
             const essayButton = document.querySelector(`.essay-trigger[data-slug="${rawHash}"]`);
             if (essayButton) {
                 switchView('entries', false);
@@ -1378,7 +1442,6 @@ The Bar Council of India does not permit advertisement or solicitation by advoca
                 document.getElementById('bci-modal').classList.add('hidden');
                 document.body.classList.remove('modal-open');
             }
-            // Check initial URL hash on load
             handleHashChange();
         });
 

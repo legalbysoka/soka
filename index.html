@@ -168,7 +168,7 @@
         }
 
         .collapsible-essay.expanded {
-            max-height: 8000px;
+            max-height: 6000px;
             margin-top: 14px;
             margin-bottom: 28px;
         }
@@ -182,7 +182,7 @@
             max-width: 100%;
         }
 
-        /* --- Precise Single Image Formatting --- */
+        /* --- Single Banner Image Formatting --- */
         .essay-image {
             width: 100%;
             max-width: 720px;
@@ -194,29 +194,30 @@
             box-sizing: border-box;
         }
 
-        /* --- Horizontal Carousel Gallery (Carousel for cs1 - cs8) --- */
+        /* --- Sideways Carousel Formatting (Locked to Sentence Breadth) --- */
         .carousel-container {
             display: flex;
             gap: 16px;
             overflow-x: auto;
             scroll-snap-type: x mandatory;
             -webkit-overflow-scrolling: touch;
-            width: 100%;
             max-width: 720px;
-            margin-bottom: 20px;
-            padding-bottom: 10px;
+            width: 100%;
+            margin-bottom: 18px;
+            padding-bottom: 8px;
         }
 
-        /* Custom Scrollbar styling for Carousel */
+        /* Hide Scrollbar for ultra-clean aesthetic */
         .carousel-container::-webkit-scrollbar {
-            height: 4px;
+            display: none;
         }
-        .carousel-container::-webkit-scrollbar-thumb {
-            background: var(--border-color);
+        .carousel-container {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
         }
 
         .carousel-slide {
-            flex: 0 0 100%;
+            flex: 0 0 85%; /* Shows majority of image with peek of next photo */
             scroll-snap-align: start;
             box-sizing: border-box;
         }
@@ -224,16 +225,18 @@
         .carousel-slide img {
             width: 100%;
             height: auto;
+            aspect-ratio: 4/3;
+            object-fit: cover;
             display: block;
             border: 1px solid var(--border-color);
-            object-fit: cover;
             margin-bottom: 6px;
         }
 
-        .carousel-caption {
-            font-size: 12px;
+        .image-caption {
+            font-size: 11.5px;
             font-style: italic;
             color: var(--date-color);
+            line-height: 1.3;
             word-wrap: break-word;
             overflow-wrap: break-word;
         }
@@ -435,11 +438,13 @@
 
             .carousel-container {
                 max-width: 100% !important;
-                width: 100% !important;
             }
 
-            .essay-image, 
-            .collapsible-essay img {
+            .carousel-slide {
+                flex: 0 0 90%; /* Slightly wider card view on mobile */
+            }
+
+            .essay-image {
                 width: 100% !important;
                 max-width: 100% !important;
                 height: auto !important;
@@ -616,42 +621,39 @@ The Bar Council of India does not permit advertisement or solicitation by advoca
                     <button class="essay-trigger toggle-btn">courtroom sketches</button>
                     <div class="collapsible-essay">
                         
-                        <!-- SIDEWAYS SCROLLABLE CAROUSEL -->
+                        <!-- SIDEWAYS SCROLLING GALLERY (7 SKETCHES) -->
                         <div class="carousel-container">
                             <div class="carousel-slide">
                                 <img src="cs1.jpeg" alt="Courtroom Sketch 1">
-                                <div class="carousel-caption">Dustin McDaniel, CC BY-SA 4.0, via Wikimedia Commons</div>
+                                <div class="image-caption">Dustin McDaniel, CC BY-SA 4.0, via Wikimedia Commons</div>
                             </div>
                             <div class="carousel-slide">
                                 <img src="cs2.jpeg" alt="Courtroom Sketch 2">
-                                <div class="carousel-caption">[author unconfirmed], CC BY-SA 3.0, via Wikimedia Commons (verify before use)</div>
+                                <div class="image-caption">[author unconfirmed], CC BY-SA 3.0, via Wikimedia Commons</div>
                             </div>
                             <div class="carousel-slide">
                                 <img src="cs3.jpeg" alt="Courtroom Sketch 3">
-                                <div class="carousel-caption">Beinecke Library, CC BY-SA 2.0, via Wikimedia Commons</div>
+                                <div class="image-caption">Beinecke Library, CC BY-SA 2.0, via Wikimedia Commons</div>
                             </div>
                             <div class="carousel-slide">
                                 <img src="cs4.jpeg" alt="Courtroom Sketch 4">
-                                <div class="carousel-caption">Elizabeth Williams, CC BY-SA 3.0, via Wikimedia Commons</div>
+                                <div class="image-caption">Elizabeth Williams, CC BY-SA 3.0, via Wikimedia Commons</div>
                             </div>
                             <div class="carousel-slide">
                                 <img src="cs5.jpeg" alt="Courtroom Sketch 5">
-                                <div class="carousel-caption">Staff Sgt. Amy Brown, Public Domain, via Wikimedia Commons</div>
+                                <div class="image-caption">Staff Sgt. Amy Brown, Public Domain, via Wikimedia Commons</div>
                             </div>
                             <div class="carousel-slide">
                                 <img src="cs6.jpeg" alt="Courtroom Sketch 6">
-                                <div class="carousel-caption">Oeoi, CC0, via Wikimedia Commons</div>
+                                <div class="image-caption">Oeoi, CC0, via Wikimedia Commons</div>
                             </div>
                             <div class="carousel-slide">
                                 <img src="cs7.jpeg" alt="Courtroom Sketch 7">
-                                <div class="carousel-caption">Elizabeth Williams, CC BY-SA 3.0, via Wikimedia Commons</div>
-                            </div>
-                            <div class="carousel-slide">
-                                <img src="cs8.jpeg" alt="Courtroom Sketch 8">
-                                <div class="carousel-caption">Abeltelo, CC BY-SA 4.0, via Wikimedia Commons</div>
+                                <div class="image-caption">Elizabeth Williams, CC BY-SA 3.0, via Wikimedia Commons</div>
                             </div>
                         </div>
 
+                        <!-- FULL ESSAY CONTENT -->
                         <div class="essay-text">
                             Last September, the Supreme Court banned photography and videography across its high-security zones, cameras, phones, tripods, selfie sticks, all of it, citing security and the dignity of proceedings. Buried in the same circular sat a single clarifying line, official sketches remain allowed. Nobody wrote a follow-up piece about that sentence. It's easy to miss, sitting quietly beside a ban that made headlines for what it prohibited rather than the one thing it quietly permitted.
 

@@ -45,7 +45,7 @@
             color: var(--text-color);
             font-family: "Times New Roman", Times, serif;
             font-size: 15px;
-            line-height: 1.5;
+            line-height: 1.6;
             letter-spacing: -0.2px;
             -webkit-font-smoothing: antialiased;
             height: 100vh;
@@ -67,7 +67,7 @@
             top: 0;
             left: 0;
             width: 100%;
-            padding: 30px 50px 15px 50px;
+            padding: 35px 50px 15px 50px;
             background-color: var(--bg-color);
             z-index: 100;
             display: flex;
@@ -93,7 +93,7 @@
         .nav-links {
             display: flex;
             gap: 12px;
-            margin-top: 4px;
+            margin-top: 6px;
         }
 
         .nav-btn {
@@ -120,7 +120,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            padding: 105px 50px 80px 50px;
+            padding: 115px 50px 90px 50px;
             overflow-y: auto;
             overflow-x: hidden;
             opacity: 1;
@@ -144,7 +144,7 @@
         .row {
             display: flex;
             align-items: flex-start;
-            margin-bottom: 22px;
+            margin-bottom: 26px;
             width: 100%;
         }
 
@@ -194,13 +194,13 @@
 
         .collapsible-essay.expanded {
             max-height: 6000px;
-            margin-top: 14px;
-            margin-bottom: 28px;
+            margin-top: 16px;
+            margin-bottom: 32px;
         }
 
         .essay-text {
             font-size: 15.5px;
-            line-height: 1.6;
+            line-height: 1.65;
             white-space: pre-line;
             word-wrap: break-word;
             overflow-wrap: break-word;
@@ -271,20 +271,20 @@
         .about-text-container {
             max-width: 780px;
             width: 100%;
-            padding-top: 10px;
+            padding-top: 15px;
         }
 
         .about-title {
             font-size: 24px;
-            margin-bottom: 25px;
+            margin-bottom: 30px;
             letter-spacing: -0.5px;
             font-weight: bold;
         }
 
         .about-paragraph {
             font-size: 16.5px;
-            line-height: 1.7;
-            margin-bottom: 25px;
+            line-height: 1.75;
+            margin-bottom: 30px;
             white-space: pre-line;
         }
 
@@ -292,42 +292,46 @@
         .practices-grid {
             display: flex;
             flex-direction: column;
-            gap: 40px;
-            padding-top: 10px;
+            gap: 60px; /* Enhanced Spaciousness */
+            padding-top: 15px;
         }
 
         .practice-row {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 40px;
+            gap: 60px; /* Spacious column gap */
             align-items: start;
         }
 
         .practice-block {
             display: flex;
             flex-direction: column;
+            align-items: center; /* Centered block elements */
+            text-align: center;
         }
 
         .practice-img {
             width: 100%;
-            height: 240px;
+            max-width: 480px;
+            height: 260px;
             object-fit: cover;
             border: 1px solid var(--border-color);
-            margin-bottom: 12px;
+            margin-bottom: 16px;
             display: block;
         }
 
         .practice-heading {
-            font-size: 18px;
+            font-size: 19px;
             font-weight: bold;
             background: none;
             border: none;
             font-family: inherit;
             color: var(--text-color);
-            text-align: left;
+            text-align: center;
             cursor: pointer;
             display: flex;
             align-items: center;
+            justify-content: center;
             gap: 6px;
             padding: 0;
         }
@@ -336,42 +340,59 @@
             text-decoration: underline;
         }
 
+        .practice-toggle-icon {
+            font-size: 12px; /* Smaller delicate toggle icon */
+            font-weight: normal;
+            opacity: 0.85;
+        }
+
         .practice-accordion {
             max-height: 0;
             overflow: hidden;
             transition: max-height 0.4s cubic-bezier(0.25, 1, 0.5, 1), margin 0.3s ease;
+            max-width: 480px;
+            text-align: left; /* Text remains comfortable for reading */
         }
 
         .practice-accordion.expanded {
             max-height: 1000px;
-            margin-top: 8px;
+            margin-top: 12px;
         }
 
         .practice-desc {
             font-size: 14.5px;
-            line-height: 1.6;
-        }
-
-        .hero-prose-block {
-            font-size: 16px;
             line-height: 1.65;
-            padding-top: 10px;
         }
 
-        /* Practices Blue Strip */
+        /* Hero Prose Paragraph: Vertically Centered, Left Aligned */
+        .hero-prose-block {
+            font-size: 16.5px;
+            line-height: 1.75;
+            text-align: left;
+            align-self: center; /* Vertically centered in block */
+            padding: 10px 15px;
+        }
+
+        /* Full-Bleed Edge-to-Edge Blue Strip */
         .blue-strip {
             background-color: #1400FF;
             color: #FFFFFF;
-            padding: 35px 40px;
-            margin: 20px 0;
-            border: 1px solid #1400FF;
+            width: 100vw;
+            margin-left: calc(-50vw + 50%);
+            padding: 55px 50px; /* Increased vertical height */
+            margin-top: 30px;
+            margin-bottom: 30px;
+            box-sizing: border-box;
         }
 
         .blue-strip-grid {
+            max-width: 1100px;
+            margin: 0 auto;
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 20px;
-            font-size: 18px;
+            gap: 30px 60px;
+            text-align: center; /* Centered items */
+            font-size: 20px; /* Slightly larger font */
             font-weight: bold;
         }
 
@@ -385,30 +406,34 @@
             text-decoration: underline;
         }
 
+        /* Closing Statement Section */
         .closing-statement {
-            margin-top: 40px;
-            margin-bottom: 30px;
+            margin-top: 50px;
+            margin-bottom: 50px;
+            text-align: center; /* Middle aligned */
+            padding: 20px 0;
         }
 
         .closing-title {
-            font-size: 22px;
+            font-size: 26px; /* Slightly larger font */
             font-weight: bold;
-            letter-spacing: -0.4px;
+            letter-spacing: -0.5px;
+            margin-bottom: 8px;
         }
 
         .closing-subtitle {
-            font-size: 14px;
-            margin-top: 6px;
+            font-size: 15px;
             opacity: 0.85;
+            font-style: italic;
         }
 
         /* --- Contact Page Layout --- */
         .contact-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 60px;
-            min-height: calc(100vh - 260px);
-            padding-top: 10px;
+            gap: 80px;
+            min-height: calc(100vh - 280px);
+            padding-top: 15px;
         }
 
         .contact-left {
@@ -425,7 +450,7 @@
 
         .contact-subtitle {
             font-size: 15px;
-            margin-bottom: 30px;
+            margin-bottom: 35px;
             line-height: 1.5;
             opacity: 0.9;
         }
@@ -434,12 +459,13 @@
             display: flex;
             flex-direction: column;
             justify-content: flex-end; /* Bottom Aligned */
-            padding-bottom: 20px;
+            text-align: right; /* Right Aligned Content */
+            padding-bottom: 35px;
         }
 
         .contact-detail-block {
             font-size: 15.5px;
-            line-height: 1.8;
+            line-height: 1.85;
         }
 
         .contact-detail-block a {
@@ -451,12 +477,12 @@
             text-decoration: underline;
         }
 
-        /* Form Controls for Inline Contact Page */
-        .inline-form .form-group {
-            margin-bottom: 18px;
+        /* Form Controls for Inline Form & Modal Form */
+        .form-group {
+            margin-bottom: 20px;
         }
 
-        .inline-form label {
+        .form-group label {
             display: block;
             font-size: 12px;
             text-transform: lowercase;
@@ -464,7 +490,7 @@
             color: var(--text-color);
         }
 
-        .inline-form .form-control {
+        .form-control {
             width: 100%;
             padding: 10px 12px;
             font-family: inherit;
@@ -473,23 +499,24 @@
             background: transparent;
             color: var(--text-color);
             outline: none;
+            transition: border-color 0.2s ease;
         }
 
-        .inline-form .form-control:focus {
+        .form-control:focus {
             border-color: #1400FF;
             background: rgba(20, 0, 255, 0.03);
         }
 
-        .inline-form textarea.form-control {
+        textarea.form-control {
             resize: vertical;
-            min-height: 100px;
+            min-height: 110px;
         }
 
-        .inline-submit-btn {
+        .submit-btn {
             background-color: #1400FF;
             color: #FFFFFF;
             border: 1px solid #1400FF;
-            padding: 12px 24px;
+            padding: 12px 26px;
             font-family: inherit;
             font-size: 13px;
             text-transform: uppercase;
@@ -498,9 +525,20 @@
             transition: background-color 0.2s ease, color 0.2s ease;
         }
 
-        .inline-submit-btn:hover {
+        .submit-btn:hover {
             background-color: #FFFFFF;
             color: #1400FF;
+        }
+
+        /* Modal Specific Form Override (Black Text in Modal) */
+        .modal-box .form-group label {
+            color: #444444;
+        }
+
+        .modal-box .form-control {
+            border-color: #000000;
+            background: #FAFAFA;
+            color: #000000;
         }
 
         /* --- Fixed Footer --- */
@@ -674,10 +712,11 @@
 
             .practice-row, .contact-grid, .blue-strip-grid {
                 grid-template-columns: 1fr;
-                gap: 25px;
+                gap: 35px;
             }
 
             .contact-right {
+                text-align: left;
                 justify-content: flex-start;
                 padding-top: 20px;
             }
@@ -934,7 +973,7 @@ The Bar Council of India does not permit advertisement or solicitation by advoca
                     If your work needs that kind of structure, <span class="learn-more-link" onclick="switchView('contact')">write to us</span>.
                 </p>
 
-                <p class="about-paragraph" style="margin-top: 40px;">
+                <p class="about-paragraph" style="margin-top: 40px; margin-bottom: 30px;">
                     <span class="learn-more-link" onclick="switchView('entries')">← return</span>
                 </p>
             </div>
@@ -950,7 +989,7 @@ The Bar Council of India does not permit advertisement or solicitation by advoca
                 <div class="practice-row">
                     <div class="practice-block">
                         <img src="vinyl.jpeg" alt="Music" class="practice-img">
-                        <button class="practice-heading practice-toggle">Music <span>[ + ]</span></button>
+                        <button class="practice-heading practice-toggle">Music <span class="practice-toggle-icon">[ + ]</span></button>
                         <div class="practice-accordion">
                             <p class="practice-desc">
                                 We work with musicians, producers, and independent labels on the agreements that decide who owns what once a track exists, splits, sampling clearances, distribution and licensing deals, and the featured artist and producer credits that rarely get written down until something goes wrong.
@@ -959,7 +998,7 @@ The Bar Council of India does not permit advertisement or solicitation by advoca
                     </div>
                     <div class="practice-block">
                         <img src="art.jpeg" alt="Art" class="practice-img">
-                        <button class="practice-heading practice-toggle">Art <span>[ + ]</span></button>
+                        <button class="practice-heading practice-toggle">Art <span class="practice-toggle-icon">[ + ]</span></button>
                         <div class="practice-accordion">
                             <p class="practice-desc">
                                 For painters, illustrators, and visual artists, we handle commission agreements, licensing for prints and reproductions, and the ownership questions that come up when a piece is made for someone else's brief, gallery, or campaign.
@@ -972,7 +1011,7 @@ The Bar Council of India does not permit advertisement or solicitation by advoca
                 <div class="practice-row">
                     <div class="practice-block">
                         <img src="clapper.jpeg" alt="Film & Photography" class="practice-img">
-                        <button class="practice-heading practice-toggle">Film & Photography <span>[ + ]</span></button>
+                        <button class="practice-heading practice-toggle">Film & Photography <span class="practice-toggle-icon">[ + ]</span></button>
                         <div class="practice-accordion">
                             <p class="practice-desc">
                                 From short films to commercial shoots, we work on production agreements, location and talent releases, and the rights clearances that determine who can use footage or stills, where, and for how long, before a single frame goes public.
@@ -984,13 +1023,13 @@ The Bar Council of India does not permit advertisement or solicitation by advoca
                     </div>
                 </div>
 
-                <!-- BLUE STRIP (FULL WIDTH 2x2) -->
+                <!-- FULL-BLEED EDGE-TO-EDGE BLUE STRIP -->
                 <div class="blue-strip">
                     <div class="blue-strip-grid">
-                        <span class="blue-strip-item">[ Intellectual Property ]</span>
-                        <span class="blue-strip-item">[ Contracts ]</span>
-                        <span class="blue-strip-item">[ Disputes ]</span>
-                        <span class="blue-strip-item">[ Rights & Enforcement ]</span>
+                        <span class="blue-strip-item">[ intellectual property ]</span>
+                        <span class="blue-strip-item">[ contracts ]</span>
+                        <span class="blue-strip-item">[ disputes ]</span>
+                        <span class="blue-strip-item">[ rights & enforcement ]</span>
                     </div>
                 </div>
 
@@ -998,7 +1037,7 @@ The Bar Council of India does not permit advertisement or solicitation by advoca
                 <div class="practice-row">
                     <div class="practice-block">
                         <img src="book.jpeg" alt="Writing" class="practice-img">
-                        <button class="practice-heading practice-toggle">Writing <span>[ + ]</span></button>
+                        <button class="practice-heading practice-toggle">Writing <span class="practice-toggle-icon">[ + ]</span></button>
                         <div class="practice-accordion">
                             <p class="practice-desc">
                                 For novelists, screenwriters, and independent writers, we work on publishing and option agreements, ghostwriting and collaboration credit, and the licensing terms that decide what happens to a manuscript once someone else wants to adapt, publish, or option it.
@@ -1007,7 +1046,7 @@ The Bar Council of India does not permit advertisement or solicitation by advoca
                     </div>
                     <div class="practice-block">
                         <img src="cam.jpeg" alt="Creators" class="practice-img">
-                        <button class="practice-heading practice-toggle">Creators <span>[ + ]</span></button>
+                        <button class="practice-heading practice-toggle">Creators <span class="practice-toggle-icon">[ + ]</span></button>
                         <div class="practice-accordion">
                             <p class="practice-desc">
                                 For creators building on Instagram, YouTube, and live platforms, we work on brand deal and sponsorship agreements, platform and IP disputes, and the ownership questions that come up when a persona, format, or piece of content starts generating real commercial value.
@@ -1022,7 +1061,7 @@ The Bar Council of India does not permit advertisement or solicitation by advoca
                     <div class="closing-subtitle">*we're that legal side.</div>
                 </div>
 
-                <p style="margin-bottom: 30px;">
+                <p style="margin-bottom: 40px;">
                     <span class="learn-more-link" onclick="switchView('entries')">← return</span>
                 </p>
 
@@ -1040,7 +1079,7 @@ The Bar Council of India does not permit advertisement or solicitation by advoca
                     <h1 class="contact-title">Start a Conversation</h1>
                     <div class="contact-subtitle">Tell us briefly about what you're building or what needs protection.</div>
                     
-                    <form action="https://formspree.io/f/hello@legalbysoka.com" method="POST" class="inline-form">
+                    <form action="https://formspree.io/f/hello@legalbysoka.com" method="POST">
                         <div class="form-group">
                             <label>Name</label>
                             <input type="text" name="name" class="form-control" required placeholder="Full Name or Brand Entity">
@@ -1057,24 +1096,24 @@ The Bar Council of India does not permit advertisement or solicitation by advoca
                             <label>Message</label>
                             <textarea name="message" class="form-control" required placeholder="Briefly describe what you need assistance with..."></textarea>
                         </div>
-                        <button type="submit" class="inline-submit-btn">Send Message</button>
+                        <button type="submit" class="submit-btn">Send Message</button>
                     </form>
                 </div>
 
-                <!-- RIGHT SIDE DETAILS (BOTTOM ALIGNED) -->
+                <!-- RIGHT SIDE DETAILS (RIGHT & BOTTOM ALIGNED WITH PINCODE) -->
                 <div class="contact-right">
                     <div class="contact-detail-block">
                         <p><a href="mailto:hello@legalbysoka.com">hello@legalbysoka.com</a></p>
                         <p style="margin-top: 10px; opacity: 0.85;">
                             3rd Floor, K1/52, CR Park,<br>
-                            New Delhi, India
+                            New Delhi, 110019, India
                         </p>
                     </div>
                 </div>
 
             </div>
 
-            <p style="margin-top: 30px; margin-bottom: 20px;">
+            <p style="margin-top: 40px; margin-bottom: 30px;">
                 <span class="learn-more-link" onclick="switchView('entries')">← return</span>
             </p>
         </div>
@@ -1111,7 +1150,7 @@ The Bar Council of India does not permit advertisement or solicitation by advoca
             button.addEventListener('click', () => {
                 const accordion = button.nextElementSibling;
                 accordion.classList.toggle('expanded');
-                const span = button.querySelector('span');
+                const span = button.querySelector('.practice-toggle-icon');
                 if (accordion.classList.contains('expanded')) {
                     span.textContent = '[ − ]';
                 } else {

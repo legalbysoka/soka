@@ -214,7 +214,14 @@
             pointer-events: none;
         }
 
-        .timeline, .about-content, .practices-content {
+        /* Timeline Margin Left-Aligned Flush with Footer Copyright (50px Padding) */
+        .timeline {
+            max-width: 1200px;
+            width: 100%;
+            margin: 0; /* Align left edge flush with 50px page padding & footer */
+        }
+
+        .about-content, .practices-content {
             max-width: 1200px;
             width: 100%;
             margin: 0 auto;
@@ -459,22 +466,21 @@
             padding: 10px 10px;
         }
 
-        /* --- Full-Bleed Edge-to-Edge Blue Strip with MASSIVE Watermark Numbers --- */
+        /* --- Full-Bleed Edge-to-Edge Blue Strip with HUGE Watermark Numbers --- */
         .blue-strip {
             background-color: #1400FF;
             color: #FFFFFF;
             width: 100vw;
             margin-left: calc(-50vw + 50%);
-            padding: 260px 50px;
+            padding: 280px 50px;
             margin-top: 40px;
             margin-bottom: 40px;
             box-sizing: border-box;
         }
 
-        /* Header & Subheader inside Blue Strip */
         .blue-strip-header {
             max-width: 1250px;
-            margin: 0 auto 120px auto;
+            margin: 0 auto 130px auto;
             text-align: center;
         }
 
@@ -501,7 +507,7 @@
             margin: 0 auto;
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 180px 100px; /* Generous vertical spacing between rows */
+            gap: 200px 120px; /* Expansive row spacing */
             text-align: center;
         }
 
@@ -512,7 +518,6 @@
             position: relative;
         }
 
-        /* Wrapper for Text + Watermark Layering */
         .blue-strip-wrapper {
             position: relative;
             display: inline-flex;
@@ -520,17 +525,18 @@
             justify-content: center;
         }
 
-        /* MASSIVE Watermark Images (420px height) */
+        /* MASSIVELY SCALED & DARKENED WATERMARK NUMBERS (650px Height) */
         .blue-strip-bg-num {
             position: absolute;
-            left: -120px; /* Pushed significantly left behind text */
+            left: -180px; /* Shifted way left */
             top: 50%;
             transform: translateY(-50%);
-            height: 420px; /* Massive architectural size */
+            height: 650px; /* Doubled architectural size */
             width: auto;
             object-fit: contain;
-            pointer-events: none; /* Never blocks clicks */
-            opacity: 0.85;
+            pointer-events: none;
+            opacity: 0.35; /* Soft, subtle background tone */
+            filter: brightness(0.6); /* Darkened so white text pops dramatically */
             z-index: 1;
         }
 
@@ -546,7 +552,7 @@
             padding: 0;
             text-align: center;
             position: relative;
-            z-index: 2; /* Sits strictly above watermark */
+            z-index: 2;
             pointer-events: auto;
             transition: opacity 0.3s ease;
         }
@@ -818,6 +824,8 @@
             header { padding: 20px 20px 12px 20px; }
             .page-view { padding: 120px 24px 80px 24px; }
 
+            .timeline { margin: 0; }
+
             .row { 
                 flex-direction: row; 
                 align-items: baseline;
@@ -840,7 +848,7 @@
             .blue-strip-title { font-size: 26px; }
             .blue-strip-subtitle { font-size: 15px; }
             .blue-strip-trigger { font-size: 28px; }
-            .blue-strip-bg-num { height: 22px0px; left: -30px; }
+            .blue-strip-bg-num { height: 280px; left: -60px; opacity: 0.25; }
 
             .closing-title { font-size: 26px; }
             .contact-right { text-align: left; justify-content: flex-start; padding-top: 25px; }
@@ -1446,6 +1454,14 @@ The Bar Council of India does not permit advertisement or solicitation by advoca
                 document.body.classList.remove('modal-open');
             }
             handleHashChange();
+
+            // Contact Modal Backdrop Click-Outside-To-Close Listener
+            const contactModal = document.getElementById('contact-modal');
+            contactModal.addEventListener('click', (e) => {
+                if (e.target === contactModal) {
+                    toggleContactModal(false);
+                }
+            });
         });
 
         // Contact Modal Logic

@@ -31,7 +31,7 @@
             --modal-overlay-bg: rgba(20, 0, 255, 0.22);
         }
 
-        /* Inverted Theme: White Background / Electric Blue Text */
+        /* Inverted / White Page Theme */
         body.inverted {
             --bg-color: #FFFFFF;
             --text-color: #1400FF;
@@ -61,17 +61,18 @@
             pointer-events: none;
         }
 
-        /* --- Fixed Top-Right Header --- */
+        /* --- Fixed Top-Right Header & Navigation --- */
         header {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
-            padding: 40px 50px 20px 50px;
+            padding: 30px 50px 15px 50px;
             background-color: var(--bg-color);
             z-index: 100;
             display: flex;
-            justify-content: flex-end;
+            flex-direction: column;
+            align-items: flex-end;
             transition: background-color 0.6s ease;
         }
 
@@ -89,6 +90,29 @@
             text-decoration: underline;
         }
 
+        .nav-links {
+            display: flex;
+            gap: 12px;
+            margin-top: 4px;
+        }
+
+        .nav-btn {
+            font-size: 12px;
+            color: var(--text-color);
+            background: none;
+            border: none;
+            font-family: inherit;
+            cursor: pointer;
+            text-decoration: none;
+            opacity: 0.85;
+            transition: opacity 0.3s ease, color 0.6s ease;
+        }
+
+        .nav-btn:hover {
+            opacity: 1;
+            text-decoration: underline;
+        }
+
         /* --- Scrollable View Containers --- */
         .page-view {
             position: absolute;
@@ -96,7 +120,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            padding: 90px 50px 80px 50px;
+            padding: 105px 50px 80px 50px;
             overflow-y: auto;
             overflow-x: hidden;
             opacity: 1;
@@ -110,9 +134,10 @@
             pointer-events: none;
         }
 
-        .timeline, .about-content {
-            max-width: 1400px;
+        .timeline, .about-content, .practices-content, .contact-content {
+            max-width: 1200px;
             width: 100%;
+            margin: 0 auto;
         }
 
         /* --- Timeline Rows --- */
@@ -194,7 +219,7 @@
             box-sizing: border-box;
         }
 
-        /* --- Sideways Carousel Formatting (Locked to Sentence Breadth) --- */
+        /* --- Sideways Carousel Formatting --- */
         .carousel-container {
             display: flex;
             gap: 16px;
@@ -207,17 +232,11 @@
             padding-bottom: 8px;
         }
 
-        /* Hide Scrollbar for ultra-clean aesthetic */
-        .carousel-container::-webkit-scrollbar {
-            display: none;
-        }
-        .carousel-container {
-            -ms-overflow-style: none;
-            scrollbar-width: none;
-        }
+        .carousel-container::-webkit-scrollbar { display: none; }
+        .carousel-container { -ms-overflow-style: none; scrollbar-width: none; }
 
         .carousel-slide {
-            flex: 0 0 85%; /* Shows majority of image with peek of next photo */
+            flex: 0 0 85%;
             scroll-snap-align: start;
             box-sizing: border-box;
         }
@@ -267,6 +286,221 @@
             line-height: 1.7;
             margin-bottom: 25px;
             white-space: pre-line;
+        }
+
+        /* --- Practices Page Grid & Blocks --- */
+        .practices-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+            padding-top: 10px;
+        }
+
+        .practice-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: start;
+        }
+
+        .practice-block {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .practice-img {
+            width: 100%;
+            height: 240px;
+            object-fit: cover;
+            border: 1px solid var(--border-color);
+            margin-bottom: 12px;
+            display: block;
+        }
+
+        .practice-heading {
+            font-size: 18px;
+            font-weight: bold;
+            background: none;
+            border: none;
+            font-family: inherit;
+            color: var(--text-color);
+            text-align: left;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 0;
+        }
+
+        .practice-heading:hover {
+            text-decoration: underline;
+        }
+
+        .practice-accordion {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s cubic-bezier(0.25, 1, 0.5, 1), margin 0.3s ease;
+        }
+
+        .practice-accordion.expanded {
+            max-height: 1000px;
+            margin-top: 8px;
+        }
+
+        .practice-desc {
+            font-size: 14.5px;
+            line-height: 1.6;
+        }
+
+        .hero-prose-block {
+            font-size: 16px;
+            line-height: 1.65;
+            padding-top: 10px;
+        }
+
+        /* Practices Blue Strip */
+        .blue-strip {
+            background-color: #1400FF;
+            color: #FFFFFF;
+            padding: 35px 40px;
+            margin: 20px 0;
+            border: 1px solid #1400FF;
+        }
+
+        .blue-strip-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .blue-strip-item {
+            color: #FFFFFF;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .blue-strip-item:hover {
+            text-decoration: underline;
+        }
+
+        .closing-statement {
+            margin-top: 40px;
+            margin-bottom: 30px;
+        }
+
+        .closing-title {
+            font-size: 22px;
+            font-weight: bold;
+            letter-spacing: -0.4px;
+        }
+
+        .closing-subtitle {
+            font-size: 14px;
+            margin-top: 6px;
+            opacity: 0.85;
+        }
+
+        /* --- Contact Page Layout --- */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            min-height: calc(100vh - 260px);
+            padding-top: 10px;
+        }
+
+        .contact-left {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .contact-title {
+            font-size: 26px;
+            font-weight: bold;
+            margin-bottom: 8px;
+            letter-spacing: -0.5px;
+        }
+
+        .contact-subtitle {
+            font-size: 15px;
+            margin-bottom: 30px;
+            line-height: 1.5;
+            opacity: 0.9;
+        }
+
+        .contact-right {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end; /* Bottom Aligned */
+            padding-bottom: 20px;
+        }
+
+        .contact-detail-block {
+            font-size: 15.5px;
+            line-height: 1.8;
+        }
+
+        .contact-detail-block a {
+            color: var(--text-color);
+            text-decoration: none;
+        }
+
+        .contact-detail-block a:hover {
+            text-decoration: underline;
+        }
+
+        /* Form Controls for Inline Contact Page */
+        .inline-form .form-group {
+            margin-bottom: 18px;
+        }
+
+        .inline-form label {
+            display: block;
+            font-size: 12px;
+            text-transform: lowercase;
+            margin-bottom: 6px;
+            color: var(--text-color);
+        }
+
+        .inline-form .form-control {
+            width: 100%;
+            padding: 10px 12px;
+            font-family: inherit;
+            font-size: 14px;
+            border: 1px solid var(--border-color);
+            background: transparent;
+            color: var(--text-color);
+            outline: none;
+        }
+
+        .inline-form .form-control:focus {
+            border-color: #1400FF;
+            background: rgba(20, 0, 255, 0.03);
+        }
+
+        .inline-form textarea.form-control {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .inline-submit-btn {
+            background-color: #1400FF;
+            color: #FFFFFF;
+            border: 1px solid #1400FF;
+            padding: 12px 24px;
+            font-family: inherit;
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: background-color 0.2s ease, color 0.2s ease;
+        }
+
+        .inline-submit-btn:hover {
+            background-color: #FFFFFF;
+            color: #1400FF;
         }
 
         /* --- Fixed Footer --- */
@@ -393,12 +627,6 @@
             border-color: #1400FF;
         }
 
-        /* Form Controls */
-        .form-group { margin-bottom: 15px; }
-        .form-group label { display: block; font-size: 12px; text-transform: lowercase; margin-bottom: 4px; color: #444; }
-        .form-control { width: 100%; padding: 8px 10px; font-family: inherit; font-size: 14px; border: 1px solid #000; background: #FAFAFA; outline: none; }
-        .form-control:focus { background: #FFFFFF; border-color: #1400FF; }
-        textarea.form-control { resize: vertical; min-height: 90px; }
         .close-modal-link { display: block; text-align: center; margin-top: 12px; font-size: 12px; color: #666; cursor: pointer; text-decoration: none; }
         .close-modal-link:hover { color: #000; text-decoration: underline; }
 
@@ -407,10 +635,10 @@
         /* --- STRICT MOBILE OVERRIDES --- */
         @media (max-width: 600px) {
             header { 
-                padding: 25px 20px 15px 20px; 
+                padding: 20px 20px 12px 20px; 
             }
             .page-view { 
-                padding: 105px 20px 70px 20px;
+                padding: 110px 20px 70px 20px;
             }
 
             .row { 
@@ -441,13 +669,17 @@
             }
 
             .carousel-slide {
-                flex: 0 0 90%; /* Slightly wider card view on mobile */
+                flex: 0 0 90%;
             }
 
-            .essay-image {
-                width: 100% !important;
-                max-width: 100% !important;
-                height: auto !important;
+            .practice-row, .contact-grid, .blue-strip-grid {
+                grid-template-columns: 1fr;
+                gap: 25px;
+            }
+
+            .contact-right {
+                justify-content: flex-start;
+                padding-top: 20px;
             }
 
             footer { 
@@ -460,24 +692,10 @@
                 font-size: 11.5px;
             }
 
-            .footer-left {
-                flex-shrink: 0;
-            }
-
-            .footer-center {
-                display: flex;
-                align-items: center;
-            }
-
-            .footer-logo-img {
-                height: 22px;
-            }
-
-            .footer-right { 
-                display: flex;
-                gap: 8px; 
-                align-items: center; 
-            }
+            .footer-left { flex-shrink: 0; }
+            .footer-center { display: flex; align-items: center; }
+            .footer-logo-img { height: 22px; }
+            .footer-right { display: flex; gap: 8px; align-items: center; }
         }
     </style>
 </head>
@@ -521,12 +739,16 @@ The Bar Council of India does not permit advertisement or solicitation by advoca
         </div>
     </div>
 
-    <!-- FIXED TOP-RIGHT HEADER -->
+    <!-- FIXED TOP-RIGHT HEADER WITH SUB-NAV -->
     <header>
-        <div class="brand-header" onclick="toggleAboutView()">SOKA; A Legal Studio.</div>
+        <div class="brand-header" onclick="switchView('about')">SOKA; A Legal Studio.</div>
+        <div class="nav-links">
+            <button class="nav-btn" onclick="switchView('practices')">[ practices ]</button>
+            <button class="nav-btn" onclick="switchView('contact')">[ contact ]</button>
+        </div>
     </header>
 
-    <!-- VIEW 1: CHRONOLOGICAL ENTRIES FEED -->
+    <!-- VIEW 1: INDEX / MAIN ENTRIES FEED (BLUE THEME) -->
     <div id="entries-view" class="page-view">
         <main class="timeline">
 
@@ -541,7 +763,7 @@ The Bar Council of India does not permit advertisement or solicitation by advoca
 
                             SOKA builds that structure. We work directly with artists, studios, and independent creators to protect what they make and secure what they own, without the weight of a traditional practice.
 
-                            <span class="learn-more-link" onclick="toggleAboutView()">[ learn more ]</span>
+                            <span class="learn-more-link" onclick="switchView('about')">[ learn more ]</span>
                         </div>
                     </div>
                 </div>
@@ -674,7 +896,7 @@ The Bar Council of India does not permit advertisement or solicitation by advoca
         </main>
     </div>
 
-    <!-- VIEW 2: INVERTED "ABOUT SOKA" MANIFESTO PAGE -->
+    <!-- VIEW 2: ABOUT SOKA (WHITE THEME) -->
     <div id="about-view" class="page-view hidden-view">
         <div class="about-content">
             <div class="about-text-container">
@@ -709,13 +931,152 @@ The Bar Council of India does not permit advertisement or solicitation by advoca
                 </p>
 
                 <p class="about-paragraph">
-                    If your work needs that kind of structure, <span class="learn-more-link" onclick="toggleContactModal(true)">write to us</span>.
+                    If your work needs that kind of structure, <span class="learn-more-link" onclick="switchView('contact')">write to us</span>.
                 </p>
 
                 <p class="about-paragraph" style="margin-top: 40px;">
-                    <span class="learn-more-link" onclick="toggleAboutView()">← return</span>
+                    <span class="learn-more-link" onclick="switchView('entries')">← return</span>
                 </p>
             </div>
+        </div>
+    </div>
+
+    <!-- VIEW 3: PRACTICES PAGE (WHITE THEME) -->
+    <div id="practices-view" class="page-view hidden-view">
+        <div class="practices-content">
+            <div class="practices-grid">
+                
+                <!-- ROW 1 -->
+                <div class="practice-row">
+                    <div class="practice-block">
+                        <img src="vinyl.jpeg" alt="Music" class="practice-img">
+                        <button class="practice-heading practice-toggle">Music <span>[ + ]</span></button>
+                        <div class="practice-accordion">
+                            <p class="practice-desc">
+                                We work with musicians, producers, and independent labels on the agreements that decide who owns what once a track exists, splits, sampling clearances, distribution and licensing deals, and the featured artist and producer credits that rarely get written down until something goes wrong.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="practice-block">
+                        <img src="art.jpeg" alt="Art" class="practice-img">
+                        <button class="practice-heading practice-toggle">Art <span>[ + ]</span></button>
+                        <div class="practice-accordion">
+                            <p class="practice-desc">
+                                For painters, illustrators, and visual artists, we handle commission agreements, licensing for prints and reproductions, and the ownership questions that come up when a piece is made for someone else's brief, gallery, or campaign.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ROW 2 -->
+                <div class="practice-row">
+                    <div class="practice-block">
+                        <img src="clapper.jpeg" alt="Film & Photography" class="practice-img">
+                        <button class="practice-heading practice-toggle">Film & Photography <span>[ + ]</span></button>
+                        <div class="practice-accordion">
+                            <p class="practice-desc">
+                                From short films to commercial shoots, we work on production agreements, location and talent releases, and the rights clearances that determine who can use footage or stills, where, and for how long, before a single frame goes public.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="hero-prose-block">
+                        SOKA works across the practical, structural side of creative work, the contracts, ownership questions, and rights issues that sit underneath almost everything a creative practice eventually has to deal with. We work with individual artists and small studios, not just large production houses, on the agreements and disputes that decide who owns what, who gets paid, and what happens when something goes wrong. The work spans several mediums, but the underlying questions are usually the same.
+                    </div>
+                </div>
+
+                <!-- BLUE STRIP (FULL WIDTH 2x2) -->
+                <div class="blue-strip">
+                    <div class="blue-strip-grid">
+                        <span class="blue-strip-item">[ Intellectual Property ]</span>
+                        <span class="blue-strip-item">[ Contracts ]</span>
+                        <span class="blue-strip-item">[ Disputes ]</span>
+                        <span class="blue-strip-item">[ Rights & Enforcement ]</span>
+                    </div>
+                </div>
+
+                <!-- ROW 3 -->
+                <div class="practice-row">
+                    <div class="practice-block">
+                        <img src="book.jpeg" alt="Writing" class="practice-img">
+                        <button class="practice-heading practice-toggle">Writing <span>[ + ]</span></button>
+                        <div class="practice-accordion">
+                            <p class="practice-desc">
+                                For novelists, screenwriters, and independent writers, we work on publishing and option agreements, ghostwriting and collaboration credit, and the licensing terms that decide what happens to a manuscript once someone else wants to adapt, publish, or option it.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="practice-block">
+                        <img src="cam.jpeg" alt="Creators" class="practice-img">
+                        <button class="practice-heading practice-toggle">Creators <span>[ + ]</span></button>
+                        <div class="practice-accordion">
+                            <p class="practice-desc">
+                                For creators building on Instagram, YouTube, and live platforms, we work on brand deal and sponsorship agreements, platform and IP disputes, and the ownership questions that come up when a persona, format, or piece of content starts generating real commercial value.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CLOSING STATEMENT -->
+                <div class="closing-statement">
+                    <div class="closing-title">Whatever you're building — there's a legal side to it.*</div>
+                    <div class="closing-subtitle">*we're that legal side.</div>
+                </div>
+
+                <p style="margin-bottom: 30px;">
+                    <span class="learn-more-link" onclick="switchView('entries')">← return</span>
+                </p>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- VIEW 4: CONTACT PAGE (WHITE THEME) -->
+    <div id="contact-view" class="page-view hidden-view">
+        <div class="contact-content">
+            <div class="contact-grid">
+                
+                <!-- LEFT SIDE FORM -->
+                <div class="contact-left">
+                    <h1 class="contact-title">Start a Conversation</h1>
+                    <div class="contact-subtitle">Tell us briefly about what you're building or what needs protection.</div>
+                    
+                    <form action="https://formspree.io/f/hello@legalbysoka.com" method="POST" class="inline-form">
+                        <div class="form-group">
+                            <label>Name</label>
+                            <input type="text" name="name" class="form-control" required placeholder="Full Name or Brand Entity">
+                        </div>
+                        <div class="form-group">
+                            <label>Email Address</label>
+                            <input type="email" name="email" class="form-control" required placeholder="name@domain.com">
+                        </div>
+                        <div class="form-group">
+                            <label>Address / Location</label>
+                            <input type="text" name="address" class="form-control" placeholder="City, State, or Address">
+                        </div>
+                        <div class="form-group">
+                            <label>Message</label>
+                            <textarea name="message" class="form-control" required placeholder="Briefly describe what you need assistance with..."></textarea>
+                        </div>
+                        <button type="submit" class="inline-submit-btn">Send Message</button>
+                    </form>
+                </div>
+
+                <!-- RIGHT SIDE DETAILS (BOTTOM ALIGNED) -->
+                <div class="contact-right">
+                    <div class="contact-detail-block">
+                        <p><a href="mailto:hello@legalbysoka.com">hello@legalbysoka.com</a></p>
+                        <p style="margin-top: 10px; opacity: 0.85;">
+                            3rd Floor, K1/52, CR Park,<br>
+                            New Delhi, India
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+
+            <p style="margin-top: 30px; margin-bottom: 20px;">
+                <span class="learn-more-link" onclick="switchView('entries')">← return</span>
+            </p>
         </div>
     </div>
 
@@ -737,31 +1098,52 @@ The Bar Council of India does not permit advertisement or solicitation by advoca
 
     <!-- INTERACTIVE SCRIPT LOGIC -->
     <script>
-        // Toggle Accordion Entries
-        document.querySelectorAll('.toggle-btn').forEach(button => {
+        // Toggle Main Entry Accordions
+        document.querySelectorAll('.essay-trigger.toggle-btn').forEach(button => {
             button.addEventListener('click', () => {
                 const collapsible = button.nextElementSibling;
                 collapsible.classList.toggle('expanded');
             });
         });
 
-        // VIEW SWITCHING, COLOR INVERSION, & LOGO FILE SWAP LOGIC
-        function toggleAboutView() {
+        // Toggle Practices Page Accordions [ + ]
+        document.querySelectorAll('.practice-toggle').forEach(button => {
+            button.addEventListener('click', () => {
+                const accordion = button.nextElementSibling;
+                accordion.classList.toggle('expanded');
+                const span = button.querySelector('span');
+                if (accordion.classList.contains('expanded')) {
+                    span.textContent = '[ − ]';
+                } else {
+                    span.textContent = '[ + ]';
+                }
+            });
+        });
+
+        // MULTI-VIEW SWITCHING, INVERSION & LOGO LOGIC
+        function switchView(targetView) {
             const body = document.body;
-            const entriesView = document.getElementById('entries-view');
-            const aboutView = document.getElementById('about-view');
+            const views = {
+                entries: document.getElementById('entries-view'),
+                about: document.getElementById('about-view'),
+                practices: document.getElementById('practices-view'),
+                contact: document.getElementById('contact-view')
+            };
             const footerLogo = document.querySelector('.footer-logo-img');
 
-            body.classList.toggle('inverted');
+            // Hide all views first
+            Object.values(views).forEach(v => v.classList.add('hidden-view'));
 
-            if (body.classList.contains('inverted')) {
-                entriesView.classList.add('hidden-view');
-                aboutView.classList.remove('hidden-view');
-                footerLogo.src = 'footer-logo-blue.png';
-            } else {
-                aboutView.classList.add('hidden-view');
-                entriesView.classList.remove('hidden-view');
+            // Reveal chosen target view
+            views[targetView].classList.remove('hidden-view');
+
+            // Handle theme inversion (Blue vs White background)
+            if (targetView === 'entries') {
+                body.classList.remove('inverted');
                 footerLogo.src = 'footer-logo.png';
+            } else {
+                body.classList.add('inverted');
+                footerLogo.src = 'footer-logo-blue.png';
             }
         }
 
@@ -787,7 +1169,6 @@ The Bar Council of India does not permit advertisement or solicitation by advoca
                 document.body.classList.add('modal-open');
             } else {
                 modal.classList.add('hidden');
-                // Only remove modal-open if BCI disclaimer is also accepted
                 if (sessionStorage.getItem('bci_accepted') === 'true') {
                     document.body.classList.remove('modal-open');
                 }

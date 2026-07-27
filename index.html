@@ -141,7 +141,7 @@
         }
 
         .contact-content {
-            max-width: 100%; /* Stretch to align flush with header 50px padding */
+            max-width: 100%;
             width: 100%;
             margin: 0 auto;
         }
@@ -298,7 +298,7 @@
         .practices-grid {
             display: flex;
             flex-direction: column;
-            gap: 130px; /* Spacious block separation */
+            gap: 130px;
             padding-top: 25px;
         }
 
@@ -329,7 +329,7 @@
         .practice-heading {
             font-size: 20px;
             font-weight: bold;
-            text-transform: lowercase; /* Lowercase headings */
+            text-transform: lowercase;
             background: none;
             border: none;
             font-family: inherit;
@@ -371,7 +371,7 @@
             line-height: 1.65;
         }
 
-        /* Hero Prose Paragraph: Vertically Centered, Left Aligned */
+        /* Hero Prose Paragraph */
         .hero-prose-block {
             font-size: 17px;
             line-height: 1.8;
@@ -380,38 +380,71 @@
             padding: 10px 10px;
         }
 
-        /* Full-Bleed Edge-to-Edge Blue Strip with High Height & Light/Large Typography */
+        /* Full-Bleed Edge-to-Edge Blue Strip (Extra Height & Light/Large Font) */
         .blue-strip {
             background-color: #1400FF;
             color: #FFFFFF;
             width: 100vw;
             margin-left: calc(-50vw + 50%);
-            padding: 160px 50px; /* Expansive vertical height */
+            padding: 180px 50px; /* Massive vertical height */
             margin-top: 40px;
             margin-bottom: 40px;
             box-sizing: border-box;
         }
 
         .blue-strip-grid {
-            max-width: 1200px;
+            max-width: 1250px;
             margin: 0 auto;
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 60px 100px;
+            gap: 90px 100px;
             text-align: center;
-            font-size: 36px; /* Substantially larger headings */
-            font-weight: normal; /* Decreased font weight */
-            letter-spacing: -0.8px;
         }
 
-        .blue-strip-item {
+        .blue-strip-block {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .blue-strip-trigger {
+            font-size: 42px; /* Very large font */
+            font-weight: 200; /* Extremely light font weight */
+            letter-spacing: -1px;
             color: #FFFFFF;
-            text-decoration: none;
+            background: none;
+            border: none;
+            font-family: inherit;
             cursor: pointer;
+            padding: 0;
+            text-align: center;
+            transition: opacity 0.3s ease;
         }
 
-        .blue-strip-item:hover {
+        .blue-strip-trigger:hover {
             text-decoration: underline;
+            opacity: 0.9;
+        }
+
+        .blue-strip-accordion {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s cubic-bezier(0.25, 1, 0.5, 1), margin 0.3s ease;
+            max-width: 520px;
+            text-align: center;
+        }
+
+        .blue-strip-accordion.expanded {
+            max-height: 1000px;
+            margin-top: 20px;
+        }
+
+        .blue-strip-desc {
+            font-size: 15.5px;
+            line-height: 1.7;
+            font-weight: 300;
+            opacity: 0.92;
+            color: #FFFFFF;
         }
 
         /* Hero Closing Statement Section */
@@ -435,7 +468,7 @@
             font-style: italic;
         }
 
-        /* --- Contact Page Layout (Aligned Flush Right with Header) --- */
+        /* --- Contact Page Layout --- */
         .contact-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -443,7 +476,7 @@
             min-height: calc(100vh - 280px);
             padding-top: 15px;
             max-width: 1200px;
-            margin: 0 0 0 auto; /* Pushes content right so right column hits screen boundary */
+            margin: 0 0 0 auto;
             width: 100%;
         }
 
@@ -470,7 +503,7 @@
             display: flex;
             flex-direction: column;
             justify-content: flex-end;
-            text-align: right; /* Aligned right to match header text margin */
+            text-align: right;
             padding-bottom: 35px;
         }
 
@@ -488,7 +521,7 @@
             text-decoration: underline;
         }
 
-        /* Form Controls for Inline Form & Modal Form */
+        /* Form Controls */
         .form-group {
             margin-bottom: 20px;
         }
@@ -541,16 +574,8 @@
             color: #1400FF;
         }
 
-        /* Modal Specific Form Override */
-        .modal-box .form-group label {
-            color: #444444;
-        }
-
-        .modal-box .form-control {
-            border-color: #000000;
-            background: #FAFAFA;
-            color: #000000;
-        }
+        .modal-box .form-group label { color: #444444; }
+        .modal-box .form-control { border-color: #000000; background: #FAFAFA; color: #000000; }
 
         /* --- Fixed Footer --- */
         footer {
@@ -570,31 +595,10 @@
             transition: background-color 0.6s ease, border-color 0.6s ease, color 0.6s ease;
         }
 
-        .footer-left {
-            text-align: left;
-            text-transform: none;
-        }
-
-        .footer-center {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .footer-logo-img {
-            height: 38px;
-            width: auto;
-            object-fit: contain;
-            display: block;
-        }
-
-        .footer-right {
-            display: flex;
-            justify-content: flex-end;
-            gap: 18px;
-            align-items: center;
-            text-transform: lowercase;
-        }
+        .footer-left { text-align: left; text-transform: none; }
+        .footer-center { display: flex; justify-content: center; align-items: center; }
+        .footer-logo-img { height: 38px; width: auto; object-fit: contain; display: block; }
+        .footer-right { display: flex; justify-content: flex-end; gap: 18px; align-items: center; text-transform: lowercase; }
 
         .footer-right a, .contact-btn {
             color: var(--text-color);
@@ -607,11 +611,9 @@
             transition: color 0.6s ease;
         }
 
-        .footer-right a:hover, .contact-btn:hover {
-            text-decoration: underline;
-        }
+        .footer-right a:hover, .contact-btn:hover { text-decoration: underline; }
 
-        /* --- Light, Transparent Frosted Glass Backdrop --- */
+        /* --- Modals --- */
         .modal-overlay {
             position: fixed;
             top: 0;
@@ -681,14 +683,10 @@
 
         .hidden { display: none !important; }
 
-        /* --- STRICT & SPACIOUS MOBILE OVERRIDES --- */
+        /* --- STRICT MOBILE OVERRIDES --- */
         @media (max-width: 600px) {
-            header { 
-                padding: 20px 20px 12px 20px; 
-            }
-            .page-view { 
-                padding: 120px 24px 80px 24px; /* Generous side padding and top clearance */
-            }
+            header { padding: 20px 20px 12px 20px; }
+            .page-view { padding: 120px 24px 80px 24px; }
 
             .row { 
                 flex-direction: row; 
@@ -697,57 +695,21 @@
                 width: 100%;
             }
             
-            .date { 
-                width: 95px;
-                font-size: 13px;
-                margin-bottom: 0;
-            }
+            .date { width: 95px; font-size: 13px; margin-bottom: 0; }
+            .content-area { width: calc(100% - 95px); max-width: calc(100% - 95px); }
 
-            .content-area {
-                width: calc(100% - 95px);
-                max-width: calc(100% - 95px);
-            }
+            .collapsible-essay { max-width: 100% !important; width: 100% !important; }
+            .carousel-container { max-width: 100% !important; }
+            .carousel-slide { flex: 0 0 90%; }
 
-            .collapsible-essay {
-                max-width: 100% !important;
-                width: 100% !important;
-            }
+            .practices-grid { gap: 80px; }
+            .practice-row, .contact-grid, .blue-strip-grid { grid-template-columns: 1fr; gap: 45px; }
 
-            .carousel-container {
-                max-width: 100% !important;
-            }
+            .blue-strip { padding: 100px 24px; }
+            .blue-strip-trigger { font-size: 30px; }
 
-            .carousel-slide {
-                flex: 0 0 90%;
-            }
-
-            .practices-grid {
-                gap: 80px; /* Ample breathing room on mobile */
-            }
-
-            .practice-row, .contact-grid, .blue-strip-grid {
-                grid-template-columns: 1fr;
-                gap: 45px;
-            }
-
-            .blue-strip {
-                padding: 90px 24px;
-            }
-
-            .blue-strip-grid {
-                font-size: 26px;
-                gap: 35px;
-            }
-
-            .closing-title {
-                font-size: 24px;
-            }
-
-            .contact-right {
-                text-align: left;
-                justify-content: flex-start;
-                padding-top: 25px;
-            }
+            .closing-title { font-size: 24px; }
+            .contact-right { text-align: left; justify-content: flex-start; padding-top: 25px; }
 
             footer { 
                 padding: 14px 20px 20px 20px; 
@@ -1051,13 +1013,46 @@ The Bar Council of India does not permit advertisement or solicitation by advoca
                     </div>
                 </div>
 
-                <!-- FULL-BLEED EDGE-TO-EDGE BLUE STRIP (REVEALED UPON SCROLLING) -->
+                <!-- FULL-BLEED EDGE-TO-EDGE BLUE STRIP (WITH INTERACTIVE DROPDOWNS & ULTRA-LIGHT LIGHT/LARGE FONT) -->
                 <div class="blue-strip">
                     <div class="blue-strip-grid">
-                        <span class="blue-strip-item">[ intellectual property ]</span>
-                        <span class="blue-strip-item">[ contracts ]</span>
-                        <span class="blue-strip-item">[ disputes ]</span>
-                        <span class="blue-strip-item">[ rights & enforcement ]</span>
+                        
+                        <div class="blue-strip-block">
+                            <button class="blue-strip-trigger blue-toggle">[ intellectual property ]</button>
+                            <div class="blue-strip-accordion">
+                                <p class="blue-strip-desc">
+                                    Creative ideas only carry real value when they are legally distinct and defensibly owned. We establish clear title over artistic assets from the moment of creation, securing copyright, brand identity, and proprietary craft before work enters the marketplace.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="blue-strip-block">
+                            <button class="blue-strip-trigger blue-toggle">[ contracts ]</button>
+                            <div class="blue-strip-accordion">
+                                <p class="blue-strip-desc">
+                                    Traditional legal drafting forces creative relationships into rigid corporate templates. We construct bespoke, transparent agreements that protect commercial upside, preserve artistic control, and eliminate ambiguity before capital is committed.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="blue-strip-block">
+                            <button class="blue-strip-trigger blue-toggle">[ disputes ]</button>
+                            <div class="blue-strip-accordion">
+                                <p class="blue-strip-desc">
+                                    When creative partnerships break down or ownership is challenged, swift intervention is essential. We manage conflicts at the intersection of law and creative culture with strategic composure, protecting reputations and securing fair settlement.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="blue-strip-block">
+                            <button class="blue-strip-trigger blue-toggle">[ rights & enforcement ]</button>
+                            <div class="blue-strip-accordion">
+                                <p class="blue-strip-desc">
+                                    Building defensible value requires continuous vigilance across digital and physical domains. We handle unauthorized commercial exploitation, takedowns, and brand protection to ensure creators retain full financial and moral authority over their catalog.
+                                </p>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
 
@@ -1176,7 +1171,7 @@ The Bar Council of India does not permit advertisement or solicitation by advoca
             });
         });
 
-        // Toggle Practices Page Accordions [ + ]
+        // Toggle Practices Page Media Accordions [ + ]
         document.querySelectorAll('.practice-toggle').forEach(button => {
             button.addEventListener('click', () => {
                 const accordion = button.nextElementSibling;
@@ -1187,6 +1182,14 @@ The Bar Council of India does not permit advertisement or solicitation by advoca
                 } else {
                     span.textContent = '[ + ]';
                 }
+            });
+        });
+
+        // Toggle Blue Strip Practice Areas Accordions
+        document.querySelectorAll('.blue-toggle').forEach(button => {
+            button.addEventListener('click', () => {
+                const accordion = button.nextElementSibling;
+                accordion.classList.toggle('expanded');
             });
         });
 

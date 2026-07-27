@@ -459,13 +459,13 @@
             padding: 10px 10px;
         }
 
-        /* --- Full-Bleed Edge-to-Edge Blue Strip with Background Numbers --- */
+        /* --- Full-Bleed Edge-to-Edge Blue Strip with Scaled Watermark Numbers --- */
         .blue-strip {
             background-color: #1400FF;
             color: #FFFFFF;
             width: 100vw;
             margin-left: calc(-50vw + 50%);
-            padding: 220px 50px; /* Expansive vertical height */
+            padding: 240px 50px;
             margin-top: 40px;
             margin-bottom: 40px;
             box-sizing: border-box;
@@ -474,7 +474,7 @@
         /* Header & Subheader inside Blue Strip */
         .blue-strip-header {
             max-width: 1250px;
-            margin: 0 auto 90px auto;
+            margin: 0 auto 110px auto;
             text-align: center;
         }
 
@@ -501,7 +501,7 @@
             margin: 0 auto;
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 110px 100px;
+            gap: 160px 100px; /* Generous vertical spacing between practice rows */
             text-align: center;
         }
 
@@ -512,7 +512,7 @@
             position: relative;
         }
 
-        /* Relative Wrapper for Text + Watermark Image Layering */
+        /* Wrapper for Text + Watermark Layering */
         .blue-strip-wrapper {
             position: relative;
             display: inline-flex;
@@ -520,23 +520,23 @@
             justify-content: center;
         }
 
-        /* Number Watermark Images (one.png, two.png, three.png, four.png) */
+        /* Large Watermark Image (240px height) - 1/3 top, 1/3 text, 1/3 bottom */
         .blue-strip-bg-num {
             position: absolute;
-            left: -35px; /* Offset slightly to the left behind text */
+            left: -50px; /* Offset slightly left behind the text */
             top: 50%;
             transform: translateY(-50%);
-            height: 140px; /* Proportionate watermark scale */
+            height: 240px; /* Substantially larger watermark */
             width: auto;
             object-fit: contain;
-            pointer-events: none;
-            opacity: 0.85; /* Light shade blending into blue */
-            z-index: 0;
+            pointer-events: none; /* Prevents image from blocking button clicks */
+            opacity: 0.85;
+            z-index: 1;
         }
 
         .blue-strip-trigger {
             font-size: 42px;
-            font-weight: 200; /* Ultra-light font weight */
+            font-weight: 200;
             letter-spacing: -1px;
             color: #FFFFFF;
             background: none;
@@ -546,7 +546,8 @@
             padding: 0;
             text-align: center;
             position: relative;
-            z-index: 1; /* Floats crisp above watermark image */
+            z-index: 2; /* Sits strictly on top for 100% click reliability */
+            pointer-events: auto;
             transition: opacity 0.3s ease;
         }
 
@@ -562,7 +563,7 @@
             max-width: 520px;
             text-align: center;
             position: relative;
-            z-index: 1;
+            z-index: 2;
         }
 
         .blue-strip-accordion.expanded {
@@ -839,7 +840,7 @@
             .blue-strip-title { font-size: 26px; }
             .blue-strip-subtitle { font-size: 15px; }
             .blue-strip-trigger { font-size: 28px; }
-            .blue-strip-bg-num { height: 90px; left: -15px; }
+            .blue-strip-bg-num { height: 140px; left: -20px; }
 
             .closing-title { font-size: 26px; }
             .contact-right { text-align: left; justify-content: flex-start; padding-top: 25px; }
@@ -1352,8 +1353,10 @@ The Bar Council of India does not permit advertisement or solicitation by advoca
 
         // Toggle Blue Strip Practice Areas Accordions
         document.querySelectorAll('.blue-toggle').forEach(button => {
-            button.addEventListener('click', () => {
-                const accordion = button.nextElementSibling;
+            button.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const block = button.closest('.blue-strip-block');
+                const accordion = block.querySelector('.blue-strip-accordion');
                 accordion.classList.toggle('expanded');
             });
         });

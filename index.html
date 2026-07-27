@@ -465,13 +465,13 @@
             padding: 10px 10px;
         }
 
-        /* --- Full-Bleed Edge-to-Edge Blue Strip with HUGE Watermark Numbers --- */
+        /* --- Full-Bleed Edge-to-Edge Blue Strip with SUPER-SCALE Watermarks --- */
         .blue-strip {
             background-color: #1400FF;
             color: #FFFFFF;
             width: 100vw;
             margin-left: calc(-50vw + 50%);
-            padding: 280px 50px;
+            padding: 300px 50px;
             margin-top: 40px;
             margin-bottom: 40px;
             box-sizing: border-box;
@@ -479,7 +479,7 @@
 
         .blue-strip-header {
             max-width: 1250px;
-            margin: 0 auto 130px auto;
+            margin: 0 auto 150px auto;
             text-align: center;
         }
 
@@ -506,7 +506,7 @@
             margin: 0 auto;
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 200px 120px;
+            gap: 220px 120px;
             text-align: center;
         }
 
@@ -524,18 +524,18 @@
             justify-content: center;
         }
 
-        /* MASSIVELY SCALED & DARKENED WATERMARK NUMBERS (650px Height) */
+        /* SUPER-SCALED & LIGHT-BLENDED WATERMARK NUMBERS (900px Height) */
         .blue-strip-bg-num {
             position: absolute;
-            left: -180px;
+            left: -240px; /* Offset dramatically to the left */
             top: 50%;
             transform: translateY(-50%);
-            height: 650px;
+            height: 900px; /* Super-scale architectural proportion */
             width: auto;
             object-fit: contain;
             pointer-events: none;
-            opacity: 0.35;
-            filter: brightness(0.6);
+            opacity: 0.18; /* Soft luminous background glow */
+            filter: brightness(1.2); /* Lighter tone blending into blue */
             z-index: 1;
         }
 
@@ -847,7 +847,7 @@
             .blue-strip-title { font-size: 26px; }
             .blue-strip-subtitle { font-size: 15px; }
             .blue-strip-trigger { font-size: 28px; }
-            .blue-strip-bg-num { height: 280px; left: -60px; opacity: 0.25; }
+            .blue-strip-bg-num { height: 320px; left: -70px; opacity: 0.18; }
 
             .closing-title { font-size: 26px; }
             .contact-right { text-align: left; justify-content: flex-start; padding-top: 25px; }

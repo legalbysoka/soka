@@ -292,36 +292,36 @@
         .practices-grid {
             display: flex;
             flex-direction: column;
-            gap: 60px; /* Enhanced Spaciousness */
-            padding-top: 15px;
+            gap: 120px; /* Expands vertical spacing so strip is hidden until scroll */
+            padding-top: 25px;
         }
 
         .practice-row {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 60px; /* Spacious column gap */
+            gap: 80px;
             align-items: start;
         }
 
         .practice-block {
             display: flex;
             flex-direction: column;
-            align-items: center; /* Centered block elements */
+            align-items: center;
             text-align: center;
         }
 
         .practice-img {
             width: 100%;
-            max-width: 480px;
-            height: 260px;
-            object-fit: cover;
-            border: 1px solid var(--border-color);
-            margin-bottom: 16px;
+            max-width: 440px;
+            height: 280px;
+            object-fit: contain; /* Clean render without box borders */
+            border: none; /* Removed blue outline box */
+            margin-bottom: 18px;
             display: block;
         }
 
         .practice-heading {
-            font-size: 19px;
+            font-size: 20px;
             font-weight: bold;
             background: none;
             border: none;
@@ -341,7 +341,7 @@
         }
 
         .practice-toggle-icon {
-            font-size: 12px; /* Smaller delicate toggle icon */
+            font-size: 12px;
             font-weight: normal;
             opacity: 0.85;
         }
@@ -350,13 +350,13 @@
             max-height: 0;
             overflow: hidden;
             transition: max-height 0.4s cubic-bezier(0.25, 1, 0.5, 1), margin 0.3s ease;
-            max-width: 480px;
-            text-align: left; /* Text remains comfortable for reading */
+            max-width: 440px;
+            text-align: left;
         }
 
         .practice-accordion.expanded {
             max-height: 1000px;
-            margin-top: 12px;
+            margin-top: 14px;
         }
 
         .practice-desc {
@@ -366,22 +366,22 @@
 
         /* Hero Prose Paragraph: Vertically Centered, Left Aligned */
         .hero-prose-block {
-            font-size: 16.5px;
-            line-height: 1.75;
+            font-size: 17px;
+            line-height: 1.8;
             text-align: left;
-            align-self: center; /* Vertically centered in block */
-            padding: 10px 15px;
+            align-self: center;
+            padding: 10px 10px;
         }
 
-        /* Full-Bleed Edge-to-Edge Blue Strip */
+        /* Full-Bleed Edge-to-Edge Blue Strip with High Vertical Length */
         .blue-strip {
             background-color: #1400FF;
             color: #FFFFFF;
             width: 100vw;
             margin-left: calc(-50vw + 50%);
-            padding: 55px 50px; /* Increased vertical height */
-            margin-top: 30px;
-            margin-bottom: 30px;
+            padding: 110px 50px; /* Generous height expansion */
+            margin-top: 40px;
+            margin-bottom: 40px;
             box-sizing: border-box;
         }
 
@@ -390,10 +390,11 @@
             margin: 0 auto;
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 30px 60px;
-            text-align: center; /* Centered items */
-            font-size: 20px; /* Slightly larger font */
+            gap: 40px 80px;
+            text-align: center;
+            font-size: 28px; /* Substantially larger lowercase headings */
             font-weight: bold;
+            letter-spacing: -0.5px;
         }
 
         .blue-strip-item {
@@ -406,23 +407,23 @@
             text-decoration: underline;
         }
 
-        /* Closing Statement Section */
+        /* Hero Closing Statement Section */
         .closing-statement {
-            margin-top: 50px;
-            margin-bottom: 50px;
-            text-align: center; /* Middle aligned */
-            padding: 20px 0;
+            margin-top: 80px;
+            margin-bottom: 80px;
+            text-align: center;
+            padding: 30px 0;
         }
 
         .closing-title {
-            font-size: 26px; /* Slightly larger font */
+            font-size: 32px; /* Prominent closing title */
             font-weight: bold;
-            letter-spacing: -0.5px;
-            margin-bottom: 8px;
+            letter-spacing: -0.8px;
+            margin-bottom: 12px;
         }
 
         .closing-subtitle {
-            font-size: 15px;
+            font-size: 17px;
             opacity: 0.85;
             font-style: italic;
         }
@@ -458,8 +459,8 @@
         .contact-right {
             display: flex;
             flex-direction: column;
-            justify-content: flex-end; /* Bottom Aligned */
-            text-align: right; /* Right Aligned Content */
+            justify-content: flex-end;
+            text-align: right;
             padding-bottom: 35px;
         }
 
@@ -530,7 +531,7 @@
             color: #1400FF;
         }
 
-        /* Modal Specific Form Override (Black Text in Modal) */
+        /* Modal Specific Form Override */
         .modal-box .form-group label {
             color: #444444;
         }
@@ -710,9 +711,25 @@
                 flex: 0 0 90%;
             }
 
+            .practices-grid {
+                gap: 60px;
+            }
+
             .practice-row, .contact-grid, .blue-strip-grid {
                 grid-template-columns: 1fr;
                 gap: 35px;
+            }
+
+            .blue-strip {
+                padding: 65px 20px;
+            }
+
+            .blue-strip-grid {
+                font-size: 22px;
+            }
+
+            .closing-title {
+                font-size: 24px;
             }
 
             .contact-right {
@@ -780,7 +797,7 @@ The Bar Council of India does not permit advertisement or solicitation by advoca
 
     <!-- FIXED TOP-RIGHT HEADER WITH SUB-NAV -->
     <header>
-        <div class="brand-header" onclick="switchView('about')">SOKA; A Legal Studio.</div>
+        <div class="brand-header" onclick="handleBrandClick()">SOKA; A Legal Studio.</div>
         <div class="nav-links">
             <button class="nav-btn" onclick="switchView('practices')">[ practices ]</button>
             <button class="nav-btn" onclick="switchView('contact')">[ contact ]</button>
@@ -1023,7 +1040,7 @@ The Bar Council of India does not permit advertisement or solicitation by advoca
                     </div>
                 </div>
 
-                <!-- FULL-BLEED EDGE-TO-EDGE BLUE STRIP -->
+                <!-- FULL-BLEED EDGE-TO-EDGE BLUE STRIP (REVEALED UPON SCROLLING) -->
                 <div class="blue-strip">
                     <div class="blue-strip-grid">
                         <span class="blue-strip-item">[ intellectual property ]</span>
@@ -1055,13 +1072,13 @@ The Bar Council of India does not permit advertisement or solicitation by advoca
                     </div>
                 </div>
 
-                <!-- CLOSING STATEMENT -->
+                <!-- HERO CLOSING STATEMENT -->
                 <div class="closing-statement">
                     <div class="closing-title">Whatever you're building — there's a legal side to it.*</div>
                     <div class="closing-subtitle">*we're that legal side.</div>
                 </div>
 
-                <p style="margin-bottom: 40px;">
+                <p style="margin-bottom: 50px;">
                     <span class="learn-more-link" onclick="switchView('entries')">← return</span>
                 </p>
 
@@ -1137,6 +1154,9 @@ The Bar Council of India does not permit advertisement or solicitation by advoca
 
     <!-- INTERACTIVE SCRIPT LOGIC -->
     <script>
+        // Track currently active view
+        let currentView = 'entries';
+
         // Toggle Main Entry Accordions
         document.querySelectorAll('.essay-trigger.toggle-btn').forEach(button => {
             button.addEventListener('click', () => {
@@ -1159,8 +1179,18 @@ The Bar Council of India does not permit advertisement or solicitation by advoca
             });
         });
 
+        // SMART BRAND HEADER NAVIGATION LOGIC
+        function handleBrandClick() {
+            if (currentView === 'about') {
+                switchView('entries');
+            } else {
+                switchView('about');
+            }
+        }
+
         // MULTI-VIEW SWITCHING, INVERSION & LOGO LOGIC
         function switchView(targetView) {
+            currentView = targetView;
             const body = document.body;
             const views = {
                 entries: document.getElementById('entries-view'),
@@ -1175,6 +1205,9 @@ The Bar Council of India does not permit advertisement or solicitation by advoca
 
             // Reveal chosen target view
             views[targetView].classList.remove('hidden-view');
+
+            // Reset scroll position to top when changing views
+            views[targetView].scrollTop = 0;
 
             // Handle theme inversion (Blue vs White background)
             if (targetView === 'entries') {

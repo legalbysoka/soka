@@ -527,15 +527,15 @@
         /* SUPER-SCALED & LIGHT-BLENDED WATERMARK NUMBERS (900px Height) */
         .blue-strip-bg-num {
             position: absolute;
-            left: -240px; /* Offset dramatically to the left */
+            left: -240px;
             top: 50%;
             transform: translateY(-50%);
-            height: 900px; /* Super-scale architectural proportion */
+            height: 900px;
             width: auto;
             object-fit: contain;
             pointer-events: none;
-            opacity: 0.18; /* Soft luminous background glow */
-            filter: brightness(1.2); /* Lighter tone blending into blue */
+            opacity: 0.18;
+            filter: brightness(1.2);
             z-index: 1;
         }
 
@@ -713,6 +713,13 @@
             color: #1400FF;
         }
 
+        .submit-btn.submitted {
+            background-color: #00C853 !important;
+            color: #FFFFFF !important;
+            border-color: #00C853 !important;
+            cursor: default;
+        }
+
         .modal-box .form-group label { color: #444444; }
         .modal-box .form-control { border-color: #000000; background: #FAFAFA; color: #000000; }
 
@@ -886,7 +893,7 @@ The Bar Council of India does not permit advertisement or solicitation by advoca
     <div id="contact-modal" class="modal-overlay hidden">
         <div class="modal-box">
             <div class="modal-title">Send an Enquiry</div>
-            <form action="https://formspree.io/f/xojgbagg" method="POST">
+            <form id="modal-form" action="https://formspree.io/f/xojgbagg" method="POST">
                 <div class="form-group">
                     <label>Name</label>
                     <input type="text" name="name" class="form-control" required placeholder="Full Name or Brand Entity">
@@ -903,7 +910,7 @@ The Bar Council of India does not permit advertisement or solicitation by advoca
                     <label>Message</label>
                     <textarea name="message" class="form-control" required placeholder="Briefly describe what you need assistance with..."></textarea>
                 </div>
-                <button type="submit" class="modal-btn">Send Message</button>
+                <button type="submit" class="modal-btn" id="modal-submit-btn">Send Message</button>
                 <span class="close-modal-link" onclick="toggleContactModal(false)">[ close window ]</span>
             </form>
         </div>
@@ -1287,7 +1294,7 @@ The Bar Council of India does not permit advertisement or solicitation by advoca
                     <h1 class="contact-title">Start a Conversation</h1>
                     <div class="contact-subtitle">Tell us briefly about what you're building or what needs protection.</div>
                     
-                    <form action="https://formspree.io/f/xojgbagg" method="POST">
+                    <form id="contact-page-form" action="https://formspree.io/f/xojgbagg" method="POST">
                         <div class="form-group">
                             <label>Name</label>
                             <input type="text" name="name" class="form-control" required placeholder="Full Name or Brand Entity">
@@ -1304,7 +1311,7 @@ The Bar Council of India does not permit advertisement or solicitation by advoca
                             <label>Message</label>
                             <textarea name="message" class="form-control" required placeholder="Briefly describe what you need assistance with..."></textarea>
                         </div>
-                        <button type="submit" class="submit-btn">Send Message</button>
+                        <button type="submit" class="submit-btn" id="contact-submit-btn">Send Message</button>
                     </form>
                 </div>
 
@@ -1482,6 +1489,75 @@ The Bar Council of India does not permit advertisement or solicitation by advoca
                     toggleContactModal(false);
                 }
             });
+
+            // AJAX FORM SUBMISSION FOR POP-UP MODAL FORM
+            const modalForm = document.getElementById('modal-form');
+            const modalSubmitBtn = document.getElementById('modal-submit-btn');
+            if (modalForm) {
+                modalForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    modalSubmitBtn.textContent = 'SENDING...';
+                    modalSubmitBtn.disabled = true;
+
+                    fetch(modalForm.action, {
+                        method: 'POST',
+                        body: new FormData(modalForm),
+                        headers: { 'Accept': 'application/json' }
+                    }).then(response => {
+                        if (response.ok) {
+                            modalSubmitBtn.textContent = 'SENT';
+                            modalSubmitBtn.classList.add('submitted');
+                            modalForm.reset();
+                            setTimeout(() => {
+                                toggleContactModal(false);
+                                modalSubmitBtn.textContent = 'SEND MESSAGE';
+                                modalSubmitBtn.classList.remove('submitted');
+                                modalSubmitBtn.disabled = false;
+                            }, 1800);
+                        } else {
+                            modalSubmitBtn.textContent = 'ERROR — TRY AGAIN';
+                            modalSubmitBtn.disabled = false;
+                        }
+                    }).catch(error => {
+                        modalSubmitBtn.textContent = 'ERROR — TRY AGAIN';
+                        modalSubmitBtn.disabled = false;
+                    });
+                });
+            }
+
+            // AJAX FORM SUBMISSION FOR INLINE CONTACT PAGE FORM
+            const contactPageForm = document.getElementById('contact-page-form');
+            const contactSubmitBtn = document.getElementById('contact-submit-btn');
+            if (contactPageForm) {
+                contactPageForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    contactSubmitBtn.textContent = 'SENDING...';
+                    contactSubmitBtn.disabled = true;
+
+                    fetch(contactPageForm.action, {
+                        method: 'POST',
+                        body: new FormData(contactPageForm),
+                        headers: { 'Accept': 'application/json' }
+                    }).then(response => {
+                        if (response.ok) {
+                            contactSubmitBtn.textContent = 'SENT';
+                            contactSubmitBtn.classList.add('submitted');
+                            contactPageForm.reset();
+                            setTimeout(() => {
+                                contactSubmitBtn.textContent = 'SEND MESSAGE';
+                                contactSubmitBtn.classList.remove('submitted');
+                                contactSubmitBtn.disabled = false;
+                            }, 3000);
+                        } else {
+                            contactSubmitBtn.textContent = 'ERROR — TRY AGAIN';
+                            contactSubmitBtn.disabled = false;
+                        }
+                    }).catch(error => {
+                        contactSubmitBtn.textContent = 'ERROR — TRY AGAIN';
+                        contactSubmitBtn.disabled = false;
+                    });
+                });
+            }
         });
 
         // Contact Modal Logic

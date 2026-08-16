@@ -56,7 +56,7 @@
     </script>
 
     <style>
-        /* --- Core Reset & Dynamic Color Variables --- */
+        /* --- Core Reset & Dynamic Variables --- */
         * {
             margin: 0;
             padding: 0;
@@ -102,7 +102,7 @@
             transition: background-color 0.8s cubic-bezier(0.25, 1, 0.5, 1), color 0.8s cubic-bezier(0.25, 1, 0.5, 1);
         }
 
-        /* --- Fullscreen Interactive Symbol Canvas --- */
+        /* --- Fullscreen Interactive Codex-Style Symbol Grid Canvas --- */
         #interactive-canvas {
             position: fixed;
             top: 0;
@@ -112,14 +112,20 @@
             pointer-events: none;
             z-index: 1;
             opacity: 1;
-            transition: opacity 0.8s ease;
+            transition: opacity 0.6s ease;
         }
 
         body.inverted #interactive-canvas {
             opacity: 0;
         }
 
-        /* --- Noise Grain Texture Overlay --- */
+        /* When on practices page, canvas is rendered dynamically in the blue section */
+        body.inverted.practices-active #interactive-canvas {
+            opacity: 1;
+            clip-path: inset(var(--strip-top, 100vh) 0px var(--strip-bottom, 0px) 0px);
+        }
+
+        /* --- Visible Film Grain Noise Texture --- */
         .noise-overlay {
             position: fixed;
             top: 0;
@@ -128,11 +134,11 @@
             height: 100vh;
             pointer-events: none;
             z-index: 2;
-            opacity: 0.045;
+            opacity: 0.085; /* Clearly visible textural grain */
             background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
         }
 
-        /* --- Slow, Meditative Hero Curtain Entry Screen --- */
+        /* --- Hero Curtain Screen --- */
         #hero-curtain {
             position: fixed;
             top: 0;
@@ -147,7 +153,7 @@
             justify-content: center;
             align-items: center;
             padding: 50px 30px;
-            transition: transform 1.4s cubic-bezier(0.76, 0, 0.24, 1);
+            transition: transform 1.3s cubic-bezier(0.76, 0, 0.24, 1);
             will-change: transform;
             cursor: default;
         }
@@ -162,67 +168,74 @@
             flex-direction: column;
             align-items: center;
             text-align: center;
+            z-index: 10;
         }
 
-        /* SOKA Logo Slow Building Animation (4.2s Duration) */
-        .curtain-logo-svg {
-            width: 86px;
-            height: 86px;
-            margin-bottom: 38px;
+        /* Piece-by-piece / Reveal animated external SVG container */
+        .curtain-logo-container {
+            width: 110px;
+            height: 110px;
+            margin-bottom: 45px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
-        .curtain-logo-svg path,
-        .curtain-logo-svg circle,
-        .curtain-logo-svg rect {
-            fill: none;
-            stroke: #FFFFFF;
-            stroke-width: 1.2;
-            stroke-dasharray: 450;
-            stroke-dashoffset: 450;
-            animation: drawLogoSlow 4.2s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+        .curtain-logo-img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            filter: drop-shadow(0px 0px 14px rgba(255, 255, 255, 0.35));
+            animation: assembleLogoPiece 3.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
         }
 
-        @keyframes drawLogoSlow {
+        @keyframes assembleLogoPiece {
             0% {
-                stroke-dashoffset: 450;
                 opacity: 0;
+                transform: scale(0.65) translateY(24px);
+                filter: blur(12px) brightness(2);
+                clip-path: polygon(50% 50%, 50% 50%, 50% 50%, 50% 50%);
             }
-            15% {
-                opacity: 1;
+            40% {
+                opacity: 0.8;
+                filter: blur(3px) brightness(1.4);
+                clip-path: polygon(0% 0%, 100% 0%, 100% 50%, 0% 50%);
             }
             100% {
-                stroke-dashoffset: 0;
                 opacity: 1;
+                transform: scale(1) translateY(0);
+                filter: blur(0px) brightness(1);
+                clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
             }
         }
 
         .curtain-title {
-            font-size: 32px;
+            font-size: 34px;
             font-weight: 500;
             letter-spacing: -0.8px;
-            line-height: 1.25;
-            margin-bottom: 12px;
-            text-transform: uppercase;
+            line-height: 1.2;
+            margin-bottom: 22px; /* Whitespace between title and subtitle */
             font-family: var(--font-serif);
             opacity: 0;
-            animation: fadeInCurtainText 2s 2.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            animation: fadeInCurtainText 2s 1.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
         }
 
         .curtain-subtitle {
-            font-size: 14px;
+            font-size: 13.5px;
             font-family: var(--font-mono);
-            letter-spacing: 3px;
-            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-transform: lowercase; /* Lowercase subtitle */
             opacity: 0;
-            animation: fadeInCurtainText 2s 2.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            color: rgba(255, 255, 255, 0.85);
+            animation: fadeInCurtainText 2s 2.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
         }
 
         @keyframes fadeInCurtainText {
             0% { opacity: 0; transform: translateY(12px); }
-            100% { opacity: 0.92; transform: translateY(0); }
+            100% { opacity: 1; transform: translateY(0); }
         }
 
-        /* Minimalist Long Arrow at Bottom-Right Corner */
+        /* Long, Thin Arrow on Bottom Right */
         .curtain-bottom-arrow {
             position: absolute;
             bottom: 40px;
@@ -231,13 +244,14 @@
             flex-direction: column;
             align-items: center;
             opacity: 0;
-            animation: fadeInCurtainText 2s 3.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            animation: fadeInCurtainText 2s 2.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
             pointer-events: none;
+            z-index: 10;
         }
 
         .curtain-arrow-line {
             width: 1px;
-            height: 38px;
+            height: 58px; /* Longer vertical stem */
             background-color: rgba(255, 255, 255, 0.5);
             position: relative;
         }
@@ -251,7 +265,7 @@
             margin-top: -4px;
         }
 
-        /* --- Monospace Utility Fonts --- */
+        /* --- Monospace Elements --- */
         .date, 
         .nav-btn, 
         .footer-right, 
@@ -335,7 +349,7 @@
 
         .nav-btn:hover { opacity: 1; }
 
-        /* --- Scrollable View Containers --- */
+        /* --- Scrollable Views --- */
         .page-view {
             position: absolute;
             top: 0;
@@ -369,11 +383,42 @@
             margin: 0 auto;
         }
 
+        /* --- Left-Aligned Contact Page --- */
         .contact-content {
-            max-width: 100%;
+            max-width: 1200px;
             width: 100%;
-            margin: 0 auto;
+            margin: 0; /* Fully left-aligned with page padding margin */
         }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            min-height: calc(100vh - 280px);
+            padding-top: 15px;
+            width: 100%;
+        }
+
+        .contact-left { 
+            display: flex; 
+            flex-direction: column; 
+            max-width: 520px; /* Clean column structure */
+        }
+
+        .contact-title { font-size: 28px; font-weight: 500; margin-bottom: 8px; letter-spacing: -0.5px; }
+        .contact-subtitle { font-size: 15.5px; margin-bottom: 35px; line-height: 1.5; opacity: 0.9; }
+
+        .contact-right {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            text-align: right;
+            padding-bottom: 35px;
+        }
+
+        .contact-detail-block { font-size: 16px; line-height: 1.85; }
+        .contact-detail-block a { color: var(--text-color); text-decoration: none; }
+        .contact-detail-block a:hover { text-decoration: underline; }
 
         /* --- Timeline Rows --- */
         .row {
@@ -494,7 +539,7 @@
             font-weight: 500;
         }
 
-        /* --- About View: Even Bigger Headline (60px / 3.75rem) --- */
+        /* --- About Page Headline --- */
         .about-text-container {
             max-width: 880px;
             width: 100%;
@@ -507,7 +552,7 @@
         }
 
         .about-title-large {
-            font-size: 60px; /* Even bigger */
+            font-size: 60px;
             font-weight: 700;
             line-height: 1.1;
             letter-spacing: -1.8px;
@@ -614,6 +659,7 @@
             margin-top: 40px;
             margin-bottom: 40px;
             box-sizing: border-box;
+            position: relative;
         }
 
         .blue-strip-header {
@@ -741,34 +787,7 @@
             font-style: italic;
         }
 
-        /* --- Contact Page Layout --- */
-        .contact-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 80px;
-            min-height: calc(100vh - 280px);
-            padding-top: 15px;
-            max-width: 1200px;
-            margin: 0 0 0 auto;
-            width: 100%;
-        }
-
-        .contact-left { display: flex; flex-direction: column; }
-        .contact-title { font-size: 28px; font-weight: 500; margin-bottom: 8px; letter-spacing: -0.5px; }
-        .contact-subtitle { font-size: 15.5px; margin-bottom: 35px; line-height: 1.5; opacity: 0.9; }
-
-        .contact-right {
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-end;
-            text-align: right;
-            padding-bottom: 35px;
-        }
-
-        .contact-detail-block { font-size: 16px; line-height: 1.85; }
-        .contact-detail-block a { color: var(--text-color); text-decoration: none; }
-        .contact-detail-block a:hover { text-decoration: underline; }
-
+        /* --- Forms --- */
         .form-group { margin-bottom: 20px; }
         .form-group label {
             display: block;
@@ -930,7 +949,7 @@
         @media (max-width: 600px) {
             header { padding: 20px 20px 12px 20px; }
             .page-view { padding: 120px 24px 80px 24px; }
-            .timeline { margin: 0; }
+            .timeline, .contact-content { margin: 0; }
 
             .about-title-large {
                 font-size: 38px;
@@ -989,34 +1008,32 @@
 </head>
 <body class="modal-open">
 
-    <!-- NOISE GRAIN TEXTURE -->
+    <!-- VISIBLE FILM NOISE GRAIN TEXTURE -->
     <div class="noise-overlay"></div>
 
-    <!-- FULLSCREEN INTERACTIVE SYMBOL CANVAS -->
+    <!-- FULLSCREEN CODEX-STYLE INTERACTIVE CANVAS -->
     <canvas id="interactive-canvas"></canvas>
 
     <!-- CINEMATIC HERO CURTAIN ENTRY SCREEN -->
     <div id="hero-curtain">
         <div class="curtain-center">
-            <!-- Slow SVG Drawing Vector Logo -->
-            <svg class="curtain-logo-svg" viewBox="0 0 100 100">
-                <circle cx="50" cy="50" r="42" />
-                <rect x="25" y="25" width="50" height="50" />
-                <path d="M 50 15 L 50 85 M 15 50 L 85 50" />
-            </svg>
+            <!-- Custom Animated SOKA SVG Logo -->
+            <div class="curtain-logo-container">
+                <img src="soka logo.svg" alt="SOKA Logo" class="curtain-logo-img">
+            </div>
             
-            <div class="curtain-title">Securing the Culture</div>
-            <div class="curtain-subtitle">Legally</div>
+            <div class="curtain-title">SOKA; A Legal Studio.</div>
+            <div class="curtain-subtitle">securing the culture, legally.</div>
         </div>
 
-        <!-- Tight & Light Long Scroll Indicator Arrow -->
+        <!-- Long & Light Minimalist Scroll Indicator Arrow -->
         <div class="curtain-bottom-arrow">
             <div class="curtain-arrow-line"></div>
             <div class="curtain-arrow-head"></div>
         </div>
     </div>
 
-    <!-- BCI DISCLAIMER POP-UP MODAL (REVEALS AFTER CURTAIN SCROLL) -->
+    <!-- BCI DISCLAIMER POP-UP MODAL (REVEALED AFTER SCROLLING CURTAIN) -->
     <div id="bci-modal" class="modal-overlay hidden">
         <div class="modal-box">
             <div class="modal-title">Disclaimer</div>
@@ -1183,7 +1200,6 @@ The Bar Council of India does not permit advertisement or solicitation by advoca
                     <button class="essay-trigger toggle-btn" data-slug="courtroom-sketches">courtroom sketches</button>
                     <div class="collapsible-essay">
                         
-                        <!-- SIDEWAYS SCROLLING GALLERY (7 SKETCHES) -->
                         <div class="carousel-container">
                             <div class="carousel-slide">
                                 <img src="cs1.jpeg" alt="Courtroom Sketch 1">
@@ -1215,7 +1231,6 @@ The Bar Council of India does not permit advertisement or solicitation by advoca
                             </div>
                         </div>
 
-                        <!-- FULL ESSAY CONTENT -->
                         <div class="essay-text">
                             Last September, the Supreme Court banned photography and videography across its high-security zones, cameras, phones, tripods, selfie sticks, all of it, citing security and the dignity of proceedings. Buried in the same circular sat a single clarifying line, official sketches remain allowed. Nobody wrote a follow-up piece about that sentence. It's easy to miss, sitting quietly beside a ban that made headlines for what it prohibited rather than the one thing it quietly permitted.
 
@@ -1349,10 +1364,9 @@ The Bar Council of India does not permit advertisement or solicitation by advoca
                     </div>
                 </div>
 
-                <!-- FULL-BLEED EDGE-TO-EDGE BLUE STRIP -->
-                <div class="blue-strip">
+                <!-- FULL-BLEED EDGE-TO-EDGE BLUE STRIP (WITH CANVAS SHOCKWAVE INTEGRATION) -->
+                <div class="blue-strip" id="practices-blue-strip">
                     
-                    <!-- EDITORIAL HEADER & SUBHEADER INSIDE STRIP -->
                     <div class="blue-strip-header">
                         <div class="blue-strip-title">The structural framework underneath the culture.</div>
                         <div class="blue-strip-subtitle">At SOKA, we focus strictly on four targeted pillars designed to establish artistic ownership, clarify commercial structure, and safeguard creative capital.</div>
@@ -1451,7 +1465,7 @@ The Bar Council of India does not permit advertisement or solicitation by advoca
         </div>
     </div>
 
-    <!-- VIEW 4: CONTACT PAGE (WHITE THEME) -->
+    <!-- VIEW 4: CONTACT PAGE (WHITE THEME - FULLY LEFT-ALIGNED) -->
     <div id="contact-view" class="page-view hidden-view">
         <div class="contact-content">
             <div class="contact-grid">
@@ -1463,26 +1477,26 @@ The Bar Council of India does not permit advertisement or solicitation by advoca
                     
                     <form id="contact-page-form" action="https://formspree.io/f/xojgbagg" method="POST">
                         <div class="form-group">
-                            <label>Name</label>
+                            <label>name</label>
                             <input type="text" name="name" class="form-control" required placeholder="Full Name or Brand Entity">
                         </div>
                         <div class="form-group">
-                            <label>Email Address</label>
+                            <label>email address</label>
                             <input type="email" name="email" class="form-control" required placeholder="name@domain.com">
                         </div>
                         <div class="form-group">
-                            <label>Address / Location</label>
+                            <label>address / location</label>
                             <input type="text" name="address" class="form-control" placeholder="City, State, or Address">
                         </div>
                         <div class="form-group">
-                            <label>Message</label>
+                            <label>message</label>
                             <textarea name="message" class="form-control" required placeholder="Briefly describe what you need assistance with..."></textarea>
                         </div>
                         <button type="submit" class="submit-btn" id="contact-submit-btn">Send Message</button>
                     </form>
                 </div>
 
-                <!-- RIGHT SIDE DETAILS (RIGHT & BOTTOM ALIGNED WITH PINCODE) -->
+                <!-- RIGHT SIDE DETAILS -->
                 <div class="contact-right">
                     <div class="contact-detail-block">
                         <p><a href="mailto:hello@legalbysoka.com">hello@legalbysoka.com</a></p>
@@ -1507,7 +1521,6 @@ The Bar Council of India does not permit advertisement or solicitation by advoca
             © 2026 SOKA
         </div>
         <div class="footer-center">
-            <!-- CLICKABLE LOGO BUTTON TO HOME / INDEX FEED -->
             <img src="footer-logo.png" alt="SOKA Logo" class="footer-logo-img" onclick="switchView('entries')">
         </div>
         <div class="footer-right">
@@ -1518,7 +1531,7 @@ The Bar Council of India does not permit advertisement or solicitation by advoca
         </div>
     </footer>
 
-    <!-- INTERACTIVE SCRIPT LOGIC -->
+    <!-- INTERACTIVE CODEX ENGINE & NAVIGATION SCRIPT -->
     <script>
         let currentView = 'entries';
         let curtainDismissed = false;
@@ -1532,7 +1545,6 @@ The Bar Council of India does not permit advertisement or solicitation by advoca
             curtainDismissed = true;
             curtain.classList.add('dismissed');
 
-            // Once curtain finishes sliding up (1.4s), smoothly display BCI disclaimer if not yet accepted
             setTimeout(() => {
                 if (sessionStorage.getItem('bci_accepted') !== 'true') {
                     bciModal.classList.remove('hidden');
@@ -1540,12 +1552,11 @@ The Bar Council of India does not permit advertisement or solicitation by advoca
                 } else {
                     document.body.classList.remove('modal-open');
                 }
-            }, 1400);
+            }, 1300);
         }
 
-        // Listen purely to deliberate user scroll events
         window.addEventListener('wheel', (e) => {
-            if (e.deltaY > 10 && !curtainDismissed) {
+            if (e.deltaY > 8 && !curtainDismissed) {
                 triggerCurtainScrollReveal();
             }
         }, { passive: true });
@@ -1557,127 +1568,158 @@ The Bar Council of India does not permit advertisement or solicitation by advoca
 
         window.addEventListener('touchmove', (e) => {
             let touchEndY = e.touches[0].clientY;
-            if (touchStartY - touchEndY > 25 && !curtainDismissed) {
+            if (touchStartY - touchEndY > 20 && !curtainDismissed) {
                 triggerCurtainScrollReveal();
             }
         }, { passive: true });
 
 
-        // --- 2. CALM, WIDE, SLOW-DISSOLVING SYMBOL TRAIL & WAVE CANVAS ---
+        // --- 2. EXACT OPENAI CODEX INTERACTIVE MATRIX GRID & WAVE ENGINE ---
         const canvas = document.getElementById('interactive-canvas');
         const ctx = canvas.getContext('2d');
 
         let width = canvas.width = window.innerWidth;
         let height = canvas.height = window.innerHeight;
 
+        const SPACING = 24; // Precision grid spacing
+        let grid = [];
+
+        function initGrid() {
+            grid = [];
+            const cols = Math.ceil(width / SPACING) + 1;
+            const rows = Math.ceil(height / SPACING) + 1;
+            for (let r = 0; r < rows; r++) {
+                for (let c = 0; c < cols; c++) {
+                    grid.push({
+                        x: c * SPACING,
+                        y: r * SPACING,
+                        baseChar: '>', // Signature Codex symbol
+                        opacity: 0.045, // Calm ambient grid presence
+                        targetOpacity: 0.045,
+                        scale: 1,
+                        targetScale: 1
+                    });
+                }
+            }
+        }
+        initGrid();
+
         window.addEventListener('resize', () => {
             width = canvas.width = window.innerWidth;
             height = canvas.height = window.innerHeight;
+            initGrid();
         });
 
-        const symbols = ['>', '_', '+', '*', '~', '^', '§', '©', '[', ']', '//', ':', ';', '='];
-        const particles = [];
-        const ripples = [];
-
-        // Wide, Slow Floating Cursor Trail
-        let lastMoveTime = 0;
+        let mouse = { x: -1000, y: -1000 };
         window.addEventListener('mousemove', (e) => {
-            const now = Date.now();
-            if (now - lastMoveTime > 35) { // controlled, serene spawn rate
-                lastMoveTime = now;
-                particles.push({
-                    x: e.clientX + (Math.random() * 50 - 25), // wide dispersion
-                    y: e.clientY + (Math.random() * 50 - 25),
-                    vx: (Math.random() - 0.5) * 0.4, // gentle drift
-                    vy: (Math.random() - 0.5) * 0.4,
-                    symbol: symbols[Math.floor(Math.random() * symbols.length)],
-                    opacity: 0.35,
-                    size: 9 + Math.random() * 2.5, // small, refined symbol size
-                    life: 1.0,
-                    decay: 0.0055 // lingering, slow dissolve
-                });
-            }
+            mouse.x = e.clientX;
+            mouse.y = e.clientY;
         });
 
-        // Gentle, Flowing Ripple Wave
+        // Click Ripple Shockwave
+        const shockwaves = [];
         window.addEventListener('click', (e) => {
             if (e.target.closest('button, input, textarea, a, .form-control, .modal-box')) return;
-
-            // Fluid ripple wave ring with long radius
-            ripples.push({
+            shockwaves.push({
                 x: e.clientX,
                 y: e.clientY,
-                radius: 10,
-                maxRadius: 360, // wide reach
-                opacity: 0.28,
-                speed: 3.2
+                radius: 0,
+                maxRadius: Math.max(width, height) * 0.9,
+                speed: 18,
+                thickness: 80,
+                strength: 1.0
             });
-
-            // Soft orbital particle release
-            const waveCount = 16;
-            for (let i = 0; i < waveCount; i++) {
-                const angle = (Math.PI * 2 / waveCount) * i;
-                const speed = 0.8 + Math.random() * 1.6;
-                particles.push({
-                    x: e.clientX,
-                    y: e.clientY,
-                    vx: Math.cos(angle) * speed,
-                    vy: Math.sin(angle) * speed,
-                    symbol: symbols[Math.floor(Math.random() * symbols.length)],
-                    opacity: 0.55,
-                    size: 10,
-                    life: 1.0,
-                    decay: 0.007
-                });
-            }
         });
 
-        function renderInteractiveBackground() {
+        // Practices View Boundary Tracker for Clip-Path Canvas Rendering
+        function updatePracticesStripClip() {
+            if (currentView === 'practices') {
+                const strip = document.getElementById('practices-blue-strip');
+                if (strip) {
+                    const rect = strip.getBoundingClientRect();
+                    document.body.style.setProperty('--strip-top', `${Math.max(0, rect.top)}px`);
+                    document.body.style.setProperty('--strip-bottom', `${Math.max(0, window.innerHeight - rect.bottom)}px`);
+                }
+            }
+        }
+        document.getElementById('practices-view').addEventListener('scroll', updatePracticesStripClip, { passive: true });
+
+        // Animation Loop
+        function renderCodexGrid() {
             ctx.clearRect(0, 0, width, height);
 
-            // Render calm expanding ripple wave
-            for (let i = ripples.length - 1; i >= 0; i--) {
-                const r = ripples[i];
-                ctx.beginPath();
-                ctx.arc(r.x, r.y, r.radius, 0, Math.PI * 2);
-                ctx.strokeStyle = `rgba(255, 255, 255, ${r.opacity})`;
-                ctx.lineWidth = 1;
-                ctx.stroke();
+            ctx.font = `11px "JetBrains Mono", monospace`;
+            ctx.textAlign = "center";
+            ctx.textBaseline = "middle";
 
-                r.radius += r.speed;
-                r.opacity *= 0.978;
-
-                if (r.opacity < 0.005 || r.radius > r.maxRadius) {
-                    ripples.splice(i, 1);
+            // Update expanding shockwaves
+            for (let i = shockwaves.length - 1; i >= 0; i--) {
+                const sw = shockwaves[i];
+                sw.radius += sw.speed;
+                sw.strength *= 0.975;
+                if (sw.radius > sw.maxRadius || sw.strength < 0.01) {
+                    shockwaves.splice(i, 1);
                 }
             }
 
-            // Render tranquil symbol particles
-            ctx.fillStyle = "#FFFFFF";
+            const cursorRadius = 135;
+            const cursorRadiusSq = cursorRadius * cursorRadius;
 
-            for (let i = particles.length - 1; i >= 0; i--) {
-                const p = particles[i];
-                ctx.save();
-                ctx.globalAlpha = p.opacity * p.life;
-                ctx.font = `${p.size}px "JetBrains Mono", monospace`;
-                ctx.fillText(p.symbol, p.x, p.y);
-                ctx.restore();
+            for (let i = 0; i < grid.length; i++) {
+                const pt = grid[i];
 
-                p.x += p.vx;
-                p.y += p.vy;
-                p.life -= p.decay;
+                // Cursor Proximity calculation
+                const dx = mouse.x - pt.x;
+                const dy = mouse.y - pt.y;
+                const distSq = dx * dx + dy * dy;
 
-                if (p.life <= 0) {
-                    particles.splice(i, 1);
+                let extraOpacity = 0;
+                let extraScale = 0;
+
+                if (distSq < cursorRadiusSq) {
+                    const factor = 1 - Math.sqrt(distSq) / cursorRadius;
+                    extraOpacity = factor * 0.75;
+                    extraScale = factor * 0.35;
+                }
+
+                // Shockwave Influence
+                for (let j = 0; j < shockwaves.length; j++) {
+                    const sw = shockwaves[j];
+                    const swDx = sw.x - pt.x;
+                    const swDy = sw.y - pt.y;
+                    const swDist = Math.sqrt(swDx * swDx + swDy * swDy);
+                    const waveDelta = Math.abs(swDist - sw.radius);
+
+                    if (waveDelta < sw.thickness) {
+                        const waveFactor = (1 - waveDelta / sw.thickness) * sw.strength;
+                        extraOpacity = Math.max(extraOpacity, waveFactor * 0.85);
+                        extraScale = Math.max(extraScale, waveFactor * 0.45);
+                    }
+                }
+
+                pt.targetOpacity = 0.045 + extraOpacity;
+                pt.targetScale = 1 + extraScale;
+
+                // Smooth decay
+                pt.opacity += (pt.targetOpacity - pt.opacity) * 0.12;
+                pt.scale += (pt.targetScale - pt.scale) * 0.12;
+
+                if (pt.opacity > 0.04) {
+                    ctx.save();
+                    ctx.fillStyle = `rgba(255, 255, 255, ${pt.opacity})`;
+                    ctx.translate(pt.x, pt.y);
+                    ctx.scale(pt.scale, pt.scale);
+                    ctx.fillText(pt.baseChar, 0, 0);
+                    ctx.restore();
                 }
             }
 
-            requestAnimationFrame(renderInteractiveBackground);
+            requestAnimationFrame(renderCodexGrid);
         }
-        renderInteractiveBackground();
+        renderCodexGrid();
 
 
-        // --- 3. TIMELINE & ACCORDIONS CONTROLLER ---
+        // --- 3. TIMELINE ACCORDIONS & NAVIGATION ROUTER ---
         document.querySelectorAll('.essay-trigger.toggle-btn').forEach(button => {
             button.addEventListener('click', () => {
                 const collapsible = button.nextElementSibling;
@@ -1708,7 +1750,7 @@ The Bar Council of India does not permit advertisement or solicitation by advoca
             });
         });
 
-        // Blue Strip Accordion Toggles
+        // Blue Strip Practice Areas Accordions
         document.querySelectorAll('.blue-toggle').forEach(button => {
             button.addEventListener('click', (e) => {
                 e.stopPropagation();
@@ -1718,7 +1760,6 @@ The Bar Council of India does not permit advertisement or solicitation by advoca
             });
         });
 
-        // Smart Header Navigation
         function handleBrandClick() {
             triggerCurtainScrollReveal();
             if (currentView === 'about') {
@@ -1728,7 +1769,6 @@ The Bar Council of India does not permit advertisement or solicitation by advoca
             }
         }
 
-        // Multi-View Navigation Router
         function switchView(targetView, updateHash = true) {
             triggerCurtainScrollReveal();
             currentView = targetView;
@@ -1756,15 +1796,19 @@ The Bar Council of India does not permit advertisement or solicitation by advoca
             views[targetView].scrollTop = 0;
 
             if (targetView === 'entries') {
-                body.classList.remove('inverted');
+                body.classList.remove('inverted', 'practices-active');
                 if (footerLogo) footerLogo.src = 'footer-logo.png';
+            } else if (targetView === 'practices') {
+                body.classList.add('inverted', 'practices-active');
+                if (footerLogo) footerLogo.src = 'footer-logo-blue.png';
+                setTimeout(updatePracticesStripClip, 50);
             } else {
+                body.classList.remove('practices-active');
                 body.classList.add('inverted');
                 if (footerLogo) footerLogo.src = 'footer-logo-blue.png';
             }
         }
 
-        // Handle Hash Routing
         function handleHashChange() {
             const rawHash = window.location.hash.replace('#', '');
             if (!rawHash) {
@@ -1794,23 +1838,96 @@ The Bar Council of India does not permit advertisement or solicitation by advoca
 
         window.addEventListener('hashchange', handleHashChange);
 
-        // BCI Disclaimer Logic
         function acceptDisclaimer() {
-            bciModal.classList.add('hidden');
+            document.getElementById('bci-modal').classList.add('hidden');
             document.body.classList.remove('modal-open');
             sessionStorage.setItem('bci_accepted', 'true');
         }
 
         window.addEventListener('DOMContentLoaded', () => {
-            // Check direct hash entry (e.g. from shared link)
-            const rawHash = window.location.hash.replace('#', '');
-            if (rawHash) {
-                triggerCurtainScrollReveal();
-                handleHashChange();
+            if (sessionStorage.getItem('bci_accepted') === 'true') {
+                document.getElementById('bci-modal').classList.add('hidden');
+                document.body.classList.remove('modal-open');
+            }
+            handleHashChange();
+
+            const contactModal = document.getElementById('contact-modal');
+            contactModal.addEventListener('click', (e) => {
+                if (e.target === contactModal) {
+                    toggleContactModal(false);
+                }
+            });
+
+            // Modal Form Submission
+            const modalForm = document.getElementById('modal-form');
+            const modalSubmitBtn = document.getElementById('modal-submit-btn');
+            if (modalForm) {
+                modalForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    modalSubmitBtn.textContent = 'SENDING...';
+                    modalSubmitBtn.disabled = true;
+
+                    fetch(modalForm.action, {
+                        method: 'POST',
+                        body: new FormData(modalForm),
+                        headers: { 'Accept': 'application/json' }
+                    }).then(response => {
+                        if (response.ok) {
+                            modalSubmitBtn.textContent = 'SENT';
+                            modalSubmitBtn.classList.add('submitted');
+                            modalForm.reset();
+                            setTimeout(() => {
+                                toggleContactModal(false);
+                                modalSubmitBtn.textContent = 'SEND MESSAGE';
+                                modalSubmitBtn.classList.remove('submitted');
+                                modalSubmitBtn.disabled = false;
+                            }, 1800);
+                        } else {
+                            modalSubmitBtn.textContent = 'ERROR — TRY AGAIN';
+                            modalSubmitBtn.disabled = false;
+                        }
+                    }).catch(() => {
+                        modalSubmitBtn.textContent = 'ERROR — TRY AGAIN';
+                        modalSubmitBtn.disabled = false;
+                    });
+                });
+            }
+
+            // Inline Contact Page Form Submission
+            const contactPageForm = document.getElementById('contact-page-form');
+            const contactSubmitBtn = document.getElementById('contact-submit-btn');
+            if (contactPageForm) {
+                contactPageForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    contactSubmitBtn.textContent = 'SENDING...';
+                    contactSubmitBtn.disabled = true;
+
+                    fetch(contactPageForm.action, {
+                        method: 'POST',
+                        body: new FormData(contactPageForm),
+                        headers: { 'Accept': 'application/json' }
+                    }).then(response => {
+                        if (response.ok) {
+                            contactSubmitBtn.textContent = 'SENT';
+                            contactSubmitBtn.classList.add('submitted');
+                            contactPageForm.reset();
+                            setTimeout(() => {
+                                contactSubmitBtn.textContent = 'SEND MESSAGE';
+                                contactSubmitBtn.classList.remove('submitted');
+                                contactSubmitBtn.disabled = false;
+                            }, 3000);
+                        } else {
+                            contactSubmitBtn.textContent = 'ERROR — TRY AGAIN';
+                            contactSubmitBtn.disabled = false;
+                        }
+                    }).catch(() => {
+                        contactSubmitBtn.textContent = 'ERROR — TRY AGAIN';
+                        contactSubmitBtn.disabled = false;
+                    });
+                });
             }
         });
 
-        // Contact Modal Logic
         function toggleContactModal(show) {
             const modal = document.getElementById('contact-modal');
             if (show) {
@@ -1818,87 +1935,10 @@ The Bar Council of India does not permit advertisement or solicitation by advoca
                 document.body.classList.add('modal-open');
             } else {
                 modal.classList.add('hidden');
-                if (sessionStorage.getItem('bci_accepted') === 'true' && curtainDismissed) {
+                if (sessionStorage.getItem('bci_accepted') === 'true') {
                     document.body.classList.remove('modal-open');
                 }
             }
-        }
-
-        // Modal Click-Outside-To-Close Listener
-        const contactModal = document.getElementById('contact-modal');
-        contactModal.addEventListener('click', (e) => {
-            if (e.target === contactModal) {
-                toggleContactModal(false);
-            }
-        });
-
-        // AJAX Formspree Submissions (Modal)
-        const modalForm = document.getElementById('modal-form');
-        const modalSubmitBtn = document.getElementById('modal-submit-btn');
-        if (modalForm) {
-            modalForm.addEventListener('submit', function(e) {
-                e.preventDefault();
-                modalSubmitBtn.textContent = 'SENDING...';
-                modalSubmitBtn.disabled = true;
-
-                fetch(modalForm.action, {
-                    method: 'POST',
-                    body: new FormData(modalForm),
-                    headers: { 'Accept': 'application/json' }
-                }).then(response => {
-                    if (response.ok) {
-                        modalSubmitBtn.textContent = 'SENT';
-                        modalSubmitBtn.classList.add('submitted');
-                        modalForm.reset();
-                        setTimeout(() => {
-                            toggleContactModal(false);
-                            modalSubmitBtn.textContent = 'SEND MESSAGE';
-                            modalSubmitBtn.classList.remove('submitted');
-                            modalSubmitBtn.disabled = false;
-                        }, 1800);
-                    } else {
-                        modalSubmitBtn.textContent = 'ERROR — TRY AGAIN';
-                        modalSubmitBtn.disabled = false;
-                    }
-                }).catch(error => {
-                    modalSubmitBtn.textContent = 'ERROR — TRY AGAIN';
-                    modalSubmitBtn.disabled = false;
-                });
-            });
-        }
-
-        // AJAX Formspree Submissions (Inline Contact Page)
-        const contactPageForm = document.getElementById('contact-page-form');
-        const contactSubmitBtn = document.getElementById('contact-submit-btn');
-        if (contactPageForm) {
-            contactPageForm.addEventListener('submit', function(e) {
-                e.preventDefault();
-                contactSubmitBtn.textContent = 'SENDING...';
-                contactSubmitBtn.disabled = true;
-
-                fetch(contactPageForm.action, {
-                    method: 'POST',
-                    body: new FormData(contactPageForm),
-                    headers: { 'Accept': 'application/json' }
-                }).then(response => {
-                    if (response.ok) {
-                        contactSubmitBtn.textContent = 'SENT';
-                        contactSubmitBtn.classList.add('submitted');
-                        contactPageForm.reset();
-                        setTimeout(() => {
-                            contactSubmitBtn.textContent = 'SEND MESSAGE';
-                            contactSubmitBtn.classList.remove('submitted');
-                            contactSubmitBtn.disabled = false;
-                        }, 3000);
-                    } else {
-                        contactSubmitBtn.textContent = 'ERROR — TRY AGAIN';
-                        contactSubmitBtn.disabled = false;
-                    }
-                }).catch(error => {
-                    contactSubmitBtn.textContent = 'ERROR — TRY AGAIN';
-                    contactSubmitBtn.disabled = false;
-                });
-            });
         }
     </script>
 

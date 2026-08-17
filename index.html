@@ -102,164 +102,6 @@
             transition: background-color 0.8s cubic-bezier(0.25, 1, 0.5, 1), color 0.8s cubic-bezier(0.25, 1, 0.5, 1);
         }
 
-        /* --- Fullscreen Interactive Codex Grid Canvas --- */
-        #interactive-canvas {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            pointer-events: none;
-            z-index: 1;
-            opacity: 1;
-            transition: opacity 0.6s ease;
-        }
-
-        body.inverted #interactive-canvas {
-            opacity: 0;
-        }
-
-        body.inverted.practices-active #interactive-canvas {
-            opacity: 1;
-            clip-path: inset(var(--strip-top, 100vh) 0px var(--strip-bottom, 0px) 0px);
-        }
-
-        /* --- Hero Curtain Screen --- */
-        #hero-curtain {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            background-color: #1400FF;
-            color: #FFFFFF;
-            z-index: 95;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 50px 30px;
-            transition: transform 1.3s cubic-bezier(0.76, 0, 0.24, 1);
-            will-change: transform;
-            cursor: pointer;
-            overflow: hidden;
-        }
-
-        /* Heavy Noise Texture Isolated to Hero Curtain */
-        #hero-curtain::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            opacity: 0.26;
-            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.95' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
-            z-index: 1;
-        }
-
-        #hero-curtain.dismissed {
-            transform: translateY(-100%);
-            pointer-events: none;
-        }
-
-        .curtain-center {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-            z-index: 10;
-            position: relative;
-        }
-
-        /* Sequential Fade-in for Logo */
-        .curtain-logo-container {
-            width: 110px;
-            height: 110px;
-            margin-bottom: 45px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            position: relative;
-            opacity: 0;
-            animation: fadeInLogoSlow 2.4s 0.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-        }
-
-        .curtain-logo-img {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-        }
-
-        @keyframes fadeInLogoSlow {
-            0% {
-                opacity: 0;
-                transform: translateY(12px);
-            }
-            100% {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* Staged Text Fade-In Following the Logo */
-        .curtain-title {
-            font-size: 34px;
-            font-weight: 500;
-            letter-spacing: -0.8px;
-            line-height: 1.2;
-            margin-bottom: 22px;
-            font-family: var(--font-serif);
-            opacity: 0;
-            animation: fadeInCurtainText 2s 1.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-        }
-
-        .curtain-subtitle {
-            font-size: 13.5px;
-            font-family: var(--font-mono);
-            letter-spacing: 2px;
-            text-transform: lowercase;
-            opacity: 0;
-            color: rgba(255, 255, 255, 0.85);
-            animation: fadeInCurtainText 2s 2.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-        }
-
-        @keyframes fadeInCurtainText {
-            0% { opacity: 0; transform: translateY(12px); }
-            100% { opacity: 1; transform: translateY(0); }
-        }
-
-        /* Long, Thin Hairline Arrow on Bottom Right */
-        .curtain-bottom-arrow {
-            position: absolute;
-            bottom: 40px;
-            right: 50px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            opacity: 0;
-            animation: fadeInCurtainText 2s 2.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-            pointer-events: none;
-            z-index: 10;
-        }
-
-        .curtain-arrow-line {
-            width: 1px;
-            height: 64px;
-            background-color: rgba(255, 255, 255, 0.5);
-            position: relative;
-        }
-
-        .curtain-arrow-head {
-            width: 7px;
-            height: 7px;
-            border-right: 1px solid rgba(255, 255, 255, 0.5);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.5);
-            transform: rotate(45deg);
-            margin-top: -4px;
-        }
-
         /* --- Monospace Utility Elements --- */
         .date, 
         .nav-btn, 
@@ -979,11 +821,6 @@
             .closing-title { font-size: 26px; }
             .contact-right { text-align: left; justify-content: flex-start; padding-top: 25px; }
 
-            .curtain-bottom-arrow {
-                right: 30px;
-                bottom: 30px;
-            }
-
             footer { 
                 padding: 14px 20px 20px 20px; 
                 display: flex; 
@@ -1003,30 +840,8 @@
 </head>
 <body class="modal-open">
 
-    <!-- FULLSCREEN CODEX GRID CANVAS -->
-    <canvas id="interactive-canvas"></canvas>
-
-    <!-- CINEMATIC HERO CURTAIN ENTRY SCREEN -->
-    <div id="hero-curtain">
-        <div class="curtain-center">
-            <!-- Staged Fade-in SVG Logo -->
-            <div class="curtain-logo-container">
-                <img src="soka logo.svg" alt="SOKA Logo" class="curtain-logo-img">
-            </div>
-            
-            <div class="curtain-title">SOKA; A Legal Studio.</div>
-            <div class="curtain-subtitle">securing the culture, legally.</div>
-        </div>
-
-        <!-- Long & Light Minimalist Scroll Indicator Arrow -->
-        <div class="curtain-bottom-arrow">
-            <div class="curtain-arrow-line"></div>
-            <div class="curtain-arrow-head"></div>
-        </div>
-    </div>
-
-    <!-- BCI DISCLAIMER POP-UP MODAL (REVEALED AFTER SCROLLING CURTAIN) -->
-    <div id="bci-modal" class="modal-overlay hidden">
+    <!-- BCI DISCLAIMER POP-UP MODAL -->
+    <div id="bci-modal" class="modal-overlay">
         <div class="modal-box">
             <div class="modal-title">Disclaimer</div>
             <div class="modal-body">
@@ -1521,221 +1336,11 @@ The Bar Council of India does not permit advertisement or solicitation by advoca
         </div>
     </footer>
 
-    <!-- INTERACTIVE CODEX MATRIX & NAVIGATION ENGINE -->
+    <!-- SCRIPT LOGIC -->
     <script>
         let currentView = 'entries';
-        let curtainDismissed = false;
-        let curtainReady = false;
 
-        // Prevent accidental gesture firing on load
-        setTimeout(() => {
-            curtainReady = true;
-        }, 1200);
-
-        // --- 1. HERO CURTAIN ACCUMULATOR CONTROLLER ---
-        const curtain = document.getElementById('hero-curtain');
-        const bciModal = document.getElementById('bci-modal');
-        let scrollDeltaAccumulator = 0;
-
-        function triggerCurtainScrollReveal() {
-            if (curtainDismissed) return;
-            curtainDismissed = true;
-            curtain.classList.add('dismissed');
-
-            setTimeout(() => {
-                if (sessionStorage.getItem('bci_accepted') !== 'true') {
-                    bciModal.classList.remove('hidden');
-                    document.body.classList.add('modal-open');
-                } else {
-                    document.body.classList.remove('modal-open');
-                }
-            }, 1300);
-        }
-
-        window.addEventListener('wheel', (e) => {
-            if (curtainDismissed || !curtainReady) return;
-            if (e.deltaY > 0) {
-                scrollDeltaAccumulator += e.deltaY;
-                if (scrollDeltaAccumulator > 80) {
-                    triggerCurtainScrollReveal();
-                }
-            } else {
-                scrollDeltaAccumulator = Math.max(0, scrollDeltaAccumulator + e.deltaY);
-            }
-        }, { passive: true });
-
-        let touchStartY = 0;
-        window.addEventListener('touchstart', (e) => {
-            touchStartY = e.touches[0].clientY;
-        }, { passive: true });
-
-        window.addEventListener('touchmove', (e) => {
-            if (curtainDismissed || !curtainReady) return;
-            let touchEndY = e.touches[0].clientY;
-            if (touchStartY - touchEndY > 55) {
-                triggerCurtainScrollReveal();
-            }
-        }, { passive: true });
-
-        curtain.addEventListener('click', () => {
-            if (curtainReady) {
-                triggerCurtainScrollReveal();
-            }
-        });
-
-
-        // --- 2. EXACT CODEX GRID ILLUMINATION & SHOCKWAVE ENGINE ---
-        const canvas = document.getElementById('interactive-canvas');
-        const ctx = canvas.getContext('2d');
-
-        let width = canvas.width = window.innerWidth;
-        let height = canvas.height = window.innerHeight;
-
-        const SPACING = 18; // Precise 18px lattice spacing matching Codex
-        const GLYPHS = ['>', '+', '-', '~', '*', 'x', ':', '_', '^', '|', '/', '{', '}', ';', '=', '%', '0', '1', '·'];
-        let grid = [];
-
-        function initGrid() {
-            grid = [];
-            const cols = Math.ceil(width / SPACING) + 1;
-            const rows = Math.ceil(height / SPACING) + 1;
-            for (let r = 0; r < rows; r++) {
-                for (let c = 0; c < cols; c++) {
-                    grid.push({
-                        x: c * SPACING,
-                        y: r * SPACING,
-                        char: GLYPHS[Math.floor(Math.random() * GLYPHS.length)],
-                        intensity: 0.0
-                    });
-                }
-            }
-        }
-        initGrid();
-
-        window.addEventListener('resize', () => {
-            width = canvas.width = window.innerWidth;
-            height = canvas.height = window.innerHeight;
-            initGrid();
-        });
-
-        // Mouse Motion Interception (Interpolated Stroke Path)
-        let lastMouse = { x: -1000, y: -1000 };
-        window.addEventListener('mousemove', (e) => {
-            if (lastMouse.x === -1000) {
-                lastMouse = { x: e.clientX, y: e.clientY };
-                return;
-            }
-
-            const dx = e.clientX - lastMouse.x;
-            const dy = e.clientY - lastMouse.y;
-            const dist = Math.hypot(dx, dy);
-            const steps = Math.max(1, Math.floor(dist / 4));
-
-            for (let s = 0; s <= steps; s++) {
-                const mx = lastMouse.x + dx * (s / steps);
-                const my = lastMouse.y + dy * (s / steps);
-                const radius = 38;
-                const radiusSq = radius * radius;
-
-                for (let i = 0; i < grid.length; i++) {
-                    const pt = grid[i];
-                    const pdx = mx - pt.x;
-                    const pdy = my - pt.y;
-                    const pdistSq = pdx * pdx + pdy * pdy;
-
-                    if (pdistSq < radiusSq) {
-                        const falloff = 1 - Math.sqrt(pdistSq) / radius;
-                        if (falloff * 0.95 > pt.intensity) {
-                            pt.intensity = falloff * 0.95;
-                            if (Math.random() < 0.12) {
-                                pt.char = GLYPHS[Math.floor(Math.random() * GLYPHS.length)];
-                            }
-                        }
-                    }
-                }
-            }
-
-            lastMouse = { x: e.clientX, y: e.clientY };
-        });
-
-        // Expanding Circular Ripple Shockwave
-        const shockwaves = [];
-        window.addEventListener('click', (e) => {
-            if (e.target.closest('button, input, textarea, a, .form-control, .modal-box')) return;
-
-            shockwaves.push({
-                x: e.clientX,
-                y: e.clientY,
-                radius: 0,
-                maxRadius: Math.max(width, height) * 0.9,
-                speed: 13,
-                thickness: 48,
-                strength: 1.0
-            });
-        });
-
-        function updatePracticesStripClip() {
-            if (currentView === 'practices') {
-                const strip = document.getElementById('practices-blue-strip');
-                if (strip) {
-                    const rect = strip.getBoundingClientRect();
-                    document.body.style.setProperty('--strip-top', `${Math.max(0, rect.top)}px`);
-                    document.body.style.setProperty('--strip-bottom', `${Math.max(0, window.innerHeight - rect.bottom)}px`);
-                }
-            }
-        }
-        document.getElementById('practices-view').addEventListener('scroll', updatePracticesStripClip, { passive: true });
-
-        // Animation Loop
-        function renderCodexCanvas() {
-            ctx.clearRect(0, 0, width, height);
-            ctx.font = `11.5px "JetBrains Mono", monospace`;
-            ctx.textAlign = "center";
-            ctx.textBaseline = "middle";
-
-            // Propagate Shockwaves
-            for (let i = shockwaves.length - 1; i >= 0; i--) {
-                const sw = shockwaves[i];
-                sw.radius += sw.speed;
-                sw.strength *= 0.975;
-
-                for (let k = 0; k < grid.length; k++) {
-                    const pt = grid[k];
-                    const dist = Math.hypot(pt.x - sw.x, pt.y - sw.y);
-                    const diff = Math.abs(dist - sw.radius);
-
-                    if (diff < sw.thickness) {
-                        const waveVal = (1 - diff / sw.thickness) * sw.strength * 0.95;
-                        if (waveVal > pt.intensity) {
-                            pt.intensity = waveVal;
-                        }
-                    }
-                }
-
-                if (sw.radius > sw.maxRadius || sw.strength < 0.01) {
-                    shockwaves.splice(i, 1);
-                }
-            }
-
-            // Draw Activated Nodes and Decay Smoothly
-            for (let i = 0; i < grid.length; i++) {
-                const pt = grid[i];
-
-                if (pt.intensity > 0.008) {
-                    ctx.fillStyle = `rgba(255, 255, 255, ${pt.intensity})`;
-                    ctx.fillText(pt.char, pt.x, pt.y);
-                    pt.intensity *= 0.962; // Smooth ~1.5s fade
-                } else {
-                    pt.intensity = 0;
-                }
-            }
-
-            requestAnimationFrame(renderCodexCanvas);
-        }
-        renderCodexCanvas();
-
-
-        // --- 3. TIMELINE ACCORDIONS & ROUTING ---
+        // Toggle Main Entry Accordions with Hash Updates
         document.querySelectorAll('.essay-trigger.toggle-btn').forEach(button => {
             button.addEventListener('click', () => {
                 const collapsible = button.nextElementSibling;
@@ -1752,6 +1357,7 @@ The Bar Council of India does not permit advertisement or solicitation by advoca
             });
         });
 
+        // Practices Media Toggles [ + ]
         document.querySelectorAll('.practice-toggle').forEach(button => {
             button.addEventListener('click', () => {
                 const accordion = button.nextElementSibling;
@@ -1765,6 +1371,7 @@ The Bar Council of India does not permit advertisement or solicitation by advoca
             });
         });
 
+        // Blue Strip Practice Areas Accordions
         document.querySelectorAll('.blue-toggle').forEach(button => {
             button.addEventListener('click', (e) => {
                 e.stopPropagation();
@@ -1775,7 +1382,6 @@ The Bar Council of India does not permit advertisement or solicitation by advoca
         });
 
         function handleBrandClick() {
-            triggerCurtainScrollReveal();
             if (currentView === 'about') {
                 switchView('entries');
             } else {
@@ -1784,7 +1390,6 @@ The Bar Council of India does not permit advertisement or solicitation by advoca
         }
 
         function switchView(targetView, updateHash = true) {
-            triggerCurtainScrollReveal();
             currentView = targetView;
             const body = document.body;
             const views = {
@@ -1810,14 +1415,9 @@ The Bar Council of India does not permit advertisement or solicitation by advoca
             views[targetView].scrollTop = 0;
 
             if (targetView === 'entries') {
-                body.classList.remove('inverted', 'practices-active');
+                body.classList.remove('inverted');
                 if (footerLogo) footerLogo.src = 'footer-logo.png';
-            } else if (targetView === 'practices') {
-                body.classList.add('inverted', 'practices-active');
-                if (footerLogo) footerLogo.src = 'footer-logo-blue.png';
-                setTimeout(updatePracticesStripClip, 50);
             } else {
-                body.classList.remove('practices-active');
                 body.classList.add('inverted');
                 if (footerLogo) footerLogo.src = 'footer-logo-blue.png';
             }
@@ -1829,8 +1429,6 @@ The Bar Council of India does not permit advertisement or solicitation by advoca
                 switchView('entries', false);
                 return;
             }
-
-            triggerCurtainScrollReveal();
 
             if (['about', 'practices', 'contact'].includes(rawHash)) {
                 switchView(rawHash, false);
@@ -1863,12 +1461,7 @@ The Bar Council of India does not permit advertisement or solicitation by advoca
                 document.getElementById('bci-modal').classList.add('hidden');
                 document.body.classList.remove('modal-open');
             }
-            
-            const rawHash = window.location.hash.replace('#', '');
-            if (rawHash) {
-                triggerCurtainScrollReveal();
-                handleHashChange();
-            }
+            handleHashChange();
 
             const contactModal = document.getElementById('contact-modal');
             contactModal.addEventListener('click', (e) => {
@@ -1877,7 +1470,7 @@ The Bar Council of India does not permit advertisement or solicitation by advoca
                 }
             });
 
-            // Modal Form Submission
+            // Modal Formspree Submission
             const modalForm = document.getElementById('modal-form');
             const modalSubmitBtn = document.getElementById('modal-submit-btn');
             if (modalForm) {
@@ -1912,7 +1505,7 @@ The Bar Council of India does not permit advertisement or solicitation by advoca
                 });
             }
 
-            // Inline Contact Page Form Submission
+            // Inline Contact Formspree Submission
             const contactPageForm = document.getElementById('contact-page-form');
             const contactSubmitBtn = document.getElementById('contact-submit-btn');
             if (contactPageForm) {

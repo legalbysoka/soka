@@ -102,7 +102,7 @@
             transition: background-color 0.8s cubic-bezier(0.25, 1, 0.5, 1), color 0.8s cubic-bezier(0.25, 1, 0.5, 1);
         }
 
-        /* --- Fullscreen Interactive Codex Canvas --- */
+        /* --- Fullscreen Interactive Codex Particle Trail Canvas --- */
         #interactive-canvas {
             position: fixed;
             top: 0;
@@ -124,20 +124,7 @@
             clip-path: inset(var(--strip-top, 100vh) 0px var(--strip-bottom, 0px) 0px);
         }
 
-        /* --- Visible Film Grain Noise Texture --- */
-        .noise-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            pointer-events: none;
-            z-index: 2;
-            opacity: 0.085;
-            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
-        }
-
-        /* --- Hero Curtain Screen --- */
+        /* --- Hero Curtain Screen (Noise Applied Exclusively Here) --- */
         #hero-curtain {
             position: fixed;
             top: 0;
@@ -155,6 +142,21 @@
             transition: transform 1.3s cubic-bezier(0.76, 0, 0.24, 1);
             will-change: transform;
             cursor: pointer;
+            overflow: hidden;
+        }
+
+        /* Dense Grain Noise Overlay Isolated to Hero Curtain */
+        #hero-curtain::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            opacity: 0.16;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.95' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+            z-index: 1;
         }
 
         #hero-curtain.dismissed {
@@ -168,8 +170,10 @@
             align-items: center;
             text-align: center;
             z-index: 10;
+            position: relative;
         }
 
+        /* Piece-by-piece Vector SVG Construction Animation */
         .curtain-logo-container {
             width: 110px;
             height: 110px;
@@ -177,33 +181,40 @@
             display: flex;
             justify-content: center;
             align-items: center;
+            position: relative;
         }
 
         .curtain-logo-img {
             width: 100%;
             height: 100%;
             object-fit: contain;
-            filter: drop-shadow(0px 0px 14px rgba(255, 255, 255, 0.35));
-            animation: assembleLogoPiece 3.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            animation: assembleLogoSlices 3.4s cubic-bezier(0.2, 0.9, 0.3, 1) forwards;
         }
 
-        @keyframes assembleLogoPiece {
+        @keyframes assembleLogoSlices {
             0% {
                 opacity: 0;
-                transform: scale(0.65) translateY(24px);
-                filter: blur(12px) brightness(2);
-                clip-path: polygon(50% 50%, 50% 50%, 50% 50%, 50% 50%);
+                transform: scale(0.85);
+                clip-path: polygon(0 0, 0 0, 0 100%, 0% 100%);
             }
-            40% {
+            25% {
+                opacity: 0.7;
+                clip-path: polygon(0 0, 50% 0, 50% 100%, 0 100%);
+            }
+            50% {
                 opacity: 0.85;
-                filter: blur(3px) brightness(1.3);
-                clip-path: polygon(0% 0%, 100% 0%, 100% 50%, 0% 50%);
+                clip-path: polygon(0 0, 100% 0, 100% 50%, 0 50%);
+            }
+            75% {
+                opacity: 0.95;
+                clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+                filter: drop-shadow(0 0 18px rgba(255, 255, 255, 0.6));
             }
             100% {
                 opacity: 1;
-                transform: scale(1) translateY(0);
-                filter: blur(0px) brightness(1);
-                clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
+                transform: scale(1);
+                clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+                filter: drop-shadow(0 0 0px transparent);
             }
         }
 
@@ -1006,16 +1017,13 @@
 </head>
 <body class="modal-open">
 
-    <!-- VISIBLE FILM NOISE GRAIN TEXTURE -->
-    <div class="noise-overlay"></div>
-
-    <!-- FULLSCREEN CODEX-STYLE DENSE MATRIX CANVAS -->
+    <!-- FULLSCREEN CODEX PARTICLE TRAIL & WAVE CANVAS -->
     <canvas id="interactive-canvas"></canvas>
 
     <!-- CINEMATIC HERO CURTAIN ENTRY SCREEN -->
     <div id="hero-curtain">
         <div class="curtain-center">
-            <!-- Custom Animated SOKA SVG Logo -->
+            <!-- Piece-by-Piece Animated SVG Logo -->
             <div class="curtain-logo-container">
                 <img src="soka logo.svg" alt="SOKA Logo" class="curtain-logo-img">
             </div>
@@ -1274,12 +1282,10 @@ The Bar Council of India does not permit advertisement or solicitation by advoca
     <div id="about-view" class="page-view hidden-view">
         <div class="about-content">
             <div class="about-text-container">
-                <!-- Return Button at Top -->
                 <div class="about-top-return">
                     <span class="learn-more-link" onclick="switchView('entries')">← return</span>
                 </div>
 
-                <!-- Very Large (60px) Bold Title in Two Lines -->
                 <h1 class="about-title-large">
                     The legal infrastructure<br>creative work was never given.
                 </h1>
@@ -1554,7 +1560,7 @@ The Bar Council of India does not permit advertisement or solicitation by advoca
             }, 1300);
         }
 
-        // Require positive, deliberate scroll momentum (> 60px) to prevent trackpad drift
+        // Positive, deliberate scroll momentum threshold (> 60px) prevents trackpad auto-fire
         window.addEventListener('wheel', (e) => {
             if (curtainDismissed) return;
             if (e.deltaY > 0) {
@@ -1567,7 +1573,7 @@ The Bar Council of India does not permit advertisement or solicitation by advoca
             }
         }, { passive: true });
 
-        // Touch gestures on mobile
+        // Touch swipe on mobile
         let touchStartY = 0;
         window.addEventListener('touchstart', (e) => {
             touchStartY = e.touches[0].clientY;
@@ -1581,76 +1587,61 @@ The Bar Council of India does not permit advertisement or solicitation by advoca
             }
         }, { passive: true });
 
-        // Direct click on hero curtain
         curtain.addEventListener('click', triggerCurtainScrollReveal);
 
 
-        // --- 2. EXACT OPENAI CODEX DENSE MATRIX GRID ENGINE ---
+        // --- 2. DYNAMIC CODEX PARTICLE TRAIL & PROPAGATING SHOCKWAVE ENGINE ---
         const canvas = document.getElementById('interactive-canvas');
         const ctx = canvas.getContext('2d');
 
         let width = canvas.width = window.innerWidth;
         let height = canvas.height = window.innerHeight;
 
-        const SPACING = 13; // Tight, dense grid matrix (13px)
-        const GLYPHS = ['>', '+', '·', '~', '*', 'x', ':', '-', '_', '^', '|'];
-        let grid = [];
-
-        function initGrid() {
-            grid = [];
-            const cols = Math.ceil(width / SPACING) + 1;
-            const rows = Math.ceil(height / SPACING) + 1;
-            for (let r = 0; r < rows; r++) {
-                for (let c = 0; c < cols; c++) {
-                    grid.push({
-                        x: c * SPACING,
-                        y: r * SPACING,
-                        char: '>',
-                        baseChar: '>',
-                        opacity: 0.035,
-                        targetOpacity: 0.035,
-                        scale: 1,
-                        targetScale: 1
-                    });
-                }
-            }
-        }
-        initGrid();
-
         window.addEventListener('resize', () => {
             width = canvas.width = window.innerWidth;
             height = canvas.height = window.innerHeight;
-            initGrid();
         });
 
-        // Fluid trailing path memory
-        let mouse = { x: -1000, y: -1000 };
-        const trailHistory = [];
+        const GLYPHS = ['>', '+', '·', '~', '*', 'x', ':', '-', '_', '^', '|'];
+        const trailParticles = [];
+        const shockwaveRings = [];
 
+        // High-density dynamic cursor trail emission
+        let lastMousePos = { x: -1000, y: -1000 };
         window.addEventListener('mousemove', (e) => {
-            mouse.x = e.clientX;
-            mouse.y = e.clientY;
-            trailHistory.push({
-                x: e.clientX,
-                y: e.clientY,
-                life: 1.0
-            });
-            if (trailHistory.length > 35) {
-                trailHistory.shift();
+            const dist = Math.hypot(e.clientX - lastMousePos.x, e.clientY - lastMousePos.y);
+            if (dist > 4) { // Tight spacing along mouse motion vector
+                const steps = Math.min(Math.floor(dist / 3), 6);
+                for (let s = 0; s <= steps; s++) {
+                    const interX = lastMousePos.x + (e.clientX - lastMousePos.x) * (s / steps);
+                    const interY = lastMousePos.y + (e.clientY - lastMousePos.y) * (s / steps);
+
+                    trailParticles.push({
+                        x: interX + (Math.random() * 18 - 9), // Tight cluster
+                        y: interY + (Math.random() * 18 - 9),
+                        vx: (Math.random() - 0.5) * 0.35,
+                        vy: (Math.random() - 0.5) * 0.35,
+                        char: GLYPHS[Math.floor(Math.random() * GLYPHS.length)],
+                        opacity: 0.85,
+                        size: 7.5 + Math.random() * 1.5, // Small 7.5px–9px glyphs
+                        life: 1.0,
+                        decay: 0.016 + Math.random() * 0.012
+                    });
+                }
+                lastMousePos = { x: e.clientX, y: e.clientY };
             }
         });
 
-        // Tight concentric shockwaves
-        const shockwaves = [];
+        // Click Propagating Particle Shockwave Wavefront
         window.addEventListener('click', (e) => {
             if (e.target.closest('button, input, textarea, a, .form-control, .modal-box')) return;
-            shockwaves.push({
+
+            shockwaveRings.push({
                 x: e.clientX,
                 y: e.clientY,
-                radius: 0,
-                maxRadius: Math.max(width, height) * 0.85,
-                speed: 15,
-                thickness: 35, // Tight, concentrated wave ring
+                radius: 4,
+                maxRadius: Math.max(width, height) * 0.75,
+                speed: 11,
                 strength: 1.0
             });
         });
@@ -1668,112 +1659,66 @@ The Bar Council of India does not permit advertisement or solicitation by advoca
         document.getElementById('practices-view').addEventListener('scroll', updatePracticesStripClip, { passive: true });
 
         // Animation Loop
-        function renderCodexGrid() {
+        function renderCodexCanvas() {
             ctx.clearRect(0, 0, width, height);
-
-            ctx.font = `8px "JetBrains Mono", monospace`; // Small, refined 8px symbols
             ctx.textAlign = "center";
             ctx.textBaseline = "middle";
 
-            // Decay trail history
-            for (let i = trailHistory.length - 1; i >= 0; i--) {
-                trailHistory[i].life -= 0.025;
-                if (trailHistory[i].life <= 0) {
-                    trailHistory.splice(i, 1);
-                }
-            }
-
-            // Update expanding shockwaves
-            for (let i = shockwaves.length - 1; i >= 0; i--) {
-                const sw = shockwaves[i];
+            // Process Expanding Shockwave Wavefronts
+            for (let i = shockwaveRings.length - 1; i >= 0; i--) {
+                const sw = shockwaveRings[i];
                 sw.radius += sw.speed;
                 sw.strength *= 0.965;
-                if (sw.radius > sw.maxRadius || sw.strength < 0.01) {
-                    shockwaves.splice(i, 1);
-                }
-            }
 
-            const cursorRadius = 110;
-            const cursorRadiusSq = cursorRadius * cursorRadius;
+                // Spawn a dense ring of particles along the wave boundary
+                const count = Math.floor(sw.radius * 0.22);
+                for (let k = 0; k < count; k++) {
+                    const angle = (Math.PI * 2 / count) * k;
+                    const px = sw.x + Math.cos(angle) * sw.radius;
+                    const py = sw.y + Math.sin(angle) * sw.radius;
 
-            for (let i = 0; i < grid.length; i++) {
-                const pt = grid[i];
-                let extraOpacity = 0;
-                let extraScale = 0;
-                let shouldMorph = false;
-
-                // Direct Cursor Proximity
-                const dx = mouse.x - pt.x;
-                const dy = mouse.y - pt.y;
-                const distSq = dx * dx + dy * dy;
-
-                if (distSq < cursorRadiusSq) {
-                    const factor = 1 - Math.sqrt(distSq) / cursorRadius;
-                    extraOpacity = factor * 0.82;
-                    extraScale = factor * 0.35;
-                    shouldMorph = true;
-                }
-
-                // Trailing Ribbon Wake Influence
-                for (let t = 0; t < trailHistory.length; t++) {
-                    const tr = trailHistory[t];
-                    const tdx = tr.x - pt.x;
-                    const tdy = tr.y - pt.y;
-                    const tdistSq = tdx * tdx + tdy * tdy;
-                    if (tdistSq < 4900) { // 70px trail wake radius
-                        const tfactor = (1 - Math.sqrt(tdistSq) / 70) * tr.life;
-                        if (tfactor * 0.5 > extraOpacity) {
-                            extraOpacity = tfactor * 0.5;
-                            extraScale = tfactor * 0.2;
-                            shouldMorph = true;
-                        }
+                    if (px >= 0 && px <= width && py >= 0 && py <= height && Math.random() < 0.35) {
+                        trailParticles.push({
+                            x: px,
+                            y: py,
+                            vx: Math.cos(angle) * 0.4,
+                            vy: Math.sin(angle) * 0.4,
+                            char: GLYPHS[Math.floor(Math.random() * GLYPHS.length)],
+                            opacity: sw.strength * 0.75,
+                            size: 8,
+                            life: 1.0,
+                            decay: 0.04
+                        });
                     }
                 }
 
-                // Shockwave Interaction
-                for (let j = 0; j < shockwaves.length; j++) {
-                    const sw = shockwaves[j];
-                    const swDx = sw.x - pt.x;
-                    const swDy = sw.y - pt.y;
-                    const swDist = Math.sqrt(swDx * swDx + swDy * swDy);
-                    const waveDelta = Math.abs(swDist - sw.radius);
-
-                    if (waveDelta < sw.thickness) {
-                        const waveFactor = (1 - waveDelta / sw.thickness) * sw.strength;
-                        if (waveFactor * 0.9 > extraOpacity) {
-                            extraOpacity = waveFactor * 0.9;
-                            extraScale = waveFactor * 0.45;
-                            shouldMorph = true;
-                        }
-                    }
-                }
-
-                // Dynamic glyph morphing on excitation
-                if (shouldMorph && Math.random() < 0.08) {
-                    pt.char = GLYPHS[Math.floor(Math.random() * GLYPHS.length)];
-                } else if (!shouldMorph && pt.opacity < 0.08) {
-                    pt.char = pt.baseChar;
-                }
-
-                pt.targetOpacity = 0.035 + extraOpacity;
-                pt.targetScale = 1 + extraScale;
-
-                pt.opacity += (pt.targetOpacity - pt.opacity) * 0.15;
-                pt.scale += (pt.targetScale - pt.scale) * 0.15;
-
-                if (pt.opacity > 0.03) {
-                    ctx.save();
-                    ctx.fillStyle = `rgba(255, 255, 255, ${pt.opacity})`;
-                    ctx.translate(pt.x, pt.y);
-                    ctx.scale(pt.scale, pt.scale);
-                    ctx.fillText(pt.char, 0, 0);
-                    ctx.restore();
+                if (sw.radius > sw.maxRadius || sw.strength < 0.02) {
+                    shockwaveRings.splice(i, 1);
                 }
             }
 
-            requestAnimationFrame(renderCodexGrid);
+            // Render & Decay Trail Particles
+            for (let i = trailParticles.length - 1; i >= 0; i--) {
+                const p = trailParticles[i];
+                p.x += p.vx;
+                p.y += p.vy;
+                p.life -= p.decay;
+
+                if (p.life <= 0) {
+                    trailParticles.splice(i, 1);
+                    continue;
+                }
+
+                ctx.save();
+                ctx.font = `${p.size}px "JetBrains Mono", monospace`;
+                ctx.fillStyle = `rgba(255, 255, 255, ${p.opacity * p.life})`;
+                ctx.fillText(p.char, p.x, p.y);
+                ctx.restore();
+            }
+
+            requestAnimationFrame(renderCodexCanvas);
         }
-        renderCodexGrid();
+        renderCodexCanvas();
 
 
         // --- 3. TIMELINE ACCORDIONS & ROUTING ---
@@ -1904,13 +1849,7 @@ The Bar Council of India does not permit advertisement or solicitation by advoca
                 document.getElementById('bci-modal').classList.add('hidden');
                 document.body.classList.remove('modal-open');
             }
-            
-            // Only handle deep-link if explicit hash exists
-            const rawHash = window.location.hash.replace('#', '');
-            if (rawHash) {
-                triggerCurtainScrollReveal();
-                handleHashChange();
-            }
+            handleHashChange();
 
             const contactModal = document.getElementById('contact-modal');
             contactModal.addEventListener('click', (e) => {
@@ -1919,7 +1858,7 @@ The Bar Council of India does not permit advertisement or solicitation by advoca
                 }
             });
 
-            // Modal Form Submission
+            // Modal Formspree Submission
             const modalForm = document.getElementById('modal-form');
             const modalSubmitBtn = document.getElementById('modal-submit-btn');
             if (modalForm) {
@@ -1954,7 +1893,7 @@ The Bar Council of India does not permit advertisement or solicitation by advoca
                 });
             }
 
-            // Inline Contact Page Form Submission
+            // Inline Contact Formspree Submission
             const contactPageForm = document.getElementById('contact-page-form');
             const contactSubmitBtn = document.getElementById('contact-submit-btn');
             if (contactPageForm) {

@@ -104,7 +104,7 @@
 
         .header-home-btn {
             font-family: var(--font-mono);
-            font-size: 12px;
+            font-size: 11.5px;
             text-transform: uppercase;
             letter-spacing: 0.5px;
             color: #111111;
@@ -122,7 +122,7 @@
             display: flex;
             gap: 20px;
             font-family: var(--font-mono);
-            font-size: 12px;
+            font-size: 11.5px;
         }
 
         .header-nav-btn {
@@ -150,7 +150,7 @@
             display: none !important;
         }
 
-        /* --- Interactive Morphing Hero Screen --- */
+        /* --- Minimalist White Hero Curtain --- */
         .hero-curtain-layer {
             position: fixed;
             top: 0;
@@ -158,46 +158,60 @@
             width: 100vw;
             height: 100vh;
             background: #FFFFFF;
-            z-index: 90;
+            z-index: 300;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            padding: 36px;
+            align-items: center;
+            padding: 60px 36px 40px 36px;
             pointer-events: auto;
             cursor: pointer;
-            transition: opacity 0.8s cubic-bezier(0.76, 0, 0.24, 1), visibility 0.8s;
+            transition: transform 1.1s cubic-bezier(0.76, 0, 0.24, 1), opacity 0.8s ease;
         }
 
         .hero-curtain-layer.dismissed {
-            opacity: 0;
-            visibility: hidden;
+            transform: translateY(-100%);
             pointer-events: none;
         }
 
-        .curtain-corner-logo {
-            position: absolute;
-            bottom: 40px;
-            right: 40px;
-            width: 130px;
-            height: 130px;
-            opacity: 0.85;
-            pointer-events: none;
+        .curtain-center-content {
+            margin: auto 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
         }
 
-        .curtain-corner-logo img {
-            width: 100%;
-            height: 100%;
+        .curtain-logo-img {
+            width: 110px;
+            height: 110px;
             object-fit: contain;
+            margin-bottom: 28px;
+        }
+
+        .curtain-headline {
+            font-size: clamp(32px, 5vw, 64px);
+            font-weight: 800;
+            letter-spacing: -2px;
+            text-transform: uppercase;
+            line-height: 1;
+            margin-bottom: 12px;
+        }
+
+        .curtain-subline {
+            font-family: var(--font-mono);
+            font-size: 13px;
+            color: var(--text-dim);
+            letter-spacing: 1px;
+            text-transform: lowercase;
         }
 
         .curtain-instruction {
             font-family: var(--font-mono);
-            font-size: 11.5px;
+            font-size: 11px;
             letter-spacing: 1px;
             text-transform: uppercase;
             color: var(--text-dim);
-            margin-top: auto;
-            padding-bottom: 12px;
         }
 
         /* --- Split Display Hero Header --- */
@@ -208,11 +222,6 @@
             grid-template-columns: 1fr 1fr;
             gap: 40px;
             align-items: baseline;
-            transition: transform 1s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.8s ease;
-        }
-
-        body.curtain-active .hero-banner {
-            transform: translateY(22vh);
         }
 
         .hero-title-left {
@@ -421,14 +430,14 @@
             transform: translate(-50%, -50%) scale(1);
         }
 
-        /* --- Redesigned Brutalist About View --- */
-        .about-grid-layout {
+        /* --- Standardized Section Layout (About, Practices, Contact) --- */
+        .section-grid-layout {
             max-width: 1300px;
             margin: 0 auto;
             padding-top: 20px;
         }
 
-        .about-top-back {
+        .section-top-back {
             font-family: var(--font-mono);
             font-size: 11.5px;
             text-transform: uppercase;
@@ -439,11 +448,11 @@
             display: inline-block;
         }
 
-        .about-top-back:hover {
+        .section-top-back:hover {
             color: #111111;
         }
 
-        .about-hero-statement {
+        .section-hero-statement {
             font-size: clamp(38px, 6vw, 84px);
             font-weight: 800;
             line-height: 0.95;
@@ -452,7 +461,7 @@
             margin-bottom: 70px;
         }
 
-        .about-meta-row {
+        .meta-row {
             display: grid;
             grid-template-columns: 240px 1fr;
             gap: 40px;
@@ -460,7 +469,7 @@
             border-top: 1px solid var(--border-line);
         }
 
-        .about-meta-label {
+        .meta-label {
             font-family: var(--font-mono);
             font-size: 11.5px;
             text-transform: uppercase;
@@ -468,17 +477,17 @@
             color: var(--text-dim);
         }
 
-        .about-meta-body {
+        .meta-body {
             font-size: 18px;
             line-height: 1.7;
             color: #111111;
         }
 
-        .about-meta-body p {
+        .meta-body p {
             margin-bottom: 20px;
         }
 
-        .about-meta-body p:last-child {
+        .meta-body p:last-child {
             margin-bottom: 0;
         }
 
@@ -492,44 +501,38 @@
             text-transform: uppercase;
         }
 
-        /* --- Practices View Layout: 2-1-2 Staggered Grid --- */
-        .practices-view-container {
-            max-width: 1300px;
-            margin: 0 auto;
-            padding-top: 20px;
-        }
-
-        .practices-staggered-grid {
+        /* --- Clean Practices View Layout (No Box Boundaries) --- */
+        .practices-clean-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 40px;
+            gap: 60px 40px;
             margin-top: 50px;
             margin-bottom: 90px;
         }
 
-        .practice-medium-block {
+        .practice-clean-item {
             display: flex;
             flex-direction: column;
             align-items: center;
             text-align: center;
-            border: 1px solid var(--border-line);
-            padding: 40px 30px;
-            background: #FAFAFA;
+            background: transparent;
+            padding: 10px 0;
         }
 
-        .practice-medium-img {
+        .practice-clean-img {
             width: 100%;
             max-width: 380px;
             height: 240px;
             object-fit: contain;
-            margin-bottom: 24px;
+            margin-bottom: 20px;
+            background: transparent;
         }
 
-        .practice-medium-heading {
-            font-size: 22px;
+        .practice-clean-heading {
+            font-size: 24px;
             font-weight: 600;
             text-transform: lowercase;
-            letter-spacing: -0.5px;
+            letter-spacing: -0.6px;
             background: none;
             border: none;
             cursor: pointer;
@@ -537,111 +540,96 @@
             align-items: center;
             gap: 8px;
             color: #111111;
-            margin-bottom: 12px;
+            margin-bottom: 8px;
         }
 
-        .practice-medium-heading:hover {
+        .practice-clean-heading:hover {
             color: var(--blue-accent);
         }
 
-        .practice-medium-icon {
+        .practice-clean-icon {
             font-family: var(--font-mono);
             font-size: 12px;
             color: var(--blue-accent);
         }
 
-        .practice-medium-accordion {
+        .practice-clean-accordion {
             max-height: 0;
             opacity: 0;
             overflow: hidden;
             transition: max-height 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s ease;
-            max-width: 440px;
+            max-width: 460px;
             text-align: left;
         }
 
-        .practice-medium-accordion.expanded {
+        .practice-clean-accordion.expanded {
             max-height: 600px;
             opacity: 1;
             margin-top: 14px;
         }
 
-        .practice-medium-desc {
-            font-size: 15px;
-            line-height: 1.7;
+        .practice-clean-desc {
+            font-size: 15.5px;
+            line-height: 1.75;
             color: #444444;
         }
 
-        .practice-editorial-block {
+        .practice-clean-editorial {
             display: flex;
             flex-direction: column;
             justify-content: center;
-            border: 1px solid var(--border-line);
-            padding: 40px 36px;
-            background: #FFFFFF;
-            font-size: 18px;
+            padding: 20px;
+            font-size: 19px;
             line-height: 1.8;
             color: #222222;
         }
 
-        /* Index-Style Minimalist Pillars */
+        /* --- Large Heading Disciplinary Pillars Section --- */
         .practices-pillars-section {
             border-top: 1px solid var(--border-line);
-            padding-top: 60px;
+            padding-top: 70px;
         }
 
-        .pillars-index-list {
+        .pillars-large-list {
             display: flex;
             flex-direction: column;
-            margin-top: 30px;
+            margin-top: 20px;
         }
 
-        .pillar-index-row {
-            display: grid;
-            grid-template-columns: 80px 320px 1fr;
-            gap: 30px;
-            padding: 32px 0;
+        .pillar-large-row {
+            padding: 48px 0;
             border-bottom: 1px solid var(--border-line);
-            align-items: baseline;
+            display: flex;
+            flex-direction: column;
         }
 
-        .pillar-index-row:hover .pillar-index-title {
-            color: var(--blue-accent);
-        }
-
-        .pillar-index-num {
+        .pillar-large-num {
             font-family: var(--font-mono);
-            font-size: 13px;
-            color: var(--text-dim);
+            font-size: 12px;
+            color: var(--blue-accent);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 12px;
         }
 
-        .pillar-index-title {
-            font-size: 28px;
-            font-weight: 600;
-            letter-spacing: -0.8px;
-            text-transform: lowercase;
-            transition: color 0.2s ease;
+        .pillar-large-heading {
+            font-size: clamp(32px, 4.5vw, 56px);
+            font-weight: 800;
+            line-height: 1.05;
+            letter-spacing: -2px;
+            text-transform: uppercase;
+            color: #111111;
+            margin-bottom: 18px;
         }
 
-        .pillar-index-desc {
-            font-size: 16px;
-            line-height: 1.7;
+        .pillar-large-desc {
+            font-size: 17.5px;
+            line-height: 1.75;
             color: #444444;
+            max-width: 860px;
         }
 
-        /* --- Contact Page Layout --- */
-        .contact-page-container {
-            max-width: 1200px;
-            margin: 0;
-            padding-top: 20px;
-        }
-
-        .contact-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 80px;
-            padding-top: 20px;
-        }
-
+        /* --- Contact Form Inputs --- */
         .form-group {
             margin-bottom: 22px;
         }
@@ -815,22 +803,13 @@
                 margin-bottom: 40px;
             }
 
-            body.curtain-active .hero-banner {
-                transform: translateY(14vh);
-            }
-
             .index-columns-header { display: none; }
             .index-row-trigger { grid-template-columns: 40px 1fr 60px; }
             .row-type { display: none; }
 
-            .about-meta-row, .practices-staggered-grid, .contact-grid {
+            .meta-row, .practices-clean-grid {
                 grid-template-columns: 1fr;
-                gap: 30px;
-            }
-
-            .pillar-index-row {
-                grid-template-columns: 1fr;
-                gap: 12px;
+                gap: 20px;
             }
 
             .about-skills-columns { grid-template-columns: 1fr; }
@@ -846,15 +825,16 @@
         }
     </style>
 </head>
-<body class="modal-open curtain-active">
+<body class="modal-open">
 
-    <!-- MORPHING HERO CURTAIN LAYER -->
+    <!-- MINIMALIST WHITE CURTAIN REVEAL -->
     <div id="hero-curtain" class="hero-curtain-layer">
-        <div></div>
+        <div style="height: 10px;"></div>
         
-        <!-- Large Asymmetric Corner Watermark Logo -->
-        <div class="curtain-corner-logo">
-            <img src="soka logo.svg" alt="SOKA Emblem">
+        <div class="curtain-center-content">
+            <img src="soka logo.svg" alt="SOKA Logo" class="curtain-logo-img">
+            <div class="curtain-headline">SOKA; A LEGAL STUDIO.</div>
+            <div class="curtain-subline">securing the culture, legally.</div>
         </div>
 
         <div class="curtain-instruction">[ click or scroll to enter ] ↓</div>
@@ -917,7 +897,7 @@ The Bar Council of India does not permit advertisement or solicitation by advoca
     <!-- VIEW 1: BRUTALIST INDEX VIEW -->
     <main id="entries-view" class="page-view">
         
-        <!-- MORPHING SPLIT DISPLAY BANNER -->
+        <!-- SPLIT DISPLAY BANNER -->
         <div class="hero-banner" id="hero-banner">
             <div class="hero-title-left">SOKA;</div>
             <div class="hero-title-right">A LEGAL STUDIO.</div>
@@ -1145,25 +1125,25 @@ None of this requires an elaborate agreement. A short license or assignment nami
 
     <!-- VIEW 2: REDESIGNED BRUTALIST ABOUT VIEW -->
     <section id="about-view" class="page-view hidden-view">
-        <div class="about-grid-layout">
-            <div class="about-top-back" onclick="switchView('entries')">← INDEX / ABOUT</div>
+        <div class="section-grid-layout">
+            <div class="section-top-back" onclick="switchView('entries')">← INDEX / ABOUT</div>
 
-            <h1 class="about-hero-statement">
+            <h1 class="section-hero-statement">
                 THE LEGAL <span class="highlight-word">INFRASTRUCTURE</span> CREATIVE WORK WAS NEVER GIVEN.
             </h1>
 
-            <div class="about-meta-row">
-                <div class="about-meta-label">PROFILE</div>
-                <div class="about-meta-body">
+            <div class="meta-row">
+                <div class="meta-label">PROFILE</div>
+                <div class="meta-body">
                     <p>SOKA is a New Delhi based legal practice working with creators and creative businesses across India and beyond.</p>
                     <p>India's creative economy has scaled faster than the legal infrastructure built around it. Musicians, filmmakers, designers, and independent creators are now building things of real, defensible value, often without the contracts, rights clarity, or protection that value requires. Legal practice in India was built for corporations. It was not built for the individual creator.</p>
                     <p>SOKA exists to close that gap.</p>
                 </div>
             </div>
 
-            <div class="about-meta-row">
-                <div class="about-meta-label">PRACTICE SCOPE</div>
-                <div class="about-meta-body">
+            <div class="meta-row">
+                <div class="meta-label">PRACTICE SCOPE</div>
+                <div class="meta-body">
                     <div class="about-skills-columns">
                         <div>
                             <strong>Core Domains</strong><br>
@@ -1185,17 +1165,17 @@ None of this requires an elaborate agreement. A short license or assignment nami
                 </div>
             </div>
 
-            <div class="about-meta-row">
-                <div class="about-meta-label">PHILOSOPHY</div>
-                <div class="about-meta-body">
+            <div class="meta-row">
+                <div class="meta-label">PHILOSOPHY</div>
+                <div class="meta-body">
                     <p>We call ourselves a studio rather than a firm by design. A studio implies precision and craft applied to a specific discipline, not general practice spread thin across every kind of client and matter. That distinction shapes how we work.</p>
                     <p>The name itself draws from 創価, a term meaning "the creation of value." We take that literally. Our work exists to protect the value creative people build, not merely to formalize it after the fact.</p>
                 </div>
             </div>
 
-            <div class="about-meta-row">
-                <div class="about-meta-label">ENQUIRIES</div>
-                <div class="about-meta-body">
+            <div class="meta-row">
+                <div class="meta-label">ENQUIRIES</div>
+                <div class="meta-body">
                     <p>If your work needs structure, <span style="text-decoration: underline; cursor: pointer; color: var(--blue-accent);" onclick="switchView('contact')">start a conversation with us</span>.</p>
                 </div>
             </div>
@@ -1203,84 +1183,84 @@ None of this requires an elaborate agreement. A short license or assignment nami
         </div>
     </section>
 
-    <!-- VIEW 3: PRACTICES PAGE (STAGGERED 2-1-2 MEDIUMS + INDEX PILLARS) -->
+    <!-- VIEW 3: CLEAN PRACTICES PAGE (NO BOUNDARY BOXES + LARGE HEADING PILLARS) -->
     <section id="practices-view" class="page-view hidden-view">
-        <div class="practices-view-container">
-            <div class="about-top-back" onclick="switchView('entries')">← INDEX / PRACTICES</div>
+        <div class="section-grid-layout">
+            <div class="section-top-back" onclick="switchView('entries')">← INDEX / PRACTICES</div>
             
-            <h1 class="about-hero-statement">
+            <h1 class="section-hero-statement">
                 THE STRUCTURAL <span class="highlight-word">FRAMEWORK</span> UNDERNEATH THE CULTURE.
             </h1>
 
-            <!-- Staggered 2 - 1 - 2 Mediums Grid -->
-            <div class="practices-staggered-grid">
+            <!-- Clean Floating Mediums Grid -->
+            <div class="practices-clean-grid">
                 
                 <!-- ROW 1 (ITEM 1): MUSIC -->
-                <div class="practice-medium-block">
-                    <img src="vinyl.jpeg" alt="music" class="practice-medium-img">
-                    <button class="practice-medium-heading practice-toggle">
-                        music <span class="practice-medium-icon">[ + ]</span>
+                <div class="practice-clean-item">
+                    <img src="vinyl.jpeg" alt="music" class="practice-clean-img">
+                    <button class="practice-clean-heading practice-toggle">
+                        music <span class="practice-clean-icon">[ + ]</span>
                     </button>
-                    <div class="practice-medium-accordion">
-                        <p class="practice-medium-desc">
+                    <div class="practice-clean-accordion">
+                        <p class="practice-clean-desc">
                             We work with musicians, producers, and independent labels on the agreements that decide who owns what once a track exists, splits, sampling clearances, distribution and licensing deals, and the featured artist and producer credits that rarely get written down until something goes wrong.
                         </p>
                     </div>
                 </div>
 
                 <!-- ROW 1 (ITEM 2): ART -->
-                <div class="practice-medium-block">
-                    <img src="art.jpeg" alt="art" class="practice-medium-img">
-                    <button class="practice-medium-heading practice-toggle">
-                        art <span class="practice-medium-icon">[ + ]</span>
+                <div class="practice-clean-item">
+                    <img src="art.jpeg" alt="art" class="practice-clean-img">
+                    <button class="practice-clean-heading practice-toggle">
+                        art <span class="practice-clean-icon">[ + ]</span>
                     </button>
-                    <div class="practice-medium-accordion">
-                        <p class="practice-medium-desc">
+                    <div class="practice-clean-accordion">
+                        <p class="practice-clean-desc">
                             For painters, illustrators, and visual artists, we handle commission agreements, licensing for prints and reproductions, and the ownership questions that come up when a piece is made for someone else's brief, gallery, or campaign.
                         </p>
                     </div>
                 </div>
 
                 <!-- ROW 2 (ITEM 1): FILM & PHOTOGRAPHY -->
-                <div class="practice-medium-block">
-                    <img src="clapper.jpeg" alt="film & photography" class="practice-medium-img">
-                    <button class="practice-medium-heading practice-toggle">
-                        film & photography <span class="practice-medium-icon">[ + ]</span>
+                <div class="practice-clean-item">
+                    <img src="clapper.jpeg" alt="film & photography" class="practice-clean-img">
+                    <button class="practice-clean-heading practice-toggle">
+                        film & photography <span class="practice-clean-icon">[ + ]</span>
                     </button>
-                    <div class="practice-medium-accordion">
-                        <p class="practice-medium-desc">
+                    <div class="practice-clean-accordion">
+                        <p class="practice-clean-desc">
                             From short films to commercial shoots, we work on production agreements, location and talent releases, and the rights clearances that determine who can use footage or stills, where, and for how long, before a single frame goes public.
                         </p>
                     </div>
                 </div>
 
                 <!-- ROW 2 (ITEM 2): EDITORIAL PROSE -->
-                <div class="practice-editorial-block">
-                    <p style="margin-bottom: 16px; font-weight: 600; text-transform: uppercase; font-family: var(--font-mono); font-size: 11.5px; color: var(--blue-accent);">PRACTICE FOCUS</p>
+                <div class="practice-clean-editorial">
+                    <p style="margin-bottom: 12px; font-weight: 600; text-transform: uppercase; font-family: var(--font-mono); font-size: 11.5px; color: var(--blue-accent);">PRACTICE FOCUS</p>
                     SOKA works across the practical, structural side of creative work — the contracts, ownership questions, and rights issues that sit underneath almost everything a creative practice eventually has to deal with. We work directly with independent artists, creative studios, and production entities on the agreements that protect artistic upside and secure fair commercial settlement.
                 </div>
 
                 <!-- ROW 3 (ITEM 1): WRITING -->
-                <div class="practice-medium-block">
-                    <img src="book.jpeg" alt="writing" class="practice-medium-img">
-                    <button class="practice-medium-heading practice-toggle">
-                        writing <span class="practice-medium-icon">[ + ]</span>
+                <div class="practice-clean-item">
+                    <img src="book.jpeg" alt="writing" class="practice-clean-img">
+                    <button class="practice-clean-heading practice-toggle">
+                        writing <span class="practice-clean-icon">[ + ]</span>
                     </button>
-                    <div class="practice-medium-accordion">
-                        <p class="practice-medium-desc">
+                    <div class="practice-clean-accordion">
+                        <p class="practice-clean-desc">
                             For novelists, screenwriters, and independent writers, we work on publishing and option agreements, ghostwriting and collaboration credit, and the licensing terms that decide what happens to a manuscript once someone else wants to adapt, publish, or option it.
                         </p>
                     </div>
                 </div>
 
                 <!-- ROW 3 (ITEM 2): CREATORS -->
-                <div class="practice-medium-block">
-                    <img src="cam.jpeg" alt="creators" class="practice-medium-img">
-                    <button class="practice-medium-heading practice-toggle">
-                        creators <span class="practice-medium-icon">[ + ]</span>
+                <div class="practice-clean-item">
+                    <img src="cam.jpeg" alt="creators" class="practice-clean-img">
+                    <button class="practice-clean-heading practice-toggle">
+                        creators <span class="practice-clean-icon">[ + ]</span>
                     </button>
-                    <div class="practice-medium-accordion">
-                        <p class="practice-medium-desc">
+                    <div class="practice-clean-accordion">
+                        <p class="practice-clean-desc">
                             For creators building on Instagram, YouTube, and live platforms, we work on brand deal and sponsorship agreements, platform and IP disputes, and the ownership questions that come up when a persona, format, or piece of content starts generating real commercial value.
                         </p>
                     </div>
@@ -1288,40 +1268,40 @@ None of this requires an elaborate agreement. A short license or assignment nami
 
             </div>
 
-            <!-- Four Pillars Large Index-Style Section -->
+            <!-- Large Heading Disciplinary Pillars Section -->
             <div class="practices-pillars-section">
-                <div class="about-meta-label">DISCIPLINARY PILLARS</div>
+                <div class="meta-label">DISCIPLINARY PILLARS</div>
 
-                <div class="pillars-index-list">
+                <div class="pillars-large-list">
                     
-                    <div class="pillar-index-row">
-                        <div class="pillar-index-num">01 /</div>
-                        <div class="pillar-index-title">intellectual property</div>
-                        <div class="pillar-index-desc">
+                    <div class="pillar-large-row">
+                        <div class="pillar-large-num">01 / DISCIPLINE</div>
+                        <div class="pillar-large-heading">INTELLECTUAL PROPERTY</div>
+                        <div class="pillar-large-desc">
                             Creative ideas only carry real value when they are legally distinct and defensibly owned. We establish clear title over artistic assets from creation, securing copyright, brand identity, and proprietary craft before work enters the marketplace.
                         </div>
                     </div>
 
-                    <div class="pillar-index-row">
-                        <div class="pillar-index-num">02 /</div>
-                        <div class="pillar-index-title">contracts & structure</div>
-                        <div class="pillar-index-desc">
+                    <div class="pillar-large-row">
+                        <div class="pillar-large-num">02 / DISCIPLINE</div>
+                        <div class="pillar-large-heading">CONTRACTS & STRUCTURE</div>
+                        <div class="pillar-large-desc">
                             Traditional legal drafting forces creative relationships into rigid templates. We construct bespoke, transparent agreements that protect commercial upside, preserve artistic control, and eliminate ambiguity before capital is committed.
                         </div>
                     </div>
 
-                    <div class="pillar-index-row">
-                        <div class="pillar-index-num">03 /</div>
-                        <div class="pillar-index-title">disputes & resolution</div>
-                        <div class="pillar-index-desc">
+                    <div class="pillar-large-row">
+                        <div class="pillar-large-num">03 / DISCIPLINE</div>
+                        <div class="pillar-large-heading">DISPUTES & RESOLUTION</div>
+                        <div class="pillar-large-desc">
                             When creative partnerships break down or ownership is challenged, swift intervention is essential. We manage conflicts at the intersection of law and creative culture with strategic composure, protecting reputations and securing fair settlement.
                         </div>
                     </div>
 
-                    <div class="pillar-index-row">
-                        <div class="pillar-index-num">04 /</div>
-                        <div class="pillar-index-title">rights & enforcement</div>
-                        <div class="pillar-index-desc">
+                    <div class="pillar-large-row">
+                        <div class="pillar-large-num">04 / DISCIPLINE</div>
+                        <div class="pillar-large-heading">RIGHTS & ENFORCEMENT</div>
+                        <div class="pillar-large-desc">
                             Building defensible value requires continuous vigilance across digital and physical domains. We handle unauthorized commercial exploitation, takedowns, and brand protection to ensure creators retain full authority over their catalog.
                         </div>
                     </div>
@@ -1332,17 +1312,19 @@ None of this requires an elaborate agreement. A short license or assignment nami
         </div>
     </section>
 
-    <!-- VIEW 4: LEFT-ALIGNED CONTACT VIEW -->
+    <!-- VIEW 4: FULLY ALIGNED BRUTALIST CONTACT VIEW -->
     <section id="contact-view" class="page-view hidden-view">
-        <div class="contact-page-container">
-            <div class="about-top-back" onclick="switchView('entries')">← INDEX / CONTACT</div>
+        <div class="section-grid-layout">
+            <div class="section-top-back" onclick="switchView('entries')">← INDEX / CONTACT</div>
 
-            <div class="contact-grid">
-                <div class="contact-left">
-                    <h1 class="about-hero-statement" style="font-size: clamp(32px, 5vw, 64px); margin-bottom: 24px;">
-                        START A <span class="highlight-word">CONVERSATION</span>.
-                    </h1>
-                    <p style="font-family: var(--font-mono); font-size: 12px; color: var(--text-dim); margin-bottom: 35px; text-transform: uppercase;">
+            <h1 class="section-hero-statement">
+                START A <span class="highlight-word">CONVERSATION</span>.
+            </h1>
+
+            <div class="meta-row">
+                <div class="meta-label">ENQUIRIES</div>
+                <div class="meta-body">
+                    <p style="font-family: var(--font-mono); font-size: 12px; color: var(--text-dim); margin-bottom: 25px; text-transform: uppercase;">
                         Tell us briefly about what you're building or what needs protection.
                     </p>
 
@@ -1366,18 +1348,25 @@ None of this requires an elaborate agreement. A short license or assignment nami
                         <button type="submit" class="submit-btn" id="contact-submit-btn">Send Message</button>
                     </form>
                 </div>
+            </div>
 
-                <div class="contact-right">
-                    <div class="contact-detail-block">
-                        <p style="font-family: var(--font-mono); font-size: 13px;"><strong>DIRECT:</strong> <a href="mailto:hello@legalbysoka.com" style="color: #111111; text-decoration: none;">hello@legalbysoka.com</a></p>
-                        <p style="font-family: var(--font-mono); font-size: 12px; color: var(--text-dim); margin-top: 15px;">
-                            CHAMBERS:<br>
-                            3rd Floor, K1/52, CR Park,<br>
-                            New Delhi, 110019, India
-                        </p>
-                    </div>
+            <div class="meta-row">
+                <div class="meta-label">DIRECT</div>
+                <div class="meta-body">
+                    <p><a href="mailto:hello@legalbysoka.com" style="color: #111111; text-decoration: none; font-weight: 500;">hello@legalbysoka.com</a></p>
                 </div>
             </div>
+
+            <div class="meta-row">
+                <div class="meta-label">CHAMBERS</div>
+                <div class="meta-body">
+                    <p style="font-size: 16px; color: #444444;">
+                        3rd Floor, K1/52, CR Park,<br>
+                        New Delhi, 110019, India
+                    </p>
+                </div>
+            </div>
+
         </div>
     </section>
 
@@ -1403,9 +1392,9 @@ None of this requires an elaborate agreement. A short license or assignment nami
         let curtainDismissed = false;
         let curtainReady = false;
 
-        setTimeout(() => { curtainReady = true; }, 700);
+        setTimeout(() => { curtainReady = true; }, 600);
 
-        // --- 1. MORPHING HERO CURTAIN CONTROLLER ---
+        // --- 1. HERO CURTAIN REVEAL CONTROLLER ---
         const curtain = document.getElementById('hero-curtain');
         const bciModal = document.getElementById('bci-modal');
         let scrollDeltaAccumulator = 0;
@@ -1414,7 +1403,6 @@ None of this requires an elaborate agreement. A short license or assignment nami
             if (curtainDismissed) return;
             curtainDismissed = true;
             curtain.classList.add('dismissed');
-            document.body.classList.remove('curtain-active');
 
             setTimeout(() => {
                 if (sessionStorage.getItem('bci_accepted') !== 'true') {
@@ -1423,14 +1411,14 @@ None of this requires an elaborate agreement. A short license or assignment nami
                 } else {
                     document.body.classList.remove('modal-open');
                 }
-            }, 800);
+            }, 900);
         }
 
         window.addEventListener('wheel', (e) => {
             if (curtainDismissed || !curtainReady) return;
             if (e.deltaY > 0) {
                 scrollDeltaAccumulator += e.deltaY;
-                if (scrollDeltaAccumulator > 50) {
+                if (scrollDeltaAccumulator > 40) {
                     triggerCurtainDismiss();
                 }
             } else {
@@ -1446,7 +1434,7 @@ None of this requires an elaborate agreement. A short license or assignment nami
         window.addEventListener('touchmove', (e) => {
             if (curtainDismissed || !curtainReady) return;
             let touchEndY = e.touches[0].clientY;
-            if (touchStartY - touchEndY > 35) {
+            if (touchStartY - touchEndY > 30) {
                 triggerCurtainDismiss();
             }
         }, { passive: true });
@@ -1515,7 +1503,7 @@ None of this requires an elaborate agreement. A short license or assignment nami
             button.addEventListener('click', () => {
                 const accordion = button.nextElementSibling;
                 accordion.classList.toggle('expanded');
-                const span = button.querySelector('.practice-medium-icon');
+                const span = button.querySelector('.practice-clean-icon');
                 if (accordion.classList.contains('expanded')) {
                     span.textContent = '[ − ]';
                 } else {

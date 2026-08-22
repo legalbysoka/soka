@@ -14,7 +14,7 @@
     <!-- TAB ICON / FAVICON -->
     <link rel="icon" type="image/png" href="tab-icon.png">
 
-    <!-- GOOGLE FONTS: Inter (Brutalist Display) & JetBrains Mono -->
+    <!-- GOOGLE FONTS: Inter & JetBrains Mono -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@300;400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,300..600;1,6..72,300..600&display=swap" rel="stylesheet">
@@ -52,7 +52,7 @@
     </script>
 
     <style>
-        /* --- Core Reset & Design Variables --- */
+        /* --- Core Reset & Variables --- */
         * {
             margin: 0;
             padding: 0;
@@ -85,6 +85,75 @@
             flex-direction: column;
         }
 
+        /* --- Minimalist Curtain Entry Screen --- */
+        #minimal-curtain {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: #FFFFFF;
+            color: #111111;
+            z-index: 250;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            padding: 60px 36px 40px 36px;
+            transition: transform 1.1s cubic-bezier(0.77, 0, 0.175, 1);
+            will-change: transform;
+            cursor: pointer;
+        }
+
+        #minimal-curtain.dismissed {
+            transform: translateY(-100%);
+            pointer-events: none;
+        }
+
+        .curtain-center-box {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            margin: auto 0;
+        }
+
+        .curtain-logo {
+            width: 90px;
+            height: 90px;
+            object-fit: contain;
+            margin-bottom: 30px;
+        }
+
+        .curtain-brand-title {
+            font-size: clamp(32px, 5vw, 64px);
+            font-weight: 800;
+            letter-spacing: -2px;
+            text-transform: uppercase;
+            line-height: 1;
+            margin-bottom: 12px;
+        }
+
+        .curtain-brand-title span {
+            color: var(--blue-accent);
+        }
+
+        .curtain-brand-sub {
+            font-family: var(--font-mono);
+            font-size: 13px;
+            color: var(--text-dim);
+            text-transform: lowercase;
+            letter-spacing: 0.5px;
+        }
+
+        .curtain-footer-hint {
+            font-family: var(--font-mono);
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-dim);
+        }
+
         /* --- Minimalist Top Utility Header --- */
         header {
             position: fixed;
@@ -92,48 +161,36 @@
             left: 0;
             width: 100%;
             padding: 22px 36px;
-            background-color: rgba(255, 255, 255, 0.95);
+            background-color: rgba(255, 255, 255, 0.96);
             -webkit-backdrop-filter: blur(10px);
             backdrop-filter: blur(10px);
             z-index: 100;
-            display: grid;
-            grid-template-columns: auto 1fr auto;
-            align-items: center;
-            border-bottom: 1px solid transparent;
-        }
-
-        .header-logo-icon {
             display: flex;
+            justify-content: space-between;
             align-items: center;
-            cursor: pointer;
         }
 
-        .header-logo-icon svg {
-            width: 22px;
-            height: 22px;
-        }
-
-        .header-center-info {
-            display: flex;
-            justify-content: center;
-            gap: 40px;
+        .header-home-btn {
+            background: none;
+            border: none;
             font-family: var(--font-mono);
-            font-size: 11px;
+            font-size: 12px;
             text-transform: uppercase;
             letter-spacing: 0.5px;
-            color: var(--text-dim);
+            color: #111111;
+            cursor: pointer;
+            transition: color 0.2s ease;
         }
 
-        .header-center-info strong {
-            color: #111111;
-            font-weight: 500;
+        .header-home-btn:hover {
+            color: var(--blue-accent);
         }
 
         .header-nav-right {
             display: flex;
-            gap: 16px;
+            gap: 18px;
             font-family: var(--font-mono);
-            font-size: 11.5px;
+            font-size: 12px;
         }
 
         .header-nav-btn {
@@ -177,6 +234,7 @@
             line-height: 0.92;
             letter-spacing: -3.5px;
             text-transform: uppercase;
+            color: #111111;
         }
 
         .hero-title-right {
@@ -185,6 +243,7 @@
             line-height: 0.92;
             letter-spacing: -3.5px;
             text-transform: uppercase;
+            color: var(--blue-accent); /* SOKA Blue */
         }
 
         /* --- Index Table Header Bar --- */
@@ -317,7 +376,6 @@
             border: 1px solid var(--border-line);
         }
 
-        /* Gallery Carousel inside accordion */
         .carousel-container {
             display: flex;
             gap: 16px;
@@ -445,33 +503,111 @@
             text-transform: uppercase;
         }
 
-        /* --- Practices View Layout --- */
+        /* --- Practices View Layout (Unified Visual Mediums & Pillars) --- */
         .practices-view-container {
             max-width: 1300px;
             margin: 0 auto;
         }
 
-        .practices-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 40px;
-            margin-top: 40px;
+        .practices-category-title {
+            font-family: var(--font-mono);
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-dim);
+            margin-top: 50px;
+            margin-bottom: 20px;
+            border-bottom: 1px solid var(--border-line);
+            padding-bottom: 8px;
         }
 
-        .practice-card {
+        .mediums-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+
+        .medium-card {
+            border: 1px solid var(--border-line);
+            padding: 24px;
+            background: #FFFFFF;
+            transition: border-color 0.2s ease;
+        }
+
+        .medium-card:hover {
+            border-color: #111111;
+        }
+
+        .medium-card-img {
+            width: 100%;
+            height: 180px;
+            object-fit: contain;
+            margin-bottom: 18px;
+            display: block;
+        }
+
+        .medium-card-btn {
+            width: 100%;
+            background: none;
+            border: none;
+            font-size: 20px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            text-transform: lowercase;
+            text-align: left;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0;
+            color: #111111;
+        }
+
+        .medium-card-btn:hover {
+            color: var(--blue-accent);
+        }
+
+        .medium-accordion-content {
+            max-height: 0;
+            opacity: 0;
+            overflow: hidden;
+            transition: max-height 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s ease, margin 0.3s ease;
+        }
+
+        .medium-accordion-content.expanded {
+            max-height: 300px;
+            opacity: 1;
+            margin-top: 14px;
+        }
+
+        .medium-desc {
+            font-size: 14px;
+            line-height: 1.65;
+            color: #444444;
+        }
+
+        .pillars-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-top: 20px;
+        }
+
+        .pillar-card {
             border: 1px solid var(--border-line);
             padding: 36px;
             background: #FAFAFA;
         }
 
-        .practice-card-num {
+        .pillar-card-num {
             font-family: var(--font-mono);
             font-size: 12px;
             color: var(--blue-accent);
             margin-bottom: 12px;
         }
 
-        .practice-card-title {
+        .pillar-card-title {
             font-size: 26px;
             font-weight: 700;
             letter-spacing: -0.8px;
@@ -479,8 +615,8 @@
             margin-bottom: 16px;
         }
 
-        .practice-card-desc {
-            font-size: 16px;
+        .pillar-card-desc {
+            font-size: 15.5px;
             line-height: 1.7;
             color: #444444;
         }
@@ -597,7 +733,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            z-index: 200;
+            z-index: 300;
             padding: 20px;
         }
 
@@ -663,7 +799,6 @@
         /* --- Mobile Overrides --- */
         @media (max-width: 768px) {
             header { padding: 18px 20px; }
-            .header-center-info { display: none; }
             .page-view { padding: 80px 20px 60px 20px; }
 
             .hero-banner {
@@ -682,7 +817,7 @@
 
             .row-type { display: none; }
 
-            .about-meta-row, .practices-grid, .contact-grid {
+            .about-meta-row, .pillars-grid, .contact-grid {
                 grid-template-columns: 1fr;
                 gap: 20px;
             }
@@ -702,6 +837,17 @@
     </style>
 </head>
 <body class="modal-open">
+
+    <!-- MINIMALIST HERO CURTAIN -->
+    <div id="minimal-curtain">
+        <div style="height: 20px;"></div>
+        <div class="curtain-center-box">
+            <img src="soka logo.svg" alt="SOKA Logo" class="curtain-logo">
+            <div class="curtain-brand-title">SOKA; <span>A LEGAL STUDIO.</span></div>
+            <div class="curtain-brand-sub">securing the culture, legally.</div>
+        </div>
+        <div class="curtain-footer-hint">[ scroll or click to enter ] ↓</div>
+    </div>
 
     <!-- FLOATING HOVER PREVIEW IMAGE (FOLLOWS CURSOR) -->
     <div id="floating-cursor-preview">
@@ -748,22 +894,11 @@ The Bar Council of India does not permit advertisement or solicitation by advoca
 
     <!-- MINIMALIST TOP HEADER -->
     <header>
-        <div class="header-logo-icon" onclick="switchView('entries')">
-            <svg viewBox="0 0 24 24" fill="none" stroke="#111111" stroke-width="2.2">
-                <line x1="3" y1="6" x2="21" y2="6"></line>
-                <line x1="3" y1="12" x2="21" y2="12"></line>
-                <line x1="3" y1="18" x2="21" y2="18"></line>
-            </svg>
-        </div>
-
-        <div class="header-center-info">
-            <div>CURRENTLY: <strong>DELHI / WORLDWIDE</strong></div>
-            <div>STATUS: <strong>ACCEPTING SELECT MATTERS</strong></div>
-        </div>
+        <button class="header-home-btn" onclick="switchView('entries')">[ home ]</button>
 
         <div class="header-nav-right">
-            <button class="header-nav-btn" onclick="switchView('practices')">[ practices ]</button>
             <button class="header-nav-btn" onclick="switchView('about')">[ about ]</button>
+            <button class="header-nav-btn" onclick="switchView('practices')">[ practices ]</button>
             <button class="header-nav-btn" onclick="switchView('contact')">[ contact ]</button>
         </div>
     </header>
@@ -1057,7 +1192,7 @@ None of this requires an elaborate agreement. A short license or assignment nami
         </div>
     </section>
 
-    <!-- VIEW 3: PRACTICES PAGE VIEW -->
+    <!-- VIEW 3: PRACTICES PAGE (MEDIUM CARDS + CORE PILLARS) -->
     <section id="practices-view" class="page-view hidden-view">
         <div class="practices-view-container">
             <div class="about-top-back" onclick="switchView('entries')">← INDEX / PRACTICES</div>
@@ -1066,35 +1201,115 @@ None of this requires an elaborate agreement. A short license or assignment nami
                 FOUR TARGETED PILLARS TO PROTECT CREATIVE CAPITAL.
             </h1>
 
-            <div class="practices-grid">
-                <div class="practice-card">
-                    <div class="practice-card-num">01 / DISCIPLINE</div>
-                    <div class="practice-card-title">intellectual property</div>
-                    <div class="practice-card-desc">
+            <!-- SECTION 1: CREATIVE MEDIUMS -->
+            <div class="practices-category-title">CREATIVE MEDIUMS & DISCIPLINES</div>
+            
+            <div class="mediums-grid">
+                
+                <!-- MEDIUM: MUSIC -->
+                <div class="medium-card">
+                    <img src="vinyl.jpeg" alt="Music" class="medium-card-img">
+                    <button class="medium-card-btn" onclick="toggleMediumAccordion(this)">
+                        <span>music</span>
+                        <span class="medium-toggle-icon">[ + ]</span>
+                    </button>
+                    <div class="medium-accordion-content">
+                        <p class="medium-desc">
+                            We work with musicians, producers, and independent labels on the agreements that decide who owns what once a track exists: splits, sampling clearances, distribution deals, and credits that rarely get formalized until something goes wrong.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- MEDIUM: ART -->
+                <div class="medium-card">
+                    <img src="art.jpeg" alt="Art" class="medium-card-img">
+                    <button class="medium-card-btn" onclick="toggleMediumAccordion(this)">
+                        <span>art</span>
+                        <span class="medium-toggle-icon">[ + ]</span>
+                    </button>
+                    <div class="medium-accordion-content">
+                        <p class="medium-desc">
+                            For painters, illustrators, and visual artists, we handle commission agreements, licensing for prints and reproductions, and the ownership questions that arise when a piece is created for a brand brief, gallery, or campaign.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- MEDIUM: FILM & PHOTOGRAPHY -->
+                <div class="medium-card">
+                    <img src="clapper.jpeg" alt="Film & Photography" class="medium-card-img">
+                    <button class="medium-card-btn" onclick="toggleMediumAccordion(this)">
+                        <span>film & photo</span>
+                        <span class="medium-toggle-icon">[ + ]</span>
+                    </button>
+                    <div class="medium-accordion-content">
+                        <p class="medium-desc">
+                            From short films to commercial shoots, we manage production agreements, location and talent releases, and rights clearances that determine who can use footage or stills before a single frame goes public.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- MEDIUM: WRITING -->
+                <div class="medium-card">
+                    <img src="book.jpeg" alt="Writing" class="medium-card-img">
+                    <button class="medium-card-btn" onclick="toggleMediumAccordion(this)">
+                        <span>writing</span>
+                        <span class="medium-toggle-icon">[ + ]</span>
+                    </button>
+                    <div class="medium-accordion-content">
+                        <p class="medium-desc">
+                            For novelists, screenwriters, and independent authors, we structure publishing and option agreements, collaboration terms, and the licensing conditions that govern adaptations across mediums.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- MEDIUM: CREATORS -->
+                <div class="medium-card">
+                    <img src="cam.jpeg" alt="Creators" class="medium-card-img">
+                    <button class="medium-card-btn" onclick="toggleMediumAccordion(this)">
+                        <span>creators</span>
+                        <span class="medium-toggle-icon">[ + ]</span>
+                    </button>
+                    <div class="medium-accordion-content">
+                        <p class="medium-desc">
+                            For creators building across YouTube, Instagram, and digital platforms, we negotiate brand sponsorship deals, platform IP disputes, and defensible persona protection.
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- SECTION 2: THE 4 FOUNDATIONAL PILLARS -->
+            <div class="practices-category-title">FOUNDATIONAL LEGAL PILLARS</div>
+
+            <div class="pillars-grid">
+                <div class="pillar-card">
+                    <div class="pillar-card-num">01 / PILLAR</div>
+                    <div class="pillar-card-title">intellectual property</div>
+                    <div class="pillar-card-desc">
                         Creative ideas only carry real value when they are legally distinct and defensibly owned. We establish clear title over artistic assets from the moment of creation, securing copyright, brand identity, and proprietary craft before work enters the marketplace.
                     </div>
                 </div>
 
-                <div class="practice-card">
-                    <div class="practice-card-num">02 / DISCIPLINE</div>
-                    <div class="practice-card-title">contracts & licensing</div>
-                    <div class="practice-card-desc">
+                <div class="pillar-card">
+                    <div class="pillar-card-num">02 / PILLAR</div>
+                    <div class="pillar-card-title">contracts & licensing</div>
+                    <div class="pillar-card-desc">
                         Traditional legal drafting forces creative relationships into rigid corporate templates. We construct bespoke, transparent agreements that protect commercial upside, preserve artistic control, and eliminate ambiguity before capital is committed.
                     </div>
                 </div>
 
-                <div class="practice-card">
-                    <div class="practice-card-num">03 / DISCIPLINE</div>
-                    <div class="practice-card-title">disputes & resolution</div>
-                    <div class="practice-card-desc">
+                <div class="pillar-card">
+                    <div class="pillar-card-num">03 / PILLAR</div>
+                    <div class="pillar-card-title">disputes & resolution</div>
+                    <div class="pillar-card-desc">
                         When creative partnerships break down or ownership is challenged, swift intervention is essential. We manage conflicts at the intersection of law and creative culture with strategic composure, protecting reputations and securing fair settlement.
                     </div>
                 </div>
 
-                <div class="practice-card">
-                    <div class="practice-card-num">04 / DISCIPLINE</div>
-                    <div class="practice-card-title">rights & enforcement</div>
-                    <div class="practice-card-desc">
+                <div class="pillar-card">
+                    <div class="pillar-card-num">04 / PILLAR</div>
+                    <div class="pillar-card-title">rights & enforcement</div>
+                    <div class="pillar-card-desc">
                         Building defensible value requires continuous vigilance across digital and physical domains. We handle unauthorized commercial exploitation, takedowns, and brand protection to ensure creators retain full financial and moral authority over their catalog.
                     </div>
                 </div>
@@ -1167,18 +1382,65 @@ None of this requires an elaborate agreement. A short license or assignment nami
         </div>
     </footer>
 
-    <!-- INTERACTIVE JAVASCRIPT LOGIC -->
+    <!-- INTERACTIVE SCRIPT LOGIC -->
     <script>
         let currentView = 'entries';
+        let curtainDismissed = false;
 
-        // --- 1. FLOATING IMAGE PREVIEW CURSOR TRACKER ---
+        // --- 1. HERO CURTAIN CONTROLLER ---
+        const curtain = document.getElementById('minimal-curtain');
+        const bciModal = document.getElementById('bci-modal');
+        let scrollDeltaAccumulator = 0;
+
+        function triggerCurtainDismiss() {
+            if (curtainDismissed) return;
+            curtainDismissed = true;
+            curtain.classList.add('dismissed');
+
+            setTimeout(() => {
+                if (sessionStorage.getItem('bci_accepted') !== 'true') {
+                    bciModal.classList.remove('hidden');
+                    document.body.classList.add('modal-open');
+                } else {
+                    document.body.classList.remove('modal-open');
+                }
+            }, 1000);
+        }
+
+        window.addEventListener('wheel', (e) => {
+            if (curtainDismissed) return;
+            if (e.deltaY > 0) {
+                scrollDeltaAccumulator += e.deltaY;
+                if (scrollDeltaAccumulator > 40) {
+                    triggerCurtainDismiss();
+                }
+            }
+        }, { passive: true });
+
+        let touchStartY = 0;
+        window.addEventListener('touchstart', (e) => {
+            touchStartY = e.touches[0].clientY;
+        }, { passive: true });
+
+        window.addEventListener('touchmove', (e) => {
+            if (curtainDismissed) return;
+            let touchEndY = e.touches[0].clientY;
+            if (touchStartY - touchEndY > 30) {
+                triggerCurtainDismiss();
+            }
+        }, { passive: true });
+
+        curtain.addEventListener('click', triggerCurtainDismiss);
+
+
+        // --- 2. FLOATING IMAGE PREVIEW CURSOR TRACKER ---
         const previewCard = document.getElementById('floating-cursor-preview');
         const previewImg = document.getElementById('floating-cursor-img');
         let mouseX = 0, mouseY = 0;
         let cardX = 0, cardY = 0;
 
         window.addEventListener('mousemove', (e) => {
-            mouseX = e.clientX + 140; // Offset card slightly to the right of cursor
+            mouseX = e.clientX + 140;
             mouseY = e.clientY;
         });
 
@@ -1205,12 +1467,10 @@ None of this requires an elaborate agreement. A short license or assignment nami
                 previewCard.classList.remove('visible');
             });
 
-            // Accordion dropdown click toggle
             row.addEventListener('click', () => {
                 const accordion = row.nextElementSibling;
                 const isExpanded = accordion.classList.contains('expanded');
 
-                // Close other accordions
                 document.querySelectorAll('.row-accordion-body').forEach(el => {
                     if (el !== accordion) el.classList.remove('expanded');
                 });
@@ -1226,8 +1486,21 @@ None of this requires an elaborate agreement. A short license or assignment nami
             });
         });
 
-        // --- 2. MULTI-VIEW NAVIGATION & HASH ROUTING ---
+        // Practices Media Accordion Toggle
+        function toggleMediumAccordion(btn) {
+            const content = btn.nextElementSibling;
+            const icon = btn.querySelector('.medium-toggle-icon');
+            content.classList.toggle('expanded');
+            if (content.classList.contains('expanded')) {
+                icon.textContent = '[ − ]';
+            } else {
+                icon.textContent = '[ + ]';
+            }
+        }
+
+        // --- 3. MULTI-VIEW NAVIGATION & HASH ROUTING ---
         function switchView(targetView, updateHash = true) {
+            triggerCurtainDismiss();
             currentView = targetView;
             const views = {
                 entries: document.getElementById('entries-view'),
@@ -1258,6 +1531,8 @@ None of this requires an elaborate agreement. A short license or assignment nami
                 return;
             }
 
+            triggerCurtainDismiss();
+
             if (['about', 'practices', 'contact'].includes(rawHash)) {
                 switchView(rawHash, false);
                 return;
@@ -1278,7 +1553,7 @@ None of this requires an elaborate agreement. A short license or assignment nami
 
         window.addEventListener('hashchange', handleHashChange);
 
-        // --- 3. BCI DISCLAIMER & INQUIRY MODALS ---
+        // --- 4. BCI DISCLAIMER & INQUIRY MODALS ---
         function acceptDisclaimer() {
             document.getElementById('bci-modal').classList.add('hidden');
             document.body.classList.remove('modal-open');
@@ -1290,7 +1565,12 @@ None of this requires an elaborate agreement. A short license or assignment nami
                 document.getElementById('bci-modal').classList.add('hidden');
                 document.body.classList.remove('modal-open');
             }
-            handleHashChange();
+            
+            const rawHash = window.location.hash.replace('#', '');
+            if (rawHash) {
+                triggerCurtainDismiss();
+                handleHashChange();
+            }
 
             const contactModal = document.getElementById('contact-modal');
             contactModal.addEventListener('click', (e) => {

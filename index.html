@@ -198,15 +198,17 @@
             pointer-events: none !important;
         }
 
+        /* Prominent Large Logo Mark in Top-Left (220px) */
         .curtain-logo-wrapper {
             position: absolute;
             top: 44px;
             left: 44px;
-            width: 110px;
-            height: 110px;
-            transform-origin: 0 0;
-            will-change: transform, opacity;
+            width: 220px;
+            height: 220px;
+            transform-origin: top left;
+            will-change: transform;
             z-index: 10;
+            transition: none !important; /* Pure JS-driven */
         }
 
         .curtain-logo-mask {
@@ -217,10 +219,11 @@
             mask: url("soka logo.svg") no-repeat center / contain;
         }
 
+        /* Initial Curtain Center Positioning (Non-flex, clean baseline) */
         .curtain-center-block {
             position: absolute;
-            top: 48%;
-            left: 50%;
+            top: 50vh;
+            left: 50vw;
             transform: translate(-50%, -50%);
             display: flex;
             flex-direction: column;
@@ -233,15 +236,17 @@
         }
 
         .curtain-title-left-wrap {
-            transform-origin: center center;
+            transform-origin: top left;
             will-change: transform;
             display: inline-block;
+            transition: none !important;
         }
 
         .curtain-title-right-wrap {
-            transform-origin: center center;
+            transform-origin: top left;
             will-change: transform;
             display: inline-block;
+            transition: none !important;
         }
 
         .curtain-title-left {
@@ -684,7 +689,7 @@
             color: #222222;
         }
 
-        /* --- Disciplinary Pillars (Matching Index Headings) --- */
+        /* --- Disciplinary Pillars --- */
         .practices-pillars-section {
             border-top: 1px solid var(--border-line);
             padding-top: 60px;
@@ -860,7 +865,7 @@
         }
         .footer-right a:hover, .footer-modal-btn:hover { color: #111111; }
 
-        /* --- Pop-up Modals --- */
+        /* --- BCI Pop-up Modal (Strictly Above Curtain, z-index: 500) --- */
         .modal-overlay {
             position: fixed;
             top: 0;
@@ -873,7 +878,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            z-index: 400;
+            z-index: 500;
             padding: 20px;
         }
 
@@ -939,7 +944,7 @@
             header { padding: 18px 20px; }
             .page-view { padding: 80px 20px 60px 20px; }
 
-            .curtain-logo-wrapper { top: 24px; left: 24px; width: 70px; height: 70px; }
+            .curtain-logo-wrapper { top: 24px; left: 24px; width: 120px; height: 120px; }
             .curtain-sub-copy { margin-left: 0; max-width: 100%; }
 
             .hero-banner {
@@ -986,36 +991,8 @@
         <img id="floating-cursor-img" src="" alt="Work Preview">
     </div>
 
-    <!-- SCROLL-DRIVEN SHARED-ELEMENT MORPH CURTAIN LAYER -->
-    <div id="intro-curtain">
-        <!-- Big Top-Left Logo Mark -->
-        <div class="curtain-logo-wrapper" id="curtain-logo">
-            <div class="curtain-logo-mask"></div>
-        </div>
-
-        <!-- Centered Wordmark Block -->
-        <div class="curtain-center-block">
-            <div class="curtain-title-left-wrap" id="curtain-title-left">
-                <span class="curtain-title-left">SOKA;</span>
-            </div>
-            <div class="curtain-title-right-wrap" id="curtain-title-right">
-                <span class="curtain-title-right">A LEGAL STUDIO.</span>
-            </div>
-            
-            <p class="curtain-sub-copy" id="curtain-copy">
-                Assisting artists, musicians, and creators in securing what they make — contracts, rights, and structure for India's creative economy.
-            </p>
-        </div>
-
-        <!-- Scroll Indicator Arrow -->
-        <div class="curtain-scroll-arrow" id="curtain-arrow">
-            <div class="curtain-arrow-line"></div>
-            <div class="curtain-arrow-head"></div>
-        </div>
-    </div>
-
-    <!-- BCI COMPLIANCE POPUP MODAL -->
-    <div id="bci-modal" class="modal-overlay hidden">
+    <!-- BCI DISCLAIMER GATE MODAL (LOADS ON TOP ON INITIAL LOAD) -->
+    <div id="bci-modal" class="modal-overlay">
         <div class="modal-box">
             <div class="modal-title">Disclaimer</div>
             <div class="modal-body">
@@ -1052,7 +1029,35 @@ The Bar Council of India does not permit advertisement or solicitation by advoca
         </div>
     </div>
 
-    <!-- MINIMALIST TOP HEADER (LANDING TARGETS FOR MORPH ELEMENTS) -->
+    <!-- SCROLL-DRIVEN SHARED-ELEMENT MORPH CURTAIN LAYER -->
+    <div id="intro-curtain">
+        <!-- Large Top-Left Logo Mark (220px) -->
+        <div class="curtain-logo-wrapper" id="curtain-logo">
+            <div class="curtain-logo-mask"></div>
+        </div>
+
+        <!-- Centered Wordmark Block -->
+        <div class="curtain-center-block">
+            <div class="curtain-title-left-wrap" id="curtain-title-left">
+                <span class="curtain-title-left">SOKA;</span>
+            </div>
+            <div class="curtain-title-right-wrap" id="curtain-title-right">
+                <span class="curtain-title-right">A LEGAL STUDIO.</span>
+            </div>
+            
+            <p class="curtain-sub-copy" id="curtain-copy">
+                Assisting artists, musicians, and creators in securing what they make — contracts, rights, and structure for India's creative economy.
+            </p>
+        </div>
+
+        <!-- Scroll Indicator Arrow -->
+        <div class="curtain-scroll-arrow" id="curtain-arrow">
+            <div class="curtain-arrow-line"></div>
+            <div class="curtain-arrow-head"></div>
+        </div>
+    </div>
+
+    <!-- MINIMALIST TOP HEADER -->
     <header>
         <button class="header-logo-btn" id="target-header-logo" onclick="switchView('entries')">
             <div class="header-logo-mask"></div>
@@ -1068,15 +1073,14 @@ The Bar Council of India does not permit advertisement or solicitation by advoca
     <!-- VIEW 1: BRUTALIST INDEX VIEW WITH PINNED SCROLL HERO -->
     <main id="entries-view" class="page-view">
         
-        <!-- SPLIT DISPLAY HERO BANNER (LANDING TARGET FOR SOKA; & A LEGAL STUDIO.) -->
+        <!-- SPLIT DISPLAY HERO BANNER -->
         <div class="hero-banner" id="target-hero-banner">
             <div class="hero-title-left" id="target-title-left">SOKA;</div>
             <div class="hero-title-right" id="target-title-right">A LEGAL STUDIO.</div>
         </div>
 
-        <!-- MAIN INDEX CONTENT (FADES IN BENEATH HERO DURING TRANSITION) -->
+        <!-- MAIN INDEX CONTENT -->
         <div class="feed-reveal-container" id="feed-reveal">
-            <!-- INDEX METADATA BAR -->
             <div class="index-bar">
                 <div>INDEX OF ENTRIES (<span id="entry-counter">08</span>)</div>
                 <div>[ CLICK TO EXPAND ENTRY ]</div>
@@ -1168,7 +1172,7 @@ What that suggests is not that parody is dangerous, or that it needs to be curta
                     </div>
                 </div>
 
-                <!-- ROW 05: RIGHT TO SKATEBOARD (WITH PREVIEW IMAGE) -->
+                <!-- ROW 05: RIGHT TO SKATEBOARD -->
                 <div class="index-item" id="entry-right-to-skateboard">
                     <div class="index-row-trigger" data-slug="right-to-skateboard" data-preview="r2s.jpeg">
                         <div class="row-num">05</div>
@@ -1219,7 +1223,7 @@ Which is the actual story here, buried under a headline about fair use. This was
                     </div>
                 </div>
 
-                <!-- ROW 03: PROTECTING STEEL AND CONCRETE (WITH PREVIEW IMAGE) -->
+                <!-- ROW 03: PROTECTING STEEL AND CONCRETE -->
                 <div class="index-item" id="entry-protecting-steel-and-concrete">
                     <div class="index-row-trigger" data-slug="protecting-steel-and-concrete" data-preview="snc.jpeg">
                         <div class="row-num">03</div>
@@ -1247,7 +1251,7 @@ That's the idea worth holding past this one case. A society's relationship to it
                     </div>
                 </div>
 
-                <!-- ROW 02: COURTROOM SKETCHES (WITH PREVIEW IMAGE) -->
+                <!-- ROW 02: COURTROOM SKETCHES -->
                 <div class="index-item" id="entry-courtroom-sketches">
                     <div class="index-row-trigger" data-slug="courtroom-sketches" data-preview="cs1.jpeg">
                         <div class="row-num">02</div>
@@ -1257,7 +1261,6 @@ That's the idea worth holding past this one case. A society's relationship to it
                     </div>
                     <div class="row-accordion-body">
                         <div class="essay-inner-wrapper">
-                            
                             <div class="carousel-container">
                                 <div class="carousel-slide">
                                     <img src="cs1.jpeg" alt="Courtroom Sketch 1">
@@ -1618,6 +1621,7 @@ None of this requires an elaborate agreement. A short license or assignment nami
     <script>
         let currentView = 'entries';
         let isCurtainDismissed = false;
+        let isDisclaimerAccepted = false;
 
         // --- 1. MINIMALIST BLUE DOT CURSOR CONTROLLER ---
         const cursorDot = document.getElementById('custom-cursor-dot');
@@ -1668,7 +1672,7 @@ None of this requires an elaborate agreement. A short license or assignment nami
         const bciModal = document.getElementById('bci-modal');
 
         let accumulatedScroll = 0;
-        const SCROLL_DISTANCE = 320; // Exact distance in px to complete transformation
+        const SCROLL_DISTANCE = 320;
         let targetProgress = 0;
         let currentProgress = 0;
 
@@ -1676,12 +1680,11 @@ None of this requires an elaborate agreement. A short license or assignment nami
             return start + (end - start) * factor;
         }
 
-        // Cache initial unscaled bounds
         let morphMetrics = {};
         function computeMorphMetrics() {
             if (isCurtainDismissed) return;
 
-            // Reset inline transforms temporarily to measure clean coordinates
+            // Clear inline transforms to measure clean starting rects
             curtainLogo.style.transform = 'none';
             curtainTitleLeft.style.transform = 'none';
             curtainTitleRight.style.transform = 'none';
@@ -1724,7 +1727,7 @@ None of this requires an elaborate agreement. A short license or assignment nami
 
             const p = Math.max(0, Math.min(1, currentProgress));
 
-            // 1. Logo Transformation (Scale & Glide to Top Header Icon)
+            // Direct Single Interpolated Delta per Element
             if (morphMetrics.logo) {
                 const lx = morphMetrics.logo.dx * p;
                 const ly = morphMetrics.logo.dy * p;
@@ -1732,7 +1735,6 @@ None of this requires an elaborate agreement. A short license or assignment nami
                 curtainLogo.style.transform = `translate3d(${lx}px, ${ly}px, 0) scale(${ls})`;
             }
 
-            // 2. Title Left Transformation (Scale & Slide to Header Left)
             if (morphMetrics.titleLeft) {
                 const tx = morphMetrics.titleLeft.dx * p;
                 const ty = morphMetrics.titleLeft.dy * p;
@@ -1740,7 +1742,6 @@ None of this requires an elaborate agreement. A short license or assignment nami
                 curtainTitleLeft.style.transform = `translate3d(${tx}px, ${ty}px, 0) scale(${ts})`;
             }
 
-            // 3. Title Right Transformation (Scale & Slide to Header Right)
             if (morphMetrics.titleRight) {
                 const rx = morphMetrics.titleRight.dx * p;
                 const ry = morphMetrics.titleRight.dy * p;
@@ -1748,39 +1749,29 @@ None of this requires an elaborate agreement. A short license or assignment nami
                 curtainTitleRight.style.transform = `translate3d(${rx}px, ${ry}px, 0) scale(${rs})`;
             }
 
-            // 4. Fade-out Supporting Copy and Scroll Indicator
+            // Fade Supporting Copy & Scroll Arrow
             const fadeVal = Math.max(0, 1 - p * 2.8);
             curtainCopy.style.opacity = fadeVal;
             curtainCopy.style.transform = `translateY(${p * -20}px)`;
             curtainArrow.style.opacity = Math.max(0, 1 - p * 3.5);
 
-            // 5. Fade-in & Slide-up of Feed Elements beneath Header
+            // Fade/Slide In Main Content Feed Underneath Header
             feedReveal.style.opacity = Math.max(0, (p - 0.35) / 0.65);
             feedReveal.style.transform = `translateY(${(1 - p) * 35}px)`;
 
-            // 6. Complete and Lock Transition Permanently at Progress = 1
+            // Lock Transition Permanently at Progress = 1
             if (p >= 0.999) {
                 isCurtainDismissed = true;
                 document.body.classList.add('curtain-locked');
                 curtainLayer.style.display = 'none';
-
-                // Reveal BCI Disclaimer if not already accepted
-                setTimeout(() => {
-                    if (sessionStorage.getItem('bci_accepted') !== 'true') {
-                        bciModal.classList.remove('hidden');
-                        document.body.classList.add('modal-open');
-                    } else {
-                        document.body.classList.remove('modal-open');
-                    }
-                }, 350);
             } else {
                 requestAnimationFrame(updateMorphAnimation);
             }
         }
 
-        // Wheel Event Calculation
+        // Wheel Event Trigger (Strictly Blocked Until Disclaimer Accepted)
         window.addEventListener('wheel', (e) => {
-            if (isCurtainDismissed || currentView !== 'entries') return;
+            if (!isDisclaimerAccepted || isCurtainDismissed || currentView !== 'entries') return;
             if (e.deltaY > 0) {
                 accumulatedScroll += e.deltaY;
                 targetProgress = Math.min(1, accumulatedScroll / SCROLL_DISTANCE);
@@ -1788,14 +1779,15 @@ None of this requires an elaborate agreement. A short license or assignment nami
             }
         }, { passive: true });
 
-        // Touch Drag Calculation for Mobile
+        // Touch Drag Trigger for Mobile (Strictly Blocked Until Disclaimer Accepted)
         let touchOriginY = 0;
         window.addEventListener('touchstart', (e) => {
+            if (!isDisclaimerAccepted) return;
             touchOriginY = e.touches[0].clientY;
         }, { passive: true });
 
         window.addEventListener('touchmove', (e) => {
-            if (isCurtainDismissed || currentView !== 'entries') return;
+            if (!isDisclaimerAccepted || isCurtainDismissed || currentView !== 'entries') return;
             const currentY = e.touches[0].clientY;
             const deltaY = touchOriginY - currentY;
             if (deltaY > 0) {
@@ -1804,16 +1796,16 @@ None of this requires an elaborate agreement. A short license or assignment nami
             }
         }, { passive: true });
 
-        // Click Curtain to complete automatically
+        // Direct Curtain Click to Complete
         curtainLayer.addEventListener('click', () => {
-            if (!isCurtainDismissed) {
+            if (isDisclaimerAccepted && !isCurtainDismissed) {
                 targetProgress = 1;
                 requestAnimationFrame(updateMorphAnimation);
             }
         });
 
 
-        // --- 4. FLOATING IMAGE PREVIEW CURSOR TRACKER ---
+        // --- 4. FLOATING IMAGE PREVIEW CURSOR TRACKER (SHOWS ONLY WHEN IMAGE EXISTS) ---
         const previewCard = document.getElementById('floating-cursor-preview');
         const previewImg = document.getElementById('floating-cursor-img');
         let mouseX = 0, mouseY = 0;
@@ -1958,23 +1950,30 @@ None of this requires an elaborate agreement. A short license or assignment nami
         window.addEventListener('hashchange', handleHashChange);
         window.addEventListener('resize', computeMorphMetrics);
 
-        // --- 6. BCI DISCLAIMER & INQUIRY MODALS ---
+        // --- 6. BCI DISCLAIMER ACCEPTANCE CONTROLLER ---
         function acceptDisclaimer() {
-            document.getElementById('bci-modal').classList.add('hidden');
+            bciModal.classList.add('hidden');
             document.body.classList.remove('modal-open');
+            isDisclaimerAccepted = true;
             sessionStorage.setItem('bci_accepted', 'true');
+            computeMorphMetrics();
         }
 
         window.addEventListener('DOMContentLoaded', () => {
             computeMorphMetrics();
 
-            // Set initial feed transparency until curtain begins to scroll
+            // Set initial feed transparency
             feedReveal.style.opacity = 0;
             feedReveal.style.transform = 'translateY(35px)';
 
             if (sessionStorage.getItem('bci_accepted') === 'true') {
-                document.getElementById('bci-modal').classList.add('hidden');
+                bciModal.classList.add('hidden');
                 document.body.classList.remove('modal-open');
+                isDisclaimerAccepted = true;
+            } else {
+                bciModal.classList.remove('hidden');
+                document.body.classList.add('modal-open');
+                isDisclaimerAccepted = false;
             }
 
             const rawHash = window.location.hash.replace('#', '');

@@ -64,10 +64,10 @@
             max-width: 100vw;
             background-color: #FFFFFF;
             color: #111111;
-            cursor: none !important; /* Managed by custom blue dot cursor */
+            cursor: none !important;
         }
 
-        a, button, input, textarea, select, .index-row-trigger, .pillar-stagger-row, .header-nav-btn {
+        a, button, input, textarea, select, .index-row-trigger, .pillar-stagger-row, .header-nav-btn, .header-logo-btn {
             cursor: none !important;
         }
 
@@ -129,6 +129,27 @@
             border-bottom: 1px solid transparent;
         }
 
+        .header-logo-btn {
+            background: none;
+            border: none;
+            padding: 0;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 24px;
+            height: 24px;
+        }
+
+        .header-logo-btn svg {
+            width: 100%;
+            height: 100%;
+        }
+
+        .header-nav-right {
+            display: flex;
+            gap: 24px;
+        }
+
         .header-nav-btn {
             font-family: var(--font-mono);
             font-size: 11.5px;
@@ -142,11 +163,6 @@
 
         .header-nav-btn:hover {
             color: var(--blue-accent);
-        }
-
-        .header-nav-right {
-            display: flex;
-            gap: 24px;
         }
 
         /* --- Page Views System --- */
@@ -182,6 +198,7 @@
             align-items: baseline;
             margin-top: 15px;
             margin-bottom: 50px;
+            width: 100%;
         }
 
         body.stage-dismissed .hero-banner {
@@ -196,6 +213,7 @@
             letter-spacing: -2.8px;
             text-transform: uppercase;
             color: #111111;
+            text-align: left;
         }
 
         .hero-title-right {
@@ -205,13 +223,14 @@
             letter-spacing: -2.8px;
             text-transform: uppercase;
             color: var(--blue-accent);
+            text-align: right; /* Pushed to far-right edge */
         }
 
-        /* Pure Blue SVG Logo Mask */
+        /* Pure Blue SVG Logo Mask in Opening Stage */
         .hero-corner-svg {
             position: absolute;
             bottom: 25px;
-            right: 25px;
+            right: 0;
             width: 120px;
             height: 120px;
             pointer-events: none;
@@ -310,7 +329,6 @@
             transition: color 0.2s ease, transform 0.2s ease;
         }
 
-        /* Styled Primary Highlight Entry (Securing the Culture) */
         .row-title-blue {
             color: var(--blue-accent) !important;
             font-weight: 600;
@@ -504,7 +522,7 @@
             text-transform: uppercase;
         }
 
-        /* --- Clean Practices Page Layout with Breathing Room --- */
+        /* --- Clean Practices Page Layout --- */
         .practices-clean-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -632,7 +650,7 @@
         }
 
         .pillar-stagger-row.align-right .pillar-header-group {
-            flex-direction: row-reverse;
+            flex-direction: row;
         }
 
         .pillar-oversized-num {
@@ -846,6 +864,8 @@
                 gap: 10px;
             }
 
+            .hero-title-right { text-align: left; }
+
             .hero-corner-svg {
                 width: 80px;
                 height: 80px;
@@ -865,10 +885,6 @@
             .pillar-stagger-row.align-right {
                 align-items: flex-start;
                 text-align: left;
-            }
-
-            .pillar-stagger-row.align-right .pillar-header-group {
-                flex-direction: row;
             }
 
             .about-skills-columns { grid-template-columns: 1fr; }
@@ -932,9 +948,13 @@ The Bar Council of India does not permit advertisement or solicitation by advoca
         </div>
     </div>
 
-    <!-- MINIMALIST TOP HEADER (STANDARDIZED BUTTON STYLES) -->
+    <!-- MINIMALIST TOP HEADER (LOGO ICON ON LEFT + STANDARDIZED RIGHT NAV) -->
     <header>
-        <button class="header-nav-btn" onclick="switchView('entries')">[ home ]</button>
+        <button class="header-logo-btn" onclick="switchView('entries')">
+            <svg viewBox="0 0 24 24" fill="none">
+                <path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm0 15a5 5 0 110-10 5 5 0 010 10z" fill="#1400FF"/>
+            </svg>
+        </button>
 
         <div class="header-nav-right">
             <button class="header-nav-btn" onclick="switchView('about')">[ about ]</button>
@@ -1247,7 +1267,7 @@ None of this requires an elaborate agreement. A short license or assignment nami
         </div>
     </section>
 
-    <!-- VIEW 3: PRACTICES PAGE (BREATHING SPACE + DESIGN HARMONY) -->
+    <!-- VIEW 3: PRACTICES PAGE (MATCHING INDEX TYPOGRAPHY & DISCIPLINE PILLARS) -->
     <section id="practices-view" class="page-view hidden-view">
         <div class="section-grid-layout">
             <div class="section-top-back" onclick="switchView('entries')">← INDEX / PRACTICES</div>
@@ -1256,7 +1276,7 @@ None of this requires an elaborate agreement. A short license or assignment nami
                 THE STRUCTURAL <span class="highlight-word">FRAMEWORK</span> UNDERNEATH THE CULTURE.
             </h1>
 
-            <!-- Clean Mediums Grid -->
+            <!-- Clean Floating Mediums Grid -->
             <div class="practices-clean-grid">
                 
                 <!-- ROW 1 (ITEM 1): MUSIC -->
@@ -1332,15 +1352,18 @@ None of this requires an elaborate agreement. A short license or assignment nami
 
             </div>
 
-            <!-- Disciplinary Pillars Section with Metadata Sub-Labels -->
+            <!-- Disciplinary Pillars Section Header in Solid Black -->
             <div class="practices-pillars-section">
-                <div class="meta-label">DISCIPLINARY PILLARS</div>
+                <h2 class="section-hero-statement" style="font-size: clamp(26px, 3.8vw, 52px); margin-bottom: 25px; color: #111111;">
+                    THE STRUCTURAL PILLARS SECURING THE CULTURE.
+                </h2>
+                <div class="meta-label" style="margin-bottom: 10px;">DISCIPLINARY PILLARS</div>
 
                 <div class="pillars-staggered-list">
                     
                     <!-- PILLAR 01 (LEFT ALIGNED) -->
                     <div class="pillar-stagger-row align-left" onclick="togglePillarAccordion(this)">
-                        <div class="pillar-meta-tag">DOMAIN // 01</div>
+                        <div class="pillar-meta-tag">DOMAIN</div>
                         <div class="pillar-header-group">
                             <span class="pillar-oversized-num">01 /</span>
                             <span class="pillar-oversized-name">intellectual property</span>
@@ -1352,12 +1375,12 @@ None of this requires an elaborate agreement. A short license or assignment nami
                         </div>
                     </div>
 
-                    <!-- PILLAR 02 (RIGHT ALIGNED) -->
+                    <!-- PILLAR 02 (RIGHT ALIGNED - NUM ON RIGHT / 02) -->
                     <div class="pillar-stagger-row align-right" onclick="togglePillarAccordion(this)">
-                        <div class="pillar-meta-tag">STRUCTURE // 02</div>
+                        <div class="pillar-meta-tag">STRUCTURE</div>
                         <div class="pillar-header-group">
-                            <span class="pillar-oversized-num">02 /</span>
                             <span class="pillar-oversized-name">contracts & structure</span>
+                            <span class="pillar-oversized-num">/ 02</span>
                         </div>
                         <div class="pillar-stagger-accordion">
                             <p class="pillar-stagger-desc">
@@ -1368,7 +1391,7 @@ None of this requires an elaborate agreement. A short license or assignment nami
 
                     <!-- PILLAR 03 (LEFT ALIGNED) -->
                     <div class="pillar-stagger-row align-left" onclick="togglePillarAccordion(this)">
-                        <div class="pillar-meta-tag">RESOLUTION // 03</div>
+                        <div class="pillar-meta-tag">RESOLUTION</div>
                         <div class="pillar-header-group">
                             <span class="pillar-oversized-num">03 /</span>
                             <span class="pillar-oversized-name">disputes & resolution</span>
@@ -1380,12 +1403,12 @@ None of this requires an elaborate agreement. A short license or assignment nami
                         </div>
                     </div>
 
-                    <!-- PILLAR 04 (RIGHT ALIGNED) -->
+                    <!-- PILLAR 04 (RIGHT ALIGNED - NUM ON RIGHT / 04) -->
                     <div class="pillar-stagger-row align-right" onclick="togglePillarAccordion(this)">
-                        <div class="pillar-meta-tag">ENFORCEMENT // 04</div>
+                        <div class="pillar-meta-tag">ENFORCEMENT</div>
                         <div class="pillar-header-group">
-                            <span class="pillar-oversized-num">04 /</span>
                             <span class="pillar-oversized-name">rights & enforcement</span>
+                            <span class="pillar-oversized-num">/ 04</span>
                         </div>
                         <div class="pillar-stagger-accordion">
                             <p class="pillar-stagger-desc">
@@ -1491,8 +1514,7 @@ None of this requires an elaborate agreement. A short license or assignment nami
             cursorDot.style.top = `${cursorY}px`;
         });
 
-        // Add interactive hover states for cursor
-        document.querySelectorAll('button, a, .index-row-trigger, .pillar-stagger-row, .section-top-back, input, textarea').forEach(el => {
+        document.querySelectorAll('button, a, .index-row-trigger, .pillar-stagger-row, .section-top-back, input, textarea, .header-logo-btn').forEach(el => {
             el.addEventListener('mouseenter', () => cursorDot.classList.add('hovered'));
             el.addEventListener('mouseleave', () => cursorDot.classList.remove('hovered'));
         });

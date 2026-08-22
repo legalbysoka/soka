@@ -179,143 +179,14 @@
             display: none !important;
         }
 
-        /* --- Scroll-Driven Morph Curtain Layer --- */
-        #intro-curtain {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            background-color: #FFFFFF;
-            z-index: 250;
-            overflow: hidden;
-            pointer-events: auto;
-            touch-action: pan-y;
-        }
-
-        body.curtain-locked #intro-curtain {
-            display: none !important;
-            pointer-events: none !important;
-        }
-
-        /* Prominent Large Logo Mark in Top-Left (220px) */
-        .curtain-logo-wrapper {
-            position: absolute;
-            top: 44px;
-            left: 44px;
-            width: 220px;
-            height: 220px;
-            transform-origin: top left;
-            will-change: transform;
-            z-index: 10;
-            transition: none !important; /* Pure JS-driven */
-        }
-
-        .curtain-logo-mask {
-            width: 100%;
-            height: 100%;
-            background-color: var(--blue-accent);
-            -webkit-mask: url("soka logo.svg") no-repeat center / contain;
-            mask: url("soka logo.svg") no-repeat center / contain;
-        }
-
-        /* Initial Curtain Center Positioning (Non-flex, clean baseline) */
-        .curtain-center-block {
-            position: absolute;
-            top: 50vh;
-            left: 50vw;
-            transform: translate(-50%, -50%);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-            width: 90vw;
-            max-width: 1200px;
-            z-index: 10;
-            pointer-events: none;
-        }
-
-        .curtain-title-left-wrap {
-            transform-origin: top left;
-            will-change: transform;
-            display: inline-block;
-            transition: none !important;
-        }
-
-        .curtain-title-right-wrap {
-            transform-origin: top left;
-            will-change: transform;
-            display: inline-block;
-            transition: none !important;
-        }
-
-        .curtain-title-left {
-            font-size: clamp(48px, 8.5vw, 118px);
-            font-weight: 800;
-            line-height: 0.92;
-            letter-spacing: -3.5px;
-            text-transform: uppercase;
-            color: #111111;
-            display: block;
-        }
-
-        .curtain-title-right {
-            font-size: clamp(48px, 8.5vw, 118px);
-            font-weight: 800;
-            line-height: 0.92;
-            letter-spacing: -3.5px;
-            text-transform: uppercase;
-            color: var(--blue-accent);
-            display: block;
-        }
-
-        .curtain-sub-copy {
-            margin-top: 36px;
-            max-width: 580px;
-            font-size: 16px;
-            line-height: 1.65;
-            color: #444444;
-            text-align: left;
-            will-change: opacity, transform;
-            align-self: flex-start;
-            margin-left: max(0px, calc(50% - 290px));
-        }
-
-        .curtain-scroll-arrow {
-            position: absolute;
-            bottom: 40px;
-            right: 44px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            will-change: opacity;
-            pointer-events: none;
-            z-index: 10;
-        }
-
-        .curtain-arrow-line {
-            width: 1px;
-            height: 48px;
-            background-color: #AAAAAA;
-        }
-
-        .curtain-arrow-head {
-            width: 6px;
-            height: 6px;
-            border-right: 1px solid #AAAAAA;
-            border-bottom: 1px solid #AAAAAA;
-            transform: rotate(45deg);
-            margin-top: -3px;
-        }
-
-        /* --- Split Display Hero Header Target in Main Feed --- */
+        /* --- Split Display Hero Header --- */
         .hero-banner {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 40px;
             align-items: baseline;
-            margin-top: 15px;
-            margin-bottom: 50px;
+            margin-top: 20px;
+            margin-bottom: 55px;
             width: 100%;
         }
 
@@ -337,11 +208,6 @@
             text-transform: uppercase;
             color: var(--blue-accent);
             text-align: right;
-        }
-
-        /* --- Index & Main Feed Content Reveal Transition --- */
-        .feed-reveal-container {
-            will-change: opacity, transform;
         }
 
         /* --- Editorial Blue Word Highlight --- */
@@ -865,7 +731,7 @@
         }
         .footer-right a:hover, .footer-modal-btn:hover { color: #111111; }
 
-        /* --- BCI Pop-up Modal (Strictly Above Curtain, z-index: 500) --- */
+        /* --- Pop-up Modals --- */
         .modal-overlay {
             position: fixed;
             top: 0;
@@ -944,9 +810,6 @@
             header { padding: 18px 20px; }
             .page-view { padding: 80px 20px 60px 20px; }
 
-            .curtain-logo-wrapper { top: 24px; left: 24px; width: 120px; height: 120px; }
-            .curtain-sub-copy { margin-left: 0; max-width: 100%; }
-
             .hero-banner {
                 grid-template-columns: 1fr;
                 gap: 10px;
@@ -991,7 +854,7 @@
         <img id="floating-cursor-img" src="" alt="Work Preview">
     </div>
 
-    <!-- BCI DISCLAIMER GATE MODAL (LOADS ON TOP ON INITIAL LOAD) -->
+    <!-- BCI DISCLAIMER GATE MODAL -->
     <div id="bci-modal" class="modal-overlay">
         <div class="modal-box">
             <div class="modal-title">Disclaimer</div>
@@ -1029,37 +892,9 @@ The Bar Council of India does not permit advertisement or solicitation by advoca
         </div>
     </div>
 
-    <!-- SCROLL-DRIVEN SHARED-ELEMENT MORPH CURTAIN LAYER -->
-    <div id="intro-curtain">
-        <!-- Large Top-Left Logo Mark (220px) -->
-        <div class="curtain-logo-wrapper" id="curtain-logo">
-            <div class="curtain-logo-mask"></div>
-        </div>
-
-        <!-- Centered Wordmark Block -->
-        <div class="curtain-center-block">
-            <div class="curtain-title-left-wrap" id="curtain-title-left">
-                <span class="curtain-title-left">SOKA;</span>
-            </div>
-            <div class="curtain-title-right-wrap" id="curtain-title-right">
-                <span class="curtain-title-right">A LEGAL STUDIO.</span>
-            </div>
-            
-            <p class="curtain-sub-copy" id="curtain-copy">
-                Assisting artists, musicians, and creators in securing what they make — contracts, rights, and structure for India's creative economy.
-            </p>
-        </div>
-
-        <!-- Scroll Indicator Arrow -->
-        <div class="curtain-scroll-arrow" id="curtain-arrow">
-            <div class="curtain-arrow-line"></div>
-            <div class="curtain-arrow-head"></div>
-        </div>
-    </div>
-
     <!-- MINIMALIST TOP HEADER -->
     <header>
-        <button class="header-logo-btn" id="target-header-logo" onclick="switchView('entries')">
+        <button class="header-logo-btn" onclick="switchView('entries')">
             <div class="header-logo-mask"></div>
         </button>
 
@@ -1070,17 +905,17 @@ The Bar Council of India does not permit advertisement or solicitation by advoca
         </div>
     </header>
 
-    <!-- VIEW 1: BRUTALIST INDEX VIEW WITH PINNED SCROLL HERO -->
+    <!-- VIEW 1: BRUTALIST INDEX VIEW -->
     <main id="entries-view" class="page-view">
         
         <!-- SPLIT DISPLAY HERO BANNER -->
-        <div class="hero-banner" id="target-hero-banner">
-            <div class="hero-title-left" id="target-title-left">SOKA;</div>
-            <div class="hero-title-right" id="target-title-right">A LEGAL STUDIO.</div>
+        <div class="hero-banner">
+            <div class="hero-title-left">SOKA;</div>
+            <div class="hero-title-right">A LEGAL STUDIO.</div>
         </div>
 
         <!-- MAIN INDEX CONTENT -->
-        <div class="feed-reveal-container" id="feed-reveal">
+        <div>
             <div class="index-bar">
                 <div>INDEX OF ENTRIES (<span id="entry-counter">08</span>)</div>
                 <div>[ CLICK TO EXPAND ENTRY ]</div>
@@ -1620,8 +1455,6 @@ None of this requires an elaborate agreement. A short license or assignment nami
     <!-- INTERACTIVE JAVASCRIPT LOGIC -->
     <script>
         let currentView = 'entries';
-        let isCurtainDismissed = false;
-        let isDisclaimerAccepted = false;
 
         // --- 1. MINIMALIST BLUE DOT CURSOR CONTROLLER ---
         const cursorDot = document.getElementById('custom-cursor-dot');
@@ -1635,13 +1468,10 @@ None of this requires an elaborate agreement. A short license or assignment nami
             cursorDot.style.top = `${cursorY}px`;
         });
 
-        function attachCursorHoverListeners() {
-            document.querySelectorAll('button, a, .index-row-trigger, .pillar-stagger-row, .section-top-back, input, textarea, .header-logo-btn').forEach(el => {
-                el.addEventListener('mouseenter', () => cursorDot.classList.add('hovered'));
-                el.addEventListener('mouseleave', () => cursorDot.classList.remove('hovered'));
-            });
-        }
-        attachCursorHoverListeners();
+        document.querySelectorAll('button, a, .index-row-trigger, .pillar-stagger-row, .section-top-back, input, textarea, .header-logo-btn').forEach(el => {
+            el.addEventListener('mouseenter', () => cursorDot.classList.add('hovered'));
+            el.addEventListener('mouseleave', () => cursorDot.classList.remove('hovered'));
+        });
 
 
         // --- 2. LIVE DELHI TIME TRACKER ---
@@ -1657,155 +1487,7 @@ None of this requires an elaborate agreement. A short license or assignment nami
         updateDelhiTime();
 
 
-        // --- 3. SCROLL-DRIVEN SHARED-ELEMENT MORPH ENGINE ---
-        const curtainLayer = document.getElementById('intro-curtain');
-        const curtainLogo = document.getElementById('curtain-logo');
-        const curtainTitleLeft = document.getElementById('curtain-title-left');
-        const curtainTitleRight = document.getElementById('curtain-title-right');
-        const curtainCopy = document.getElementById('curtain-copy');
-        const curtainArrow = document.getElementById('curtain-arrow');
-
-        const targetHeaderLogo = document.getElementById('target-header-logo');
-        const targetTitleLeft = document.getElementById('target-title-left');
-        const targetTitleRight = document.getElementById('target-title-right');
-        const feedReveal = document.getElementById('feed-reveal');
-        const bciModal = document.getElementById('bci-modal');
-
-        let accumulatedScroll = 0;
-        const SCROLL_DISTANCE = 320;
-        let targetProgress = 0;
-        let currentProgress = 0;
-
-        function lerp(start, end, factor) {
-            return start + (end - start) * factor;
-        }
-
-        let morphMetrics = {};
-        function computeMorphMetrics() {
-            if (isCurtainDismissed) return;
-
-            // Clear inline transforms to measure clean starting rects
-            curtainLogo.style.transform = 'none';
-            curtainTitleLeft.style.transform = 'none';
-            curtainTitleRight.style.transform = 'none';
-
-            const cLogoRect = curtainLogo.getBoundingClientRect();
-            const tLogoRect = targetHeaderLogo.getBoundingClientRect();
-
-            const cLeftRect = curtainTitleLeft.getBoundingClientRect();
-            const tLeftRect = targetTitleLeft.getBoundingClientRect();
-
-            const cRightRect = curtainTitleRight.getBoundingClientRect();
-            const tRightRect = targetTitleRight.getBoundingClientRect();
-
-            morphMetrics = {
-                logo: {
-                    dx: tLogoRect.left - cLogoRect.left,
-                    dy: tLogoRect.top - cLogoRect.top,
-                    scale: tLogoRect.width / cLogoRect.width
-                },
-                titleLeft: {
-                    dx: tLeftRect.left - cLeftRect.left,
-                    dy: tLeftRect.top - cLeftRect.top,
-                    scale: tLeftRect.width / cLeftRect.width
-                },
-                titleRight: {
-                    dx: tRightRect.left - cRightRect.left,
-                    dy: tRightRect.top - cRightRect.top,
-                    scale: tRightRect.width / cRightRect.width
-                }
-            };
-        }
-
-        function updateMorphAnimation() {
-            if (isCurtainDismissed) return;
-
-            currentProgress = lerp(currentProgress, targetProgress, 0.16);
-            if (Math.abs(currentProgress - targetProgress) < 0.001) {
-                currentProgress = targetProgress;
-            }
-
-            const p = Math.max(0, Math.min(1, currentProgress));
-
-            // Direct Single Interpolated Delta per Element
-            if (morphMetrics.logo) {
-                const lx = morphMetrics.logo.dx * p;
-                const ly = morphMetrics.logo.dy * p;
-                const ls = 1 + (morphMetrics.logo.scale - 1) * p;
-                curtainLogo.style.transform = `translate3d(${lx}px, ${ly}px, 0) scale(${ls})`;
-            }
-
-            if (morphMetrics.titleLeft) {
-                const tx = morphMetrics.titleLeft.dx * p;
-                const ty = morphMetrics.titleLeft.dy * p;
-                const ts = 1 + (morphMetrics.titleLeft.scale - 1) * p;
-                curtainTitleLeft.style.transform = `translate3d(${tx}px, ${ty}px, 0) scale(${ts})`;
-            }
-
-            if (morphMetrics.titleRight) {
-                const rx = morphMetrics.titleRight.dx * p;
-                const ry = morphMetrics.titleRight.dy * p;
-                const rs = 1 + (morphMetrics.titleRight.scale - 1) * p;
-                curtainTitleRight.style.transform = `translate3d(${rx}px, ${ry}px, 0) scale(${rs})`;
-            }
-
-            // Fade Supporting Copy & Scroll Arrow
-            const fadeVal = Math.max(0, 1 - p * 2.8);
-            curtainCopy.style.opacity = fadeVal;
-            curtainCopy.style.transform = `translateY(${p * -20}px)`;
-            curtainArrow.style.opacity = Math.max(0, 1 - p * 3.5);
-
-            // Fade/Slide In Main Content Feed Underneath Header
-            feedReveal.style.opacity = Math.max(0, (p - 0.35) / 0.65);
-            feedReveal.style.transform = `translateY(${(1 - p) * 35}px)`;
-
-            // Lock Transition Permanently at Progress = 1
-            if (p >= 0.999) {
-                isCurtainDismissed = true;
-                document.body.classList.add('curtain-locked');
-                curtainLayer.style.display = 'none';
-            } else {
-                requestAnimationFrame(updateMorphAnimation);
-            }
-        }
-
-        // Wheel Event Trigger (Strictly Blocked Until Disclaimer Accepted)
-        window.addEventListener('wheel', (e) => {
-            if (!isDisclaimerAccepted || isCurtainDismissed || currentView !== 'entries') return;
-            if (e.deltaY > 0) {
-                accumulatedScroll += e.deltaY;
-                targetProgress = Math.min(1, accumulatedScroll / SCROLL_DISTANCE);
-                requestAnimationFrame(updateMorphAnimation);
-            }
-        }, { passive: true });
-
-        // Touch Drag Trigger for Mobile (Strictly Blocked Until Disclaimer Accepted)
-        let touchOriginY = 0;
-        window.addEventListener('touchstart', (e) => {
-            if (!isDisclaimerAccepted) return;
-            touchOriginY = e.touches[0].clientY;
-        }, { passive: true });
-
-        window.addEventListener('touchmove', (e) => {
-            if (!isDisclaimerAccepted || isCurtainDismissed || currentView !== 'entries') return;
-            const currentY = e.touches[0].clientY;
-            const deltaY = touchOriginY - currentY;
-            if (deltaY > 0) {
-                targetProgress = Math.min(1, (deltaY * 1.6) / SCROLL_DISTANCE);
-                requestAnimationFrame(updateMorphAnimation);
-            }
-        }, { passive: true });
-
-        // Direct Curtain Click to Complete
-        curtainLayer.addEventListener('click', () => {
-            if (isDisclaimerAccepted && !isCurtainDismissed) {
-                targetProgress = 1;
-                requestAnimationFrame(updateMorphAnimation);
-            }
-        });
-
-
-        // --- 4. FLOATING IMAGE PREVIEW CURSOR TRACKER (SHOWS ONLY WHEN IMAGE EXISTS) ---
+        // --- 3. FLOATING IMAGE PREVIEW CURSOR TRACKER (SHOWS ONLY WHEN PREVIEW EXISTS) ---
         const previewCard = document.getElementById('floating-cursor-preview');
         const previewImg = document.getElementById('floating-cursor-img');
         let mouseX = 0, mouseY = 0;
@@ -1891,14 +1573,8 @@ None of this requires an elaborate agreement. A short license or assignment nami
         }
 
 
-        // --- 5. MULTI-VIEW NAVIGATION & HASH ROUTING ---
+        // --- 4. MULTI-VIEW NAVIGATION & HASH ROUTING ---
         function switchView(targetView, updateHash = true) {
-            if (!isCurtainDismissed) {
-                isCurtainDismissed = true;
-                document.body.classList.add('curtain-locked');
-                curtainLayer.style.display = 'none';
-            }
-
             currentView = targetView;
             const views = {
                 entries: document.getElementById('entries-view'),
@@ -1948,43 +1624,20 @@ None of this requires an elaborate agreement. A short license or assignment nami
         }
 
         window.addEventListener('hashchange', handleHashChange);
-        window.addEventListener('resize', computeMorphMetrics);
 
-        // --- 6. BCI DISCLAIMER ACCEPTANCE CONTROLLER ---
+        // --- 5. BCI DISCLAIMER & INQUIRY MODALS ---
         function acceptDisclaimer() {
-            bciModal.classList.add('hidden');
+            document.getElementById('bci-modal').classList.add('hidden');
             document.body.classList.remove('modal-open');
-            isDisclaimerAccepted = true;
             sessionStorage.setItem('bci_accepted', 'true');
-            computeMorphMetrics();
         }
 
         window.addEventListener('DOMContentLoaded', () => {
-            computeMorphMetrics();
-
-            // Set initial feed transparency
-            feedReveal.style.opacity = 0;
-            feedReveal.style.transform = 'translateY(35px)';
-
             if (sessionStorage.getItem('bci_accepted') === 'true') {
-                bciModal.classList.add('hidden');
+                document.getElementById('bci-modal').classList.add('hidden');
                 document.body.classList.remove('modal-open');
-                isDisclaimerAccepted = true;
-            } else {
-                bciModal.classList.remove('hidden');
-                document.body.classList.add('modal-open');
-                isDisclaimerAccepted = false;
             }
-
-            const rawHash = window.location.hash.replace('#', '');
-            if (rawHash) {
-                isCurtainDismissed = true;
-                document.body.classList.add('curtain-locked');
-                curtainLayer.style.display = 'none';
-                feedReveal.style.opacity = 1;
-                feedReveal.style.transform = 'none';
-                handleHashChange();
-            }
+            handleHashChange();
 
             const contactModal = document.getElementById('contact-modal');
             contactModal.addEventListener('click', (e) => {

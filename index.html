@@ -102,14 +102,14 @@
             pointer-events: none;
             z-index: 9999;
             transform: translate(-50%, -50%);
-            transition: width 0.2s ease, height 0.2s ease, background-color 0.2s ease, opacity 0.2s ease;
+            transition: width 0.2s cubic-bezier(0.16, 1, 0.3, 1), height 0.2s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.2s ease;
         }
 
         #custom-cursor-dot.hovered {
-            width: 22px;
-            height: 22px;
-            background-color: rgba(20, 0, 255, 0.25);
-            border: 1px solid var(--blue-accent);
+            width: 26px;
+            height: 26px;
+            background-color: rgba(20, 0, 255, 0.15);
+            border: 1.5px solid var(--blue-accent);
         }
 
         /* --- Minimalist Top Header --- */
@@ -136,13 +136,16 @@
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            width: 24px;
-            height: 24px;
+            width: 22px;
+            height: 22px;
         }
 
-        .header-logo-btn svg {
+        .header-logo-mask {
             width: 100%;
             height: 100%;
+            background-color: var(--blue-accent);
+            -webkit-mask: url("soka logo.svg") no-repeat center / contain;
+            mask: url("soka logo.svg") no-repeat center / contain;
         }
 
         .header-nav-right {
@@ -223,10 +226,10 @@
             letter-spacing: -2.8px;
             text-transform: uppercase;
             color: var(--blue-accent);
-            text-align: right; /* Pushed to far-right edge */
+            text-align: right;
         }
 
-        /* Pure Blue SVG Logo Mask in Opening Stage */
+        /* SOKA Blue Masked SVG in Stage */
         .hero-corner-svg {
             position: absolute;
             bottom: 25px;
@@ -948,12 +951,10 @@ The Bar Council of India does not permit advertisement or solicitation by advoca
         </div>
     </div>
 
-    <!-- MINIMALIST TOP HEADER (LOGO ICON ON LEFT + STANDARDIZED RIGHT NAV) -->
+    <!-- MINIMALIST TOP HEADER -->
     <header>
         <button class="header-logo-btn" onclick="switchView('entries')">
-            <svg viewBox="0 0 24 24" fill="none">
-                <path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm0 15a5 5 0 110-10 5 5 0 010 10z" fill="#1400FF"/>
-            </svg>
+            <div class="header-logo-mask"></div>
         </button>
 
         <div class="header-nav-right">
@@ -989,7 +990,7 @@ The Bar Council of India does not permit advertisement or solicitation by advoca
 
         <!-- INDEX METADATA BAR -->
         <div class="index-bar">
-            <div>INDEX OF ENTRIES (07)</div>
+            <div>INDEX OF ENTRIES (<span id="entry-counter">07</span>)</div>
             <div>[ CLICK TO EXPAND ENTRY ]</div>
         </div>
 
@@ -1003,7 +1004,7 @@ The Bar Council of India does not permit advertisement or solicitation by advoca
         <!-- INDEX LIST -->
         <div class="index-list">
             
-            <!-- ROW 07: SECURING THE CULTURE (BLUE HIGHLIGHTED TITLE) -->
+            <!-- ROW 07: SECURING THE CULTURE -->
             <div class="index-item" id="entry-securing-the-culture">
                 <div class="index-row-trigger" data-slug="securing-the-culture" data-preview="tab-icon.png">
                     <div class="row-num">07</div>
@@ -1267,7 +1268,7 @@ None of this requires an elaborate agreement. A short license or assignment nami
         </div>
     </section>
 
-    <!-- VIEW 3: PRACTICES PAGE (MATCHING INDEX TYPOGRAPHY & DISCIPLINE PILLARS) -->
+    <!-- VIEW 3: PRACTICES PAGE -->
     <section id="practices-view" class="page-view hidden-view">
         <div class="section-grid-layout">
             <div class="section-top-back" onclick="switchView('entries')">← INDEX / PRACTICES</div>
@@ -1276,7 +1277,7 @@ None of this requires an elaborate agreement. A short license or assignment nami
                 THE STRUCTURAL <span class="highlight-word">FRAMEWORK</span> UNDERNEATH THE CULTURE.
             </h1>
 
-            <!-- Clean Floating Mediums Grid -->
+            <!-- Clean Mediums Grid -->
             <div class="practices-clean-grid">
                 
                 <!-- ROW 1 (ITEM 1): MUSIC -->
@@ -1481,13 +1482,13 @@ None of this requires an elaborate agreement. A short license or assignment nami
         </div>
     </section>
 
-    <!-- FIXED FOOTER -->
+    <!-- FIXED FOOTER WITH LIVE DELHI GMT+5:30 TIME TRACKER -->
     <footer>
         <div class="footer-left">
             © 2026 SOKA
         </div>
         <div class="footer-center">
-            LEGAL STUDIO FOR INDIA'S CREATIVE ECONOMY
+            <span id="delhi-time-tracker">NEW DELHI 16:21 / IST</span>
         </div>
         <div class="footer-right">
             <button class="footer-modal-btn" onclick="toggleContactModal(true)">[send enquiry]</button>
@@ -1520,7 +1521,20 @@ None of this requires an elaborate agreement. A short license or assignment nami
         });
 
 
-        // --- 2. ONE-WAY PINNED HERO TRANSITION ---
+        // --- 2. LIVE DELHI TIME TRACKER ---
+        function updateDelhiTime() {
+            const timeEl = document.getElementById('delhi-time-tracker');
+            if (timeEl) {
+                const now = new Date();
+                const options = { timeZone: 'Asia/Kolkata', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false };
+                timeEl.textContent = `NEW DELHI ${now.toLocaleTimeString('en-GB', options)} / IST`;
+            }
+        }
+        setInterval(updateDelhiTime, 1000);
+        updateDelhiTime();
+
+
+        // --- 3. ONE-WAY PINNED HERO TRANSITION ---
         const initialStage = document.getElementById('initial-stage');
         const pinnedBanner = document.getElementById('pinned-hero-banner');
         const bciModal = document.getElementById('bci-modal');
@@ -1564,7 +1578,7 @@ None of this requires an elaborate agreement. A short license or assignment nami
         initialStage.addEventListener('click', triggerHeroDock);
 
 
-        // --- 3. FLOATING IMAGE PREVIEW CURSOR TRACKER ---
+        // --- 4. FLOATING IMAGE PREVIEW CURSOR TRACKER ---
         const previewCard = document.getElementById('floating-cursor-preview');
         const previewImg = document.getElementById('floating-cursor-img');
         let mouseX = 0, mouseY = 0;
@@ -1648,7 +1662,7 @@ None of this requires an elaborate agreement. A short license or assignment nami
         }
 
 
-        // --- 4. MULTI-VIEW NAVIGATION & HASH ROUTING ---
+        // --- 5. MULTI-VIEW NAVIGATION & HASH ROUTING ---
         function switchView(targetView, updateHash = true) {
             triggerHeroDock();
             currentView = targetView;
@@ -1703,7 +1717,7 @@ None of this requires an elaborate agreement. A short license or assignment nami
 
         window.addEventListener('hashchange', handleHashChange);
 
-        // --- 5. BCI DISCLAIMER & INQUIRY MODALS ---
+        // --- 6. BCI DISCLAIMER & INQUIRY MODALS ---
         function acceptDisclaimer() {
             document.getElementById('bci-modal').classList.add('hidden');
             document.body.classList.remove('modal-open');

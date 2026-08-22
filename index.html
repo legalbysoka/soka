@@ -14,10 +14,10 @@
     <!-- TAB ICON / FAVICON -->
     <link rel="icon" type="image/png" href="tab-icon.png">
 
-    <!-- GOOGLE FONTS: Newsreader & JetBrains Mono -->
+    <!-- GOOGLE FONTS: Inter (Brutalist Display) & JetBrains Mono -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500&family=Newsreader:ital,opsz,wght@0,6..72,300..700;1,6..72,300..700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@300;400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,300..600;1,6..72,300..600&display=swap" rel="stylesheet">
 
     <!-- JSON-LD STRUCTURED DATA FOR AI & GOOGLE -->
     <script type="application/ld+json">
@@ -47,16 +47,12 @@
         "Creator Rights",
         "Moral Rights",
         "Entertainment Law India"
-      ],
-      "sameAs": [
-        "https://www.instagram.com/legalbysoka",
-        "https://linkedin.com/company/legalbysoka"
       ]
     }
     </script>
 
     <style>
-        /* --- Core Reset & Dynamic Variables --- */
+        /* --- Core Reset & Design Variables --- */
         * {
             margin: 0;
             padding: 0;
@@ -66,164 +62,432 @@
         html, body {
             overflow-x: hidden;
             max-width: 100vw;
+            background-color: #FFFFFF;
+            color: #111111;
         }
 
         :root {
-            --bg-color: #1400FF;
-            --text-color: #FFFFFF;
-            --date-color: rgba(255, 255, 255, 0.55);
-            --border-color: rgba(255, 255, 255, 0.18);
-            --modal-overlay-bg: rgba(20, 0, 255, 0.22);
-
-            --font-serif: 'Newsreader', 'Times New Roman', serif;
+            --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
             --font-mono: 'JetBrains Mono', monospace;
-        }
-
-        body.inverted {
-            --bg-color: #FFFFFF;
-            --text-color: #1400FF;
-            --date-color: rgba(20, 0, 255, 0.5);
-            --border-color: rgba(20, 0, 255, 0.2);
-            --modal-overlay-bg: rgba(255, 255, 255, 0.35);
+            --font-serif: 'Newsreader', 'Times New Roman', serif;
+            --border-line: #E5E5E5;
+            --blue-accent: #1400FF;
+            --text-dim: #777777;
         }
 
         body {
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            font-family: var(--font-serif);
-            font-size: 16px;
-            line-height: 1.65;
-            letter-spacing: -0.15px;
+            font-family: var(--font-sans);
+            font-size: 15px;
+            line-height: 1.6;
             -webkit-font-smoothing: antialiased;
-            height: 100vh;
-            overflow-y: hidden;
+            min-height: 100vh;
             display: flex;
             flex-direction: column;
-            transition: background-color 0.8s cubic-bezier(0.25, 1, 0.5, 1), color 0.8s cubic-bezier(0.25, 1, 0.5, 1);
         }
 
-        /* --- Monospace Utility Elements --- */
-        .date, 
-        .nav-btn, 
-        .footer-right, 
-        .footer-left,
-        .close-modal-link,
-        .practice-toggle-icon,
-        .image-caption {
-            font-family: var(--font-mono);
-            letter-spacing: -0.3px;
-        }
-
-        body.modal-open header,
-        body.modal-open footer {
-            pointer-events: none;
-        }
-
-        /* --- Micro-Animations: Scale Underlines --- */
-        .essay-trigger, .nav-btn, .brand-header, .learn-more-link, .footer-right a, .contact-btn, .practice-heading, .blue-strip-trigger {
-            position: relative;
-            text-decoration: none !important;
-        }
-
-        .essay-trigger::after, .nav-btn::after, .brand-header::after, .learn-more-link::after, .footer-right a::after, .contact-btn::after, .practice-heading::after, .blue-strip-trigger::after {
-            content: '';
-            position: absolute;
-            bottom: -1px;
-            left: 0;
-            width: 100%;
-            height: 1px;
-            background-color: currentColor;
-            transform: scaleX(0);
-            transform-origin: right;
-            transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
-            opacity: 0.8;
-        }
-
-        .essay-trigger:hover::after, .nav-btn:hover::after, .brand-header:hover::after, .learn-more-link:hover::after, .footer-right a:hover::after, .contact-btn:hover::after, .practice-heading:hover::after, .blue-strip-trigger:hover::after {
-            transform: scaleX(1);
-            transform-origin: left;
-        }
-
-        /* --- Fixed Top-Right Header --- */
+        /* --- Minimalist Top Utility Header --- */
         header {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
-            padding: 35px 50px 15px 50px;
-            background-color: var(--bg-color);
-            z-index: 80;
-            display: flex;
-            flex-direction: column;
-            align-items: flex-end;
-            transition: background-color 0.8s ease;
+            padding: 22px 36px;
+            background-color: rgba(255, 255, 255, 0.95);
+            -webkit-backdrop-filter: blur(10px);
+            backdrop-filter: blur(10px);
+            z-index: 100;
+            display: grid;
+            grid-template-columns: auto 1fr auto;
+            align-items: center;
+            border-bottom: 1px solid transparent;
         }
 
-        .brand-header {
-            font-size: 16px;
-            font-weight: 400;
-            letter-spacing: -0.3px;
-            color: var(--text-color);
+        .header-logo-icon {
+            display: flex;
+            align-items: center;
             cursor: pointer;
-            transition: color 0.8s ease;
         }
 
-        .nav-links {
+        .header-logo-icon svg {
+            width: 22px;
+            height: 22px;
+        }
+
+        .header-center-info {
             display: flex;
-            gap: 12px;
-            margin-top: 6px;
+            justify-content: center;
+            gap: 40px;
+            font-family: var(--font-mono);
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--text-dim);
         }
 
-        .nav-btn {
-            font-size: 12px;
-            color: var(--text-color);
+        .header-center-info strong {
+            color: #111111;
+            font-weight: 500;
+        }
+
+        .header-nav-right {
+            display: flex;
+            gap: 16px;
+            font-family: var(--font-mono);
+            font-size: 11.5px;
+        }
+
+        .header-nav-btn {
             background: none;
             border: none;
+            color: #111111;
             cursor: pointer;
-            opacity: 0.85;
-            transition: opacity 0.3s ease, color 0.8s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: color 0.2s ease;
         }
 
-        .nav-btn:hover { opacity: 1; }
+        .header-nav-btn:hover {
+            color: var(--blue-accent);
+        }
 
-        /* --- Scrollable Views --- */
+        /* --- Views System --- */
         .page-view {
-            position: absolute;
-            top: 0;
-            left: 0;
             width: 100%;
-            height: 100%;
-            padding: 115px 50px 90px 50px;
-            overflow-y: auto;
-            overflow-x: hidden;
-            opacity: 1;
-            transform: translateY(0);
-            z-index: 10;
-            transition: opacity 0.5s ease, transform 0.5s ease;
+            padding: 95px 36px 80px 36px;
+            flex: 1;
         }
 
         .page-view.hidden-view {
+            display: none !important;
+        }
+
+        /* --- Giant Split Display Hero Header --- */
+        .hero-banner {
+            margin-top: 25px;
+            margin-bottom: 65px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: baseline;
+        }
+
+        .hero-title-left {
+            font-size: clamp(44px, 7.8vw, 108px);
+            font-weight: 800;
+            line-height: 0.92;
+            letter-spacing: -3.5px;
+            text-transform: uppercase;
+        }
+
+        .hero-title-right {
+            font-size: clamp(44px, 7.8vw, 108px);
+            font-weight: 800;
+            line-height: 0.92;
+            letter-spacing: -3.5px;
+            text-transform: uppercase;
+        }
+
+        /* --- Index Table Header Bar --- */
+        .index-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-family: var(--font-mono);
+            font-size: 11.5px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--text-dim);
+            padding-bottom: 12px;
+            border-bottom: 1px solid var(--border-line);
+        }
+
+        .index-columns-header {
+            display: grid;
+            grid-template-columns: 60px 1fr 200px 90px;
+            font-family: var(--font-mono);
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--text-dim);
+            padding: 14px 0 8px 0;
+            border-bottom: 1px solid var(--border-line);
+        }
+
+        /* --- Index Rows --- */
+        .index-list {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+        }
+
+        .index-item {
+            border-bottom: 1px solid var(--border-line);
+            width: 100%;
+        }
+
+        .index-row-trigger {
+            display: grid;
+            grid-template-columns: 60px 1fr 200px 90px;
+            align-items: center;
+            padding: 26px 0;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+            user-select: none;
+        }
+
+        .index-row-trigger:hover .row-title {
+            color: var(--blue-accent);
+            transform: translateX(4px);
+        }
+
+        .row-num {
+            font-family: var(--font-mono);
+            font-size: 12px;
+            color: var(--text-dim);
+        }
+
+        .row-title {
+            font-size: clamp(26px, 3.4vw, 44px);
+            font-weight: 500;
+            letter-spacing: -1.2px;
+            transition: color 0.2s ease, transform 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .row-type {
+            font-family: var(--font-mono);
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--text-dim);
+        }
+
+        .row-year {
+            font-family: var(--font-mono);
+            font-size: 11px;
+            text-align: right;
+            color: var(--text-dim);
+        }
+
+        /* --- Collapsible Accordion Dropdown Content --- */
+        .row-accordion-body {
+            max-height: 0;
             opacity: 0;
-            transform: translateY(12px);
-            pointer-events: none;
+            overflow: hidden;
+            transition: max-height 0.6s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s ease, padding 0.4s ease;
+            background-color: #FAFAFA;
+            padding: 0 40px;
         }
 
-        .timeline {
-            max-width: 1200px;
-            width: 100%;
-            margin: 0;
+        .row-accordion-body.expanded {
+            max-height: 5000px;
+            opacity: 1;
+            padding: 40px 40px 60px 40px;
+            border-top: 1px solid var(--border-line);
         }
 
-        .about-content, .practices-content {
-            max-width: 1200px;
-            width: 100%;
+        .essay-inner-wrapper {
+            max-width: 820px;
             margin: 0 auto;
         }
 
-        /* Left-Aligned Contact Page Structure */
-        .contact-content {
-            max-width: 1200px;
+        .essay-headline {
+            font-size: 28px;
+            font-weight: 600;
+            letter-spacing: -0.8px;
+            margin-bottom: 24px;
+        }
+
+        .essay-body-text {
+            font-family: var(--font-serif);
+            font-size: 18px;
+            line-height: 1.8;
+            color: #222222;
+            white-space: pre-line;
+        }
+
+        .essay-feature-img {
             width: 100%;
+            height: auto;
+            max-height: 520px;
+            object-fit: cover;
+            margin-bottom: 24px;
+            border: 1px solid var(--border-line);
+        }
+
+        /* Gallery Carousel inside accordion */
+        .carousel-container {
+            display: flex;
+            gap: 16px;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            padding-bottom: 12px;
+            margin-bottom: 24px;
+        }
+        .carousel-slide {
+            flex: 0 0 85%;
+            scroll-snap-align: start;
+        }
+        .carousel-slide img {
+            width: 100%;
+            height: auto;
+            aspect-ratio: 4/3;
+            object-fit: cover;
+            border: 1px solid var(--border-line);
+        }
+        .image-caption {
+            font-family: var(--font-mono);
+            font-size: 11px;
+            color: var(--text-dim);
+            margin-top: 6px;
+        }
+
+        /* --- Floating Hover Image Cursor Card --- */
+        #floating-cursor-preview {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 220px;
+            height: 280px;
+            pointer-events: none;
+            z-index: 150;
+            opacity: 0;
+            transform: translate(-50%, -50%) scale(0.85);
+            transition: opacity 0.25s ease, transform 0.25s ease;
+            box-shadow: 0px 20px 40px rgba(0, 0, 0, 0.18);
+            border: 1px solid rgba(0,0,0,0.1);
+            background: #FFFFFF;
+            overflow: hidden;
+        }
+
+        #floating-cursor-preview img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        #floating-cursor-preview.visible {
+            opacity: 1;
+            transform: translate(-50%, -50%) scale(1);
+        }
+
+        /* --- Redesigned Brutalist About View --- */
+        .about-grid-layout {
+            max-width: 1300px;
+            margin: 0 auto;
+            padding-top: 20px;
+        }
+
+        .about-top-back {
+            font-family: var(--font-mono);
+            font-size: 11.5px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--text-dim);
+            cursor: pointer;
+            margin-bottom: 25px;
+            display: inline-block;
+        }
+
+        .about-top-back:hover {
+            color: #111111;
+        }
+
+        .about-hero-statement {
+            font-size: clamp(38px, 6vw, 84px);
+            font-weight: 800;
+            line-height: 0.95;
+            letter-spacing: -2.5px;
+            text-transform: uppercase;
+            margin-bottom: 70px;
+        }
+
+        .about-meta-row {
+            display: grid;
+            grid-template-columns: 240px 1fr;
+            gap: 40px;
+            padding: 32px 0;
+            border-top: 1px solid var(--border-line);
+        }
+
+        .about-meta-label {
+            font-family: var(--font-mono);
+            font-size: 11.5px;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            color: var(--text-dim);
+        }
+
+        .about-meta-body {
+            font-size: 18px;
+            line-height: 1.7;
+            color: #111111;
+        }
+
+        .about-meta-body p {
+            margin-bottom: 20px;
+        }
+
+        .about-meta-body p:last-child {
+            margin-bottom: 0;
+        }
+
+        .about-skills-columns {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            font-family: var(--font-mono);
+            font-size: 12.5px;
+            line-height: 2;
+            text-transform: uppercase;
+        }
+
+        /* --- Practices View Layout --- */
+        .practices-view-container {
+            max-width: 1300px;
+            margin: 0 auto;
+        }
+
+        .practices-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-top: 40px;
+        }
+
+        .practice-card {
+            border: 1px solid var(--border-line);
+            padding: 36px;
+            background: #FAFAFA;
+        }
+
+        .practice-card-num {
+            font-family: var(--font-mono);
+            font-size: 12px;
+            color: var(--blue-accent);
+            margin-bottom: 12px;
+        }
+
+        .practice-card-title {
+            font-size: 26px;
+            font-weight: 700;
+            letter-spacing: -0.8px;
+            text-transform: lowercase;
+            margin-bottom: 16px;
+        }
+
+        .practice-card-desc {
+            font-size: 16px;
+            line-height: 1.7;
+            color: #444444;
+        }
+
+        /* --- Contact Page Layout --- */
+        .contact-page-container {
+            max-width: 1200px;
             margin: 0;
         }
 
@@ -231,536 +495,143 @@
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 80px;
-            min-height: calc(100vh - 280px);
-            padding-top: 15px;
-            width: 100%;
+            padding-top: 20px;
         }
 
-        .contact-left { 
-            display: flex; 
-            flex-direction: column; 
-            max-width: 520px;
+        .form-group {
+            margin-bottom: 22px;
         }
 
-        .contact-title { font-size: 28px; font-weight: 500; margin-bottom: 8px; letter-spacing: -0.5px; }
-        .contact-subtitle { font-size: 15.5px; margin-bottom: 35px; line-height: 1.5; opacity: 0.9; }
-
-        .contact-right {
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-end;
-            text-align: right;
-            padding-bottom: 35px;
-        }
-
-        .contact-detail-block { font-size: 16px; line-height: 1.85; }
-        .contact-detail-block a { color: var(--text-color); text-decoration: none; }
-        .contact-detail-block a:hover { text-decoration: underline; }
-
-        /* --- Timeline Rows --- */
-        .row {
-            display: flex;
-            align-items: flex-start;
-            margin-bottom: 26px;
-            width: 100%;
-        }
-
-        .date {
-            width: 130px;
-            flex-shrink: 0;
-            color: var(--date-color);
-            font-size: 13.5px;
-            transition: color 0.8s ease;
-        }
-
-        .row.pinned .date { color: var(--text-color); }
-        .content-area { flex-grow: 1; max-width: 100%; }
-
-        .essay-trigger {
-            color: var(--text-color);
-            background: none;
-            border: none;
-            font-family: inherit;
-            font-size: 16.5px;
-            text-align: left;
-            padding: 0;
-            display: inline;
-            cursor: pointer;
-            transition: color 0.8s ease;
-        }
-
-        .collapsible-essay {
-            max-height: 0;
-            opacity: 0;
-            overflow: hidden;
-            transform: translateY(-4px);
-            transition: max-height 0.6s cubic-bezier(0.16, 1, 0.3, 1), 
-                        opacity 0.5s ease, 
-                        transform 0.5s ease,
-                        margin 0.4s ease;
-            max-width: 720px;
-            width: 100%;
-        }
-
-        .collapsible-essay.expanded {
-            max-height: 6000px;
-            opacity: 1;
-            transform: translateY(0);
-            margin-top: 18px;
-            margin-bottom: 36px;
-        }
-
-        .essay-text {
-            font-size: 16px;
-            line-height: 1.7;
-            white-space: pre-line;
-            word-wrap: break-word;
-            overflow-wrap: break-word;
-            max-width: 100%;
-        }
-
-        .essay-image {
-            width: 100%;
-            max-width: 720px;
-            height: auto;
-            display: block;
-            margin-bottom: 18px;
-            border: 1px solid var(--border-color);
-            object-fit: cover;
-            box-sizing: border-box;
-        }
-
-        .carousel-container {
-            display: flex;
-            gap: 16px;
-            overflow-x: auto;
-            scroll-snap-type: x mandatory;
-            -webkit-overflow-scrolling: touch;
-            max-width: 720px;
-            width: 100%;
-            margin-bottom: 18px;
-            padding-bottom: 8px;
-        }
-
-        .carousel-container::-webkit-scrollbar { display: none; }
-        .carousel-container { -ms-overflow-style: none; scrollbar-width: none; }
-
-        .carousel-slide {
-            flex: 0 0 85%;
-            scroll-snap-align: start;
-            box-sizing: border-box;
-        }
-
-        .carousel-slide img {
-            width: 100%;
-            height: auto;
-            aspect-ratio: 4/3;
-            object-fit: cover;
-            display: block;
-            border: 1px solid var(--border-color);
-            margin-bottom: 6px;
-        }
-
-        .image-caption {
-            font-size: 11px;
-            font-style: italic;
-            color: var(--date-color);
-            line-height: 1.3;
-            word-wrap: break-word;
-            overflow-wrap: break-word;
-        }
-
-        .learn-more-link {
-            color: var(--text-color);
-            cursor: pointer;
-            font-weight: 500;
-        }
-
-        /* --- About Page Headline --- */
-        .about-text-container {
-            max-width: 880px;
-            width: 100%;
-            padding-top: 10px;
-        }
-
-        .about-top-return {
-            margin-bottom: 28px;
-            display: inline-block;
-        }
-
-        .about-title-large {
-            font-size: 60px;
-            font-weight: 700;
-            line-height: 1.1;
-            letter-spacing: -1.8px;
-            margin-bottom: 45px;
-            max-width: 840px;
-        }
-
-        .about-paragraph {
-            font-size: 18px;
-            line-height: 1.8;
-            margin-bottom: 32px;
-            white-space: pre-line;
-        }
-
-        /* --- Practices Page Layout --- */
-        .practices-grid {
-            display: flex;
-            flex-direction: column;
-            gap: 130px;
-            padding-top: 25px;
-        }
-
-        .practice-row {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 80px;
-            align-items: start;
-        }
-
-        .practice-block {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-        }
-
-        .practice-img {
-            width: 100%;
-            max-width: 440px;
-            height: 280px;
-            object-fit: contain;
-            border: none;
-            margin-bottom: 18px;
-            display: block;
-        }
-
-        .practice-heading {
-            font-size: 21px;
-            font-weight: 500;
-            text-transform: lowercase;
-            background: none;
-            border: none;
-            font-family: inherit;
-            color: var(--text-color);
-            text-align: center;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 6px;
-            padding: 0;
-        }
-
-        .practice-heading:hover { text-decoration: underline; }
-
-        .practice-toggle-icon {
-            font-size: 11px;
-            font-weight: normal;
-            opacity: 0.85;
-        }
-
-        .practice-accordion {
-            max-height: 0;
-            opacity: 0;
-            overflow: hidden;
-            transition: max-height 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s ease, margin 0.3s ease;
-            max-width: 440px;
-            text-align: left;
-        }
-
-        .practice-accordion.expanded {
-            max-height: 1000px;
-            opacity: 1;
-            margin-top: 14px;
-        }
-
-        .practice-desc { font-size: 15px; line-height: 1.65; }
-
-        .hero-prose-block {
-            font-size: 17.5px;
-            line-height: 1.8;
-            text-align: left;
-            align-self: center;
-            padding: 10px 10px;
-        }
-
-        /* --- Full-Bleed Blue Strip --- */
-        .blue-strip {
-            background-color: #1400FF;
-            color: #FFFFFF;
-            width: 100vw;
-            margin-left: calc(-50vw + 50%);
-            padding: 300px 50px;
-            margin-top: 40px;
-            margin-bottom: 40px;
-            box-sizing: border-box;
-            position: relative;
-        }
-
-        .blue-strip-header {
-            max-width: 1250px;
-            margin: 0 auto 150px auto;
-            text-align: center;
-        }
-
-        .blue-strip-title {
-            font-size: 34px;
-            font-weight: 500;
-            letter-spacing: -0.8px;
-            margin-bottom: 16px;
-            color: #FFFFFF;
-        }
-
-        .blue-strip-subtitle {
-            font-size: 17px;
-            font-weight: 300;
-            line-height: 1.65;
-            opacity: 0.9;
-            max-width: 900px;
-            margin: 0 auto;
-            color: #FFFFFF;
-        }
-
-        .blue-strip-grid {
-            max-width: 1250px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 220px 120px;
-            text-align: center;
-        }
-
-        .blue-strip-block {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            position: relative;
-        }
-
-        .blue-strip-wrapper {
-            position: relative;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .blue-strip-bg-num {
-            position: absolute;
-            left: -240px;
-            top: 50%;
-            transform: translateY(-50%);
-            height: 900px;
-            width: auto;
-            object-fit: contain;
-            pointer-events: none;
-            opacity: 0.18;
-            filter: brightness(1.2);
-            z-index: 1;
-        }
-
-        .blue-strip-trigger {
-            font-size: 42px;
-            font-weight: 200;
-            letter-spacing: -1px;
-            color: #FFFFFF;
-            background: none;
-            border: none;
-            font-family: inherit;
-            cursor: pointer;
-            padding: 0;
-            text-align: center;
-            position: relative;
-            z-index: 2;
-            pointer-events: auto;
-            transition: opacity 0.3s ease;
-        }
-
-        .blue-strip-trigger:hover { opacity: 0.9; }
-
-        .blue-strip-accordion {
-            max-height: 0;
-            opacity: 0;
-            overflow: hidden;
-            transition: max-height 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s ease, margin 0.3s ease;
-            max-width: 520px;
-            text-align: center;
-            position: relative;
-            z-index: 2;
-        }
-
-        .blue-strip-accordion.expanded {
-            max-height: 1000px;
-            opacity: 1;
-            margin-top: 28px;
-        }
-
-        .blue-strip-desc {
-            font-size: 16px;
-            line-height: 1.7;
-            font-weight: 300;
-            opacity: 0.92;
-            color: #FFFFFF;
-        }
-
-        .closing-statement {
-            margin-top: 90px;
-            margin-bottom: 90px;
-            text-align: center;
-            padding: 30px 0;
-        }
-
-        .closing-title {
-            font-size: 34px;
-            font-weight: 500;
-            letter-spacing: -0.8px;
-            margin-bottom: 12px;
-        }
-
-        .closing-subtitle {
-            font-size: 17px;
-            opacity: 0.85;
-            font-style: italic;
-        }
-
-        /* --- Forms --- */
-        .form-group { margin-bottom: 20px; }
         .form-group label {
             display: block;
-            font-size: 12px;
             font-family: var(--font-mono);
-            text-transform: lowercase;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--text-dim);
             margin-bottom: 6px;
-            color: var(--text-color);
         }
 
         .form-control {
             width: 100%;
-            padding: 10px 12px;
-            font-family: var(--font-serif);
+            padding: 12px 14px;
+            font-family: var(--font-sans);
             font-size: 15px;
-            border: 1px solid var(--border-color);
-            background: transparent;
-            color: var(--text-color);
+            border: 1px solid var(--border-line);
+            background: #FAFAFA;
+            color: #111111;
             outline: none;
             transition: border-color 0.2s ease;
         }
 
         .form-control:focus {
-            border-color: #1400FF;
-            background: rgba(20, 0, 255, 0.03);
+            border-color: #111111;
+            background: #FFFFFF;
         }
 
-        textarea.form-control { resize: vertical; min-height: 110px; }
+        textarea.form-control {
+            min-height: 120px;
+            resize: vertical;
+        }
 
         .submit-btn {
-            background-color: #1400FF;
+            background-color: #111111;
             color: #FFFFFF;
-            border: 1px solid #1400FF;
-            padding: 12px 26px;
+            border: 1px solid #111111;
+            padding: 14px 28px;
             font-family: var(--font-mono);
-            font-size: 12px;
+            font-size: 11.5px;
             text-transform: uppercase;
             letter-spacing: 1px;
             cursor: pointer;
             transition: background-color 0.2s ease, color 0.2s ease;
         }
 
-        .submit-btn:hover { background-color: #FFFFFF; color: #1400FF; }
+        .submit-btn:hover {
+            background-color: var(--blue-accent);
+            border-color: var(--blue-accent);
+        }
 
         .submit-btn.submitted {
             background-color: #00C853 !important;
-            color: #FFFFFF !important;
             border-color: #00C853 !important;
-            cursor: default;
         }
 
-        .modal-box .form-group label { color: #444444; }
-        .modal-box .form-control { border-color: #000000; background: #FAFAFA; color: #000000; }
-
-        /* --- Fixed Footer --- */
+        /* --- Footer --- */
         footer {
-            position: fixed;
-            bottom: 0;
-            left: 0;
             width: 100%;
-            padding: 18px 50px 25px 50px;
-            background-color: var(--bg-color);
-            z-index: 80;
+            padding: 24px 36px;
+            border-top: 1px solid var(--border-line);
             display: grid;
             grid-template-columns: 1fr auto 1fr;
             align-items: center;
-            font-size: 12.5px;
-            color: var(--text-color);
-            border-top: 1px solid var(--border-color);
-            transition: background-color 0.8s ease, border-color 0.8s ease, color 0.8s ease;
+            font-family: var(--font-mono);
+            font-size: 11.5px;
+            color: var(--text-dim);
         }
 
-        .footer-left { text-align: left; text-transform: none; }
-        .footer-center { display: flex; justify-content: center; align-items: center; }
-        .footer-logo-img { height: 38px; width: auto; object-fit: contain; display: block; cursor: pointer; }
-        .footer-right { display: flex; justify-content: flex-end; gap: 18px; align-items: center; text-transform: lowercase; }
-
-        .footer-right a, .contact-btn {
-            color: var(--text-color);
+        .footer-left { text-align: left; }
+        .footer-center { text-align: center; }
+        .footer-right { display: flex; justify-content: flex-end; gap: 20px; text-transform: uppercase; }
+        .footer-right a, .footer-modal-btn {
+            color: var(--text-dim);
+            text-decoration: none;
             background: none;
             border: none;
+            font-family: inherit;
+            font-size: inherit;
             cursor: pointer;
-            transition: color 0.8s ease;
         }
+        .footer-right a:hover, .footer-modal-btn:hover { color: #111111; }
 
-        /* --- Modals --- */
+        /* --- Pop-up Modals --- */
         .modal-overlay {
             position: fixed;
             top: 0;
             left: 0;
             width: 100vw;
             height: 100vh;
-            background-color: var(--modal-overlay-bg);
-            -webkit-backdrop-filter: blur(6px);
-            backdrop-filter: blur(6px);
+            background-color: rgba(0, 0, 0, 0.45);
+            -webkit-backdrop-filter: blur(8px);
+            backdrop-filter: blur(8px);
             display: flex;
             justify-content: center;
             align-items: center;
-            z-index: 100;
+            z-index: 200;
             padding: 20px;
-            opacity: 1;
-            transition: background-color 0.6s ease, backdrop-filter 0.6s ease, opacity 0.4s ease;
         }
 
         .modal-box {
             background: #FFFFFF;
-            color: #000000;
-            border: 1px solid #000000;
-            padding: 35px;
-            max-width: 580px;
+            padding: 38px;
+            max-width: 560px;
             width: 100%;
-            box-shadow: 0px 20px 40px rgba(0, 0, 0, 0.3);
-            pointer-events: auto;
+            box-shadow: 0px 24px 48px rgba(0, 0, 0, 0.2);
+            border: 1px solid #111111;
         }
 
         .modal-title {
-            font-size: 15px;
             font-family: var(--font-mono);
-            font-weight: 500;
+            font-size: 12px;
+            font-weight: 600;
             text-transform: uppercase;
-            margin-bottom: 15px;
-            color: #1400FF;
+            letter-spacing: 1px;
+            margin-bottom: 14px;
+            color: var(--blue-accent);
         }
 
         .modal-body {
             font-size: 14px;
-            line-height: 1.6;
-            color: #222222;
-            margin-bottom: 25px;
+            line-height: 1.65;
+            color: #333333;
+            margin-bottom: 24px;
             white-space: pre-line;
         }
 
         .modal-btn {
-            background-color: #1400FF;
+            background-color: #111111;
             color: #FFFFFF;
-            border: 1px solid #1400FF;
+            border: 1px solid #111111;
             padding: 12px 20px;
             font-family: var(--font-mono);
             font-size: 12px;
@@ -768,79 +639,76 @@
             letter-spacing: 1px;
             cursor: pointer;
             width: 100%;
-            transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+            transition: background-color 0.2s ease;
         }
 
         .modal-btn:hover {
-            background-color: #FFFFFF;
-            color: #1400FF;
-            border-color: #1400FF;
+            background-color: var(--blue-accent);
+            border-color: var(--blue-accent);
         }
 
-        .close-modal-link { display: block; text-align: center; margin-top: 12px; font-size: 12px; color: #666; cursor: pointer; text-decoration: none; }
-        .close-modal-link:hover { color: #000; text-decoration: underline; }
+        .close-modal-link {
+            display: block;
+            text-align: center;
+            margin-top: 14px;
+            font-family: var(--font-mono);
+            font-size: 11px;
+            color: #777777;
+            cursor: pointer;
+        }
+        .close-modal-link:hover { color: #111111; }
 
         .hidden { display: none !important; }
 
-        /* --- Responsive Mobile Overrides --- */
-        @media (max-width: 600px) {
-            header { padding: 20px 20px 12px 20px; }
-            .page-view { padding: 120px 24px 80px 24px; }
-            .timeline, .contact-content { margin: 0; }
+        /* --- Mobile Overrides --- */
+        @media (max-width: 768px) {
+            header { padding: 18px 20px; }
+            .header-center-info { display: none; }
+            .page-view { padding: 80px 20px 60px 20px; }
 
-            .about-title-large {
-                font-size: 38px;
-                letter-spacing: -1px;
-                margin-bottom: 30px;
+            .hero-banner {
+                grid-template-columns: 1fr;
+                gap: 10px;
+                margin-bottom: 40px;
             }
 
-            .row { 
-                flex-direction: row; 
-                align-items: baseline;
-                margin-bottom: 24px; 
-                width: 100%;
-            }
-            
-            .date { width: 95px; font-size: 12.5px; margin-bottom: 0; }
-            .content-area { width: calc(100% - 95px); max-width: calc(100% - 95px); }
-
-            .collapsible-essay { max-width: 100% !important; width: 100% !important; }
-            .carousel-container { max-width: 100% !important; }
-            .carousel-slide { flex: 0 0 90%; }
-
-            .practices-grid { gap: 80px; }
-            .practice-row, .contact-grid, .blue-strip-grid { grid-template-columns: 1fr; gap: 45px; }
-
-            .blue-strip { padding: 120px 24px; }
-            .blue-strip-header { margin-bottom: 60px; }
-            .blue-strip-title { font-size: 26px; }
-            .blue-strip-subtitle { font-size: 15px; }
-            .blue-strip-trigger { font-size: 28px; }
-            .blue-strip-bg-num { height: 320px; left: -70px; opacity: 0.18; }
-
-            .closing-title { font-size: 26px; }
-            .contact-right { text-align: left; justify-content: flex-start; padding-top: 25px; }
-
-            footer { 
-                padding: 14px 20px 20px 20px; 
-                display: flex; 
-                flex-direction: row; 
-                justify-content: space-between;
-                align-items: center; 
-                gap: 8px;
-                font-size: 11px;
+            .index-columns-header {
+                display: none;
             }
 
-            .footer-left { flex-shrink: 0; }
-            .footer-center { display: flex; align-items: center; }
-            .footer-logo-img { height: 22px; }
-            .footer-right { display: flex; gap: 8px; align-items: center; }
+            .index-row-trigger {
+                grid-template-columns: 40px 1fr 60px;
+            }
+
+            .row-type { display: none; }
+
+            .about-meta-row, .practices-grid, .contact-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .about-skills-columns { grid-template-columns: 1fr; }
+
+            #floating-cursor-preview { display: none !important; }
+
+            footer {
+                padding: 20px;
+                grid-template-columns: 1fr;
+                gap: 12px;
+                text-align: center;
+            }
+            .footer-left, .footer-center, .footer-right { justify-content: center; text-align: center; }
         }
     </style>
 </head>
 <body class="modal-open">
 
-    <!-- BCI DISCLAIMER POP-UP MODAL -->
+    <!-- FLOATING HOVER PREVIEW IMAGE (FOLLOWS CURSOR) -->
+    <div id="floating-cursor-preview">
+        <img id="floating-cursor-img" src="" alt="Work Preview">
+    </div>
+
+    <!-- BCI COMPLIANCE POPUP MODAL -->
     <div id="bci-modal" class="modal-overlay">
         <div class="modal-box">
             <div class="modal-title">Disclaimer</div>
@@ -851,7 +719,7 @@ The Bar Council of India does not permit advertisement or solicitation by advoca
         </div>
     </div>
 
-    <!-- CONTACT / INQUIRY POP-UP MODAL -->
+    <!-- INQUIRY POPUP MODAL -->
     <div id="contact-modal" class="modal-overlay hidden">
         <div class="modal-box">
             <div class="modal-title">Send an Enquiry</div>
@@ -878,134 +746,191 @@ The Bar Council of India does not permit advertisement or solicitation by advoca
         </div>
     </div>
 
-    <!-- FIXED TOP-RIGHT HEADER WITH SUB-NAV -->
+    <!-- MINIMALIST TOP HEADER -->
     <header>
-        <div class="brand-header" onclick="handleBrandClick()">SOKA; A Legal Studio.</div>
-        <div class="nav-links">
-            <button class="nav-btn" onclick="switchView('practices')">[ practices ]</button>
-            <button class="nav-btn" onclick="switchView('contact')">[ contact ]</button>
+        <div class="header-logo-icon" onclick="switchView('entries')">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#111111" stroke-width="2.2">
+                <line x1="3" y1="6" x2="21" y2="6"></line>
+                <line x1="3" y1="12" x2="21" y2="12"></line>
+                <line x1="3" y1="18" x2="21" y2="18"></line>
+            </svg>
+        </div>
+
+        <div class="header-center-info">
+            <div>CURRENTLY: <strong>DELHI / WORLDWIDE</strong></div>
+            <div>STATUS: <strong>ACCEPTING SELECT MATTERS</strong></div>
+        </div>
+
+        <div class="header-nav-right">
+            <button class="header-nav-btn" onclick="switchView('practices')">[ practices ]</button>
+            <button class="header-nav-btn" onclick="switchView('about')">[ about ]</button>
+            <button class="header-nav-btn" onclick="switchView('contact')">[ contact ]</button>
         </div>
     </header>
 
-    <!-- VIEW 1: INDEX / MAIN ENTRIES FEED (BLUE THEME) -->
-    <div id="entries-view" class="page-view">
-        <main class="timeline">
+    <!-- VIEW 1: BRUTALIST INDEX VIEW -->
+    <main id="entries-view" class="page-view">
+        
+        <!-- GIANT DISPLAY SPLIT BANNER -->
+        <div class="hero-banner">
+            <div class="hero-title-left">SOKA;</div>
+            <div class="hero-title-right">A LEGAL STUDIO.</div>
+        </div>
 
-            <!-- PINNED TOP ENTRY -->
-            <div class="row pinned" id="entry-securing-the-culture">
-                <div class="date">xx.xx.xxxx</div>
-                <div class="content-area">
-                    <button class="essay-trigger toggle-btn" data-slug="securing-the-culture">securing the culture; legally.</button>
-                    <div class="collapsible-essay">
-                        <div class="essay-text">
-                            Creative work doesn't fail for lack of talent. It fails for lack of structure, the kind that goes unnoticed until it's needed.
+        <!-- INDEX METADATA BAR -->
+        <div class="index-bar">
+            <div>INDEX OF ENTRIES (07)</div>
+            <div>[ CLICK TO EXPAND ENTRY ]</div>
+        </div>
 
-                            SOKA builds that structure. We work directly with artists, studios, and independent creators to protect what they make and secure what they own, without the weight of a traditional practice.
+        <div class="index-columns-header">
+            <div>#</div>
+            <div>TITLE</div>
+            <div>CATEGORY</div>
+            <div style="text-align: right;">DATE</div>
+        </div>
 
-                            <span class="learn-more-link" onclick="switchView('about')">[ learn more ]</span>
+        <!-- INDEX LIST -->
+        <div class="index-list">
+            
+            <!-- ROW 07: SECURING THE CULTURE -->
+            <div class="index-item" id="entry-securing-the-culture">
+                <div class="index-row-trigger" data-slug="securing-the-culture" data-preview="tab-icon.png">
+                    <div class="row-num">07</div>
+                    <div class="row-title">Securing the Culture; Legally.</div>
+                    <div class="row-type">MANIFESTO / INFRASTRUCTURE</div>
+                    <div class="row-year">xx.xx.xxxx</div>
+                </div>
+                <div class="row-accordion-body">
+                    <div class="essay-inner-wrapper">
+                        <div class="essay-headline">The structural framework creative work was never given.</div>
+                        <div class="essay-body-text">
+Creative work doesn't fail for lack of talent. It fails for lack of structure, the kind that goes unnoticed until it's needed.
+
+SOKA builds that structure. We work directly with artists, studios, and independent creators to protect what they make and secure what they own, without the weight of a traditional practice.
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- CHRONOLOGICAL ENTRY 1: PARODY ISN'T INFRINGEMENT, UNTIL IT IS -->
-            <div class="row" id="entry-parody-isnt-infringement-until-it-is">
-                <div class="date">04.08.2026</div>
-                <div class="content-area">
-                    <button class="essay-trigger toggle-btn" data-slug="parody-isnt-infringement-until-it-is">parody isn't infringement, until it is</button>
-                    <div class="collapsible-essay">
-                        <div class="essay-text">
-                            Every parody makes the same bet twice. Once on the joke landing, and once on the law agreeing it was a joke at all. Most of the time nobody notices the second bet was ever placed, because the target laughed, or shrugged, or the video simply didn't travel far enough to matter. The bet only becomes visible when it's lost, and by then the parodist has usually already discovered that the protection they assumed they had was never as fixed as it felt while they were filming.
+            <!-- ROW 06: PARODY ISN'T INFRINGEMENT -->
+            <div class="index-item" id="entry-parody-isnt-infringement-until-it-is">
+                <div class="index-row-trigger" data-slug="parody-isnt-infringement-until-it-is" data-preview="tab-icon.png">
+                    <div class="row-num">06</div>
+                    <div class="row-title">Parody Isn't Infringement, Until It Is</div>
+                    <div class="row-type">FAIR DEALING / PERSONALITY RIGHTS</div>
+                    <div class="row-year">04.08.2026</div>
+                </div>
+                <div class="row-accordion-body">
+                    <div class="essay-inner-wrapper">
+                        <div class="essay-body-text">
+Every parody makes the same bet twice. Once on the joke landing, and once on the law agreeing it was a joke at all. Most of the time nobody notices the second bet was ever placed, because the target laughed, or shrugged, or the video simply didn't travel far enough to matter. The bet only becomes visible when it's lost, and by then the parodist has usually already discovered that the protection they assumed they had was never as fixed as it felt while they were filming.
 
-                            Purav Jha has been making that bet for years, and mostly winning it. His most recent video, a mimicry of the public spat between the educator known as Khan Sir and journalist Anjana Om Kashyap, took a real controversy involving two named, living people and restaged it as comedy, exaggerating both figures into characters while clearly siding with one over the other. It is, by any reasonable measure, satire, commentary dressed as performance, aimed at how a serious dispute gets flattened into television theatre. It is also, just as clearly, built entirely from someone else's likeness, someone else's voice, someone else's real and ongoing reputational dispute, repackaged for a laugh Jha didn't ask permission to make.
+Purav Jha has been making that bet for years, and mostly winning it. His most recent video, a mimicry of the public spat between the educator known as Khan Sir and journalist Anjana Om Kashyap, took a real controversy involving two named, living people and restaged it as comedy, exaggerating both figures into characters while clearly siding with one over the other. It is, by any reasonable measure, satire, commentary dressed as performance, aimed at how a serious dispute gets flattened into television theatre. It is also, just as clearly, built entirely from someone else's likeness, someone else's voice, someone else's real and ongoing reputational dispute, repackaged for a laugh Jha didn't ask permission to make.
 
-                            Indian law has never given a parodist a clean answer for what happens next. There is no dedicated parody exception written into the Copyright Act the way American fair use doctrine explicitly weighs transformative commentary as a factor in its own right. What exists instead is a patchwork, assembled case by case, drawing on Section 52's fair dealing provisions for criticism and review, and on Article 19(1)(a)'s protection of free expression, stitched together by judges deciding, essentially, whether a given piece of mimicry read more like commentary or more like commercial appropriation dressed up as commentary to dodge the label. Courts have protected satire under that reasoning. They have also, in the same breath, warned that free speech stops being a shield the moment it crosses into what one judgment called tarnishing an individual's personality rights, a line that sounds precise until someone has to actually locate it.
+Indian law has never given a parodist a clean answer for what happens next. There is no dedicated parody exception written into the Copyright Act the way American fair use doctrine explicitly weighs transformative commentary as a factor in its own right. What exists instead is a patchwork, assembled case by case, drawing on Section 52's fair dealing provisions for criticism and review, and on Article 19(1)(a)'s protection of free expression, stitched together by judges deciding, essentially, whether a given piece of mimicry read more like commentary or more like commercial appropriation dressed up as commentary to dodge the label. Courts have protected satire under that reasoning. They have also, in the same breath, warned that free speech stops being a shield the moment it crosses into what one judgment called tarnishing an individual's personality rights, a line that sounds precise until someone has to actually locate it.
 
-                            That line moved visibly in Anil Kapoor's case against the sellers profiting off his catchphrase and likeness. The court didn't object to imitation in the abstract. Impressionists have always existed, and nobody sued them for existing. What drew the line was scale and intent, mimicry becoming merchandise, expression becoming a business model built on someone else's identity without their consent. The same logic sits quietly underneath every parody video that goes viral enough to generate real ad revenue off a real person's likeness. At some undefined point, commentary curdles into commercial exploitation, and no statute marks exactly where.
+That line moved visibly in Anil Kapoor's case against the sellers profiting off his catchphrase and likeness. The court didn't object to imitation in the abstract. Impressionists have always existed, and nobody sued them for existing. What drew the line was scale and intent, mimicry becoming merchandise, expression becoming a business model built on someone else's identity without their consent. The same logic sits quietly underneath every parody video that goes viral enough to generate real ad revenue off a real person's likeness. At some undefined point, commentary curdles into commercial exploitation, and no statute marks exactly where.
 
-                            What makes Purav Jha's case worth sitting with isn't just where his own videos sit on that line, it's what's happening to his own persona while he stands on it. Search his name and a second channel appears, one openly built to recirculate his parody characters, describing itself as adding its own creative touch to performances that, in its words, deserve more love. It is, functionally, exactly what he does to Khan Sir and Anjana Om Kashyap, except now Jha is the one being imitated without consent, his own voice and characters repackaged by somebody else's channel, his own reputation now the raw material for someone else's content strategy.
+What makes Purav Jha's case worth sitting with isn't just where his own videos sit on that line, it's what's happening to his own persona while he stands on it. Search his name and a second channel appears, one openly built to recirculate his parody characters, describing itself as adding its own creative touch to performances that, in its words, deserve more love. It is, functionally, exactly what he does to Khan Sir and Anjana Om Kashyap, except now Jha is the one being imitated without consent, his own voice and characters repackaged by somebody else's channel, his own reputation now the raw material for someone else's content strategy.
 
-                            That inversion is the actual argument here, not a footnote to it. The same legal ambiguity that lets a parodist mimic a real person with relative confidence is the identical ambiguity that offers him no more protection than anyone else the moment someone turns the camera on him. Parody's legal cover was never really about the form, the mimicry, the exaggeration, the borrowed voice. It was always about direction, about who's doing the imitating and who's absorbing it, and that direction can reverse without warning the instant a parodist becomes recognisable enough to be worth imitating themselves.
+That inversion is the actual argument here, not a footnote to it. The same legal ambiguity that lets a parodist mimic a real person with relative confidence is the identical ambiguity that offers him no more protection than anyone else the moment someone turns the camera on him. Parody's legal cover was never really about the form, the mimicry, the exaggeration, the borrowed voice. It was always about direction, about who's doing the imitating and who's absorbing it, and that direction can reverse without warning the instant a parodist becomes recognisable enough to be worth imitating themselves.
 
-                            What that suggests is not that parody is dangerous, or that it needs to be curtailed, satire has always been one of the more important pressure valves a media culture has, and Indian courts have generally understood that, protecting commentary even when it stings. What it suggests instead is that nobody making a living inside this genre, mimicking public figures for an audience that rewards exactly that, should mistake the absence of a lawsuit for the presence of a settled right. The law hasn't drawn a fixed boundary around parody so much as it's agreed, repeatedly, to look at each instance and ask how it feels, how far it went, who it hurt, and whether the hurt was worth protecting speech over. That's not a rule. It's a judgment call, made after the fact, about a joke that's already been told.
+What that suggests is not that parody is dangerous, or that it needs to be curtailed, satire has always been one of the more important pressure valves a media culture has, and Indian courts have generally understood that, protecting commentary even when it stings. What it suggests instead is that nobody making a living inside this genre, mimicking public figures for an audience that rewards exactly that, should mistake the absence of a lawsuit for the presence of a settled right. The law hasn't drawn a fixed boundary around parody so much as it's agreed, repeatedly, to look at each instance and ask how it feels, how far it went, who it hurt, and whether the hurt was worth protecting speech over. That's not a rule. It's a judgment call, made after the fact, about a joke that's already been told.
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- CHRONOLOGICAL ENTRY 2: RIGHT TO SKATEBOARD -->
-            <div class="row" id="entry-right-to-skateboard">
-                <div class="date">28.07.2026</div>
-                <div class="content-area">
-                    <button class="essay-trigger toggle-btn" data-slug="right-to-skateboard">right to skateboard</button>
-                    <div class="collapsible-essay">
-                        <img src="r2s.jpeg" alt="right to skateboard" class="essay-image">
-                        <div class="essay-text">
-                            A skateboard is not a means of transport pretending to be one. It's closer to handwriting, a way of putting a person's particular rhythm onto a shared surface, visible to anyone walking past. The line a skater draws through a plaza, up a ledge, along a rail, is a kind of authorship, temporary and physical rather than written, but authorship all the same. Cities have never quite known what to do with that. Wheels on concrete get filed under noise complaint or property damage long before anyone considers what's actually being expressed, and the surfaces that could hold it, empty lots, underused plazas, wide unused stretches of pavement, stay closed off by default rather than by any real decision that they should be.
+            <!-- ROW 05: RIGHT TO SKATEBOARD -->
+            <div class="index-item" id="entry-right-to-skateboard">
+                <div class="index-row-trigger" data-slug="right-to-skateboard" data-preview="r2s.jpeg">
+                    <div class="row-num">05</div>
+                    <div class="row-title">Right to Skateboard</div>
+                    <div class="row-type">PUBLIC DOMAIN / ARTICLE 19</div>
+                    <div class="row-year">28.07.2026</div>
+                </div>
+                <div class="row-accordion-body">
+                    <div class="essay-inner-wrapper">
+                        <img src="r2s.jpeg" alt="right to skateboard" class="essay-feature-img">
+                        <div class="essay-body-text">
+A skateboard is not a means of transport pretending to be one. It's closer to handwriting, a way of putting a person's particular rhythm onto a shared surface, visible to anyone walking past. The line a skater draws through a plaza, up a ledge, along a rail, is a kind of authorship, temporary and physical rather than written, but authorship all the same. Cities have never quite known what to do with that. Wheels on concrete get filed under noise complaint or property damage long before anyone considers what's actually being expressed, and the surfaces that could hold it, empty lots, underused plazas, wide unused stretches of pavement, stay closed off by default rather than by any real decision that they should be.
 
-                            That default has mostly gone unquestioned because nobody's had a reason powerful enough to force the question, until the Supreme Court gave one, without meaning to. On June 19, the Court held that the right to walk on a safe, demarcated footpath is a fundamental right, arising from Article 19(1)(d) read against Article 21. The case reached that conclusion through a five year old boy, killed by a tanker on a road with no footpath, no crossing, nowhere for a person on foot to exist safely. Civic bodies, the Court said, now carry an enforceable duty to build and maintain that infrastructure, not a discretionary courtesy but an obligation with teeth.
+That default has mostly gone unquestioned because nobody's had a reason powerful enough to force the question, until the Supreme Court gave one, without meaning to. On June 19, the Court held that the right to walk on a safe, demarcated footpath is a fundamental right, arising from Article 19(1)(d) read against Article 21. The case reached that conclusion through a five year old boy, killed by a tanker on a road with no footpath, no crossing, nowhere for a person on foot to exist safely. Civic bodies, the Court said, now carry an enforceable duty to build and maintain that infrastructure, not a discretionary courtesy but an obligation with teeth.
 
-                            What makes the judgment worth sitting with, past the tragedy that produced it, is where the Court chose to locate the right. It didn't rest the reasoning purely on 19(1)(d)'s guarantee of movement. It read that clause alongside 19(1)(a), (b), and (c), speech, assembly, association, treating the ability to occupy public space as the physical condition those freedoms actually depend on. A footpath, in that framing, isn't only a route from one place to another. It's the ground a person needs under them before any of the other freedoms can be exercised at all.
+What makes the judgment worth sitting with, past the tragedy that produced it, is where the Court chose to locate the right. It didn't rest the reasoning purely on 19(1)(d)'s guarantee of movement. It read that clause alongside 19(1)(a), (b), and (c), speech, assembly, association, treating the ability to occupy public space as the physical condition those freedoms actually depend on. A footpath, in that framing, isn't only a route from one place to another. It's the ground a person needs under them before any of the other freedoms can be exercised at all.
 
-                            Skateboarding makes the same claim on the same ground and has never once been read that way. It asks for a surface, clear of traffic, wide enough to be used without harming anyone, exactly what the judgment now compels cities to provide for pedestrians. But the request has always been treated as recreation, a hobby to be tolerated somewhere out of sight, rather than as a form of movement carrying its own expressive weight, its own claim to public space on the same constitutional footing the Court just extended to walking. The difference isn't in the nature of the act. It's in the fact that walking eventually produced a body the state had to answer for, and skateboarding, so far, has mostly produced noise complaints and shrugged-off municipal notices instead.
+Skateboarding makes the same claim on the same ground and has never once been read that way. It asks for a surface, clear of traffic, wide enough to be used without harming anyone, exactly what the judgment now compels cities to provide for pedestrians. But the request has always been treated as recreation, a hobby to be tolerated somewhere out of sight, rather than as a form of movement carrying its own expressive weight, its own claim to public space on the same constitutional footing the Court just extended to walking. The difference isn't in the nature of the act. It's in the fact that walking eventually produced a body the state had to answer for, and skateboarding, so far, has mostly produced noise complaints and shrugged-off municipal notices instead.
 
-                            That's the idea worth holding onto here, separate from whatever the judgment technically covers. A city's willingness to design for a use of public space tends to track how much harm that use has caused, not how much freedom it actually represents. Skateboarding sits in the gap between those two measures, low on documented harm, high on the same claim to expression and movement the Court just spent several pages defending. Nobody has to be struck by a tanker for that claim to matter. It's already there, in every skater finding a ledge nobody built for them, writing something briefly onto a surface the city never intended to hold it.
+That's the idea worth holding onto here, separate from whatever the judgment technically covers. A city's willingness to design for a use of public space tends to track how much harm that use has caused, not how much freedom it actually represents. Skateboarding sits in the gap between those two measures, low on documented harm, high on the same claim to expression and movement the Court just spent several pages defending. Nobody has to be struck by a tanker for that claim to matter. It's already there, in every skater finding a ledge nobody built for them, writing something briefly onto a surface the city never intended to hold it.
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- CHRONOLOGICAL ENTRY 3: ANI V. OPENAI -->
-            <div class="row" id="entry-ani-v-openai">
-                <div class="date">26.07.2026</div>
-                <div class="content-area">
-                    <button class="essay-trigger toggle-btn" data-slug="ani-v-openai">ani v. openai</button>
-                    <div class="collapsible-essay">
-                        <div class="essay-text">
-                            Read the coverage and you'd think the Delhi High Court just declared AI training legal in India. It didn't. Justice Amit Bansal refused ANI an interim injunction because ANI couldn't prove ChatGPT had memorised or spat back its reporting, not because OpenAI walked in clean. Fair dealing gave the ruling its legal skin. The actual bone underneath is duller and more consequential, an argument about who has to bring proof, and proof of what.
+            <!-- ROW 04: ANI V. OPENAI -->
+            <div class="index-item" id="entry-ani-v-openai">
+                <div class="index-row-trigger" data-slug="ani-v-openai" data-preview="tab-icon.png">
+                    <div class="row-num">04</div>
+                    <div class="row-title">ANI v. OpenAI</div>
+                    <div class="row-type">AI TRAINING / COPYRIGHT PRECEDENT</div>
+                    <div class="row-year">26.07.2026</div>
+                </div>
+                <div class="row-accordion-body">
+                    <div class="essay-inner-wrapper">
+                        <div class="essay-body-text">
+Read the coverage and you'd think the Delhi High Court just declared AI training legal in India. It didn't. Justice Amit Bansal refused ANI an interim injunction because ANI couldn't prove ChatGPT had memorised or spat back its reporting, not because OpenAI walked in clean. Fair dealing gave the ruling its legal skin. The actual bone underneath is duller and more consequential, an argument about who has to bring proof, and proof of what.
 
-                            That's the part getting skipped past. The order quietly moves the weight of an entire category of dispute onto the party least equipped to carry it. A newsroom, a musician, an illustrator, anyone with a suspicion that their work fed a model somewhere, no longer gets to start from suspicion. They need an output that unmistakably wears their own signature, produced by a system built specifically not to show its working. Ask any of them how they're supposed to get that, and the honest answer is, mostly, they can't.
+That's the part getting skipped past. The order quietly moves the weight of an entire category of dispute onto the party least equipped to carry it. A newsroom, a musician, an illustrator, anyone with a suspicion that their work fed a model somewhere, no longer gets to start from suspicion. They need an output that unmistakably wears their own signature, produced by a system built specifically not to show its working. Ask any of them how they're supposed to get that, and the honest answer is, mostly, they can't.
 
-                            The fair use finding will get cited for years, but it was always the easier question. Courts have been deciding what counts as fair dealing since long before anyone typed a prompt. The harder question, and the one this order actually answers, is procedural, not doctrinal, who walks into court holding the burden while the underlying technology stays a black box to everyone standing outside it. That answer just tilted, and it tilted before most people noticed there was a question being asked.
+The fair use finding will get cited for years, but it was always the easier question. Courts have been deciding what counts as fair dealing since long before anyone typed a prompt. The harder question, and the one this order actually answers, is procedural, not doctrinal, who walks into court holding the burden while the underlying technology stays a black box to everyone standing outside it. That answer just tilted, and it tilted before most people noticed there was a question being asked.
 
-                            Meanwhile ANI's other claim sits completely untouched, that the model didn't just train on its work but invented stories wholesale and stapled ANI's name to them. That has nothing to do with training data. It's what happens when a system fabricates something and dresses it in a real identity. Nobody's decided yet who has to prove what there, whether the burden falls on the name that got borrowed or the machine that borrowed it. Given where this order landed, it isn't hard to guess which way that one leans too.
+Meanwhile ANI's other claim sits completely untouched, that the model didn't just train on its work but invented stories wholesale and stapled ANI's name to them. That has nothing to do with training data. It's what happens when a system fabricates something and dresses it in a real identity. Nobody's decided yet who has to prove what there, whether the burden falls on the name that got borrowed or the machine that borrowed it. Given where this order landed, it isn't hard to guess which way that one leans too.
 
-                            Which is the actual story here, buried under a headline about fair use. This wasn't a ruling about artificial intelligence. It was a ruling about who gets to stay silent and who has to speak first, dressed up in the language of copyright because copyright happened to be the case on the docket. The next dispute might be about a voice, a face, a melody, a sentence someone swears they wrote first. The technology underneath will keep changing. What this order set is the posture everyone starts from, proof-first or proof-later, and that posture, once it settles into precedent, tends to outlive the case that built it.
+Which is the actual story here, buried under a headline about fair use. This wasn't a ruling about artificial intelligence. It was a ruling about who gets to stay silent and who has to speak first, dressed up in the language of copyright because copyright happened to be the case on the docket. The next dispute might be about a voice, a face, a melody, a sentence someone swears they wrote first. The technology underneath will keep changing. What this order set is the posture everyone starts from, proof-first or proof-later, and that posture, once it settles into precedent, tends to outlive the case that built it.
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- CHRONOLOGICAL ENTRY 4: PROTECTING STEEL AND CONCRETE -->
-            <div class="row" id="entry-protecting-steel-and-concrete">
-                <div class="date">14.07.2026</div>
-                <div class="content-area">
-                    <button class="essay-trigger toggle-btn" data-slug="protecting-steel-and-concrete">protecting steel and concrete</button>
-                    <div class="collapsible-essay">
-                        <img src="snc.jpeg" alt="protecting steel and concrete" class="essay-image">
-                        <div class="essay-text">
-                            Every other art form gets to outlive its usefulness. A painting can hang unseen in a storeroom for decades and still be a painting. A manuscript can go unread and remain, legally and materially, exactly what its author made. Architecture doesn't get that grace. A building is art that has to keep working, keep housing something, keep justifying the land under it, and the moment it stops, someone with a legitimate claim to that land can simply have it removed. No other art form is quite so conditional on its own continued utility.
+            <!-- ROW 03: PROTECTING STEEL AND CONCRETE -->
+            <div class="index-item" id="entry-protecting-steel-and-concrete">
+                <div class="index-row-trigger" data-slug="protecting-steel-and-concrete" data-preview="snc.jpeg">
+                    <div class="row-num">03</div>
+                    <div class="row-title">Protecting Steel and Concrete</div>
+                    <div class="row-type">ARCHITECTURE / MORAL RIGHTS</div>
+                    <div class="row-year">14.07.2026</div>
+                </div>
+                <div class="row-accordion-body">
+                    <div class="essay-inner-wrapper">
+                        <img src="snc.jpeg" alt="protecting steel and concrete" class="essay-feature-img">
+                        <div class="essay-body-text">
+Every other art form gets to outlive its usefulness. A painting can hang unseen in a storeroom for decades and still be a painting. A manuscript can go unread and remain, legally and materially, exactly what its author made. Architecture doesn't get that grace. A building is art that has to keep working, keep housing something, keep justifying the land under it, and the moment it stops, someone with a legitimate claim to that land can simply have it removed. No other art form is quite so conditional on its own continued utility.
 
-                            Indian copyright law tried to account for this asymmetry through Section 57, the moral rights provision, which gives an author the right of paternity and the right of integrity, the right to be identified with a work and the right to object to its distortion or mutilation in ways that harm their honour or reputation. It's a good instrument, built for exactly the kind of harm architecture tends to suffer, unauthorised alteration, a facade stripped for renovation, a structure changed beyond recognition while still technically standing. What it was never built for, and what it turned out not to reach, is outright destruction.
+Indian copyright law tried to account for this asymmetry through Section 57, the moral rights provision, which gives an author the right of paternity and the right of integrity, the right to be identified with a work and the right to object to its distortion or mutilation in ways that harm their honour or reputation. It's a good instrument, built for exactly the kind of harm architecture tends to suffer, unauthorised alteration, a facade stripped for renovation, a structure changed beyond recognition while still technically standing. What it was never built for, and what it turned out not to reach, is outright destruction.
 
-                            That gap became fact in Raj Rewal v. Union of India. Rewal had designed the Hall of Nations at Pragati Maidan, the first large span concrete structure of its kind in the country and, by most accounts, one of the defining works of Indian modernist architecture. In 2017, ITPO demolished it to redevelop the site. Rewal sued under Section 57, arguing the demolition was itself an assault on his reputation as the work's author, not a modification of the Hall but its erasure. The Delhi High Court disagreed. It held that moral rights protect a work from distortion while it exists, not from an owner's decision to end its existence entirely, and leaned on Section 52(1)(x), which permits a building to be reconstructed from its original plans without infringing anyone's copyright. If demolition itself were barred, the Court reasoned, that provision would have nothing left to permit.
+That gap became fact in Raj Rewal v. Union of India. Rewal had designed the Hall of Nations at Pragati Maidan, the first large span concrete structure of its kind in the country and, by most accounts, one of the defining works of Indian modernist architecture. In 2017, ITPO demolished it to redevelop the site. Rewal sued under Section 57, arguing the demolition was itself an assault on his reputation as the work's author, not a modification of the Hall but its erasure. The Delhi High Court disagreed. It held that moral rights protect a work from distortion while it exists, not from an owner's decision to end its existence entirely, and leaned on Section 52(1)(x), which permits a building to be reconstructed from its original plans without infringing anyone's copyright. If demolition itself were barred, the Court reasoned, that provision would have nothing left to permit.
 
-                            There's a strange logic sitting underneath that reasoning, worth pulling apart on its own terms. The Court effectively said a demolished building can always be rebuilt from its drawings, so the drawings are what survive, and the drawings are what the law was always protecting. But a reconstruction is not the thing itself, any more than a forgery made from a photograph is the original painting. The Hall of Nations was significant because it stood where it stood, built when it was built, aged the way concrete ages, carrying four decades of a country's history inside its own structure. None of that transfers to a replica built later from a technical drawing. The law found a way to call the object replaceable by treating the idea of it as the only part that mattered, which is a real philosophical move, and also a fairly convenient one for whoever wanted the land back.
+There's a strange logic sitting underneath that reasoning, worth pulling apart on its own terms. The Court effectively said a demolished building can always be rebuilt from its drawings, so the drawings are what survive, and the drawings are what the law was always protecting. But a reconstruction is not the thing itself, any more than a forgery made from a photograph is the original painting. The Hall of Nations was significant because it stood where it stood, built when it was built, aged the way concrete ages, carrying four decades of a country's history inside its own structure. None of that transfers to a replica built later from a technical drawing. The law found a way to call the object replaceable by treating the idea of it as the only part that mattered, which is a real philosophical move, and also a fairly convenient one for whoever wanted the land back.
 
-                            What the case actually exposes, once the doctrine is set aside, is a choice this country hasn't made yet, whether architecture is closer to infrastructure, disposable once its function ends, or closer to art, worth preserving regardless of function. Most legal systems that take moral rights seriously eventually have to answer that question directly, sometimes through heritage law, sometimes through cultural property statutes that sit outside copyright altogether. India has largely let property rights answer it by default, letting ownership of the land settle a question that ownership was never really equipped to settle. An architect's authorship doesn't disappear the day a building comes down. It just stops having anywhere to live.
+What the case actually exposes, once the doctrine is set aside, is a choice this country hasn't made yet, whether architecture is closer to infrastructure, disposable once its function ends, or closer to art, worth preserving regardless of function. Most legal systems that take moral rights seriously eventually have to answer that question directly, sometimes through heritage law, sometimes through cultural property statutes that sit outside copyright altogether. India has largely let property rights answer it by default, letting ownership of the land settle a question that ownership was never really equipped to settle. An architect's authorship doesn't disappear the day a building comes down. It just stops having anywhere to live.
 
-                            That's the idea worth holding past this one case. A society's relationship to its own built art shows up less in what it protects on paper and more in what it's willing to let disappear without a fight. Every demolished structure of real artistic weight is a small referendum on that question, decided quietly, usually by whoever holds the title, rarely by anyone weighing what the work itself was worth keeping. Preservation, in that sense, was never really a legal problem waiting for the right provision. It's a cultural one, about whether a country is willing to treat the buildings it stands inside as something closer to authorship than to real estate, long before any court has to be asked.
+That's the idea worth holding past this one case. A society's relationship to its own built art shows up less in what it protects on paper and more in what it's willing to let disappear without a fight. Every demolished structure of real artistic weight is a small referendum on that question, decided quietly, usually by whoever holds the title, rarely by anyone weighing what the work itself was worth keeping. Preservation, in that sense, was never really a legal problem waiting for the right provision. It's a cultural one, about whether a country is willing to treat the buildings it stands inside as something closer to authorship than to real estate, long before any court has to be asked.
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- CHRONOLOGICAL ENTRY 5: COURTROOM SKETCHES -->
-            <div class="row" id="entry-courtroom-sketches">
-                <div class="date">03.07.2026</div>
-                <div class="content-area">
-                    <button class="essay-trigger toggle-btn" data-slug="courtroom-sketches">courtroom sketches</button>
-                    <div class="collapsible-essay">
+            <!-- ROW 02: COURTROOM SKETCHES -->
+            <div class="index-item" id="entry-courtroom-sketches">
+                <div class="index-row-trigger" data-slug="courtroom-sketches" data-preview="cs1.jpeg">
+                    <div class="row-num">02</div>
+                    <div class="row-title">Courtroom Sketches</div>
+                    <div class="row-type">RECORD / EXPRESSION / ACCESS</div>
+                    <div class="row-year">03.07.2026</div>
+                </div>
+                <div class="row-accordion-body">
+                    <div class="essay-inner-wrapper">
                         
                         <div class="carousel-container">
                             <div class="carousel-slide">
@@ -1024,301 +949,207 @@ The Bar Council of India does not permit advertisement or solicitation by advoca
                                 <img src="cs4.jpeg" alt="Courtroom Sketch 4">
                                 <div class="image-caption">Elizabeth Williams, CC BY-SA 3.0, via Wikimedia Commons</div>
                             </div>
-                            <div class="carousel-slide">
-                                <img src="cs5.jpeg" alt="Courtroom Sketch 5">
-                                <div class="image-caption">Staff Sgt. Amy Brown, Public Domain, via Wikimedia Commons</div>
-                            </div>
-                            <div class="carousel-slide">
-                                <img src="cs6.jpeg" alt="Courtroom Sketch 6">
-                                <div class="image-caption">Oeoi, CC0, via Wikimedia Commons</div>
-                            </div>
-                            <div class="carousel-slide">
-                                <img src="cs7.jpeg" alt="Courtroom Sketch 7">
-                                <div class="image-caption">Elizabeth Williams, CC BY-SA 3.0, via Wikimedia Commons</div>
-                            </div>
                         </div>
 
-                        <div class="essay-text">
-                            Last September, the Supreme Court banned photography and videography across its high-security zones, cameras, phones, tripods, selfie sticks, all of it, citing security and the dignity of proceedings. Buried in the same circular sat a single clarifying line, official sketches remain allowed. Nobody wrote a follow-up piece about that sentence. It's easy to miss, sitting quietly beside a ban that made headlines for what it prohibited rather than the one thing it quietly permitted.
+                        <div class="essay-body-text">
+Last September, the Supreme Court banned photography and videography across its high-security zones, cameras, phones, tripods, selfie sticks, all of it, citing security and the dignity of proceedings. Buried in the same circular sat a single clarifying line, official sketches remain allowed. Nobody wrote a follow-up piece about that sentence. It's easy to miss, sitting quietly beside a ban that made headlines for what it prohibited rather than the one thing it quietly permitted.
 
-                            A courtroom sketch was never decoration. It exists specifically as the record wherever a camera isn't allowed to be, the artist's hand and memory standing in for a lens the room won't tolerate. A photograph fixes a face permanently, publishably, in a form that travels without context. A sketch renders a scene, the posture of counsel, the weight in a witness's shoulders, the particular stillness of a room mid-argument, without necessarily producing an identity that can be lifted and circulated freely. It preserves atmosphere while leaving likeness negotiable. In proceedings where privacy and dignity are the entire point of banning the camera in the first place, that may be the more appropriate record, not a lesser one.
+A courtroom sketch was never decoration. It exists specifically as the record wherever a camera isn't allowed to be, the artist's hand and memory standing in for a lens the room won't tolerate. A photograph fixes a face permanently, publishably, in a form that travels without context. A sketch renders a scene, the posture of counsel, the weight in a witness's shoulders, the particular stillness of a room mid-argument, without necessarily producing an identity that can be lifted and circulated freely. It preserves atmosphere while leaving likeness negotiable. In proceedings where privacy and dignity are the entire point of banning the camera in the first place, that may be the more appropriate record, not a lesser one.
 
-                            What that record has captured, over decades, is a strange and specific kind of power dynamic, a defendant with almost no control left over anything else in the room, negotiating with the one person still deciding how they'll be remembered. Jane Rosenberg, who has drawn American courtrooms for Reuters for over forty years, spent this year fielding requests from men on trial for their futures. Sean Combs, sketched through his federal trial on charges of sex trafficking and racketeering, turned to her during a break and asked her to "soften" him, telling her she was making him look like a koala. Earlier the same year, Rudy Giuliani told her she'd drawn him looking like his dog. In 2023, Donald Trump Jr., mid civil fraud trial, had a simpler request, make me look sexy. None of them could touch the verdict. All of them, apparently, could still care about the line.
+What that record has captured, over decades, is a strange and specific kind of power dynamic, a defendant with almost no control left over anything else in the room, negotiating with the one person still deciding how they'll be remembered. Jane Rosenberg, who has drawn American courtrooms for Reuters for over forty years, spent this year fielding requests from men on trial for their futures. Sean Combs, sketched through his federal trial on charges of sex trafficking and racketeering, turned to her during a break and asked her to "soften" him, telling her she was making him look like a koala. Earlier the same year, Rudy Giuliani told her she'd drawn him looking like his dog. In 2023, Donald Trump Jr., mid civil fraud trial, had a simpler request, make me look sexy. None of them could touch the verdict. All of them, apparently, could still care about the line.
 
-                            That's the part worth sitting with as art, not law. A sketch artist in an American federal courtroom holds something closer to authorship than documentation, working from a fixed vantage point, under time pressure, translating a room's tension into a single frozen composition that will stand in for an event most of the public will never see directly. It's a discipline built on constraint, no do-overs, no second angle, no zoom, and constraint has produced its own visual language over a century, exaggerated shadow, expressive line, a face rendered slightly larger than life because the artist is working fast and from memory as much as from sight. That language has become recognizable enough that a defendant can look at a sketch and object to it the way a subject objects to an unflattering photograph, proof the form carries real representational weight, not merely procedural function.
+That's the part worth sitting with as art, not law. A sketch artist in an American federal courtroom holds something closer to authorship than documentation, working from a fixed vantage point, under time pressure, translating a room's tension into a single frozen composition that will stand in for an event most of the public will never see directly. It's a discipline built on constraint, no do-overs, no second angle, no zoom, and constraint has produced its own visual language over a century, exaggerated shadow, expressive line, a face rendered slightly larger than life because the artist is working fast and from memory as much as from sight. That language has become recognizable enough that a defendant can look at a sketch and object to it the way a subject objects to an unflattering photograph, proof the form carries real representational weight, not merely procedural function.
 
-                            The United States built an entire institution around the legal gap that makes this necessary. Federal courts have restricted cameras since the 1940s, with narrow and inconsistent exceptions, and sketch artists filled the space that restriction created, credentialed, employed by news organizations, present at the country's most consequential trials for generations. The United Kingdom went further, and the comparison is more instructive for it. Section 41 of the Criminal Justice Act 1925 doesn't merely ban cameras. It bans sketching itself inside a court, extending "in court" to the building, its precincts, even a person entering or leaving. What survives that restriction is a stricter, almost ritualized discipline, an artist sits through proceedings, commits the scene to memory, leaves the building, and draws afterward, entirely from recall. Presence without recording. Likeness rebuilt from memory rather than captured live.
+The United States built an entire institution around the legal gap that makes this necessary. Federal courts have restricted cameras since the 1940s, with narrow and inconsistent exceptions, and sketch artists filled the space that restriction created, credentialed, employed by news organizations, present at the country's most consequential trials for generations. The United Kingdom went further, and the comparison is more instructive for it. Section 41 of the Criminal Justice Act 1925 doesn't merely ban cameras. It bans sketching itself inside a court, extending "in court" to the building, its precincts, even a person entering or leaving. What survives that restriction is a stricter, almost ritualized discipline, an artist sits through proceedings, commits the scene to memory, leaves the building, and draws afterward, entirely from recall. Presence without recording. Likeness rebuilt from memory rather than captured live.
 
-                            India has neither tradition, no credentialed role, no institutional process for who may sketch or how, no century of the practice attaching itself to significant proceedings the way it has elsewhere. And yet the same court that just tightened its restrictions on recording named sketching, explicitly, as the sanctioned alternative, inside the exact zones where the question would matter most. The permission isn't missing. It's sitting in the text of a circular nobody has built anything underneath, waiting on the accreditation, the access, and the artists themselves, the culture a right needs before it becomes a practice anyone can actually point to.
+India has neither tradition, no credentialed role, no institutional process for who may sketch or how, no century of the practice attaching itself to significant proceedings the way it has elsewhere. And yet the same court that just tightened its restrictions on recording named sketching, explicitly, as the sanctioned alternative, inside the exact zones where the question would matter most. The permission isn't missing. It's sitting in the text of a circular nobody has built anything underneath, waiting on the accreditation, the access, and the artists themselves, the culture a right needs before it becomes a practice anyone can actually point to.
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- CHRONOLOGICAL ENTRY 6: PRODUCERS BEWARE -->
-            <div class="row" id="entry-producers-beware">
-                <div class="date">18.06.2026</div>
-                <div class="content-area">
-                    <button class="essay-trigger toggle-btn" data-slug="producers-beware">producers beware</button>
-                    <div class="collapsible-essay">
-                        <div class="essay-text">
-                            A beat sale in India rarely comes with paperwork. A producer sends a file, an artist sends cash or a UPI transfer, someone says "thanks bro" in the replies, and that's the entire transaction. It works, until the track does something nobody planned for, and then the absence of anything written down stops being a convenience and starts being the entire problem.
+            <!-- ROW 01: PRODUCERS BEWARE -->
+            <div class="index-item" id="entry-producers-beware">
+                <div class="index-row-trigger" data-slug="producers-beware" data-preview="vinyl.jpeg">
+                    <div class="row-num">01</div>
+                    <div class="row-title">Producers Beware</div>
+                    <div class="row-type">MUSIC CONTRACTS / ROYALTIES</div>
+                    <div class="row-year">18.06.2026</div>
+                </div>
+                <div class="row-accordion-body">
+                    <div class="essay-inner-wrapper">
+                        <div class="essay-body-text">
+A beat sale in India rarely comes with paperwork. A producer sends a file, an artist sends cash or a UPI transfer, someone says "thanks bro" in the replies, and that's the entire transaction. It works, until the track does something nobody planned for, and then the absence of anything written down stops being a convenience and starts being the entire problem.
 
-                            The story worth knowing here isn't a cautionary tale. It's the opposite, and that's what makes it useful. In 2018, a nineteen year old producer in the Netherlands sold a beat on BeatStars for thirty dollars. The buyer was an unknown artist named Lil Nas X. The track became "Old Town Road," the longest running number one single in Billboard history. What separated that producer from a thousand others who've sold a beat for pocket change and watched it disappear into someone else's fortune was one detail, the thirty dollar sale came with a standard licensing agreement attached, one that included a fifty percent publishing split. He later said it plainly, if he hadn't had that contract, everything could have ended up completely different. A basic, unremarkable piece of paperwork, attached to what looked like the smallest transaction imaginable, ended up being worth an enormous amount of money.
+The story worth knowing here isn't a cautionary tale. It's the opposite, and that's what makes it useful. In 2018, a nineteen year old producer in the Netherlands sold a beat on BeatStars for thirty dollars. The buyer was an unknown artist named Lil Nas X. The track became "Old Town Road," the longest running number one single in Billboard history. What separated that producer from a thousand others who've sold a beat for pocket change and watched it disappear into someone else's fortune was one detail, the thirty dollar sale came with a standard licensing agreement attached, one that included a fifty percent publishing split. He later said it plainly, if he hadn't had that contract, everything could have ended up completely different. A basic, unremarkable piece of paperwork, attached to what looked like the smallest transaction imaginable, ended up being worth an enormous amount of money.
 
-                            That same deal carries the other half of the lesson too. The beat sampled a Nine Inch Nails track that was never cleared before the sale. Nobody thought it mattered, until the song blew up and the sample had to be cleared retroactively, under pressure, with a major label negotiating terms it would have preferred to set on its own timeline rather than after the fact. Even a producer who got the ownership question right can still get tripped up by the clearance question, because a deal has more than one term that eventually matters, and it only takes one that's missing.
+That same deal carries the other half of the lesson too. The beat sampled a Nine Inch Nails track that was never cleared before the sale. Nobody thought it mattered, until the song blew up and the sample had to be cleared retroactively, under pressure, with a major label negotiating terms it would have preferred to set on its own timeline rather than after the fact. Even a producer who got the ownership question right can still get tripped up by the clearance question, because a deal has more than one term that eventually matters, and it only takes one that's missing.
 
-                            The instinct to skip a contract usually comes from a reasonable place. A quick cash deal feels cleaner than a negotiation, especially early on, when a producer is more interested in getting placed than getting paid fairly. But a beat's value isn't fixed at the moment of sale. It's determined later, by what the track becomes, and a producer who takes flat cash with no terms has no claim on any of that later value, no matter how large it turns out to be. The song doesn't know how it was purchased. It only knows what the paperwork says, and if there isn't any, there's nothing to point to.
+The instinct to skip a contract usually comes from a reasonable place. A quick cash deal feels cleaner than a negotiation, especially early on, when a producer is more interested in getting placed than getting paid fairly. But a beat's value isn't fixed at the moment of sale. It's determined later, by what the track becomes, and a producer who takes flat cash with no terms has no claim on any of that later value, no matter how large it turns out to be. The song doesn't know how it was purchased. It only knows what the paperwork says, and if there isn't any, there's nothing to point to.
 
-                            None of this requires an elaborate agreement. A short license or assignment naming the parties, the terms of use, whether the split is a flat fee or includes points on the back end, and confirming there's nothing uncleared underneath the beat, covers the overwhelming majority of what eventually goes wrong. It's a few lines, not a negotiation that kills the momentum of a deal. What it isn't is optional, not because every beat becomes "Old Town Road," but because nobody can tell in advance which one will, and the paperwork is the only thing that still matters once it does.
+None of this requires an elaborate agreement. A short license or assignment naming the parties, the terms of use, whether the split is a flat fee or includes points on the back end, and confirming there's nothing uncleared underneath the beat, covers the overwhelming majority of what eventually goes wrong. It's a few lines, not a negotiation that kills the momentum of a deal. What it isn't is optional, not because every beat becomes "Old Town Road," but because nobody can tell in advance which one will, and the paperwork is the only thing that still matters once it does.
                         </div>
                     </div>
                 </div>
             </div>
 
-        </main>
-    </div>
-
-    <!-- VIEW 2: ABOUT SOKA (WHITE THEME) -->
-    <div id="about-view" class="page-view hidden-view">
-        <div class="about-content">
-            <div class="about-text-container">
-                <div class="about-top-return">
-                    <span class="learn-more-link" onclick="switchView('entries')">← return</span>
-                </div>
-
-                <h1 class="about-title-large">
-                    The legal infrastructure<br>creative work was never given.
-                </h1>
-                
-                <p class="about-paragraph">
-                    SOKA is a New Delhi based legal practice working with creators and creative businesses across India and beyond.
-                </p>
-
-                <p class="about-paragraph">
-                    India's creative economy has scaled faster than the legal infrastructure built around it. Musicians, filmmakers, designers, and independent creators are now building things of real, defensible value, often without the contracts, rights clarity, or protection that value requires. Legal practice in India was built for corporations. It was not built for the individual creator.
-                </p>
-
-                <p class="about-paragraph">
-                    SOKA exists to close that gap.
-                </p>
-
-                <p class="about-paragraph">
-                    We advise on intellectual property, contracts, and the structural work that determines whether a creative practice holds up over time: licensing, ownership, rights assignment, brand protection, and enforcement. The scope is deliberately narrow. We work at the intersection of law and creative industry, and nowhere else, because that focus is what the work demands.
-                </p>
-
-                <p class="about-paragraph">
-                    We call ourselves a studio rather than a firm by design. A studio implies precision and craft applied to a specific discipline, not general practice spread thin across every kind of client and matter. That distinction shapes how we work.
-                </p>
-
-                <p class="about-paragraph">
-                    SOKA is built by a team of lawyers who understand creative work on its own terms: the culture it comes from, the pace it moves at, and the structure it requires to endure.
-                </p>
-
-                <p class="about-paragraph">
-                    The name itself draws from 創価, a term meaning "the creation of value." We take that literally. Our work exists to protect the value creative people build, not merely to formalize it after the fact.
-                </p>
-
-                <p class="about-paragraph" style="margin-bottom: 50px;">
-                    If your work needs that kind of structure, <span class="learn-more-link" onclick="switchView('contact')">write to us</span>.
-                </p>
-            </div>
         </div>
-    </div>
 
-    <!-- VIEW 3: PRACTICES PAGE (WHITE THEME) -->
-    <div id="practices-view" class="page-view hidden-view">
-        <div class="practices-content">
+    </main>
+
+    <!-- VIEW 2: REDESIGNED BRUTALIST ABOUT VIEW -->
+    <section id="about-view" class="page-view hidden-view">
+        <div class="about-grid-layout">
+            <div class="about-top-back" onclick="switchView('entries')">← INDEX / ABOUT</div>
+
+            <h1 class="about-hero-statement">
+                THE LEGAL INFRASTRUCTURE CREATIVE WORK WAS NEVER GIVEN.
+            </h1>
+
+            <div class="about-meta-row">
+                <div class="about-meta-label">PROFILE</div>
+                <div class="about-meta-body">
+                    <p>SOKA is a New Delhi based legal practice working with creators and creative businesses across India and beyond.</p>
+                    <p>India's creative economy has scaled faster than the legal infrastructure built around it. Musicians, filmmakers, designers, and independent creators are now building things of real, defensible value, often without the contracts, rights clarity, or protection that value requires. Legal practice in India was built for corporations. It was not built for the individual creator.</p>
+                    <p>SOKA exists to close that gap.</p>
+                </div>
+            </div>
+
+            <div class="about-meta-row">
+                <div class="about-meta-label">PRACTICE SCOPE</div>
+                <div class="about-meta-body">
+                    <div class="about-skills-columns">
+                        <div>
+                            <strong>Core Domains</strong><br>
+                            INTELLECTUAL PROPERTY<br>
+                            MUSIC & MASTER RIGHTS<br>
+                            FILM & PRODUCTION CLEARANCES<br>
+                            DISPUTE RESOLUTION<br>
+                            BRAND ASSET PROTECTION
+                        </div>
+                        <div>
+                            <strong>Structural Deliverables</strong><br>
+                            BESPOKE CONTRACT DRAFTING<br>
+                            MORAL RIGHTS DEFENSE<br>
+                            SAMPLING & ADAPTATION LICENSES<br>
+                            PERSONALITY RIGHTS LITIGATION<br>
+                            CATALOG ENFORCEMENT
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="about-meta-row">
+                <div class="about-meta-label">PHILOSOPHY</div>
+                <div class="about-meta-body">
+                    <p>We call ourselves a studio rather than a firm by design. A studio implies precision and craft applied to a specific discipline, not general practice spread thin across every kind of client and matter. That distinction shapes how we work.</p>
+                    <p>The name itself draws from 創価, a term meaning "the creation of value." We take that literally. Our work exists to protect the value creative people build, not merely to formalize it after the fact.</p>
+                </div>
+            </div>
+
+            <div class="about-meta-row">
+                <div class="about-meta-label">ENQUIRIES</div>
+                <div class="about-meta-body">
+                    <p>If your work needs structure, <span style="text-decoration: underline; cursor: pointer; color: var(--blue-accent);" onclick="switchView('contact')">start a conversation with us</span>.</p>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- VIEW 3: PRACTICES PAGE VIEW -->
+    <section id="practices-view" class="page-view hidden-view">
+        <div class="practices-view-container">
+            <div class="about-top-back" onclick="switchView('entries')">← INDEX / PRACTICES</div>
+            
+            <h1 class="about-hero-statement">
+                FOUR TARGETED PILLARS TO PROTECT CREATIVE CAPITAL.
+            </h1>
+
             <div class="practices-grid">
-                
-                <!-- ROW 1 -->
-                <div class="practice-row">
-                    <div class="practice-block">
-                        <img src="vinyl.jpeg" alt="music" class="practice-img">
-                        <button class="practice-heading practice-toggle">music <span class="practice-toggle-icon">[ + ]</span></button>
-                        <div class="practice-accordion">
-                            <p class="practice-desc">
-                                We work with musicians, producers, and independent labels on the agreements that decide who owns what once a track exists, splits, sampling clearances, distribution and licensing deals, and the featured artist and producer credits that rarely get written down until something goes wrong.
-                            </p>
-                        </div>
-                    </div>
-                    <div class="practice-block">
-                        <img src="art.jpeg" alt="art" class="practice-img">
-                        <button class="practice-heading practice-toggle">art <span class="practice-toggle-icon">[ + ]</span></button>
-                        <div class="practice-accordion">
-                            <p class="practice-desc">
-                                For painters, illustrators, and visual artists, we handle commission agreements, licensing for prints and reproductions, and the ownership questions that come up when a piece is made for someone else's brief, gallery, or campaign.
-                            </p>
-                        </div>
+                <div class="practice-card">
+                    <div class="practice-card-num">01 / DISCIPLINE</div>
+                    <div class="practice-card-title">intellectual property</div>
+                    <div class="practice-card-desc">
+                        Creative ideas only carry real value when they are legally distinct and defensibly owned. We establish clear title over artistic assets from the moment of creation, securing copyright, brand identity, and proprietary craft before work enters the marketplace.
                     </div>
                 </div>
 
-                <!-- ROW 2 -->
-                <div class="practice-row">
-                    <div class="practice-block">
-                        <img src="clapper.jpeg" alt="film & photography" class="practice-img">
-                        <button class="practice-heading practice-toggle">film & photography <span class="practice-toggle-icon">[ + ]</span></button>
-                        <div class="practice-accordion">
-                            <p class="practice-desc">
-                                From short films to commercial shoots, we work on production agreements, location and talent releases, and the rights clearances that determine who can use footage or stills, where, and for how long, before a single frame goes public.
-                            </p>
-                        </div>
-                    </div>
-                    <div class="hero-prose-block">
-                        SOKA works across the practical, structural side of creative work, the contracts, ownership questions, and rights issues that sit underneath almost everything a creative practice eventually has to deal with. We work with individual artists and small studios, not just large production houses, on the agreements and disputes that decide who owns what, who gets paid, and what happens when something goes wrong. The work spans several mediums, but the underlying questions are usually the same.
+                <div class="practice-card">
+                    <div class="practice-card-num">02 / DISCIPLINE</div>
+                    <div class="practice-card-title">contracts & licensing</div>
+                    <div class="practice-card-desc">
+                        Traditional legal drafting forces creative relationships into rigid corporate templates. We construct bespoke, transparent agreements that protect commercial upside, preserve artistic control, and eliminate ambiguity before capital is committed.
                     </div>
                 </div>
 
-                <!-- FULL-BLEED EDGE-TO-EDGE BLUE STRIP -->
-                <div class="blue-strip" id="practices-blue-strip">
-                    
-                    <div class="blue-strip-header">
-                        <div class="blue-strip-title">The structural framework underneath the culture.</div>
-                        <div class="blue-strip-subtitle">At SOKA, we focus strictly on four targeted pillars designed to establish artistic ownership, clarify commercial structure, and safeguard creative capital.</div>
-                    </div>
-
-                    <div class="blue-strip-grid">
-                        
-                        <!-- PRACTICE 1: IP -->
-                        <div class="blue-strip-block">
-                            <div class="blue-strip-wrapper">
-                                <img src="one.png" alt="01" class="blue-strip-bg-num">
-                                <button class="blue-strip-trigger blue-toggle">[ intellectual property ]</button>
-                            </div>
-                            <div class="blue-strip-accordion">
-                                <p class="blue-strip-desc">
-                                    Creative ideas only carry real value when they are legally distinct and defensibly owned. We establish clear title over artistic assets from the moment of creation, securing copyright, brand identity, and proprietary craft before work enters the marketplace.
-                                </p>
-                            </div>
-                        </div>
-
-                        <!-- PRACTICE 2: CONTRACTS -->
-                        <div class="blue-strip-block">
-                            <div class="blue-strip-wrapper">
-                                <img src="two.png" alt="02" class="blue-strip-bg-num">
-                                <button class="blue-strip-trigger blue-toggle">[ contracts ]</button>
-                            </div>
-                            <div class="blue-strip-accordion">
-                                <p class="blue-strip-desc">
-                                    Traditional legal drafting forces creative relationships into rigid corporate templates. We construct bespoke, transparent agreements that protect commercial upside, preserve artistic control, and eliminate ambiguity before capital is committed.
-                                </p>
-                            </div>
-                        </div>
-
-                        <!-- PRACTICE 3: DISPUTES -->
-                        <div class="blue-strip-block">
-                            <div class="blue-strip-wrapper">
-                                <img src="three.png" alt="03" class="blue-strip-bg-num">
-                                <button class="blue-strip-trigger blue-toggle">[ disputes ]</button>
-                            </div>
-                            <div class="blue-strip-accordion">
-                                <p class="blue-strip-desc">
-                                    When creative partnerships break down or ownership is challenged, swift intervention is essential. We manage conflicts at the intersection of law and creative culture with strategic composure, protecting reputations and securing fair settlement.
-                                </p>
-                            </div>
-                        </div>
-
-                        <!-- PRACTICE 4: RIGHTS & ENFORCEMENT -->
-                        <div class="blue-strip-block">
-                            <div class="blue-strip-wrapper">
-                                <img src="four.png" alt="04" class="blue-strip-bg-num">
-                                <button class="blue-strip-trigger blue-toggle">[ rights & enforcement ]</button>
-                            </div>
-                            <div class="blue-strip-accordion">
-                                <p class="blue-strip-desc">
-                                    Building defensible value requires continuous vigilance across digital and physical domains. We handle unauthorized commercial exploitation, takedowns, and brand protection to ensure creators retain full financial and moral authority over their catalog.
-                                </p>
-                            </div>
-                        </div>
-
+                <div class="practice-card">
+                    <div class="practice-card-num">03 / DISCIPLINE</div>
+                    <div class="practice-card-title">disputes & resolution</div>
+                    <div class="practice-card-desc">
+                        When creative partnerships break down or ownership is challenged, swift intervention is essential. We manage conflicts at the intersection of law and creative culture with strategic composure, protecting reputations and securing fair settlement.
                     </div>
                 </div>
 
-                <!-- ROW 3 -->
-                <div class="practice-row">
-                    <div class="practice-block">
-                        <img src="book.jpeg" alt="writing" class="practice-img">
-                        <button class="practice-heading practice-toggle">writing <span class="practice-toggle-icon">[ + ]</span></button>
-                        <div class="practice-accordion">
-                            <p class="practice-desc">
-                                For novelists, screenwriters, and independent writers, we work on publishing and option agreements, ghostwriting and collaboration credit, and the licensing terms that decide what happens to a manuscript once someone else wants to adapt, publish, or option it.
-                            </p>
-                        </div>
-                    </div>
-                    <div class="practice-block">
-                        <img src="cam.jpeg" alt="creators" class="practice-img">
-                        <button class="practice-heading practice-toggle">creators <span class="practice-toggle-icon">[ + ]</span></button>
-                        <div class="practice-accordion">
-                            <p class="practice-desc">
-                                For creators building on Instagram, YouTube, and live platforms, we work on brand deal and sponsorship agreements, platform and IP disputes, and the ownership questions that come up when a persona, format, or piece of content starts generating real commercial value.
-                            </p>
-                        </div>
+                <div class="practice-card">
+                    <div class="practice-card-num">04 / DISCIPLINE</div>
+                    <div class="practice-card-title">rights & enforcement</div>
+                    <div class="practice-card-desc">
+                        Building defensible value requires continuous vigilance across digital and physical domains. We handle unauthorized commercial exploitation, takedowns, and brand protection to ensure creators retain full financial and moral authority over their catalog.
                     </div>
                 </div>
-
-                <!-- HERO CLOSING STATEMENT -->
-                <div class="closing-statement">
-                    <div class="closing-title">Whatever you're building — there's a legal side to it.*</div>
-                    <div class="closing-subtitle">*we're that legal side.</div>
-                </div>
-
-                <p style="margin-bottom: 50px;">
-                    <span class="learn-more-link" onclick="switchView('entries')">← return</span>
-                </p>
-
             </div>
         </div>
-    </div>
+    </section>
 
-    <!-- VIEW 4: CONTACT PAGE (WHITE THEME - FULLY LEFT-ALIGNED) -->
-    <div id="contact-view" class="page-view hidden-view">
-        <div class="contact-content">
+    <!-- VIEW 4: LEFT-ALIGNED CONTACT VIEW -->
+    <section id="contact-view" class="page-view hidden-view">
+        <div class="contact-page-container">
+            <div class="about-top-back" onclick="switchView('entries')">← INDEX / CONTACT</div>
+
             <div class="contact-grid">
-                
-                <!-- LEFT SIDE FORM -->
                 <div class="contact-left">
-                    <h1 class="contact-title">Start a Conversation</h1>
-                    <div class="contact-subtitle">Tell us briefly about what you're building or what needs protection.</div>
-                    
+                    <h1 class="about-hero-statement" style="font-size: clamp(32px, 5vw, 64px); margin-bottom: 24px;">
+                        START A CONVERSATION.
+                    </h1>
+                    <p style="font-family: var(--font-mono); font-size: 12px; color: var(--text-dim); margin-bottom: 35px; text-transform: uppercase;">
+                        Tell us briefly about what you're building or what needs protection.
+                    </p>
+
                     <form id="contact-page-form" action="https://formspree.io/f/xojgbagg" method="POST">
                         <div class="form-group">
-                            <label>name</label>
+                            <label>Name</label>
                             <input type="text" name="name" class="form-control" required placeholder="Full Name or Brand Entity">
                         </div>
                         <div class="form-group">
-                            <label>email address</label>
+                            <label>Email Address</label>
                             <input type="email" name="email" class="form-control" required placeholder="name@domain.com">
                         </div>
                         <div class="form-group">
-                            <label>address / location</label>
+                            <label>Address / Location</label>
                             <input type="text" name="address" class="form-control" placeholder="City, State, or Address">
                         </div>
                         <div class="form-group">
-                            <label>message</label>
+                            <label>Message</label>
                             <textarea name="message" class="form-control" required placeholder="Briefly describe what you need assistance with..."></textarea>
                         </div>
                         <button type="submit" class="submit-btn" id="contact-submit-btn">Send Message</button>
                     </form>
                 </div>
 
-                <!-- RIGHT SIDE DETAILS -->
                 <div class="contact-right">
                     <div class="contact-detail-block">
-                        <p><a href="mailto:hello@legalbysoka.com">hello@legalbysoka.com</a></p>
-                        <p style="margin-top: 10px; opacity: 0.85;">
+                        <p style="font-family: var(--font-mono); font-size: 13px;"><strong>DIRECT:</strong> <a href="mailto:hello@legalbysoka.com">hello@legalbysoka.com</a></p>
+                        <p style="font-family: var(--font-mono); font-size: 12px; color: var(--text-dim); margin-top: 15px;">
+                            CHAMBERS:<br>
                             3rd Floor, K1/52, CR Park,<br>
                             New Delhi, 110019, India
                         </p>
                     </div>
                 </div>
-
             </div>
-
-            <p style="margin-top: 40px; margin-bottom: 30px;">
-                <span class="learn-more-link" onclick="switchView('entries')">← return</span>
-            </p>
         </div>
-    </div>
+    </section>
 
     <!-- FIXED FOOTER -->
     <footer>
@@ -1326,79 +1157,84 @@ The Bar Council of India does not permit advertisement or solicitation by advoca
             © 2026 SOKA
         </div>
         <div class="footer-center">
-            <img src="footer-logo.png" alt="SOKA Logo" class="footer-logo-img" onclick="switchView('entries')">
+            LEGAL STUDIO FOR INDIA'S CREATIVE ECONOMY
         </div>
         <div class="footer-right">
-            <button class="contact-btn" onclick="toggleContactModal(true)">[send enquiry]</button>
+            <button class="footer-modal-btn" onclick="toggleContactModal(true)">[send enquiry]</button>
             <a href="https://www.instagram.com/legalbysoka?igsh=MWcwMzhwMHgxaDM0" target="_blank">ig</a>
             <a href="https://linkedin.com/company/legalbysoka" target="_blank">li</a>
             <a href="mailto:hello@legalbysoka.com">email</a>
         </div>
     </footer>
 
-    <!-- SCRIPT LOGIC -->
+    <!-- INTERACTIVE JAVASCRIPT LOGIC -->
     <script>
         let currentView = 'entries';
 
-        // Toggle Main Entry Accordions with Hash Updates
-        document.querySelectorAll('.essay-trigger.toggle-btn').forEach(button => {
-            button.addEventListener('click', () => {
-                const collapsible = button.nextElementSibling;
-                const isExpanding = !collapsible.classList.contains('expanded');
-                
-                collapsible.classList.toggle('expanded');
+        // --- 1. FLOATING IMAGE PREVIEW CURSOR TRACKER ---
+        const previewCard = document.getElementById('floating-cursor-preview');
+        const previewImg = document.getElementById('floating-cursor-img');
+        let mouseX = 0, mouseY = 0;
+        let cardX = 0, cardY = 0;
 
-                const slug = button.getAttribute('data-slug');
-                if (isExpanding && slug) {
+        window.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX + 140; // Offset card slightly to the right of cursor
+            mouseY = e.clientY;
+        });
+
+        function animateCursorCard() {
+            cardX += (mouseX - cardX) * 0.15;
+            cardY += (mouseY - cardY) * 0.15;
+            previewCard.style.left = `${cardX}px`;
+            previewCard.style.top = `${cardY}px`;
+            requestAnimationFrame(animateCursorCard);
+        }
+        animateCursorCard();
+
+        document.querySelectorAll('.index-row-trigger').forEach(row => {
+            const imgSrc = row.getAttribute('data-preview');
+            
+            row.addEventListener('mouseenter', () => {
+                if (imgSrc && window.innerWidth > 768) {
+                    previewImg.src = imgSrc;
+                    previewCard.classList.add('visible');
+                }
+            });
+
+            row.addEventListener('mouseleave', () => {
+                previewCard.classList.remove('visible');
+            });
+
+            // Accordion dropdown click toggle
+            row.addEventListener('click', () => {
+                const accordion = row.nextElementSibling;
+                const isExpanded = accordion.classList.contains('expanded');
+
+                // Close other accordions
+                document.querySelectorAll('.row-accordion-body').forEach(el => {
+                    if (el !== accordion) el.classList.remove('expanded');
+                });
+
+                accordion.classList.toggle('expanded');
+
+                const slug = row.getAttribute('data-slug');
+                if (!isExpanded && slug) {
                     history.pushState(null, null, '#' + slug);
-                } else if (!isExpanding && window.location.hash.replace('#', '') === slug) {
+                } else if (isExpanded && window.location.hash.replace('#', '') === slug) {
                     history.pushState(null, null, window.location.pathname);
                 }
             });
         });
 
-        // Practices Media Toggles [ + ]
-        document.querySelectorAll('.practice-toggle').forEach(button => {
-            button.addEventListener('click', () => {
-                const accordion = button.nextElementSibling;
-                accordion.classList.toggle('expanded');
-                const span = button.querySelector('.practice-toggle-icon');
-                if (accordion.classList.contains('expanded')) {
-                    span.textContent = '[ − ]';
-                } else {
-                    span.textContent = '[ + ]';
-                }
-            });
-        });
-
-        // Blue Strip Practice Areas Accordions
-        document.querySelectorAll('.blue-toggle').forEach(button => {
-            button.addEventListener('click', (e) => {
-                e.stopPropagation();
-                const block = button.closest('.blue-strip-block');
-                const accordion = block.querySelector('.blue-strip-accordion');
-                accordion.classList.toggle('expanded');
-            });
-        });
-
-        function handleBrandClick() {
-            if (currentView === 'about') {
-                switchView('entries');
-            } else {
-                switchView('about');
-            }
-        }
-
+        // --- 2. MULTI-VIEW NAVIGATION & HASH ROUTING ---
         function switchView(targetView, updateHash = true) {
             currentView = targetView;
-            const body = document.body;
             const views = {
                 entries: document.getElementById('entries-view'),
                 about: document.getElementById('about-view'),
                 practices: document.getElementById('practices-view'),
                 contact: document.getElementById('contact-view')
             };
-            const footerLogo = document.querySelector('.footer-logo-img');
 
             if (!views[targetView]) return;
 
@@ -1412,15 +1248,7 @@ The Bar Council of India does not permit advertisement or solicitation by advoca
 
             Object.values(views).forEach(v => v.classList.add('hidden-view'));
             views[targetView].classList.remove('hidden-view');
-            views[targetView].scrollTop = 0;
-
-            if (targetView === 'entries') {
-                body.classList.remove('inverted');
-                if (footerLogo) footerLogo.src = 'footer-logo.png';
-            } else {
-                body.classList.add('inverted');
-                if (footerLogo) footerLogo.src = 'footer-logo-blue.png';
-            }
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
         function handleHashChange() {
@@ -1435,21 +1263,22 @@ The Bar Council of India does not permit advertisement or solicitation by advoca
                 return;
             }
 
-            const essayButton = document.querySelector(`.essay-trigger[data-slug="${rawHash}"]`);
-            if (essayButton) {
+            const rowTrigger = document.querySelector(`.index-row-trigger[data-slug="${rawHash}"]`);
+            if (rowTrigger) {
                 switchView('entries', false);
-                const collapsible = essayButton.nextElementSibling;
-                if (!collapsible.classList.contains('expanded')) {
-                    collapsible.classList.add('expanded');
+                const accordion = rowTrigger.nextElementSibling;
+                if (!accordion.classList.contains('expanded')) {
+                    accordion.classList.add('expanded');
                 }
                 setTimeout(() => {
-                    essayButton.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    rowTrigger.scrollIntoView({ behavior: 'smooth', block: 'start' });
                 }, 300);
             }
         }
 
         window.addEventListener('hashchange', handleHashChange);
 
+        // --- 3. BCI DISCLAIMER & INQUIRY MODALS ---
         function acceptDisclaimer() {
             document.getElementById('bci-modal').classList.add('hidden');
             document.body.classList.remove('modal-open');
@@ -1470,7 +1299,7 @@ The Bar Council of India does not permit advertisement or solicitation by advoca
                 }
             });
 
-            // Modal Formspree Submission
+            // Modal Form Submission
             const modalForm = document.getElementById('modal-form');
             const modalSubmitBtn = document.getElementById('modal-submit-btn');
             if (modalForm) {
@@ -1505,7 +1334,7 @@ The Bar Council of India does not permit advertisement or solicitation by advoca
                 });
             }
 
-            // Inline Contact Formspree Submission
+            // Inline Page Form Submission
             const contactPageForm = document.getElementById('contact-page-form');
             const contactSubmitBtn = document.getElementById('contact-submit-btn');
             if (contactPageForm) {

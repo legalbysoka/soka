@@ -150,61 +150,74 @@
             display: none !important;
         }
 
-        /* --- Pinned Scroll Hero Opening Section --- */
-        .hero-stage-container {
-            min-height: 86vh;
+        /* --- One-Way Unpinned Opening Stage --- */
+        #initial-stage {
+            min-height: calc(100vh - 175px);
             display: flex;
             flex-direction: column;
             justify-content: center;
             position: relative;
-            padding-bottom: 40px;
+            cursor: pointer;
+            transition: opacity 0.4s ease;
         }
 
+        body.stage-dismissed #initial-stage {
+            display: none !important;
+        }
+
+        /* --- Split Display Hero Header --- */
         .hero-banner {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 40px;
             align-items: baseline;
-            transition: transform 0.15s ease-out;
-            will-change: transform;
-            z-index: 10;
+            margin-top: 15px;
+            margin-bottom: 55px;
+        }
+
+        body.stage-dismissed .hero-banner {
+            margin-top: 25px;
+            margin-bottom: 65px;
         }
 
         .hero-title-left {
-            font-size: clamp(48px, 8.2vw, 114px);
+            font-size: clamp(44px, 7.8vw, 108px);
             font-weight: 800;
-            line-height: 0.9;
-            letter-spacing: -3.8px;
+            line-height: 0.92;
+            letter-spacing: -3.5px;
             text-transform: uppercase;
             color: #111111;
         }
 
         .hero-title-right {
-            font-size: clamp(48px, 8.2vw, 114px);
+            font-size: clamp(44px, 7.8vw, 108px);
             font-weight: 800;
-            line-height: 0.9;
-            letter-spacing: -3.8px;
+            line-height: 0.92;
+            letter-spacing: -3.5px;
             text-transform: uppercase;
             color: var(--blue-accent);
         }
 
-        /* SOKA Blue Corner Watermark Logo */
+        /* True Electric Blue SVG Logo */
         .hero-corner-svg {
             position: absolute;
             bottom: 25px;
             right: 25px;
-            width: 150px;
-            height: 150px;
+            width: 140px;
+            height: 140px;
             pointer-events: none;
             z-index: 1;
-            opacity: 0.95;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
-        .hero-corner-svg img {
+        .hero-corner-svg-mask {
             width: 100%;
             height: 100%;
-            object-fit: contain;
-            filter: invert(11%) sepia(100%) saturate(7400%) hue-rotate(244deg) brightness(96%) contrast(143%); /* Converts SVG to pure SOKA Blue (#1400FF) */
+            background-color: #1400FF;
+            -webkit-mask: url("soka logo.svg") no-repeat center / contain;
+            mask: url("soka logo.svg") no-repeat center / contain;
         }
 
         .hero-scroll-hint {
@@ -481,7 +494,7 @@
         .practices-clean-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 120px 80px; /* Generous breathing space */
+            gap: 120px 80px;
             margin-top: 70px;
             margin-bottom: 120px;
         }
@@ -559,30 +572,28 @@
             color: #222222;
         }
 
-        /* --- SOKA Blue Heading Divider Line --- */
-        .practices-blue-divider-banner {
-            border-top: 2px solid var(--blue-accent);
-            padding-top: 40px;
+        /* --- Disciplinary Pillars (Matching Index Headings) --- */
+        .practices-divider-banner {
+            padding-top: 20px;
             margin-bottom: 40px;
         }
 
-        .practices-blue-divider-title {
+        .practices-divider-title {
             font-size: clamp(34px, 5vw, 68px);
             font-weight: 800;
             line-height: 1.05;
             letter-spacing: -2px;
             text-transform: uppercase;
-            color: var(--blue-accent); /* All Blue */
+            color: var(--blue-accent);
         }
 
-        /* --- Staggered Left/Right Alternating Large Pillars --- */
         .pillars-staggered-list {
             display: flex;
             flex-direction: column;
         }
 
         .pillar-stagger-row {
-            padding: 55px 0;
+            padding: 50px 0;
             border-bottom: 1px solid var(--border-line);
             display: flex;
             flex-direction: column;
@@ -611,20 +622,20 @@
         }
 
         .pillar-oversized-num {
-            font-size: clamp(36px, 5.5vw, 76px);
-            font-weight: 800;
-            letter-spacing: -2px;
+            font-family: var(--font-mono);
+            font-size: clamp(22px, 2.8vw, 36px);
+            font-weight: 600;
             color: var(--blue-accent);
-            line-height: 1;
+            line-height: 1.1;
         }
 
         .pillar-oversized-name {
-            font-size: clamp(36px, 5.5vw, 76px);
-            font-weight: 800;
-            letter-spacing: -2.5px;
-            text-transform: uppercase;
+            font-size: clamp(26px, 3.4vw, 44px);
+            font-weight: 500;
+            letter-spacing: -1.2px;
+            text-transform: lowercase;
             color: #111111;
-            line-height: 1;
+            line-height: 1.1;
             transition: color 0.2s ease;
         }
 
@@ -647,8 +658,8 @@
         }
 
         .pillar-stagger-desc {
-            font-size: 18px;
-            line-height: 1.8;
+            font-size: 17.5px;
+            line-height: 1.75;
             color: #444444;
         }
 
@@ -871,7 +882,7 @@
     </div>
 
     <!-- BCI COMPLIANCE POPUP MODAL -->
-    <div id="bci-modal" class="modal-overlay">
+    <div id="bci-modal" class="modal-overlay hidden">
         <div class="modal-box">
             <div class="modal-title">Disclaimer</div>
             <div class="modal-body">
@@ -922,19 +933,25 @@ The Bar Council of India does not permit advertisement or solicitation by advoca
     <!-- VIEW 1: BRUTALIST INDEX VIEW WITH PINNED SCROLL HERO -->
     <main id="entries-view" class="page-view">
         
-        <!-- OPENING HERO VIEWPORT STAGE -->
-        <div class="hero-stage-container" id="hero-stage">
-            <div class="hero-banner" id="hero-banner">
+        <!-- INITIAL OPENING STAGE -->
+        <div id="initial-stage">
+            <div class="hero-banner">
                 <div class="hero-title-left">SOKA;</div>
                 <div class="hero-title-right">A LEGAL STUDIO.</div>
             </div>
 
-            <!-- SOKA Blue Asymmetric Corner Logo -->
+            <!-- Electric SOKA Blue Masked SVG Logo -->
             <div class="hero-corner-svg">
-                <img src="soka logo.svg" alt="SOKA Emblem">
+                <div class="hero-corner-svg-mask"></div>
             </div>
 
             <div class="hero-scroll-hint">[ scroll down to index ] ↓</div>
+        </div>
+
+        <!-- PINNED HERO HEADER (REVEALED AND DOCKED ONCE TRANSITIONED) -->
+        <div class="hero-banner" id="pinned-hero-banner" style="display: none;">
+            <div class="hero-title-left">SOKA;</div>
+            <div class="hero-title-right">A LEGAL STUDIO.</div>
         </div>
 
         <!-- INDEX METADATA BAR -->
@@ -1217,7 +1234,7 @@ None of this requires an elaborate agreement. A short license or assignment nami
         </div>
     </section>
 
-    <!-- VIEW 3: PRACTICES PAGE (BREATHING SPACE MEDIUMS + SOKA BLUE DIVIDER + STAGGERED PILLARS) -->
+    <!-- VIEW 3: PRACTICES PAGE -->
     <section id="practices-view" class="page-view hidden-view">
         <div class="section-grid-layout">
             <div class="section-top-back" onclick="switchView('entries')">← INDEX / PRACTICES</div>
@@ -1226,7 +1243,7 @@ None of this requires an elaborate agreement. A short license or assignment nami
                 THE STRUCTURAL <span class="highlight-word">FRAMEWORK</span> UNDERNEATH THE CULTURE.
             </h1>
 
-            <!-- Staggered 2 - 1 - 2 Mediums Grid with Extended White Space -->
+            <!-- Staggered 2 - 1 - 2 Mediums Grid -->
             <div class="practices-clean-grid">
                 
                 <!-- ROW 1 (ITEM 1): MUSIC -->
@@ -1302,14 +1319,14 @@ None of this requires an elaborate agreement. A short license or assignment nami
 
             </div>
 
-            <!-- SOKA Blue Separator Heading Banner -->
-            <div class="practices-blue-divider-banner">
-                <div class="practices-blue-divider-title">
+            <!-- Disciplinary Pillars Statement -->
+            <div class="practices-divider-banner">
+                <div class="practices-divider-title">
                     THE STRUCTURAL PILLARS SECURING THE CULTURE.
                 </div>
             </div>
 
-            <!-- Alternating Left/Right Staggered Pillars -->
+            <!-- Alternating Pillars Styled Like Index Entries -->
             <div class="pillars-staggered-list">
                 
                 <!-- PILLAR 01 (LEFT ALIGNED) -->
@@ -1446,18 +1463,50 @@ None of this requires an elaborate agreement. A short license or assignment nami
     <!-- INTERACTIVE JAVASCRIPT LOGIC -->
     <script>
         let currentView = 'entries';
+        let stageDismissed = false;
 
-        // --- 1. PINNED HERO SCROLL TRANSITION ---
-        const heroBanner = document.getElementById('hero-banner');
-        window.addEventListener('scroll', () => {
-            if (currentView === 'entries') {
-                const scrollY = window.scrollY;
-                if (scrollY < 400) {
-                    // Subtle pinned deceleration transform
-                    heroBanner.style.transform = `translateY(${scrollY * 0.15}px)`;
+        // --- 1. PINNED HERO TRANSITION CONTROLLER ---
+        const initialStage = document.getElementById('initial-stage');
+        const pinnedBanner = document.getElementById('pinned-hero-banner');
+        const bciModal = document.getElementById('bci-modal');
+
+        function triggerHeroDock() {
+            if (stageDismissed) return;
+            stageDismissed = true;
+            document.body.classList.add('stage-dismissed');
+            pinnedBanner.style.display = 'grid';
+
+            setTimeout(() => {
+                if (sessionStorage.getItem('bci_accepted') !== 'true') {
+                    bciModal.classList.remove('hidden');
+                    document.body.classList.add('modal-open');
+                } else {
+                    document.body.classList.remove('modal-open');
                 }
+            }, 500);
+        }
+
+        window.addEventListener('wheel', (e) => {
+            if (stageDismissed || currentView !== 'entries') return;
+            if (e.deltaY > 10) {
+                triggerHeroDock();
             }
         }, { passive: true });
+
+        let touchStartY = 0;
+        window.addEventListener('touchstart', (e) => {
+            touchStartY = e.touches[0].clientY;
+        }, { passive: true });
+
+        window.addEventListener('touchmove', (e) => {
+            if (stageDismissed || currentView !== 'entries') return;
+            let touchEndY = e.touches[0].clientY;
+            if (touchStartY - touchEndY > 15) {
+                triggerHeroDock();
+            }
+        }, { passive: true });
+
+        initialStage.addEventListener('click', triggerHeroDock);
 
 
         // --- 2. FLOATING IMAGE PREVIEW CURSOR TRACKER ---
@@ -1529,7 +1578,7 @@ None of this requires an elaborate agreement. A short license or assignment nami
             });
         });
 
-        // Alternating Staggered Pillars Accordion Controller (Collapses others)
+        // Alternating Pillars Accordion Controller
         function togglePillarAccordion(rowElement) {
             const accordion = rowElement.querySelector('.pillar-stagger-accordion');
             const isExpanded = accordion.classList.contains('expanded');
@@ -1546,6 +1595,7 @@ None of this requires an elaborate agreement. A short license or assignment nami
 
         // --- 3. MULTI-VIEW NAVIGATION & HASH ROUTING ---
         function switchView(targetView, updateHash = true) {
+            triggerHeroDock();
             currentView = targetView;
             const views = {
                 entries: document.getElementById('entries-view'),
@@ -1575,6 +1625,8 @@ None of this requires an elaborate agreement. A short license or assignment nami
                 switchView('entries', false);
                 return;
             }
+
+            triggerHeroDock();
 
             if (['about', 'practices', 'contact'].includes(rawHash)) {
                 switchView(rawHash, false);

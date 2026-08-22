@@ -179,21 +179,131 @@
             display: none !important;
         }
 
-        /* --- One-Way Unpinned Opening Stage --- */
-        #initial-stage {
-            min-height: calc(100vh - 195px);
+        /* --- Scroll-Driven Morph Curtain Layer --- */
+        #intro-curtain {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: #FFFFFF;
+            z-index: 250;
+            overflow: hidden;
+            pointer-events: auto;
+            touch-action: pan-y;
+        }
+
+        body.curtain-locked #intro-curtain {
+            display: none !important;
+            pointer-events: none !important;
+        }
+
+        .curtain-logo-wrapper {
+            position: absolute;
+            top: 44px;
+            left: 44px;
+            width: 110px;
+            height: 110px;
+            transform-origin: 0 0;
+            will-change: transform, opacity;
+            z-index: 10;
+        }
+
+        .curtain-logo-mask {
+            width: 100%;
+            height: 100%;
+            background-color: var(--blue-accent);
+            -webkit-mask: url("soka logo.svg") no-repeat center / contain;
+            mask: url("soka logo.svg") no-repeat center / contain;
+        }
+
+        .curtain-center-block {
+            position: absolute;
+            top: 48%;
+            left: 50%;
+            transform: translate(-50%, -50%);
             display: flex;
             flex-direction: column;
-            justify-content: center;
-            position: relative;
-            transition: opacity 0.4s ease;
+            align-items: center;
+            text-align: center;
+            width: 90vw;
+            max-width: 1200px;
+            z-index: 10;
+            pointer-events: none;
         }
 
-        body.stage-dismissed #initial-stage {
-            display: none !important;
+        .curtain-title-left-wrap {
+            transform-origin: center center;
+            will-change: transform;
+            display: inline-block;
         }
 
-        /* --- Split Display Hero Header --- */
+        .curtain-title-right-wrap {
+            transform-origin: center center;
+            will-change: transform;
+            display: inline-block;
+        }
+
+        .curtain-title-left {
+            font-size: clamp(48px, 8.5vw, 118px);
+            font-weight: 800;
+            line-height: 0.92;
+            letter-spacing: -3.5px;
+            text-transform: uppercase;
+            color: #111111;
+            display: block;
+        }
+
+        .curtain-title-right {
+            font-size: clamp(48px, 8.5vw, 118px);
+            font-weight: 800;
+            line-height: 0.92;
+            letter-spacing: -3.5px;
+            text-transform: uppercase;
+            color: var(--blue-accent);
+            display: block;
+        }
+
+        .curtain-sub-copy {
+            margin-top: 36px;
+            max-width: 580px;
+            font-size: 16px;
+            line-height: 1.65;
+            color: #444444;
+            text-align: left;
+            will-change: opacity, transform;
+            align-self: flex-start;
+            margin-left: max(0px, calc(50% - 290px));
+        }
+
+        .curtain-scroll-arrow {
+            position: absolute;
+            bottom: 40px;
+            right: 44px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            will-change: opacity;
+            pointer-events: none;
+            z-index: 10;
+        }
+
+        .curtain-arrow-line {
+            width: 1px;
+            height: 48px;
+            background-color: #AAAAAA;
+        }
+
+        .curtain-arrow-head {
+            width: 6px;
+            height: 6px;
+            border-right: 1px solid #AAAAAA;
+            border-bottom: 1px solid #AAAAAA;
+            transform: rotate(45deg);
+            margin-top: -3px;
+        }
+
+        /* --- Split Display Hero Header Target in Main Feed --- */
         .hero-banner {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -202,11 +312,6 @@
             margin-top: 15px;
             margin-bottom: 50px;
             width: 100%;
-        }
-
-        body.stage-dismissed .hero-banner {
-            margin-top: 20px;
-            margin-bottom: 55px;
         }
 
         .hero-title-left {
@@ -229,37 +334,9 @@
             text-align: right;
         }
 
-        /* SOKA Blue Masked SVG in Stage */
-        .hero-corner-svg {
-            position: absolute;
-            bottom: 25px;
-            right: 0;
-            width: 120px;
-            height: 120px;
-            pointer-events: none;
-            z-index: 1;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .hero-corner-svg-mask {
-            width: 100%;
-            height: 100%;
-            background-color: var(--blue-accent);
-            -webkit-mask: url("soka logo.svg") no-repeat center / contain;
-            mask: url("soka logo.svg") no-repeat center / contain;
-        }
-
-        .hero-scroll-hint {
-            position: absolute;
-            bottom: 25px;
-            left: 0;
-            font-family: var(--font-mono);
-            font-size: 10.5px;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            color: var(--text-dim);
+        /* --- Index & Main Feed Content Reveal Transition --- */
+        .feed-reveal-container {
+            will-change: opacity, transform;
         }
 
         /* --- Editorial Blue Word Highlight --- */
@@ -332,7 +409,6 @@
             transition: color 0.2s ease, transform 0.2s ease;
         }
 
-        /* Styled Primary Pinned Top Entry */
         .row-title-blue {
             color: var(--blue-accent) !important;
             font-weight: 600;
@@ -863,19 +939,15 @@
             header { padding: 18px 20px; }
             .page-view { padding: 80px 20px 60px 20px; }
 
+            .curtain-logo-wrapper { top: 24px; left: 24px; width: 70px; height: 70px; }
+            .curtain-sub-copy { margin-left: 0; max-width: 100%; }
+
             .hero-banner {
                 grid-template-columns: 1fr;
                 gap: 10px;
             }
 
             .hero-title-right { text-align: left; }
-
-            .hero-corner-svg {
-                width: 80px;
-                height: 80px;
-                right: 15px;
-                bottom: 15px;
-            }
 
             .index-columns-header { display: none; }
             .index-row-trigger { grid-template-columns: 35px 1fr 50px; }
@@ -912,6 +984,34 @@
     <!-- FLOATING HOVER PREVIEW IMAGE (TRACKS CURSOR) -->
     <div id="floating-cursor-preview">
         <img id="floating-cursor-img" src="" alt="Work Preview">
+    </div>
+
+    <!-- SCROLL-DRIVEN SHARED-ELEMENT MORPH CURTAIN LAYER -->
+    <div id="intro-curtain">
+        <!-- Big Top-Left Logo Mark -->
+        <div class="curtain-logo-wrapper" id="curtain-logo">
+            <div class="curtain-logo-mask"></div>
+        </div>
+
+        <!-- Centered Wordmark Block -->
+        <div class="curtain-center-block">
+            <div class="curtain-title-left-wrap" id="curtain-title-left">
+                <span class="curtain-title-left">SOKA;</span>
+            </div>
+            <div class="curtain-title-right-wrap" id="curtain-title-right">
+                <span class="curtain-title-right">A LEGAL STUDIO.</span>
+            </div>
+            
+            <p class="curtain-sub-copy" id="curtain-copy">
+                Assisting artists, musicians, and creators in securing what they make — contracts, rights, and structure for India's creative economy.
+            </p>
+        </div>
+
+        <!-- Scroll Indicator Arrow -->
+        <div class="curtain-scroll-arrow" id="curtain-arrow">
+            <div class="curtain-arrow-line"></div>
+            <div class="curtain-arrow-head"></div>
+        </div>
     </div>
 
     <!-- BCI COMPLIANCE POPUP MODAL -->
@@ -952,9 +1052,9 @@ The Bar Council of India does not permit advertisement or solicitation by advoca
         </div>
     </div>
 
-    <!-- MINIMALIST TOP HEADER -->
+    <!-- MINIMALIST TOP HEADER (LANDING TARGETS FOR MORPH ELEMENTS) -->
     <header>
-        <button class="header-logo-btn" onclick="switchView('entries')">
+        <button class="header-logo-btn" id="target-header-logo" onclick="switchView('entries')">
             <div class="header-logo-mask"></div>
         </button>
 
@@ -968,74 +1068,61 @@ The Bar Council of India does not permit advertisement or solicitation by advoca
     <!-- VIEW 1: BRUTALIST INDEX VIEW WITH PINNED SCROLL HERO -->
     <main id="entries-view" class="page-view">
         
-        <!-- INITIAL OPENING STAGE -->
-        <div id="initial-stage">
-            <div class="hero-banner">
-                <div class="hero-title-left">SOKA;</div>
-                <div class="hero-title-right">A LEGAL STUDIO.</div>
+        <!-- SPLIT DISPLAY HERO BANNER (LANDING TARGET FOR SOKA; & A LEGAL STUDIO.) -->
+        <div class="hero-banner" id="target-hero-banner">
+            <div class="hero-title-left" id="target-title-left">SOKA;</div>
+            <div class="hero-title-right" id="target-title-right">A LEGAL STUDIO.</div>
+        </div>
+
+        <!-- MAIN INDEX CONTENT (FADES IN BENEATH HERO DURING TRANSITION) -->
+        <div class="feed-reveal-container" id="feed-reveal">
+            <!-- INDEX METADATA BAR -->
+            <div class="index-bar">
+                <div>INDEX OF ENTRIES (<span id="entry-counter">08</span>)</div>
+                <div>[ CLICK TO EXPAND ENTRY ]</div>
             </div>
 
-            <!-- Electric SOKA Blue Masked SVG Logo -->
-            <div class="hero-corner-svg">
-                <div class="hero-corner-svg-mask"></div>
+            <div class="index-columns-header">
+                <div>#</div>
+                <div>TITLE</div>
+                <div>CATEGORY</div>
+                <div style="text-align: right;">DATE</div>
             </div>
 
-            <div class="hero-scroll-hint">[ scroll down to index ] ↓</div>
-        </div>
-
-        <!-- PINNED HERO HEADER -->
-        <div class="hero-banner" id="pinned-hero-banner" style="display: none;">
-            <div class="hero-title-left">SOKA;</div>
-            <div class="hero-title-right">A LEGAL STUDIO.</div>
-        </div>
-
-        <!-- INDEX METADATA BAR -->
-        <div class="index-bar">
-            <div>INDEX OF ENTRIES (<span id="entry-counter">08</span>)</div>
-            <div>[ CLICK TO EXPAND ENTRY ]</div>
-        </div>
-
-        <div class="index-columns-header">
-            <div>#</div>
-            <div>TITLE</div>
-            <div>CATEGORY</div>
-            <div style="text-align: right;">DATE</div>
-        </div>
-
-        <!-- INDEX LIST -->
-        <div class="index-list">
-            
-            <!-- ROW: PINNED TOP ENTRY (SECURING THE CULTURE LEGALLY - ALL 'xx' METADATA) -->
-            <div class="index-item" id="entry-securing-the-culture">
-                <div class="index-row-trigger" data-slug="securing-the-culture">
-                    <div class="row-num">xx</div>
-                    <div class="row-title row-title-blue">securing the culture; legally.</div>
-                    <div class="row-type">xxxxxxxxxxxxxxxxxxxxxxxxxx</div>
-                    <div class="row-year">xx.xx.xxxx</div>
-                </div>
-                <div class="row-accordion-body">
-                    <div class="essay-inner-wrapper">
-                        <div class="essay-headline">The structural framework creative work was never given.</div>
-                        <div class="essay-body-text">
+            <!-- INDEX LIST -->
+            <div class="index-list">
+                
+                <!-- ROW: PINNED TOP ENTRY (SECURING THE CULTURE LEGALLY) -->
+                <div class="index-item" id="entry-securing-the-culture">
+                    <div class="index-row-trigger" data-slug="securing-the-culture">
+                        <div class="row-num">xx</div>
+                        <div class="row-title row-title-blue">securing the culture; legally.</div>
+                        <div class="row-type">xxxxxxxxxxxxxxxxxxxxxxxxxx</div>
+                        <div class="row-year">xx.xx.xxxx</div>
+                    </div>
+                    <div class="row-accordion-body">
+                        <div class="essay-inner-wrapper">
+                            <div class="essay-headline">The structural framework creative work was never given.</div>
+                            <div class="essay-body-text">
 Creative work doesn't fail for lack of talent. It fails for lack of structure, the kind that goes unnoticed until it's needed.
 
 SOKA builds that structure. We work directly with artists, studios, and independent creators to protect what they make and secure what they own, without the weight of a traditional practice.
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <!-- ROW 07: BORROWED VOICE (NO PREVIEW IMAGE) -->
-            <div class="index-item" id="entry-borrowed-voice">
-                <div class="index-row-trigger" data-slug="borrowed-voice">
-                    <div class="row-num">07</div>
-                    <div class="row-title">borrowed voice</div>
-                    <div class="row-type">voice cloning / personality rights</div>
-                    <div class="row-year">22.08.2026</div>
-                </div>
-                <div class="row-accordion-body">
-                    <div class="essay-inner-wrapper">
-                        <div class="essay-body-text">
+                <!-- ROW 07: BORROWED VOICE -->
+                <div class="index-item" id="entry-borrowed-voice">
+                    <div class="index-row-trigger" data-slug="borrowed-voice">
+                        <div class="row-num">07</div>
+                        <div class="row-title">borrowed voice</div>
+                        <div class="row-type">voice cloning / personality rights</div>
+                        <div class="row-year">22.08.2026</div>
+                    </div>
+                    <div class="row-accordion-body">
+                        <div class="essay-inner-wrapper">
+                            <div class="essay-body-text">
 A face can be checked in a mirror. A signature can be held next to a forgery and compared stroke by stroke. A voice offers no such comparison. It exists only in the moment of hearing it, and once an AI model has learned its patterns closely enough, the person it belongs to has no reliable way to point at a fake and prove, definitively, this one isn't me. That absence of a mirror is what makes a cloned voice a stranger kind of theft than most, and it may be exactly why Indian courts have started moving on instinct before they've worked out the doctrine underneath it.
 
 In July 2024, singer Arijit Singh took eight AI platforms to the Bombay High Court, arguing they had cloned his voice, his vocal style, and his likeness, to sell merchandise and pull traffic through recognition that was never licensed. Justice Riyaz Chagla granted an injunction almost immediately, writing that the case "shocked the conscience" of the court. That phrase matters more than it first appears. Courts don't usually reach for language like that in a copyright dispute over a sample or a beat. They reach for it when something feels like a violation before it's been fully argued as one.
@@ -1047,22 +1134,22 @@ What's striking is how little doctrine has actually caught up to this pattern. E
 There's a reason that gap hasn't caused more trouble yet, and it's worth naming honestly. A stolen photograph can be held up next to the original and the difference, if there is one, becomes obvious. A cloned voice doesn't offer that comparison. It can only be judged by how convincingly it fools a listener who has no original to check it against, which means the harm is almost entirely reputational and psychological before it's ever provable in a courtroom. Singers have described hearing themselves say things they never said, endorse things they never endorsed, with a specificity that a written impersonation could never achieve. That's a different order of violation than most intellectual property law was built to handle, closer to identity theft than infringement, and Indian courts seem to sense that even where the law hasn't caught up to naming it.
 
 What ties every one of these cases together isn't the outcome, since none of them have actually reached a final, reasoned judgment on what a voice is worth protecting as. It's the urgency itself, courts consistently choosing to act first and reason later, because waiting for doctrine to develop properly would mean asking someone to live, in the meantime, with a version of their own voice circulating that they never consented to and can't fully prove is false. That's not a satisfying legal position to be in. It's an honest one. The law hasn't decided what a voice is yet. It's decided, repeatedly and quickly, that whatever it is, it isn't something that gets to be stolen while everyone waits to find out.
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <!-- ROW 06: PARODY ISN'T INFRINGEMENT (NO PREVIEW IMAGE) -->
-            <div class="index-item" id="entry-parody-isnt-infringement-until-it-is">
-                <div class="index-row-trigger" data-slug="parody-isnt-infringement-until-it-is">
-                    <div class="row-num">06</div>
-                    <div class="row-title">parody isn't infringement, until it is</div>
-                    <div class="row-type">fair dealing / personality rights</div>
-                    <div class="row-year">04.08.2026</div>
-                </div>
-                <div class="row-accordion-body">
-                    <div class="essay-inner-wrapper">
-                        <div class="essay-body-text">
+                <!-- ROW 06: PARODY ISN'T INFRINGEMENT -->
+                <div class="index-item" id="entry-parody-isnt-infringement-until-it-is">
+                    <div class="index-row-trigger" data-slug="parody-isnt-infringement-until-it-is">
+                        <div class="row-num">06</div>
+                        <div class="row-title">parody isn't infringement, until it is</div>
+                        <div class="row-type">fair dealing / personality rights</div>
+                        <div class="row-year">04.08.2026</div>
+                    </div>
+                    <div class="row-accordion-body">
+                        <div class="essay-inner-wrapper">
+                            <div class="essay-body-text">
 Every parody makes the same bet twice. Once on the joke landing, and once on the law agreeing it was a joke at all. Most of the time nobody notices the second bet was ever placed, because the target laughed, or shrugged, or the video simply didn't travel far enough to matter. The bet only becomes visible when it's lost, and by then the parodist has usually already discovered that the protection they assumed they had was never as fixed as it felt while they were filming.
 
 Purav Jha has been making that bet for years, and mostly winning it. His most recent video, a mimicry of the public spat between the educator known as Khan Sir and journalist Anjana Om Kashyap, took a real controversy involving two named, living people and restaged it as comedy, exaggerating both figures into characters while clearly siding with one over the other. It is, by any reasonable measure, satire, commentary dressed as performance, aimed at how a serious dispute gets flattened into television theatre. It is also, just as clearly, built entirely from someone else's likeness, someone else's voice, someone else's real and ongoing reputational dispute, repackaged for a laugh Jha didn't ask permission to make.
@@ -1076,23 +1163,23 @@ What makes Purav Jha's case worth sitting with isn't just where his own videos s
 That inversion is the actual argument here, not a footnote to it. The same legal ambiguity that lets a parodist mimic a real person with relative confidence is the identical ambiguity that offers him no more protection than anyone else the moment someone turns the camera on him. Parody's legal cover was never really about the form, the mimicry, the exaggeration, the borrowed voice. It was always about direction, about who's doing the imitating and who's absorbing it, and that direction can reverse without warning the instant a parodist becomes recognisable enough to be worth imitating themselves.
 
 What that suggests is not that parody is dangerous, or that it needs to be curtailed, satire has always been one of the more important pressure valves a media culture has, and Indian courts have generally understood that, protecting commentary even when it stings. What it suggests instead is that nobody making a living inside this genre, mimicking public figures for an audience that rewards exactly that, should mistake the absence of a lawsuit for the presence of a settled right. The law hasn't drawn a fixed boundary around parody so much as it's agreed, repeatedly, to look at each instance and ask how it feels, how far it went, who it hurt, and whether the hurt was worth protecting speech over. That's not a rule. It's a judgment call, made after the fact, about a joke that's already been told.
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <!-- ROW 05: RIGHT TO SKATEBOARD (HAS PREVIEW IMAGE) -->
-            <div class="index-item" id="entry-right-to-skateboard">
-                <div class="index-row-trigger" data-slug="right-to-skateboard" data-preview="r2s.jpeg">
-                    <div class="row-num">05</div>
-                    <div class="row-title">right to skateboard</div>
-                    <div class="row-type">public domain / article 19</div>
-                    <div class="row-year">28.07.2026</div>
-                </div>
-                <div class="row-accordion-body">
-                    <div class="essay-inner-wrapper">
-                        <img src="r2s.jpeg" alt="right to skateboard" class="essay-feature-img">
-                        <div class="essay-body-text">
+                <!-- ROW 05: RIGHT TO SKATEBOARD (WITH PREVIEW IMAGE) -->
+                <div class="index-item" id="entry-right-to-skateboard">
+                    <div class="index-row-trigger" data-slug="right-to-skateboard" data-preview="r2s.jpeg">
+                        <div class="row-num">05</div>
+                        <div class="row-title">right to skateboard</div>
+                        <div class="row-type">public domain / article 19</div>
+                        <div class="row-year">28.07.2026</div>
+                    </div>
+                    <div class="row-accordion-body">
+                        <div class="essay-inner-wrapper">
+                            <img src="r2s.jpeg" alt="right to skateboard" class="essay-feature-img">
+                            <div class="essay-body-text">
 A skateboard is not a means of transport pretending to be one. It's closer to handwriting, a way of putting a person's particular rhythm onto a shared surface, visible to anyone walking past. The line a skater draws through a plaza, up a ledge, along a rail, is a kind of authorship, temporary and physical rather than written, but authorship all the same. Cities have never quite known what to do with that. Wheels on concrete get filed under noise complaint or property damage long before anyone considers what's actually being expressed, and the surfaces that could hold it, empty lots, underused plazas, wide unused stretches of pavement, stay closed off by default rather than by any real decision that they should be.
 
 That default has mostly gone unquestioned because nobody's had a reason powerful enough to force the question, until the Supreme Court gave one, without meaning to. On June 19, the Court held that the right to walk on a safe, demarcated footpath is a fundamental right, arising from Article 19(1)(d) read against Article 21. The case reached that conclusion through a five year old boy, killed by a tanker on a road with no footpath, no crossing, nowhere for a person on foot to exist safely. Civic bodies, the Court said, now carry an enforceable duty to build and maintain that infrastructure, not a discretionary courtesy but an obligation with teeth.
@@ -1102,22 +1189,22 @@ What makes the judgment worth sitting with, past the tragedy that produced it, i
 Skateboarding makes the same claim on the same ground and has never once been read that way. It asks for a surface, clear of traffic, wide enough to be used without harming anyone, exactly what the judgment now compels cities to provide for pedestrians. But the request has always been treated as recreation, a hobby to be tolerated somewhere out of sight, rather than as a form of movement carrying its own expressive weight, its own claim to public space on the same constitutional footing the Court just extended to walking. The difference isn't in the nature of the act. It's in the fact that walking eventually produced a body the state had to answer for, and skateboarding, so far, has mostly produced noise complaints and shrugged-off municipal notices instead.
 
 That's the idea worth holding onto here, separate from whatever the judgment technically covers. A city's willingness to design for a use of public space tends to track how much harm that use has caused, not how much freedom it actually represents. Skateboarding sits in the gap between those two measures, low on documented harm, high on the same claim to expression and movement the Court just spent several pages defending. Nobody has to be struck by a tanker for that claim to matter. It's already there, in every skater finding a ledge nobody built for them, writing something briefly onto a surface the city never intended to hold it.
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <!-- ROW 04: ANI V. OPENAI (NO PREVIEW IMAGE) -->
-            <div class="index-item" id="entry-ani-v-openai">
-                <div class="index-row-trigger" data-slug="ani-v-openai">
-                    <div class="row-num">04</div>
-                    <div class="row-title">ani v. openai</div>
-                    <div class="row-type">ai training / copyright precedent</div>
-                    <div class="row-year">26.07.2026</div>
-                </div>
-                <div class="row-accordion-body">
-                    <div class="essay-inner-wrapper">
-                        <div class="essay-body-text">
+                <!-- ROW 04: ANI V. OPENAI -->
+                <div class="index-item" id="entry-ani-v-openai">
+                    <div class="index-row-trigger" data-slug="ani-v-openai">
+                        <div class="row-num">04</div>
+                        <div class="row-title">ani v. openai</div>
+                        <div class="row-type">ai training / copyright precedent</div>
+                        <div class="row-year">26.07.2026</div>
+                    </div>
+                    <div class="row-accordion-body">
+                        <div class="essay-inner-wrapper">
+                            <div class="essay-body-text">
 Read the coverage and you'd think the Delhi High Court just declared AI training legal in India. It didn't. Justice Amit Bansal refused ANI an interim injunction because ANI couldn't prove ChatGPT had memorised or spat back its reporting, not because OpenAI walked in clean. Fair dealing gave the ruling its legal skin. The actual bone underneath is duller and more consequential, an argument about who has to bring proof, and proof of what.
 
 That's the part getting skipped past. The order quietly moves the weight of an entire category of dispute onto the party least equipped to carry it. A newsroom, a musician, an illustrator, anyone with a suspicion that their work fed a model somewhere, no longer gets to start from suspicion. They need an output that unmistakably wears their own signature, produced by a system built specifically not to show its working. Ask any of them how they're supposed to get that, and the honest answer is, mostly, they can't.
@@ -1127,23 +1214,23 @@ The fair use finding will get cited for years, but it was always the easier ques
 Meanwhile ANI's other claim sits completely untouched, that the model didn't just train on its work but invented stories wholesale and stapled ANI's name to them. That has nothing to do with training data. It's what happens when a system fabricates something and dresses it in a real identity. Nobody's decided yet who has to prove what there, whether the burden falls on the name that got borrowed or the machine that borrowed it. Given where this order landed, it isn't hard to guess which way that one leans too.
 
 Which is the actual story here, buried under a headline about fair use. This wasn't a ruling about artificial intelligence. It was a ruling about who gets to stay silent and who has to speak first, dressed up in the language of copyright because copyright happened to be the case on the docket. The next dispute might be about a voice, a face, a melody, a sentence someone swears they wrote first. The technology underneath will keep changing. What this order set is the posture everyone starts from, proof-first or proof-later, and that posture, once it settles into precedent, tends to outlive the case that built it.
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <!-- ROW 03: PROTECTING STEEL AND CONCRETE (HAS PREVIEW IMAGE) -->
-            <div class="index-item" id="entry-protecting-steel-and-concrete">
-                <div class="index-row-trigger" data-slug="protecting-steel-and-concrete" data-preview="snc.jpeg">
-                    <div class="row-num">03</div>
-                    <div class="row-title">protecting steel and concrete</div>
-                    <div class="row-type">architecture / moral rights</div>
-                    <div class="row-year">14.07.2026</div>
-                </div>
-                <div class="row-accordion-body">
-                    <div class="essay-inner-wrapper">
-                        <img src="snc.jpeg" alt="protecting steel and concrete" class="essay-feature-img">
-                        <div class="essay-body-text">
+                <!-- ROW 03: PROTECTING STEEL AND CONCRETE (WITH PREVIEW IMAGE) -->
+                <div class="index-item" id="entry-protecting-steel-and-concrete">
+                    <div class="index-row-trigger" data-slug="protecting-steel-and-concrete" data-preview="snc.jpeg">
+                        <div class="row-num">03</div>
+                        <div class="row-title">protecting steel and concrete</div>
+                        <div class="row-type">architecture / moral rights</div>
+                        <div class="row-year">14.07.2026</div>
+                    </div>
+                    <div class="row-accordion-body">
+                        <div class="essay-inner-wrapper">
+                            <img src="snc.jpeg" alt="protecting steel and concrete" class="essay-feature-img">
+                            <div class="essay-body-text">
 Every other art form gets to outlive its usefulness. A painting can hang unseen in a storeroom for decades and still be a painting. A manuscript can go unread and remain, legally and materially, exactly what its author made. Architecture doesn't get that grace. A building is art that has to keep working, keep housing something, keep justifying the land under it, and the moment it stops, someone with a legitimate claim to that land can simply have it removed. No other art form is quite so conditional on its own continued utility.
 
 Indian copyright law tried to account for this asymmetry through Section 57, the moral rights provision, which gives an author the right of paternity and the right of integrity, the right to be identified with a work and the right to object to its distortion or mutilation in ways that harm their honour or reputation. It's a good instrument, built for exactly the kind of harm architecture tends to suffer, unauthorised alteration, a facade stripped for renovation, a structure changed beyond recognition while still technically standing. What it was never built for, and what it turned out not to reach, is outright destruction.
@@ -1155,42 +1242,42 @@ There's a strange logic sitting underneath that reasoning, worth pulling apart o
 What the case actually exposes, once the doctrine is set aside, is a choice this country hasn't made yet, whether architecture is closer to infrastructure, disposable once its function ends, or closer to art, worth preserving regardless of function. Most legal systems that take moral rights seriously eventually have to answer that question directly, sometimes through heritage law, sometimes through cultural property statutes that sit outside copyright altogether. India has largely let property rights answer it by default, letting ownership of the land settle a question that ownership was never really equipped to settle. An architect's authorship doesn't disappear the day a building comes down. It just stops having anywhere to live.
 
 That's the idea worth holding past this one case. A society's relationship to its own built art shows up less in what it protects on paper and more in what it's willing to let disappear without a fight. Every demolished structure of real artistic weight is a small referendum on that question, decided quietly, usually by whoever holds the title, rarely by anyone weighing what the work itself was worth keeping. Preservation, in that sense, was never really a legal problem waiting for the right provision. It's a cultural one, about whether a country is willing to treat the buildings it stands inside as something closer to authorship than to real estate, long before any court has to be asked.
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <!-- ROW 02: COURTROOM SKETCHES (HAS PREVIEW IMAGE) -->
-            <div class="index-item" id="entry-courtroom-sketches">
-                <div class="index-row-trigger" data-slug="courtroom-sketches" data-preview="cs1.jpeg">
-                    <div class="row-num">02</div>
-                    <div class="row-title">courtroom sketches</div>
-                    <div class="row-type">record / expression / access</div>
-                    <div class="row-year">03.07.2026</div>
-                </div>
-                <div class="row-accordion-body">
-                    <div class="essay-inner-wrapper">
-                        
-                        <div class="carousel-container">
-                            <div class="carousel-slide">
-                                <img src="cs1.jpeg" alt="Courtroom Sketch 1">
-                                <div class="image-caption">Dustin McDaniel, CC BY-SA 4.0, via Wikimedia Commons</div>
+                <!-- ROW 02: COURTROOM SKETCHES (WITH PREVIEW IMAGE) -->
+                <div class="index-item" id="entry-courtroom-sketches">
+                    <div class="index-row-trigger" data-slug="courtroom-sketches" data-preview="cs1.jpeg">
+                        <div class="row-num">02</div>
+                        <div class="row-title">courtroom sketches</div>
+                        <div class="row-type">record / expression / access</div>
+                        <div class="row-year">03.07.2026</div>
+                    </div>
+                    <div class="row-accordion-body">
+                        <div class="essay-inner-wrapper">
+                            
+                            <div class="carousel-container">
+                                <div class="carousel-slide">
+                                    <img src="cs1.jpeg" alt="Courtroom Sketch 1">
+                                    <div class="image-caption">Dustin McDaniel, CC BY-SA 4.0, via Wikimedia Commons</div>
+                                </div>
+                                <div class="carousel-slide">
+                                    <img src="cs2.jpeg" alt="Courtroom Sketch 2">
+                                    <div class="image-caption">[author unconfirmed], CC BY-SA 3.0, via Wikimedia Commons</div>
+                                </div>
+                                <div class="carousel-slide">
+                                    <img src="cs3.jpeg" alt="Courtroom Sketch 3">
+                                    <div class="image-caption">Beinecke Library, CC BY-SA 2.0, via Wikimedia Commons</div>
+                                </div>
+                                <div class="carousel-slide">
+                                    <img src="cs4.jpeg" alt="Courtroom Sketch 4">
+                                    <div class="image-caption">Elizabeth Williams, CC BY-SA 3.0, via Wikimedia Commons</div>
+                                </div>
                             </div>
-                            <div class="carousel-slide">
-                                <img src="cs2.jpeg" alt="Courtroom Sketch 2">
-                                <div class="image-caption">[author unconfirmed], CC BY-SA 3.0, via Wikimedia Commons</div>
-                            </div>
-                            <div class="carousel-slide">
-                                <img src="cs3.jpeg" alt="Courtroom Sketch 3">
-                                <div class="image-caption">Beinecke Library, CC BY-SA 2.0, via Wikimedia Commons</div>
-                            </div>
-                            <div class="carousel-slide">
-                                <img src="cs4.jpeg" alt="Courtroom Sketch 4">
-                                <div class="image-caption">Elizabeth Williams, CC BY-SA 3.0, via Wikimedia Commons</div>
-                            </div>
-                        </div>
 
-                        <div class="essay-body-text">
+                            <div class="essay-body-text">
 Last September, the Supreme Court banned photography and videography across its high-security zones, cameras, phones, tripods, selfie sticks, all of it, citing security and the dignity of proceedings. Buried in the same circular sat a single clarifying line, official sketches remain allowed. Nobody wrote a follow-up piece about that sentence. It's easy to miss, sitting quietly beside a ban that made headlines for what it prohibited rather than the one thing it quietly permitted.
 
 A courtroom sketch was never decoration. It exists specifically as the record wherever a camera isn't allowed to be, the artist's hand and memory standing in for a lens the room won't tolerate. A photograph fixes a face permanently, publishably, in a form that travels without context. A sketch renders a scene, the posture of counsel, the weight in a witness's shoulders, the particular stillness of a room mid-argument, without necessarily producing an identity that can be lifted and circulated freely. It preserves atmosphere while leaving likeness negotiable. In proceedings where privacy and dignity are the entire point of banning the camera in the first place, that may be the more appropriate record, not a lesser one.
@@ -1202,22 +1289,22 @@ That's the part worth sitting with as art, not law. A sketch artist in an Americ
 The United States built an entire institution around the legal gap that makes this necessary. Federal courts have restricted cameras since the 1940s, with narrow and inconsistent exceptions, and sketch artists filled the space that restriction created, credentialed, employed by news organizations, present at the country's most consequential trials for generations. The United Kingdom went further, and the comparison is more instructive for it. Section 41 of the Criminal Justice Act 1925 doesn't merely ban cameras. It bans sketching itself inside a court, extending "in court" to the building, its precincts, even a person entering or leaving. What survives that restriction is a stricter, almost ritualized discipline, an artist sits through proceedings, commits the scene to memory, leaves the building, and draws afterward, entirely from recall. Presence without recording. Likeness rebuilt from memory rather than captured live.
 
 India has neither tradition, no credentialed role, no institutional process for who may sketch or how, no century of the practice attaching itself to significant proceedings the way it has elsewhere. And yet the same court that just tightened its restrictions on recording named sketching, explicitly, as the sanctioned alternative, inside the exact zones where the question would matter most. The permission isn't missing. It's sitting in the text of a circular nobody has built anything underneath, waiting on the accreditation, the access, and the artists themselves, the culture a right needs before it becomes a practice anyone can actually point to.
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <!-- ROW 01: PRODUCERS BEWARE (NO PREVIEW IMAGE) -->
-            <div class="index-item" id="entry-producers-beware">
-                <div class="index-row-trigger" data-slug="producers-beware">
-                    <div class="row-num">01</div>
-                    <div class="row-title">producers beware</div>
-                    <div class="row-type">music contracts / royalties</div>
-                    <div class="row-year">18.06.2026</div>
-                </div>
-                <div class="row-accordion-body">
-                    <div class="essay-inner-wrapper">
-                        <div class="essay-body-text">
+                <!-- ROW 01: PRODUCERS BEWARE -->
+                <div class="index-item" id="entry-producers-beware">
+                    <div class="index-row-trigger" data-slug="producers-beware">
+                        <div class="row-num">01</div>
+                        <div class="row-title">producers beware</div>
+                        <div class="row-type">music contracts / royalties</div>
+                        <div class="row-year">18.06.2026</div>
+                    </div>
+                    <div class="row-accordion-body">
+                        <div class="essay-inner-wrapper">
+                            <div class="essay-body-text">
 A beat sale in India rarely comes with paperwork. A producer sends a file, an artist sends cash or a UPI transfer, someone says "thanks bro" in the replies, and that's the entire transaction. It works, until the track does something nobody planned for, and then the absence of anything written down stops being a convenience and starts being the entire problem.
 
 The story worth knowing here isn't a cautionary tale. It's the opposite, and that's what makes it useful. In 2018, a nineteen year old producer in the Netherlands sold a beat on BeatStars for thirty dollars. The buyer was an unknown artist named Lil Nas X. The track became "Old Town Road," the longest running number one single in Billboard history. What separated that producer from a thousand others who've sold a beat for pocket change and watched it disappear into someone else's fortune was one detail, the thirty dollar sale came with a standard licensing agreement attached, one that included a fifty percent publishing split. He later said it plainly, if he hadn't had that contract, everything could have ended up completely different. A basic, unremarkable piece of paperwork, attached to what looked like the smallest transaction imaginable, ended up being worth an enormous amount of money.
@@ -1227,11 +1314,12 @@ That same deal carries the other half of the lesson too. The beat sampled a Nine
 The instinct to skip a contract usually comes from a reasonable place. A quick cash deal feels cleaner than a negotiation, especially early on, when a producer is more interested in getting placed than getting paid fairly. But a beat's value isn't fixed at the moment of sale. It's determined later, by what the track becomes, and a producer who takes flat cash with no terms has no claim on any of that later value, no matter how large it turns out to be. The song doesn't know how it was purchased. It only knows what the paperwork says, and if there isn't any, there's nothing to point to.
 
 None of this requires an elaborate agreement. A short license or assignment naming the parties, the terms of use, whether the split is a flat fee or includes points on the back end, and confirming there's nothing uncleared underneath the beat, covers the overwhelming majority of what eventually goes wrong. It's a few lines, not a negotiation that kills the momentum of a deal. What it isn't is optional, not because every beat becomes "Old Town Road," but because nobody can tell in advance which one will, and the paperwork is the only thing that still matters once it does.
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
+            </div>
         </div>
 
     </main>
@@ -1529,7 +1617,7 @@ None of this requires an elaborate agreement. A short license or assignment nami
     <!-- INTERACTIVE JAVASCRIPT LOGIC -->
     <script>
         let currentView = 'entries';
-        let stageDismissed = false;
+        let isCurtainDismissed = false;
 
         // --- 1. MINIMALIST BLUE DOT CURSOR CONTROLLER ---
         const cursorDot = document.getElementById('custom-cursor-dot');
@@ -1543,10 +1631,13 @@ None of this requires an elaborate agreement. A short license or assignment nami
             cursorDot.style.top = `${cursorY}px`;
         });
 
-        document.querySelectorAll('button, a, .index-row-trigger, .pillar-stagger-row, .section-top-back, input, textarea, .header-logo-btn').forEach(el => {
-            el.addEventListener('mouseenter', () => cursorDot.classList.add('hovered'));
-            el.addEventListener('mouseleave', () => cursorDot.classList.remove('hovered'));
-        });
+        function attachCursorHoverListeners() {
+            document.querySelectorAll('button, a, .index-row-trigger, .pillar-stagger-row, .section-top-back, input, textarea, .header-logo-btn').forEach(el => {
+                el.addEventListener('mouseenter', () => cursorDot.classList.add('hovered'));
+                el.addEventListener('mouseleave', () => cursorDot.classList.remove('hovered'));
+            });
+        }
+        attachCursorHoverListeners();
 
 
         // --- 2. LIVE DELHI TIME TRACKER ---
@@ -1562,51 +1653,167 @@ None of this requires an elaborate agreement. A short license or assignment nami
         updateDelhiTime();
 
 
-        // --- 3. ONE-WAY PINNED HERO TRANSITION ---
-        const initialStage = document.getElementById('initial-stage');
-        const pinnedBanner = document.getElementById('pinned-hero-banner');
+        // --- 3. SCROLL-DRIVEN SHARED-ELEMENT MORPH ENGINE ---
+        const curtainLayer = document.getElementById('intro-curtain');
+        const curtainLogo = document.getElementById('curtain-logo');
+        const curtainTitleLeft = document.getElementById('curtain-title-left');
+        const curtainTitleRight = document.getElementById('curtain-title-right');
+        const curtainCopy = document.getElementById('curtain-copy');
+        const curtainArrow = document.getElementById('curtain-arrow');
+
+        const targetHeaderLogo = document.getElementById('target-header-logo');
+        const targetTitleLeft = document.getElementById('target-title-left');
+        const targetTitleRight = document.getElementById('target-title-right');
+        const feedReveal = document.getElementById('feed-reveal');
         const bciModal = document.getElementById('bci-modal');
 
-        function triggerHeroDock() {
-            if (stageDismissed) return;
-            stageDismissed = true;
-            document.body.classList.add('stage-dismissed');
-            pinnedBanner.style.display = 'grid';
+        let accumulatedScroll = 0;
+        const SCROLL_DISTANCE = 320; // Exact distance in px to complete transformation
+        let targetProgress = 0;
+        let currentProgress = 0;
 
-            setTimeout(() => {
-                if (sessionStorage.getItem('bci_accepted') !== 'true') {
-                    bciModal.classList.remove('hidden');
-                    document.body.classList.add('modal-open');
-                } else {
-                    document.body.classList.remove('modal-open');
-                }
-            }, 450);
+        function lerp(start, end, factor) {
+            return start + (end - start) * factor;
         }
 
+        // Cache initial unscaled bounds
+        let morphMetrics = {};
+        function computeMorphMetrics() {
+            if (isCurtainDismissed) return;
+
+            // Reset inline transforms temporarily to measure clean coordinates
+            curtainLogo.style.transform = 'none';
+            curtainTitleLeft.style.transform = 'none';
+            curtainTitleRight.style.transform = 'none';
+
+            const cLogoRect = curtainLogo.getBoundingClientRect();
+            const tLogoRect = targetHeaderLogo.getBoundingClientRect();
+
+            const cLeftRect = curtainTitleLeft.getBoundingClientRect();
+            const tLeftRect = targetTitleLeft.getBoundingClientRect();
+
+            const cRightRect = curtainTitleRight.getBoundingClientRect();
+            const tRightRect = targetTitleRight.getBoundingClientRect();
+
+            morphMetrics = {
+                logo: {
+                    dx: tLogoRect.left - cLogoRect.left,
+                    dy: tLogoRect.top - cLogoRect.top,
+                    scale: tLogoRect.width / cLogoRect.width
+                },
+                titleLeft: {
+                    dx: tLeftRect.left - cLeftRect.left,
+                    dy: tLeftRect.top - cLeftRect.top,
+                    scale: tLeftRect.width / cLeftRect.width
+                },
+                titleRight: {
+                    dx: tRightRect.left - cRightRect.left,
+                    dy: tRightRect.top - cRightRect.top,
+                    scale: tRightRect.width / cRightRect.width
+                }
+            };
+        }
+
+        function updateMorphAnimation() {
+            if (isCurtainDismissed) return;
+
+            currentProgress = lerp(currentProgress, targetProgress, 0.16);
+            if (Math.abs(currentProgress - targetProgress) < 0.001) {
+                currentProgress = targetProgress;
+            }
+
+            const p = Math.max(0, Math.min(1, currentProgress));
+
+            // 1. Logo Transformation (Scale & Glide to Top Header Icon)
+            if (morphMetrics.logo) {
+                const lx = morphMetrics.logo.dx * p;
+                const ly = morphMetrics.logo.dy * p;
+                const ls = 1 + (morphMetrics.logo.scale - 1) * p;
+                curtainLogo.style.transform = `translate3d(${lx}px, ${ly}px, 0) scale(${ls})`;
+            }
+
+            // 2. Title Left Transformation (Scale & Slide to Header Left)
+            if (morphMetrics.titleLeft) {
+                const tx = morphMetrics.titleLeft.dx * p;
+                const ty = morphMetrics.titleLeft.dy * p;
+                const ts = 1 + (morphMetrics.titleLeft.scale - 1) * p;
+                curtainTitleLeft.style.transform = `translate3d(${tx}px, ${ty}px, 0) scale(${ts})`;
+            }
+
+            // 3. Title Right Transformation (Scale & Slide to Header Right)
+            if (morphMetrics.titleRight) {
+                const rx = morphMetrics.titleRight.dx * p;
+                const ry = morphMetrics.titleRight.dy * p;
+                const rs = 1 + (morphMetrics.titleRight.scale - 1) * p;
+                curtainTitleRight.style.transform = `translate3d(${rx}px, ${ry}px, 0) scale(${rs})`;
+            }
+
+            // 4. Fade-out Supporting Copy and Scroll Indicator
+            const fadeVal = Math.max(0, 1 - p * 2.8);
+            curtainCopy.style.opacity = fadeVal;
+            curtainCopy.style.transform = `translateY(${p * -20}px)`;
+            curtainArrow.style.opacity = Math.max(0, 1 - p * 3.5);
+
+            // 5. Fade-in & Slide-up of Feed Elements beneath Header
+            feedReveal.style.opacity = Math.max(0, (p - 0.35) / 0.65);
+            feedReveal.style.transform = `translateY(${(1 - p) * 35}px)`;
+
+            // 6. Complete and Lock Transition Permanently at Progress = 1
+            if (p >= 0.999) {
+                isCurtainDismissed = true;
+                document.body.classList.add('curtain-locked');
+                curtainLayer.style.display = 'none';
+
+                // Reveal BCI Disclaimer if not already accepted
+                setTimeout(() => {
+                    if (sessionStorage.getItem('bci_accepted') !== 'true') {
+                        bciModal.classList.remove('hidden');
+                        document.body.classList.add('modal-open');
+                    } else {
+                        document.body.classList.remove('modal-open');
+                    }
+                }, 350);
+            } else {
+                requestAnimationFrame(updateMorphAnimation);
+            }
+        }
+
+        // Wheel Event Calculation
         window.addEventListener('wheel', (e) => {
-            if (stageDismissed || currentView !== 'entries') return;
-            if (e.deltaY > 10) {
-                triggerHeroDock();
+            if (isCurtainDismissed || currentView !== 'entries') return;
+            if (e.deltaY > 0) {
+                accumulatedScroll += e.deltaY;
+                targetProgress = Math.min(1, accumulatedScroll / SCROLL_DISTANCE);
+                requestAnimationFrame(updateMorphAnimation);
             }
         }, { passive: true });
 
-        let touchStartY = 0;
+        // Touch Drag Calculation for Mobile
+        let touchOriginY = 0;
         window.addEventListener('touchstart', (e) => {
-            touchStartY = e.touches[0].clientY;
+            touchOriginY = e.touches[0].clientY;
         }, { passive: true });
 
         window.addEventListener('touchmove', (e) => {
-            if (stageDismissed || currentView !== 'entries') return;
-            let touchEndY = e.touches[0].clientY;
-            if (touchStartY - touchEndY > 15) {
-                triggerHeroDock();
+            if (isCurtainDismissed || currentView !== 'entries') return;
+            const currentY = e.touches[0].clientY;
+            const deltaY = touchOriginY - currentY;
+            if (deltaY > 0) {
+                targetProgress = Math.min(1, (deltaY * 1.6) / SCROLL_DISTANCE);
+                requestAnimationFrame(updateMorphAnimation);
             }
         }, { passive: true });
 
-        initialStage.addEventListener('click', triggerHeroDock);
+        // Click Curtain to complete automatically
+        curtainLayer.addEventListener('click', () => {
+            if (!isCurtainDismissed) {
+                targetProgress = 1;
+                requestAnimationFrame(updateMorphAnimation);
+            }
+        });
 
 
-        // --- 4. FLOATING IMAGE PREVIEW CURSOR TRACKER (SHOWS ONLY WHEN IMAGE EXISTS) ---
+        // --- 4. FLOATING IMAGE PREVIEW CURSOR TRACKER ---
         const previewCard = document.getElementById('floating-cursor-preview');
         const previewImg = document.getElementById('floating-cursor-img');
         let mouseX = 0, mouseY = 0;
@@ -1694,7 +1901,12 @@ None of this requires an elaborate agreement. A short license or assignment nami
 
         // --- 5. MULTI-VIEW NAVIGATION & HASH ROUTING ---
         function switchView(targetView, updateHash = true) {
-            triggerHeroDock();
+            if (!isCurtainDismissed) {
+                isCurtainDismissed = true;
+                document.body.classList.add('curtain-locked');
+                curtainLayer.style.display = 'none';
+            }
+
             currentView = targetView;
             const views = {
                 entries: document.getElementById('entries-view'),
@@ -1725,8 +1937,6 @@ None of this requires an elaborate agreement. A short license or assignment nami
                 return;
             }
 
-            triggerHeroDock();
-
             if (['about', 'practices', 'contact'].includes(rawHash)) {
                 switchView(rawHash, false);
                 return;
@@ -1746,6 +1956,7 @@ None of this requires an elaborate agreement. A short license or assignment nami
         }
 
         window.addEventListener('hashchange', handleHashChange);
+        window.addEventListener('resize', computeMorphMetrics);
 
         // --- 6. BCI DISCLAIMER & INQUIRY MODALS ---
         function acceptDisclaimer() {
@@ -1755,11 +1966,26 @@ None of this requires an elaborate agreement. A short license or assignment nami
         }
 
         window.addEventListener('DOMContentLoaded', () => {
+            computeMorphMetrics();
+
+            // Set initial feed transparency until curtain begins to scroll
+            feedReveal.style.opacity = 0;
+            feedReveal.style.transform = 'translateY(35px)';
+
             if (sessionStorage.getItem('bci_accepted') === 'true') {
                 document.getElementById('bci-modal').classList.add('hidden');
                 document.body.classList.remove('modal-open');
             }
-            handleHashChange();
+
+            const rawHash = window.location.hash.replace('#', '');
+            if (rawHash) {
+                isCurtainDismissed = true;
+                document.body.classList.add('curtain-locked');
+                curtainLayer.style.display = 'none';
+                feedReveal.style.opacity = 1;
+                feedReveal.style.transform = 'none';
+                handleHashChange();
+            }
 
             const contactModal = document.getElementById('contact-modal');
             contactModal.addEventListener('click', (e) => {
